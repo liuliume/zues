@@ -13,16 +13,12 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.pagination.SeedParameter;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
 
-/**
- * 查询参数封装
- *
- */
-public class SeedParaMethodArgumentResolver implements
-		HandlerMethodArgumentResolver {
+
+public class SeedParaMethodArgumentResolver implements HandlerMethodArgumentResolver{
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		if (parameter.hasParameterAnnotation(SeedParam.class))
+		if(parameter.hasParameterAnnotation(SeedParam.class))
 			return true;
 		return false;
 	}
@@ -37,23 +33,20 @@ public class SeedParaMethodArgumentResolver implements
 		@SuppressWarnings("rawtypes")
 		Seed seed = new Seed();
 		PageFilter pageFilter = new PageFilter();
-
-		for (Iterator<String> paramNameItr = webRequest.getParameterNames(); paramNameItr
-				.hasNext();) {
+		
+		for(Iterator<String> paramNameItr = webRequest.getParameterNames();paramNameItr.hasNext();){
 			String paramName = paramNameItr.next();
-			if (paramName.equals(SeedParameter.PAGE_NUMBER)) {
-				seed.setPageNumber(Integer.parseInt(webRequest
-						.getParameter(paramName)));
-			} else if (paramName.equals(SeedParameter.PAGE_SIZE)) {
-				seed.setPageSize(Integer.parseInt(webRequest
-						.getParameter(paramName)));
-			} else if (paramName.equals(SeedParameter.ORDER)) {
+			if(paramName.equals(SeedParameter.PAGE_NUMBER)){
+				seed.setPageNumber(Integer.parseInt(webRequest.getParameter(paramName)));
+			}else if(paramName.equals(SeedParameter.PAGE_SIZE)){
+				seed.setPageSize(Integer.parseInt(webRequest.getParameter(paramName)));
+			}else if(paramName.equals(SeedParameter.ORDER)){
 				seed.setOrder(webRequest.getParameter(paramName));
-			} else {
+			}else{
 				pageFilter.add(paramName, webRequest.getParameter(paramName));
 			}
 		}
-
+		
 		seed.setPageFilter(pageFilter);
 		return seed;
 	}

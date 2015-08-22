@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 /**
- * ¶à¸öÊÓÍ¼½âÎöÊÊÅä
+ * å¤šè§†å›¾è§£æå™¨
  * @author shiqiangguo
  *
  */
@@ -16,22 +16,20 @@ public class MultiViewResolver implements ViewResolver {
   
     @Override  
     public View resolveViewName(String viewName, Locale locale) throws Exception {  
-        int n = viewName.lastIndexOf("."); // »ñÈ¡  
-                                            // viewName(modelAndViewÖĞµÄÃû×Ö)¿´ÆäÓĞÃ»ÓĞÏÂ»®Ïß  
+    	int n = viewName.lastIndexOf("."); 	// è·å–  
+        									// viewName(modelAndViewä¸­çš„åå­—)çœ‹å…¶æœ‰æ²¡æœ‰ä¸‹åˆ’çº¿  
         String suffix = "";  
   
-        // Ã»ÓĞÄ¬ÈÏÊ¹ÓÃ¡°jsp¡°·½Ê½ ½âÎö,ÓĞµÄ»°½ØÈ¡ÏÂ»®ÏßºóÃæµÄ×Ö·û´® ÕâÀïÒ»°ãÊÇjsp,ftl,vmÓëÅäÖÃÎÄ¼şÖĞµÄ<entry  
-        // key="ftl">µÄkeyÆ¥Åä  
+        // æ²¡æœ‰é»˜è®¤ä½¿ç”¨â€œjspâ€œæ–¹å¼ è§£æ,æœ‰çš„è¯æˆªå–ä¸‹åˆ’çº¿åé¢çš„å­—ç¬¦ä¸² è¿™é‡Œä¸€èˆ¬æ˜¯jsp,ftl,vmä¸é…ç½®æ–‡ä»¶ä¸­çš„<entry  
+        // key="ftl">çš„keyåŒ¹é…  
         if (n == (-1)) {
             suffix = "jsp";  
         }  
         else {  
             suffix = viewName.substring(n + 1);  
-            // È¡ÏÂ»®ÏßÇ°ÃæµÄ²¿·Ö ÄÇÊ±ÕæÕıµÄ×ÊÔ´Ãû.±ÈÈçÎÒÃÇÒªÊ¹ÓÃhello.jsp ÄÇviewName¾ÍÓ¦¸ÃÊÇhello_jsp  
             viewName = viewName.substring(0, n);  
         }  
   
-        // ¸ù¾İÏÂ»®ÏßºóÃæµÄ×Ö·û´®È¥»ñÈ¡ÍĞ¹ÜµÄÊÓÍ¼½âÎöÀà¶ÔÏó  
         ViewResolver resolver = resolvers.get(suffix);
         if (resolver != null) {  
             return resolver.resolveViewName(viewName, locale);  

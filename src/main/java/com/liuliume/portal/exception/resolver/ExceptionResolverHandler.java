@@ -12,25 +12,21 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 
+ * å¼‚å¸¸å¤„ç†ç±»
  * @author xiayun
  *
  */
-public class ExceptionResolverHandler implements HandlerExceptionResolver {
+public class ExceptionResolverHandler implements HandlerExceptionResolver{
 
-	private static Logger logger = LoggerFactory
-			.getLogger(ExceptionResolverHandler.class);
-
+	private static Logger logger=LoggerFactory.getLogger(ExceptionResolverHandler.class);
+	
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 		String action = request.getRequestURI();
-		logger.error("·ÃÎÊaction:" + action + "³öÏÖÒì³£:" + ex.getMessage());
-		if (request.getHeader("accept").indexOf("application/json") > -1
-				|| (request.getHeader("X-Requested-With") != null && request
-						.getHeader("X-Requested-With")
-						.indexOf("XMLHttpRequest") > -1)) {
-			// Òì²½ÇëÇó,Ê¹ÓÃjson¸ñÊ½·µ»Ø
+		logger.error("è®¿é—®action:"+action+"å‡ºç°å¼‚å¸¸:"+ex.getMessage());
+		if(request.getHeader("accept").indexOf("application/json")>-1||(request.getHeader("X-Requested-With")!=null&&request.getHeader("X-Requested-With").indexOf("XMLHttpRequest")>-1)){
+			//å¼‚æ­¥è¯·æ±‚,ä½¿ç”¨jsonæ ¼å¼è¿”å›
 			PrintWriter writer;
 			try {
 				writer = response.getWriter();
@@ -39,10 +35,10 @@ public class ExceptionResolverHandler implements HandlerExceptionResolver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
+		}else {
 			ModelAndView mav = new ModelAndView("/error/error");
-			// mav.addObject("", attributeValue)
-			mav.addObject("ex", ex);
+//			mav.addObject("", attributeValue)
+			mav.addObject("ex",ex);
 			return mav;
 		}
 		return null;

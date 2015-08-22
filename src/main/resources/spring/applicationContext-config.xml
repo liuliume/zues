@@ -13,8 +13,8 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>config/jdbc.properties</value>
-				<value>config/portal.properties</value>
+				<value>classpath:config/jdbc.properties</value>
+				<value>classpath:config/portal.properties</value>
 			</list>
 		</property>
 	</bean>

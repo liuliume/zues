@@ -97,7 +97,7 @@ AbstractHttpMessageConverter<Object> {
 			return this.objectMapper.readValue(inputMessage.getBody(), javaType);
 		}
 		catch (IOException ex) {
-			logger.error("½«json×Ö·û´®×ª»»³É£º" + clazz.getCanonicalName() +"¶ÔÏóÒì³££¡Êı¾İ£º" + inputMessage.getBody() , ex);;
+			logger.error("å°†jsonå­—ç¬¦ä¸²è½¬æ¢æˆï¼š" + clazz.getCanonicalName() +"å¯¹è±¡å¼‚å¸¸ï¼æ•°æ®ï¼š" + inputMessage.getBody() , ex);;
 			throw ex;
 //			throw new HttpMessageNotReadableException("Could not read JSON: " + ex.getMessage(), ex);
 		}
@@ -117,7 +117,7 @@ AbstractHttpMessageConverter<Object> {
 			this.objectMapper.writeValue(jsonGenerator, object);
 		}
 		catch (IOException ex) {
-			logger.error("java¶ÔÏó£º" + object.getClass() +" Öµ£º" + object + "×ª³Éjson×Ö·û´®Òì³££¡"  , ex);;
+			logger.error("javaå¯¹è±¡ï¼š" + object.getClass() +"å€¼ï¼š" + object + "è½¬æˆjsonå­—ç¬¦ä¸²å¼‚å¸¸"  , ex);;
 			throw ex;
 //			throw new HttpMessageNotWritableException("Could not write JSON: " + ex.getMessage(), ex);
 		}
@@ -151,14 +151,14 @@ AbstractHttpMessageConverter<Object> {
 	 * @return the JSON encoding to use (never <code>null</code>)
 	 */
 	protected JsonEncoding getJsonEncoding(MediaType contentType) {
-//		if (contentType != null && contentType.getCharSet() != null) {
-//			Charset charset = contentType.getCharSet();
-//			for (JsonEncoding encoding : JsonEncoding.values()) {
-//				if (charset.name().equals(encoding.getJavaName())) {
-//					return encoding;
-//				}
-//			}
-//		}
+		if (contentType != null && contentType.getCharSet() != null) {
+			Charset charset = contentType.getCharSet();
+			for (JsonEncoding encoding : JsonEncoding.values()) {
+				if (charset.name().equals(encoding.getJavaName())) {
+					return encoding;
+				}
+			}
+		}
 		return JsonEncoding.UTF8;
 	}
 

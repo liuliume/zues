@@ -52,7 +52,7 @@ public class IdentityGetter implements Interceptor {
 		BaseStatementHandler delegate = (BaseStatementHandler)FieldUtils.getField(RoutingStatementHandler.class, "delegate", true).get(handler);
 		MappedStatement mappedStatement = (MappedStatement)FieldUtils.getField(BaseStatementHandler.class, "mappedStatement", true).get(delegate);  
 		
-		if(mappedStatement.getSqlCommandType() == SqlCommandType.INSERT){//Ö»ÓĞinsert²Ù×÷²Å½øĞĞid»ñÈ¡
+		if(mappedStatement.getSqlCommandType() == SqlCommandType.INSERT){//åªæœ‰insertæ“ä½œæ‰è¿›è¡Œidè·å–
 			Object parameter = delegate.getBoundSql().getParameterObject();
 			if(parameter!=null && shouldInterceptor(parameter.getClass())){
 				Executor executor = (Executor)FieldUtils.getField(BaseStatementHandler.class, "executor", true).get(delegate);
@@ -133,7 +133,7 @@ public class IdentityGetter implements Interceptor {
 		
 		public MappedStatement genKeyStatement(Class<?> entityClass) {
 			SqlSource sqlSource = buildSqlSourceFromStrings();
-			String id = entityClass.getName() + SELECT_IDENTITY;//´ıĞŞ¸Ä£¬Õâ¸ö¾Í»á¸úmapperµÄÃüÃû¿Õ¼ä²»Ì«Ò»ÖÂ
+			String id = entityClass.getName() + SELECT_IDENTITY;//å¾…ä¿®æ”¹ï¼Œè¿™ä¸ªå°±ä¼šè·Ÿmapperçš„å‘½åç©ºé—´ä¸å¤ªä¸€è‡´
 			
 			MappedStatement.Builder statementBuilder = new MappedStatement.Builder(
 					configuration, 

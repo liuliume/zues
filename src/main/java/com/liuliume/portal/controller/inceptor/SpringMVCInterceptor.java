@@ -17,9 +17,9 @@ public class SpringMVCInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		// TODO 权限验证
+		// TODO 鏉冮檺鎺у埗
 		String actionName= request.getRequestURI();
-		logger.info("------用户访问:"+actionName);
+		logger.info("------鐢ㄦ埛璁块棶:"+actionName);
 		return true;
 	}
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/layouts/">
+	<excludes>
+		<pattern>/static/*.*</pattern>
+		<pattern>/resources/*.*</pattern>
+		<pattern>/api/*.*</pattern>
+		<pattern>/login*</pattern>
+		<pattern>/store/promotions/*/products/selectable*</pattern>
+		<pattern>/store/promotions/selectable*</pattern>
+        <pattern>/invoice/invoice-detail</pattern>
+		<pattern>/products/fromProcurement/*/editSku</pattern>
+	</excludes>
+	<decorator name="activity" page="activity-layout.jsp">
+		<pattern>/activity*</pattern>
+		<pattern>/customergroup*</pattern>
+		<pattern>/segment/list*</pattern>
+		<pattern>/segment/index*</pattern>
+		<pattern>/campaign/list*</pattern>
+		<pattern>/campaign/index*</pattern>
+		<pattern>/template/list*</pattern>
+		<pattern>/template/index*</pattern>
+		<pattern>/sysmail/*</pattern>
+		<pattern>/recommand/*</pattern>
+		<pattern>/mailing/*</pattern>
+		<pattern>/userdata/*</pattern>
+		<pattern>/mailJob/list*</pattern>
+		<pattern>/mailJob/createMailJob*</pattern>
+		<pattern>/mailJob/jobDetail*</pattern>
+	</decorator>
+	<!-- 
+	<decorator name="inquiry" page="inquiry-layout.jsp">
+		<pattern>/inquiries*</pattern>
+	</decorator>
+	<decorator name="product" page="product-layout.jsp">
+		<pattern>/products*</pattern>
+	</decorator>
+	<decorator name="storeIndex" page="store-index-layout.jsp">
+		<pattern>/store/index*</pattern>
+	</decorator>
+    <decorator name="invoiceD" page="store-layout.jsp">
+        <pattern>/invoice*</pattern>
+    </decorator>
+	<decorator name="selectableProducts" page="/WEB-INF/views/store/promotionSelectableProducts.jsp">
+	</decorator>
+	-->
+</decorators>
