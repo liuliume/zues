@@ -7,9 +7,13 @@
 
 	<description>Spring公共配置</description>
 
-	<context:component-scan base-package="com.liuliume">
+	<!-- <context:component-scan base-package="com.liuliume">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan> -->
+	
+	<context:component-scan base-package="com.liuliume">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 	
 	<import resource="applicationContext-config.xml"/>
