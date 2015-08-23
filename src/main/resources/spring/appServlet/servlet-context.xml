@@ -9,17 +9,12 @@
 		http://www.springframework.org/schema/tx
     	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<!-- <context:component-scan base-package="com.liuliume.portal.controller"
+	<context:component-scan base-package="com.liuliume.portal.controller"
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan> -->
-	
-	<!-- 此处让spring不扫描Service,否则cglib将不对Service进行代理 ,会导致事物配置不起作用-->
-	<context:component-scan base-package="com.liuliume">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
-
+	
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">

@@ -46,7 +46,7 @@
 	<logger name="com.ibatis" level="DEBUG" additivity="false">
 	</logger>
 
-	<logger name="com.litb" level="DEBUG" additivity="false">
+	<logger name="com.liuliume" level="DEBUG" additivity="false">
 	    <level value="DEBUG"/>
 	    <appender-ref ref="main" />
 	    <appender-ref ref="STDOUT" />
