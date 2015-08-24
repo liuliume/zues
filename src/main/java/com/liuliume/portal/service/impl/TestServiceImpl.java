@@ -19,6 +19,6 @@ public class TestServiceImpl implements TestService{
 	public void add(String name,String passwd) throws Exception{
 		testDao.add(name, passwd);
 		if("admin".equals(name))
-			throw new Exception("Test Transactional");
+			throw new RuntimeException("Test Transactional");
 	}
 }
