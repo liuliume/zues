@@ -1,0 +1,335 @@
+table {
+  max-width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-bottom: 1px solid #DDD;
+}
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size:13px;
+}
+.table p ,.table span, .table a{
+	margin:0;
+	padding:0;
+}
+.table th,
+.table td {
+  padding: 10px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+.table th {
+  font-weight: bold;
+}
+
+.table thead th {
+  vertical-align: bottom;
+}
+
+.table caption + thead tr:first-child th,
+.table caption + thead tr:first-child td,
+.table colgroup + thead tr:first-child th,
+.table colgroup + thead tr:first-child td,
+.table thead:first-child tr:first-child th,
+.table thead:first-child tr:first-child td {
+  border-top: 0;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dddddd;
+}
+.table-striped tbody tr:nth-child(even) td,
+.table-striped tbody tr:nth-child(even) th
+{
+  background-color: #f9f9f9;	
+}
+
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th
+ {
+  background-color: #ffffff;
+}
+
+.table-striped thead tr:nth-child(odd) td,
+.table-striped thead tr:nth-child(odd) th
+ {
+  background-color: #f3f3f3;
+}
+
+
+
+.table-bordered {
+  border: 1px solid #dddddd;
+  border-collapse: separate;
+  *border-collapse: collapse;
+  border-left: 0;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border-left: 1px solid #dddddd;
+}
+
+.table-bordered caption + thead tr:first-child th,
+.table-bordered caption + tbody tr:first-child th,
+.table-bordered caption + tbody tr:first-child td,
+.table-bordered colgroup + thead tr:first-child th,
+.table-bordered colgroup + tbody tr:first-child th,
+.table-bordered colgroup + tbody tr:first-child td,
+.table-bordered thead:first-child tr:first-child th,
+.table-bordered tbody:first-child tr:first-child th,
+.table-bordered tbody:first-child tr:first-child td {
+  border-top: 0;
+}
+
+.table-bordered thead:first-child tr:first-child th:first-child,
+.table-bordered tbody:first-child tr:first-child td:first-child {
+  -webkit-border-top-left-radius: 4px;
+          border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+}
+
+.table-bordered thead:first-child tr:first-child th:last-child,
+.table-bordered tbody:first-child tr:first-child td:last-child {
+  -webkit-border-top-right-radius: 4px;
+          border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+}
+
+.table-bordered thead:last-child tr:last-child th:first-child,
+.table-bordered tbody:last-child tr:last-child td:first-child,
+.table-bordered tfoot:last-child tr:last-child td:first-child {
+  -webkit-border-radius: 0 0 0 4px;
+     -moz-border-radius: 0 0 0 4px;
+          border-radius: 0 0 0 4px;
+  -webkit-border-bottom-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+}
+
+.table-bordered thead:last-child tr:last-child th:last-child,
+.table-bordered tbody:last-child tr:last-child td:last-child,
+.table-bordered tfoot:last-child tr:last-child td:last-child {
+  -webkit-border-bottom-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+}
+
+.table-bordered caption + thead tr:first-child th:first-child,
+.table-bordered caption + tbody tr:first-child td:first-child,
+.table-bordered colgroup + thead tr:first-child th:first-child,
+.table-bordered colgroup + tbody tr:first-child td:first-child {
+  -webkit-border-top-left-radius: 4px;
+          border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+}
+
+.table-bordered caption + thead tr:first-child th:last-child,
+.table-bordered caption + tbody tr:first-child td:last-child,
+.table-bordered colgroup + thead tr:first-child th:last-child,
+.table-bordered colgroup + tbody tr:first-child td:last-child {
+  -webkit-border-top-right-radius: 4px;
+          border-top-right-radius: 4px;
+  -moz-border-right-topleft: 4px;
+}
+
+table.dataTable tr.odd td.sorting_1 { background-color: #f9f9f9; }
+table.dataTable tr.even td.sorting_1 { background-color: #f3f3f3; }
+
+table.dataTable thead th {
+  border-bottom-width:0;
+}
+
+.btn-warning {
+  color: #ffffff;
+  border-radius: 3px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ec5a00;
+  background-image: -moz-linear-gradient(top, #ff7e00, #ff6100);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff7e00), to(#ff6100));
+  background-image: -webkit-linear-gradient(top, #ff7e00, #ff6100);
+  background-image: -o-linear-gradient(top, #ff7e00, #ff6100);
+  background-image: linear-gradient(to bottom, #ff7e00, #ff6100);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+  border-color: #ff6100 #ff6100 #ec5a00;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #ec5a00;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active,
+.btn-warning.disabled,
+.btn-warning[disabled] {
+  color: #ffffff;
+  background-color: #ff6100;
+  *background-color: #df8505;
+}
+.btn-warning:active,
+.btn-warning.active {
+  background-color: #c67605 \9;
+}
+
+.filter-select select{
+	height:30px;
+}
+.filter-select button{
+	padding:6px 12px;
+	margin-left:7px;
+}
+.buy-table{
+	font:normal 13px '新宋体';
+/* 	min-width:1260px; */
+}
+.buy-table .no-break{
+	white-space: nowrap;
+}
+.buy-table .number{
+	width:56px;
+}
+.buy-table a{
+	color:#098fd6;
+}
+.buy-table thead th{
+	color:#333;
+}
+.buy-table tbody td, .buy-table tbody th{
+	color:#666;
+}
+.buy-table .options{
+	color:#ddd;
+}
+
+.table td .overwritten{
+	color:#FF6000;
+}
+
+.filter h3{
+	font-family: "微软雅黑",Arial;
+	padding: 10px;
+}
+.filter .form-main{
+	display: block;
+	height: 78px;/*展开时高度为78px*/
+	border-top: 1px solid #c4c4c4;
+}
+.filter .form-main.hideStatus{
+	height: 29px;/*展开时高度为126px*/
+}
+.filter .control-group{
+	float: left;
+	width: 100%;
+	font-size: 13px;
+	padding: 10px 0;
+	margin: 0;
+	background-color: #f3f3f3;
+}
+.filter .control-group label,.filter .control-group button,.filter .control-group .btn-group,.filter .control-group input{
+	display: inline-block;
+
+	vertical-align: middle;
+}
+.filter .control-group label{
+	margin: 0;
+	width: 80px;
+	text-align: right;
+}
+.filter .control-group input{
+/* 	width: 100px; */
+ 	margin-left: 10px;
+	margin-bottom: 0;
+}
+.filter .control-group #searchQueryInput{
+	width: 200px;
+ 	margin-left: 10px;
+	margin-bottom: 0;
+}
+.filter #pastDueOrdersButton{
+	color: #ff6000;
+	margin-left:10px;
+	padding:4px 0;
+	width: 112px;
+}
+.filter #status{
+	margin-left: 10px;
+}
+.filter .control-group .left{
+	float: left;
+}
+.filter .form-search{
+	float: right;
+}
+
+.filter .search-query input {
+	margin-bottom:0;
+	margin-left:10px;
+	width:200px;
+}
+
+.filter .toggleBar{
+	width: 100%;
+	text-align: center;
+	position: relative;
+	border-top: 1px solid #c4c4c4;
+}
+.filter .toggleBar span{
+	position: absolute;
+	left: 48%;
+	top: -2px;
+}
+.filter .toggleBtn{
+  	height: 25px;
+	padding: 0;
+	margin: -1px;
+}
+.arrowUp{
+    border-top:transparent 5px solid;
+    border-left:transparent 5px solid;
+    border-right:transparent 5px solid;
+    border-bottom:#333 5px solid;
+    width:0;
+    height:0;
+    line-height:5px;
+    font-size: 1px;
+    vertical-align: top;
+    margin-left: 3px;
+}
+.arrowDown{
+    border-top:#333 5px solid;                  
+    border-left:transparent 5px solid;
+    border-right:transparent 5px solid;
+    border-bottom:transparent 5px solid;
+    width:0;
+    height:0;
+    line-height:0;
+    font-size:0;
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+.hideForm{
+	display:none;
+} 
+
+#procurement_order_table_length{
+	float:left;
+	margin-top:5px;
+}
+.pagination{
+	float:right;
+	margin:5px;
+}
+.filter-select .btn-warning{
+	margin-bottom:9px;
+}

@@ -6,20 +6,4 @@
 	<decorator name="activity" page="activity-layout.jsp">
 		
 	</decorator>
-	<!-- 
-	<decorator name="inquiry" page="inquiry-layout.jsp">
-		<pattern>/inquiries*</pattern>
-	</decorator>
-	<decorator name="product" page="product-layout.jsp">
-		<pattern>/products*</pattern>
-	</decorator>
-	<decorator name="storeIndex" page="store-index-layout.jsp">
-		<pattern>/store/index*</pattern>
-	</decorator>
-    <decorator name="invoiceD" page="store-layout.jsp">
-        <pattern>/invoice*</pattern>
-    </decorator>
-	<decorator name="selectableProducts" page="/WEB-INF/views/store/promotionSelectableProducts.jsp">
-	</decorator>
-	-->
 </decorators>

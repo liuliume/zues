@@ -1,0 +1,141 @@
+body, table, input, textarea, select, .dropdown-menu, .page-title{
+	font-family: 微软雅黑,'Open Sans', sans-serif,Verdana,宋体;
+}
+table thead tr{
+	background-color: grey;
+}
+@media (min-width: 992px) { 
+	.page-content{
+		padding-top: 10px;
+	}
+}
+.page-content .page-breadcrumb.breadcrumb{
+	margin-top:10px;
+	margin-bottom:5px;
+}
+.page-title{
+	font-size : 24px;
+}
+.page-content { 
+ 	margin-left: 0px;
+}
+.table thead tr th{
+	font-weight: 900;
+}
+.navbar-inner{
+	margin-top : -16px;
+}
+ul.navbar-nav a{
+	font-size : 16px;
+}
+.arrowDown{
+     border-top:#fff 5px solid;                  
+     border-left:transparent 5px solid;
+     border-right:transparent 5px solid;
+     border-bottom:transparent 5px solid;
+     width:0;
+     height:0;
+     line-height:0;
+     font-size:0;
+     margin-left: 3px;
+}
+.header .navbar-nav {
+  margin-right: 20px;
+  display: block; 
+}
+.page-title{
+	margin-bottom: 0px;
+}
+.form-actions{
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.form-group{
+	margin-bottom: 5px;
+}
+.dataTables_length{
+	margin: 10px 0;
+}
+.tabbable-custom{
+	margin-bottom: 0px;
+}
+.dropdown-menu{
+	min-width:280px;
+}
+li.user .dropdown-menu{
+	min-width:140px;
+}
+
+.form-actions{
+	padding-bottom:0px;
+}
+.form-group .pull-right{
+	margin-right:15px;
+}
+.modal-header{
+	padding:9px 15px;
+	background-color:#0480be;
+	color:#FFFFFF;"
+}
+.modal-body{
+	padding:0px;
+	padding-bottom:0;
+}
+.modal-body .info{
+	margin:10px;
+}
+.pagination{
+	margin:5px 0 0;
+}
+.portlet.box > .portlet-body{
+	padding:5px;
+}
+span.help-block{
+	color:#ff0000;
+}
+.modal-footer{
+	margin-top: 0px;
+	padding: 10px 10px 10px;
+}
+.alert{
+	margin-bottom : 10px;
+}
+div.dataTables_info{
+	top:10px;
+}
+.dataTables_length{
+	margin:0;
+}
+.table-scrollable{
+	margin:0 !important
+}
+.portlet-tabs > .nav-tabs > li > a{
+	margin-top:2px;
+}
+.info-block{
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.portlet-tabs > .tab-content{
+	padding: 5px !important;
+}
+.fileinput .thumbnail > img{
+	max-height : %;
+	margin-bottom: 4px;
+}
+.modal-wide .modal-dialog {
+  width: 80%;
+  margin-top:10px;
+}
+
+.loadingMask {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1001;
+	background: url(/resources/images/DownLoading.gif) 50% 50% no-repeat ;
+}

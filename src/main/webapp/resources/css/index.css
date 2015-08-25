@@ -1,0 +1,155 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+.wrap-out{
+	font-family: "Microsoft YaHei", "Î¢ÈíÑÅºÚ" ,"ËÎÌå" , "simsun" arial,verdana,sans-serif;
+	background-color: #f9f9f9;
+}
+.wrap-out h2{
+	color: #333;
+	font: bold 18px/30px "Microsoft YaHei", "Î¢ÈíÑÅºÚ" ,"ËÎÌå" , "simsun" arial,verdana,sans-serif;
+	border-bottom: 2px solid #dfdfdf;
+	margin-bottom: 19px;
+	padding-bottom: 4px;
+}
+.work-table{
+	float: left;
+	width:220px;
+	min-height: 700px;
+}
+.help-center{
+	float: right;
+	width: 192px;
+	background-color: #fff;
+}
+.help-center h2{
+	margin-bottom: 13px;
+}
+.notice-center{
+	overflow:hidden;
+	min-height: 700px;
+	border:2px solid #dfdfdf;
+	border-top:none;
+	border-bottom:none;
+	background-color: #fff;
+}
+.notice-center h2{
+	margin-bottom: 0;
+}
+.work-table, .help-center, .notice-center{
+	padding:20px 19px 0 19px;
+}
+.work-table .around{
+	border: 1px solid #ff6000;
+	border-radius:4px;
+	height: 34px;
+	line-height: 34px;
+	margin-bottom: 10px;
+	color:#ff6000; 
+	font: bold 18px/34px Arial,Verdana,sans-serif;
+}
+.work-table .around .around-left{
+	width:106px;
+	overflow: hidden;
+	text-align: right;
+	float: left;
+	font-size: 13px;
+	font-weight:normal;
+}
+.work-table .around .around-right{
+	overflow:hidden;
+}
+.work-table .around .around-right a{
+	overflow:hidden;
+	color:#ff6000; 
+	font: bold 18px/34px Arial,Verdana,sans-serif;
+}
+.work-table .no-border{
+	border: none;
+	margin-bottom: 0;
+}
+.work-table .gray, .work-table .gray .around-right a{
+	color: #999;
+	border: none;
+	margin-bottom: 0;
+}
+.work-table .black, .work-table .black .around-right a{
+	color: #333;
+	border: none;
+	margin-bottom: 0;
+}
+.notice-center .content{
+	padding: 14px 20px;
+	font: bold 14px/22px Arial,Verdana,sans-serif;
+	color: #333;
+	display: block;
+	height:10px;
+	width:850px;
+	overflow:hidden;
+	border-bottom: 1px solid #dfdfdf;
+	position: relative;
+}
+.notice-center .content a{
+	color:#098fd6;
+}
+.notice-center .content .notify a{
+	color:#000000;
+}
+.notice-center .content a:hover{
+	text-decoration: underline;
+	color:#ff8000;
+}
+.notice-center .normal-text{
+	font-weight: normal;
+}
+.notice-center .content:hover{
+	background-color: #f3f7f9;
+}
+.notice-center .content span{
+	color:#999;
+	font-weight: normal;
+}
+.notice-center .content .notify{
+	font-weight: normal;
+	width:700px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	margin-left:30px;
+	position:absolute;
+}
+.notice-center .content .attachFile{
+	font-weight: normal;
+	padding-left:800px;
+}
+.notice-center .content .circle{
+	position:absolute;
+	width:7px;
+	height: 7px;
+	border-radius:5px;
+	background: #ff6000;
+	top: 22px;
+	left:5px;
+}
+.notice-center .pagination li.active a{
+	background: #424242;
+	color: #fff;
+	border-color: #424242;
+}
+.help-center .other-tips{
+	margin-bottom: 30px;
+}
+.help-center .other-tips a{
+	color: #098fd6;
+	text-decoration: none;
+	display: block;
+	font-size: 13px;
+	line-height: 24px;
+}
+.help-center .other-tips a:hover{
+	text-decoration: underline;
+}
+.help-center h4{
+	font-weight: normal;
+}
