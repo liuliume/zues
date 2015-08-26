@@ -25,7 +25,7 @@ public class MenuService {
 
 	private Logger logger = LoggerFactory.getLogger(MenuService.class);
 
-	@Value("${user.home}/liuliume_portal/conf/menu.json")
+	@Value("${user.home}/liuliume_portal/config/menu.json")
 	private String menuFile ;
 
 	private ObjectMapper mapper = new ObjectMapper();
