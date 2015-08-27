@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<decorators defaultdir="/WEB-INF/layouts/">
+<decorators defaultdir="/WEB-INF/layouts">
 	<excludes>
-		
+		<pattern>/static/*.*</pattern>
+		<pattern>/resources/*.*</pattern>
+		<pattern>/api/*.*</pattern>
 	</excludes>
 	<decorator name="activity" page="activity-layout.jsp">
-		
+		<pattern>/</pattern>
 	</decorator>
 </decorators>
