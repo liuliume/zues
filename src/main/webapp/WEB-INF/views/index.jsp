@@ -6,6 +6,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
+<head>
+<title>Index</title>
+
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 <%@ include file="/WEB-INF/views/includes/conflict-includes.jsp"%>
 <%@ include file="/WEB-INF/views/includes/util.jsp"%>

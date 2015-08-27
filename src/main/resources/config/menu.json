@@ -2,6 +2,34 @@
 	"name":"root",
 	"children":[
 		{
+			"name":"用户管理",
+			"url":"/account",
+			"children":[
+                {
+                    "name":"用户列表",
+                    "url":"/account/list"
+                },
+                {
+                	"name":"添加用户",
+                	"url":"/account/index"
+                }
+			]
+		},
+		{
+			"name":"订单管理",
+			"url":"/order",
+			"children":[
+                {
+                    "name":"订单列表",
+                    "url":"/order/list"
+                },
+				{
+					"name":"订单状态",
+					"url":"/order/orderStatus"
+				}
+			]
+		},
+		{
 			"name":"房间管理",
 			"url":"/room",
 			"children":[
@@ -9,34 +37,6 @@
                     "name":"房间列表",
                     "url":"/room/list"
                 }
-			]
-		},
-		{
-			"name":"员工管理",
-			"url":"/employee",
-			"children":[
-                {
-                    "name":"员工列表",
-                    "url":"/employee/list"
-                },
-				{
-					"name":"新加员工",
-					"url":"/employee/add"
-				}
-			]
-		},
-		{
-			"name":"采购管理",
-			"url":"/purchase",
-			"children":[
-                {
-                    "name":"采购类目",
-                    "url":"/purchase/category"
-                },
-				{
-					"name":"仓库管理",
-					"url":"/warehouse/list"
-				}
 			]
 		}
 	]
