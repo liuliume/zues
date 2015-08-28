@@ -1,43 +1,65 @@
 {
 	"name":"root",
 	"children":[
-		{
-			"name":"用户管理",
-			"url":"/account",
-			"children":[
-                {
-                    "name":"用户列表",
-                    "url":"/account/list"
-                },
-                {
-                	"name":"添加用户",
-                	"url":"/account/index"
-                }
-			]
-		},
-		{
-			"name":"订单管理",
-			"url":"/order",
-			"children":[
-                {
-                    "name":"订单列表",
-                    "url":"/order/list"
-                },
-				{
-					"name":"订单状态",
-					"url":"/order/orderStatus"
-				}
-			]
-		},
-		{
-			"name":"房间管理",
-			"url":"/room",
-			"children":[
-                {
-                    "name":"房间列表",
-                    "url":"/room/list"
-                }
-			]
-		}
+        {
+          "name": "用户管理",
+          "url": "/account"
+        },
+        {
+          "name":"编码管理",
+          "url":"/code",
+          "children":[
+            {
+              "name":"地址管理",
+              "url":"/room/list"
+            },
+            {
+              "name":"宠物类型管理",
+              "url":"/room/list"
+            },
+            {
+              "name":"宠物品种管理",
+              "url":"/room/list"
+            }
+          ]
+        },
+        {
+          "name": "寄养管理",
+          "url": "/code",
+          "children": [
+            {
+              "name":"房间类型管理",
+              "url":"/room/list"
+            }
+          ]
+        },
+        {
+          "name": "训练管理",
+          "url": "/code",
+          "children": [
+            {
+              "name":"课程管理",
+              "url":"/room/list"
+            }
+          ]
+        },
+        {
+          "name": "美容管理",
+          "url": "/code",
+          "children": [
+            {
+              "name":"类型管理",
+              "url":"/room/list"
+            },
+            {
+              "name":"服务时间管理",
+              "url":"/room/list"
+            }
+          ]
+        },
+        {
+          "name":"订单管理",
+          "url":"/order"
+        }
 	]
 }
