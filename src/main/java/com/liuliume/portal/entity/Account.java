@@ -39,8 +39,6 @@ public class Account implements Serializable{
 	private int city_id;
 	private int area_id;
 	private String address;
-	
-	private int status;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -107,7 +105,7 @@ public class Account implements Serializable{
 		this.flag = flag;
 	}
 
-	@Column(name="uniqname")
+	@Column(name="uniq_name")
 	public String getUniqname() {
 		return uniqname;
 	}
@@ -161,13 +159,4 @@ public class Account implements Serializable{
 		this.address = address;
 	}
 
-	@Column(name="status")
-	@Status(logic_delete_status=99)
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
 }

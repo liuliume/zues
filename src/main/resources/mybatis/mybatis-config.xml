@@ -26,6 +26,6 @@
     </plugins>
     
     <mappers>
-    	<mapper resource="mybatis/mappers/TestMapper.xml"/>
+    	<mapper resource="mybatis/mappers/AccountMapper.xml"/>
     </mappers>
 </configuration>

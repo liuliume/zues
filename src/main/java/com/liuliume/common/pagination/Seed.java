@@ -11,10 +11,10 @@ import org.apache.commons.lang3.StringUtils;
  * <p>A seed should contain a collection of result and the attributes which hold the parameters for generate pagination.</p>
  * <p>Support url like <b>"inquiries/everyone?pagesize=10&page=8&order=lsin==desc&q=s"</b></p>
  * 
- * @author limingxing
+ * @author xiayun
  * 
- * @see com.litb.common.pagination.PageFilter
- * @see com.litb.common.pagination.PageOrder
+ * @see com.liuliu.common.pagination.PageFilter
+ * @see com.liuliu.common.pagination.PageOrder
  */
 public class Seed<T extends Serializable> implements Serializable {
 

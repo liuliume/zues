@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuliume.portal.mybatis.mapper.AccountMapper">
+
+	<select id="count" resultType="int">
+		select count(1) from account
+		<where>
+			<if test="param.cond != null">
+				<if test="param.cond.account != null">
+					<if test="param.cond.account.uniqname != null">
+						uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
+					</if>
+					<!-- add query cond here -->
+				</if>
+			</if>
+		</where>
+	</select>
+	
+	<select id="list" parameterType="com.liuliume.portal.entity.Account">
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name,gender,province_id,city_id,area_id,address,flag
+		from account where 1=1
+		<if test="param.cond != null">
+				<if test="param.cond.account != null">
+					<if test="param.cond.account.uniqname != null">
+						uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
+					</if>
+					<!-- add query cond here -->
+				</if>
+			</if>
+	</select>
+</mapper>
