@@ -1,6 +1,8 @@
 package com.liuliume.portal.entity;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable{
     private String id;
 
     private String name;

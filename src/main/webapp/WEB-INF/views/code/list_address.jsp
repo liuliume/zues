@@ -3,18 +3,17 @@
 <%@ include file="/WEB-INF/layouts/fragment/taglib.jsp"%>
 
 <head>
-<title>Account</title>
-<%@ include file="/WEB-INF/views/includes/header.jsp"%>
+<title>地址管理</title>
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="page-title">Account Management</h3>
+			<h3 class="page-title">地址管理</h3>
 			<ul class="page-breadcrumb breadcrumb">
-				<li><i class="fa fa-home"></i> <span> Account Management
+				<li><i class="fa fa-home"></i> <span> 地址管理
 				</span> <i class="fa fa-angle-right"></i></li>
-				<li><span> Account List </span></li>
+				<li><span> 地址列表 </span></li>
 			</ul>
 		</div>
 	</div>

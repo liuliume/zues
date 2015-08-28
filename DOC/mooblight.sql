@@ -15,6 +15,28 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP TABLE IF EXISTS `account`;
+
+CREATE TABLE account(
+	account_id INT AUTO_INCREMENT NOT NULL,
+	passport_id VARCHAR(255) NULL,
+	email VARCHAR(255) NULL,
+	mobile VARCHAR(15) NOT NULL,
+	reg_time TIMESTAMP NOT NULL,
+	reg_ip VARCHAR(15) NOT NULL,
+	avatar varchar(128) NULL,
+	uniq_name VARCHAR(127) NULL,
+	gender TINYINT(1) NULL,
+	province_id INT NULL,
+	city_id INT NULL,
+	area_id INT NULL,
+	address VARCHAR(511) NULL,
+	flag TINYINT(4),
+	PRIMARY KEY (account_id),
+	INDEX idx_name(uniq_name)
+)ENGINE = INNODB DEFAULT CHARSET=utf8 COMMENT='用户表'
+
+
 --
 -- Table structure for table `address`
 --

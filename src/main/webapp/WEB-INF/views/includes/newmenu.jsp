@@ -16,14 +16,22 @@
 		</ul>
         <ul class="nav navbar-nav">
 	        <c:forEach items="${menus}" var="menu">
-		        <li class="dropdown">
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">${menu.name}<i class="arrowDown"></i></a>
-					<ul class="dropdown-menu" role="menu">
-						<c:forEach items="${menu.children}" var="childMenu">
-							<li><a href="${ctx}${childMenu.url}">${childMenu.name}</a></li>
-						</c:forEach>
-					</ul>
-				</li>
+                <c:if test="${menu.children!=null}" var="childrenif">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">${menu.name}<i class="arrowDown"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <c:forEach items="${menu.children}" var="childMenu">
+                                <li><a href="${ctx}${childMenu.url}">${childMenu.name}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </li>
+                </c:if>
+                <c:if test="${!childrenif}">
+                    <li>
+                        <a href="${ctx}${menu.url}">${menu.name}</a>
+                    </li>
+                </c:if>
+
 	        </c:forEach>
         </ul>
         <ul class="nav navbar-nav pull-right">
