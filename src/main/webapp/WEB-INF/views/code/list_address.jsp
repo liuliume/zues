@@ -31,7 +31,7 @@
 								placeholder="Input group name" value="${seed.filter['nameQ']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:Account.search();" class="btn dark">Search
+							<a href="javascript:Account.search();" class="btn dark">查询
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
@@ -45,8 +45,8 @@
 		<div class="col-md-12">
 			<div class="blank-form-actions">
 				<a class="btn green" href="#" id="createGroupBatch"><i
-					class="fa fa-plus"></i>Create</a> <a class="btn blue" href="#"
-					id="deleteGroupBatch"><i class="fa fa-times"></i>Delete</a>
+					class="fa fa-plus"></i>新建</a> <a class="btn blue" href="#"
+					id="deleteGroupBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 			<div class="portlet box grey">
 				<div class="portlet-title">
 					<div class="caption">
-						<i class="fa fa-calendar"></i> Account List
+						<i class="fa fa-calendar"></i> 地址列表
 					</div>
 				</div>
 				<div class="portlet-body flip-scroll">
@@ -96,10 +96,10 @@
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
 										name="editGroup" groupId="${crmSegment.id}"><i
-											class="fa fa-edit"></i> Edit</a> <a
+											class="fa fa-edit"></i> 修改</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
 										name="deleteGroup" groupId="${crmSegment.id}"><i
-											class="fa fa-times"></i> Delete</a></td>
+											class="fa fa-times"></i> 删除</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
