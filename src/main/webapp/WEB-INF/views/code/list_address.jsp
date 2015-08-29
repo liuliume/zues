@@ -24,10 +24,10 @@
 				<form id="form_search" class="form-horizontal"
 					action="/code/address/list" method="GET">
 					<div class="form-group">
-						<label class="col-md-1 control-label">Name: </label>
+						<label class="col-md-1 control-label">地址: </label>
 						<div class="col-md-3">
 							<input type="text" id="groupNameQ"
-								class="form-control input-medium input-inline" name="groupNameQ"
+								class="form-control input-medium input-inline" name="name"
 								placeholder="Input group name" value="${seed.filter['nameQ']}" />
 						</div>
 						<div class="pull-right">
@@ -71,9 +71,10 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 20%;">唯一标示</th>
+								<th style="width: 10%;">唯一标示</th>
 								<th style="width: 20%;">名称</th>
-								<th style="width: 20%;">父级标示</th>
+								<th style="width: 10%;">父级标示</th>
+                                <th style="width: 20%;">父级名称</th>
 								<th style="width: 20%;">级别</th>
                                 <th style="width: 20%;">操作</th>
 							</tr>
@@ -89,7 +90,8 @@
 									</td>
 									<td>${item.id}</td>
 									<td>${item.name}</td>
-									<td>${item.parentId}</td>
+									<td>${item.parent_id}</td>
+                                    <td>${item.parent_name}</td>
 									<td>${item.level}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"

@@ -4,7 +4,10 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Address;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface AddressService {
 	
@@ -13,5 +16,5 @@ public interface AddressService {
 	 * @param seed
 	 * @throws Exception
 	 */
-	public List<Address> list(Seed<Address> seed) throws Exception;
+	public List<HashMap<String, Object>> list(Seed<Address> seed) throws Exception;
 }

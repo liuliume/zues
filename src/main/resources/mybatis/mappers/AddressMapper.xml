@@ -27,9 +27,9 @@
         </where>
     </select>
 
-    <select id="list" parameterType="com.liuliume.portal.entity.Address" resultMap="BaseResultMap">
-        select *
-        from address where 1=1
+    <select id="list" parameterType="com.liuliume.portal.entity.Address" resultType="java.util.HashMap">
+        select a1.*,a2.name as parent_name
+        from address a1,address a2 where 1=1 and a2.id=a1.parent_id
         <if test="param.cond != null">
             <if test="param.cond.address != null">
                 <if test="param.cond.address.name != null">

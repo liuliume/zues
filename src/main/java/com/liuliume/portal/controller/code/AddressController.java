@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by clement on 8/29/15.
@@ -30,15 +34,36 @@ public class AddressController {
     @RequestMapping(value="list",method=RequestMethod.GET)
     private ModelAndView list(ModelMap map,@SeedParam Seed<Address> seed){
         logger.info("call AddressController.list");
+        List<HashMap<String,Object>> list = null;
         try {
-            addressService.list(seed);
+            list = addressService.list(seed);
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), seed.toString()), e);
         }
         ModelAndView mav = new ModelAndView("code/list_address");
-        map.put("seed", seed);
+        Seed<HashMap<String, Object>> resultSeed = new Seed<HashMap<String,Object>>();
+        Method[] methods = Seed.class.getMethods();
+        for (Method method : methods){
+            if("get".equalsIgnoreCase(method.getName().substring(0,3))){
+                for(Method method1 : methods) {
+                    if("set".equalsIgnoreCase(method1.getName().substring(0,3))
+                            && method.getName().substring(3,method.getName().length()-1).equalsIgnoreCase(method1.getName().substring(3,method1.getName().length()-1))
+                            && "result".equalsIgnoreCase(method1.getName().substring(3,method1.getName().length()-1))) {
+                        try {
+                            method1.invoke(resultSeed,method.invoke(seed));
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        resultSeed.setResult(list);
+        map.put("seed", resultSeed);
         return mav;
     }
 }

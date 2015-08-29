@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -24,17 +26,17 @@ public class AddressServiceImpl implements AddressService {
 	private AddressDao addressDao;
 
 	@Override
-	public List<Address> list(Seed<Address> seed) throws Exception{
+	public List<HashMap<String, Object>> list(Seed<Address> seed) throws Exception{
 		logger.info("Account Service list bengins.");
-		List<Address> result = new ArrayList<Address>();
+		List<HashMap<String,Object>> result = new ArrayList<HashMap<String,Object>>();
 		
 		Parameter parameter = MBox.convertParameter(seed);
 		
 		AddressQueryCond cond = new AddressQueryCond();
 		Address address = new Address();
 		
-		if(seed.getFilter().containsKey("nameQ")){
-			String name = seed.getFilter().get("nameQ");
+		if(seed.getFilter().containsKey("name")){
+			String name = seed.getFilter().get("name");
 			address.setName(name);
 		}
 		//add other query condition here
@@ -46,7 +48,7 @@ public class AddressServiceImpl implements AddressService {
 		seed.setTotalSize(count);
 		if(count>0){
 			result = addressDao.list(parameter);
-			seed.setResult(result);
+//			seed.setResult(result);
 		}
 		return result;
 	}
