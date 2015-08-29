@@ -1,4 +1,4 @@
-package com.liuliume.portal.dao;
+package com.liuliume.portal.mybatis.mapper;
 
 import com.liuliume.portal.entity.Orders;
 

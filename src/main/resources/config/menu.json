@@ -11,7 +11,7 @@
           "children":[
             {
               "name":"地址管理",
-              "url":"/room/list"
+              "url":"/code/address/list"
             },
             {
               "name":"宠物类型管理",

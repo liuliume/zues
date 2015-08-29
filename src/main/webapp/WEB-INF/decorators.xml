@@ -7,6 +7,7 @@
 		<pattern>/login*</pattern>
 	</excludes>
 	<decorator name="activity" page="activity-layout.jsp">
-		<pattern>/account/*</pattern>
+		<!--<pattern>/account/*</pattern>-->
+        <pattern>/*</pattern>
 	</decorator>
 </decorators>

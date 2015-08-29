@@ -22,7 +22,7 @@
 		<div class="col-md-12">
 			<div class="form-actions">
 				<form id="form_search" class="form-horizontal"
-					action="/account/list" method="GET">
+					action="/code/address/list" method="GET">
 					<div class="form-group">
 						<label class="col-md-1 control-label">Name: </label>
 						<div class="col-md-3">
@@ -71,13 +71,11 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">Name</th>
-								<th style="width: 5%;">Email</th>
-								<th style="width: 10%;">Mobile</th>
-								<th style="width: 15%;">reg_time</th>
-								<th style="width: 10%;">Gender</th>
-								<th style="width: 15%;">Address</th>
-								<th style="width: 20%;">Action</th>
+								<th style="width: 20%;">唯一标示</th>
+								<th style="width: 20%;">名称</th>
+								<th style="width: 20%;">父级标示</th>
+								<th style="width: 20%;">级别</th>
+                                <th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -89,12 +87,10 @@
 												value="${crmSegment.id}"> </span>
 										</div>
 									</td>
-									<td>${item.uniqname}</td>
-									<td>${item.eail}</td>
-									<td>${item.mobile}</td>
-									<td>${item.reg_time}</td>
-									<td>${item.gender}</td>
-									<td>${item.address}</td>
+									<td>${item.id}</td>
+									<td>${item.name}</td>
+									<td>${item.parentId}</td>
+									<td>${item.level}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
 										name="editGroup" groupId="${crmSegment.id}"><i
