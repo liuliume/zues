@@ -4,8 +4,9 @@
 		<pattern>/static/*.*</pattern>
 		<pattern>/resources/*.*</pattern>
 		<pattern>/api/*.*</pattern>
+		<pattern>/login*</pattern>
 	</excludes>
 	<decorator name="activity" page="activity-layout.jsp">
-		<pattern>/</pattern>
+		<pattern>/account/*</pattern>
 	</decorator>
 </decorators>

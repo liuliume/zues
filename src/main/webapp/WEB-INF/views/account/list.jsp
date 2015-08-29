@@ -31,7 +31,7 @@
 								placeholder="Input name" value="${seed.filter['nameQ']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:Account.search();" class="btn dark">Search
+							<a href="javascript:ZuesAccount.search();" class="btn dark">Search
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
@@ -44,9 +44,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="blank-form-actions">
-				<a class="btn green" href="#" id="createGroupBatch"><i
+				<a class="btn green" href="#" id="createAccount"><i
 					class="fa fa-plus"></i>Create</a> <a class="btn blue" href="#"
-					id="deleteGroupBatch"><i class="fa fa-times"></i>Delete</a>
+					id="deleteAccount"><i class="fa fa-times"></i>Delete</a>
 			</div>
 		</div>
 	</div>
