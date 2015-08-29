@@ -73,4 +73,15 @@ public class AccountServiceImpl implements AccountService {
 		return account;
 	}
 
+	@Override
+	public void createOrUpdate(Account account) throws Exception {
+		if(account==null)
+			throw new IllegalArgumentException("Account为空");
+		if(account.getAccount_id()==null){//add
+			accountDao.createAccount(account);
+		}else {
+			accountDao.updateAccount(account);
+		}
+	}
+
 }

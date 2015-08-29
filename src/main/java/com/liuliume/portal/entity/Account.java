@@ -24,7 +24,7 @@ public class Account implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int account_id;
+	private Integer account_id;
 	private String passport_id;
 	private String email;
 	private String mobile;
@@ -44,11 +44,11 @@ public class Account implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="account_id")
-	public int getAccount_id() {
+	public Integer getAccount_id() {
 		return account_id;
 	}
 
-	public void setAccount_id(int account_id) {
+	public void setAccount_id(Integer account_id) {
 		this.account_id = account_id;
 	}
 
@@ -161,4 +161,13 @@ public class Account implements Serializable{
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return "Account [account_id=" + account_id + ", passport_id="
+				+ passport_id + ", email=" + email + ", mobile=" + mobile
+				+ ", reg_time=" + reg_time + ", reg_ip=" + reg_ip + ", flag="
+				+ flag + ", uniqname=" + uniqname + ", gender=" + gender
+				+ ", province_id=" + province_id + ", city_id=" + city_id
+				+ ", area_id=" + area_id + ", address=" + address + "]";
+	}
 }

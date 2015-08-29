@@ -4,6 +4,9 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,7 @@ public class AccountController {
 		return mav;
 	}
 	
+	@RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView index(ModelMap model,@RequestParam(value="account_id",required=false)Integer account_id){
 		
 		Account account = null;
@@ -83,6 +87,31 @@ public class AccountController {
 		return jdata;
 	}
 	
+	@RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
+	@ResponseBody
+	public JData createOrUpdate(Account account,HttpServletRequest request,HttpServletResponse response){
+		
+		logger.info("call the createOrUpdate account");
+		logger.debug(account.toString());
+		JData jData = new JData();
+		try {
+			String req_ip = request.getRemoteAddr();
+			account.setReg_ip(req_ip);
+			accountService.createOrUpdate(account);
+			jData.setCode(200);
+			jData.setSuccess(true);
+			jData.setDetail("操作成功");
+		} catch (Exception e) {
+			logger.error("create Or Update  Error." + e.getMessage()
+					+ " account[" + account + "]", e);
+			jData.setCode(500);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
+		return jData;
+	}
+	
+	
 	@ModelAttribute("allGender")
 	public Map<Integer, GenderEnum> getAllGender(){
 		Map<Integer, GenderEnum> genders = new HashMap<Integer, GenderEnum>();
@@ -91,4 +120,5 @@ public class AccountController {
 		 }
 		 return genders;
 	}
+	
 }
