@@ -26,12 +26,18 @@
 					<div class="form-group">
 						<label class="col-md-1 control-label">地址: </label>
 						<div class="col-md-3">
-							<input type="text" id="groupNameQ"
+							<input type="text"
 								class="form-control input-medium input-inline" name="name"
-								placeholder="Input group name" value="${seed.filter['nameQ']}" />
+								placeholder="地址" value="${seed.filter['name']}" />
 						</div>
+                        <label class="col-md-1 control-label">父级地址: </label>
+                        <div class="col-md-3">
+                            <input type="text"
+                                   class="form-control input-medium input-inline" name="parent_name"
+                                   placeholder="父级地址" value="${seed.filter['parent_name']}" />
+                        </div>
 						<div class="pull-right">
-							<a href="javascript:Account.search();" class="btn dark">查询
+							<a href="javascript:Address.search();" class="btn dark">查询
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
@@ -85,7 +91,7 @@
 									<td>
 										<div class="">
 											<span><input class="" type="checkbox" id="test"
-												value="${crmSegment.id}"> </span>
+												value="${item.id}"> </span>
 										</div>
 									</td>
 									<td>${item.id}</td>
@@ -95,10 +101,10 @@
 									<td>${item.level}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
-										name="editGroup" groupId="${crmSegment.id}"><i
+										name="editGroup" groupId="${item.id}"><i
 											class="fa fa-edit"></i> 修改</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
-										name="deleteGroup" groupId="${crmSegment.id}"><i
+										name="deleteGroup" groupId="${item.id}"><i
 											class="fa fa-times"></i> 删除</a></td>
 								</tr>
 							</c:forEach>
@@ -158,6 +164,6 @@
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->
-	<script src="${ctx}/resources/scripts/pages/account/accountList.js"
+	<script src="${ctx}/resources/scripts/pages/code/addressList.js"
 		type="text/javascript"></script>
 </body>
