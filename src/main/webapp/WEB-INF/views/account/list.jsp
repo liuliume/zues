@@ -4,7 +4,6 @@
 
 <head>
 <title>Account</title>
-<%@ include file="/WEB-INF/views/includes/header.jsp"%>
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
@@ -27,9 +26,9 @@
 					<div class="form-group">
 						<label class="col-md-1 control-label">Name: </label>
 						<div class="col-md-3">
-							<input type="text" id="groupNameQ"
-								class="form-control input-medium input-inline" name="groupNameQ"
-								placeholder="Input group name" value="${seed.filter['nameQ']}" />
+							<input type="text" id="nameQ"
+								class="form-control input-medium input-inline" name="nameQ"
+								placeholder="Input name" value="${seed.filter['nameQ']}" />
 						</div>
 						<div class="pull-right">
 							<a href="javascript:Account.search();" class="btn dark">Search

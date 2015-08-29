@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-<%-- <script type="text/javascript" src="${ctx}/resources/third-party/metronic/assets/plugins/jquery-1.10.2.min.js"></script> --%>
+<script type="text/javascript" src="${ctx}/resources/third-party/metronic/assets/plugins/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/third-party/metronic/assets/plugins/jquery-migrate-1.2.1.min.js" ></script>
 <script type="text/javascript" src="${ctx}/resources/third-party/metronic/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/third-party/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>

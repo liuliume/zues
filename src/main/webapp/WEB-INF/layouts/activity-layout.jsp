@@ -5,6 +5,8 @@
 <head>
 <title>liuliume 平台 | <sitemesh:title /></title>
 
+<sitemesh:head />
+
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
@@ -19,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx }/resources/css/pages/activity/profile.css" />
 
 
-<sitemesh:head />
+
 </head>
 
 <body>

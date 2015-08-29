@@ -33,7 +33,7 @@
         <![endif]-->
 
 		<!-- script -->
-		<script src="${ctx}/resources/third-party/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
+		<%-- <script src="${ctx}/resources/third-party/jquery/jquery-1.9.0.min.js" type="text/javascript"></script> --%>
 		<script src="${ctx}/resources/third-party/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${ctx}/resources/third-party/template/jquery.tmpl.min.js" type="text/javascript"></script>
 <%-- 		<script src="${ctx}/resources/third-party/jquery/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script> --%>
