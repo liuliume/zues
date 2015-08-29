@@ -27,5 +27,6 @@
     
     <mappers>
     	<mapper resource="mybatis/mappers/AccountMapper.xml"/>
+        <mapper resource="mybatis/mappers/AddressMapper.xml"/>
     </mappers>
 </configuration>

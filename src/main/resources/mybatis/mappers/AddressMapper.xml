@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuliume.portal.dao.AddressMapper" >
-  <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.Address" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
-    <result column="level" property="level" jdbcType="CHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, parent_id, level
-  </sql>
+<mapper namespace="com.liuliume.portal.mybatis.mapper.AddressMapper" >
+
+
+    <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.Address" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="CHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, name, parent_id, level
+    </sql>
+
+    <select id="count" resultType="int">
+        select count(1) from address
+        <where>
+            <if test="param.cond != null">
+                <if test="param.cond.address != null">
+                    <if test="param.cond.address.name != null">
+                        name like CONCAT(#{param.cond.address.name},'%')
+                    </if>
+                    <!-- add query cond here -->
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="com.liuliume.portal.entity.Address" resultType="java.util.HashMap">
+        select a1.*,a2.name as parent_name
+        from address a1,address a2 where 1=1 and a2.id=a1.parent_id
+        <if test="param.cond != null">
+            <if test="param.cond.address != null">
+                <if test="param.cond.address.name != null">
+                    name like CONCAT(#{param.cond.address.name},'%')
+                </if>
+                <!-- add query cond here -->
+            </if>
+        </if>
+    </select>
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
