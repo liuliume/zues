@@ -46,7 +46,7 @@
 			<div class="blank-form-actions">
 				<a class="btn green" href="#" id="createAccount"><i
 					class="fa fa-plus"></i>Create</a> <a class="btn blue" href="#"
-					id="deleteAccount"><i class="fa fa-times"></i>Delete</a>
+					id="deleteAccountBatch"><i class="fa fa-times"></i>Delete</a>
 			</div>
 		</div>
 	</div>
@@ -63,7 +63,7 @@
 					<liuliume:pagination position="above"></liuliume:pagination>
 					<table
 						class="table table-bordered table-striped table-condensed flip-content"
-						id="fromGroupTable">
+						id="fromAccountTable">
 						<thead class="flip-content">
 							<tr>
 								<th style="width: 42px;">
@@ -86,21 +86,21 @@
 									<td>
 										<div class="">
 											<span><input class="" type="checkbox" id="test"
-												value="${crmSegment.id}"> </span>
+												value="${item.account_id}"> </span>
 										</div>
 									</td>
 									<td>${item.uniqname}</td>
-									<td>${item.eail}</td>
+									<td>${item.email}</td>
 									<td>${item.mobile}</td>
 									<td>${item.reg_time}</td>
 									<td>${item.gender}</td>
 									<td>${item.address}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
-										name="editGroup" groupId="${crmSegment.id}"><i
+										name="editAccount" accountId="${item.account_id}"><i
 											class="fa fa-edit"></i> Edit</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
-										name="deleteGroup" groupId="${crmSegment.id}"><i
+										name="deleteAccount" accountId="${item.account_id}"><i
 											class="fa fa-times"></i> Delete</a></td>
 								</tr>
 							</c:forEach>
@@ -157,6 +157,8 @@
 	<!-- 提示弹出框结束 -->
 
 	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
+	
+	<input type="hidden" id="accountId_delete"/>
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->

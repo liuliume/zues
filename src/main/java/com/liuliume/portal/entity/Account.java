@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.mybatis.Status;
 
 @Entity
@@ -97,6 +98,7 @@ public class Account implements Serializable{
 	}
 
 	@Column(name="flag")
+	@Status(logic_delete_status=Constants.SIMPLE_DELETE)
 	public int getFlag() {
 		return flag;
 	}

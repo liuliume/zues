@@ -13,4 +13,13 @@ public interface AccountService {
 	 * @throws Exception
 	 */
 	public List<Account> list(Seed<Account> seed) throws Exception;
+	
+	/**
+	 * 批量删除Account列表
+	 * @param account_ids
+	 * @throws Exception
+	 */
+	public void batchDelete(String account_ids) throws Exception;
+	
+	public Account findAccountById(Integer account_id) throws Exception;
 }

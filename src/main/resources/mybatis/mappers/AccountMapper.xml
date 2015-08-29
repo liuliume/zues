@@ -4,29 +4,37 @@
 <mapper namespace="com.liuliume.portal.mybatis.mapper.AccountMapper">
 
 	<select id="count" resultType="int">
-		select count(1) from account
-		<where>
+		select count(1) from account where flag <![CDATA[<>]]>99
+			
 			<if test="param.cond != null">
 				<if test="param.cond.account != null">
 					<if test="param.cond.account.uniqname != null">
-						uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
+						and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
 					</if>
 					<!-- add query cond here -->
 				</if>
 			</if>
-		</where>
+			
 	</select>
 	
-	<select id="list" parameterType="com.liuliume.portal.entity.Account">
+	<select id="list" resultType="com.liuliume.portal.entity.Account">
 		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name,gender,province_id,city_id,area_id,address,flag
-		from account where 1=1
+		from account where flag <![CDATA[<>]]>99
 		<if test="param.cond != null">
 				<if test="param.cond.account != null">
-					<if test="param.cond.account.uniqname != null">
-						uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
+					<if test="param.cond.account.uniqname != null and param.cond.account.uniqname != ''">
+						and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
 					</if>
 					<!-- add query cond here -->
 				</if>
 			</if>
+	</select>
+	
+	<select id="findAccountById" resultType="com.liuliume.portal.entity.Account">
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name,gender,province_id,city_id,area_id,address,flag
+		from account where flag <![CDATA[<>]]>99 
+		<if test="account_id != null">
+			and account_id=#{account_id}
+		</if>
 	</select>
 </mapper>

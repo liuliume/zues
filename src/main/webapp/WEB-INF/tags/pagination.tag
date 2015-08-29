@@ -57,7 +57,7 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-		<blackcat:_pagination></blackcat:_pagination>
+		<liuliume:_pagination></liuliume:_pagination>
 		<c:if test="${position eq 'below' && 1 != seed.totalPages}">
 			<script type="text/javascript">
 				 $('input[name=custompage]').each(function() {

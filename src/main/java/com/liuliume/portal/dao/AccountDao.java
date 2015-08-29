@@ -10,4 +10,8 @@ public interface AccountDao {
 	public int count(Parameter parameter);
 	
 	public List<Account> list(Parameter parameter);
+	
+	public void delete(Account account);
+	
+	public Account findAccountById(Integer account_id);
 }

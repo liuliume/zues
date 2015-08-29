@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.common.MBox;
@@ -51,6 +52,25 @@ public class AccountServiceImpl implements AccountService {
 			seed.setResult(result);
 		}
 		return result;
+	}
+
+	@Override
+	@Transactional
+	public void batchDelete(String account_ids) throws Exception {
+		String[] aids = account_ids.split(",");
+		for (String aid : aids) {
+			Account account = new Account();
+			account.setAccount_id(new Integer(aid));
+			accountDao.delete(account);
+		}
+	}
+
+	@Override
+	public Account findAccountById(Integer account_id) throws Exception {
+		Account account = null;
+		if(account_id!=null)
+			account = accountDao.findAccountById(account_id);
+		return account;
 	}
 
 }

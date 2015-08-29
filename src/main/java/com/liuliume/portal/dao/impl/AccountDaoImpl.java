@@ -26,4 +26,14 @@ public class AccountDaoImpl implements AccountDao{
 		return accountMapper.list(parameter);
 	}
 
+	@Override
+	public void delete(Account account) {
+		accountMapper.deleteEntityLogically(account);
+	}
+
+	@Override
+	public Account findAccountById(Integer account_id) {
+		return accountMapper.findAccountById(account_id);
+	}
+
 }
