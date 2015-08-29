@@ -22,4 +22,6 @@ public interface AccountService {
 	public void batchDelete(String account_ids) throws Exception;
 	
 	public Account findAccountById(Integer account_id) throws Exception;
+	
+	public void createOrUpdate(Account account) throws Exception;
 }

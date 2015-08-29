@@ -4,7 +4,7 @@
 
 
 <head>
-<title>用户 Index</title>
+<title>用用户管理</title>
 <script type="text/javascript" src="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.css"/>
     <link rel="stylesheet" type="text/css" href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2-metronic.css"/>
@@ -40,7 +40,7 @@
 											class="required"> * </span>
 										</label>
 										<div class="col-md-10">
-											<input type="text" class="form-control" name="name" id="name"
+											<input type="text" class="form-control" name="uniqname" id="uniqname"
 												placeholder="请输入用户昵称" value="${account.uniqname}"> <span
 												class="help-block display-hide" id="errorInfoName">请输入用户昵称!</span> <span class="label label-warning">
 												最长128个字符. </span>
@@ -53,11 +53,11 @@
 											class="required"> * </span>
 										</label>
 										<div class="col-md-10">
-											<select
-												class="table-group-action-input form-control input-medium"
+											<select 
+												class="table-group-action-input form-control input-medium select2me"
 												name="gender" id="gender">
 												<c:forEach var="genderEntry" items="${allGender}">
-													<option value="${genderEntry.value.code}"
+													<option value="${genderEntry.value.id}"
 														<c:if test='${genderEntry.value.desc eq "All"}'>selected</c:if>>${genderEntry.value.desc}</option>
 												</c:forEach>
 
@@ -71,8 +71,8 @@
 										</label>
 										<div class="col-md-10">
 											<input type="text" class="form-control" id="address"
-												name="address"> <span
-												class="help-block display-hide" id="errorInfoAddress">请填写用户地址!</span>
+												name="address" value="${account.address}"> <span
+												class="help-block display-hide" id="errorInfoAddress">请输入用户地址!</span>
 										</div>
 									</div>
 
@@ -88,13 +88,12 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-2 control-label">手机: <span
+										<label class="col-md-2 control-label">邮箱: <span
 											class="required"> * </span>
 										</label>
 										<div class="col-md-3">
-											<input type="text" class="form-control" id="mobile"
-												name="mobile"> <span
-												class="help-block display-hide" id="errorInfoMobile">请输入用户手机号!</span>
+											<input type="text" class="form-control" id="email"
+												name="email"> 
 										</div>
 									</div>
 
@@ -102,7 +101,7 @@
 										<div style="text-align: center">
 											<input type="hidden" id="account_id" name="account_id"
 												value="${account_id.id}" />
-											<button class="btn green" id="btnConfirm" name="btnConfirm">Create</button>
+											<button class="btn green" id="btnConfirm" name="btnConfirm">创建</button>
 										</div>
 									</div>
 								</div>
@@ -121,7 +120,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true"></button>
-					<h4 class="modal-title" id="alertModalTitle">Create User Data</h4>
+					<h4 class="modal-title" id="alertModalTitle">Create Account</h4>
 				</div>
 				<div class="modal-body">
 					<div class="info" id="alertModalContent">Create Successfully!
@@ -137,12 +136,12 @@
 	</div>
 	<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/retention/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 
 	<input type="hidden" id="nameExists" value="0">
-	<script src="${ctx}/resources/scripts/pages/userdata/userdatIndex.js"
+	<script src="${ctx}/resources/scripts/pages/account/accountIndex.js"
 		type="text/javascript"></script>
 </body>
 

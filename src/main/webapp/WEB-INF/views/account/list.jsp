@@ -3,17 +3,17 @@
 <%@ include file="/WEB-INF/layouts/fragment/taglib.jsp"%>
 
 <head>
-<title>Account</title>
+<title>用户管理</title>
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="page-title">Account Management</h3>
+			<h3 class="page-title">用户管理</h3>
 			<ul class="page-breadcrumb breadcrumb">
-				<li><i class="fa fa-home"></i> <span> Account Management
+				<li><i class="fa fa-home"></i> <span> 用户管理
 				</span> <i class="fa fa-angle-right"></i></li>
-				<li><span> Account List </span></li>
+				<li><span> 用户列表 </span></li>
 			</ul>
 		</div>
 	</div>
@@ -24,14 +24,14 @@
 				<form id="form_search" class="form-horizontal"
 					action="/account/list" method="GET">
 					<div class="form-group">
-						<label class="col-md-1 control-label">Name: </label>
+						<label class="col-md-1 control-label">昵称: </label>
 						<div class="col-md-3">
 							<input type="text" id="nameQ"
 								class="form-control input-medium input-inline" name="nameQ"
 								placeholder="Input name" value="${seed.filter['nameQ']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:ZuesAccount.search();" class="btn dark">Search
+							<a href="javascript:ZuesAccount.search();" class="btn dark">搜索
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
@@ -45,8 +45,8 @@
 		<div class="col-md-12">
 			<div class="blank-form-actions">
 				<a class="btn green" href="#" id="createAccount"><i
-					class="fa fa-plus"></i>Create</a> <a class="btn blue" href="#"
-					id="deleteAccountBatch"><i class="fa fa-times"></i>Delete</a>
+					class="fa fa-plus"></i>创建</a> <a class="btn blue" href="#"
+					id="deleteAccountBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 			<div class="portlet box grey">
 				<div class="portlet-title">
 					<div class="caption">
-						<i class="fa fa-calendar"></i> Account List
+						<i class="fa fa-calendar"></i> 用户列表
 					</div>
 				</div>
 				<div class="portlet-body flip-scroll">
@@ -71,13 +71,13 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">Name</th>
-								<th style="width: 5%;">Email</th>
-								<th style="width: 10%;">Mobile</th>
-								<th style="width: 15%;">reg_time</th>
-								<th style="width: 10%;">Gender</th>
-								<th style="width: 15%;">Address</th>
-								<th style="width: 20%;">Action</th>
+								<th style="width: 10%;">昵称</th>
+								<th style="width: 5%;">邮箱</th>
+								<th style="width: 10%;">手机</th>
+								<th style="width: 15%;">注册时间</th>
+								<th style="width: 10%;">性别</th>
+								<th style="width: 15%;">地址</th>
+								<th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -120,11 +120,11 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true"></button>
-					<h4 class="modal-title" id="confirmModalTitle">Delete Segment</h4>
+					<h4 class="modal-title" id="confirmModalTitle">Delete Account</h4>
 				</div>
 				<div class="modal-body">
 					<div class="info" id="confirmModalContent">Please confirm if
-						you want to delete the Segment?</div>
+						you want to delete the Account?</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn default" data-dismiss="modal">Cancel</button>

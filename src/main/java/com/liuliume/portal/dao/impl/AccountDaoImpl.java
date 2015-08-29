@@ -36,4 +36,14 @@ public class AccountDaoImpl implements AccountDao{
 		return accountMapper.findAccountById(account_id);
 	}
 
+	@Override
+	public void createAccount(Account account) {
+		accountMapper.createEntity(account);
+	}
+
+	@Override
+	public void updateAccount(Account account) {
+		accountMapper.updateEntity(account);
+	}
+
 }

@@ -14,4 +14,8 @@ public interface AccountDao {
 	public void delete(Account account);
 	
 	public Account findAccountById(Integer account_id);
+	
+	public void createAccount(Account account);
+	
+	public void updateAccount(Account account);
 }
