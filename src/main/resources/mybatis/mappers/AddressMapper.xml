@@ -13,13 +13,13 @@
         id, name, parent_id, level
     </sql>
 
-    <select id="count" resultType="int">
+    <select id="count" resultType="int" parameterType="java.util.Map">
         select count(1) from address
         <where>
             <if test="param.cond != null">
-                <if test="param.cond.address != null">
-                    <if test="param.cond.address.name != null">
-                        name like CONCAT(#{param.cond.address.name},'%')
+                <if test="param.cond.addressMap != null">
+                    <if test="param.cond.addressMap.name != null">
+                        and name like CONCAT('%',#{param.cond.addressMap.name},'%')
                     </if>
                     <!-- add query cond here -->
                 </if>
@@ -27,13 +27,16 @@
         </where>
     </select>
 
-    <select id="list" parameterType="com.liuliume.portal.entity.Address" resultType="java.util.HashMap">
+    <select id="list" parameterType="java.util.Map" resultType="java.util.HashMap">
         select a1.*,a2.name as parent_name
-        from address a1,address a2 where 1=1 and a2.id=a1.parent_id
+        from address a1 left join address a2 on a2.id=a1.parent_id where 1=1
         <if test="param.cond != null">
-            <if test="param.cond.address != null">
-                <if test="param.cond.address.name != null">
-                    name like CONCAT(#{param.cond.address.name},'%')
+            <if test="param.cond.addressMap != null">
+                <if test="param.cond.addressMap.name != null">
+                    and a1.name like CONCAT('%',#{param.cond.addressMap.name},'%')
+                </if>
+                <if test="param.cond.addressMap.parent_name != null">
+                    and a2.name like CONCAT('%',#{param.cond.addressMap.parent_name},'%')
                 </if>
                 <!-- add query cond here -->
             </if>

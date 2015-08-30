@@ -243,4 +243,5 @@ public class Seed<T extends Serializable> implements Serializable {
 	public void setPage(Integer page){
 		this.setPageNumber(page);
 	}
+
 }

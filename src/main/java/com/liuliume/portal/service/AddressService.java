@@ -16,5 +16,5 @@ public interface AddressService {
 	 * @param seed
 	 * @throws Exception
 	 */
-	public List<HashMap<String, Object>> list(Seed<Address> seed) throws Exception;
+	public List<HashMap<String, Object>> list(Seed<HashMap<String,Object>> seed) throws Exception;
 }

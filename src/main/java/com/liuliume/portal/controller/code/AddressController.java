@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by clement on 8/29/15.
@@ -32,38 +33,38 @@ public class AddressController {
     private AddressService addressService;
 
     @RequestMapping(value="list",method=RequestMethod.GET)
-    private ModelAndView list(ModelMap map,@SeedParam Seed<Address> seed){
+    private ModelAndView list(ModelMap map,@SeedParam Seed<HashMap<String,Object>> seed){
         logger.info("call AddressController.list");
         List<HashMap<String,Object>> list = null;
         try {
-            list = addressService.list(seed);
+            addressService.list(seed);
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), seed.toString()), e);
         }
         ModelAndView mav = new ModelAndView("code/list_address");
-        Seed<HashMap<String, Object>> resultSeed = new Seed<HashMap<String,Object>>();
-        Method[] methods = Seed.class.getMethods();
-        for (Method method : methods){
-            if("get".equalsIgnoreCase(method.getName().substring(0,3))){
-                for(Method method1 : methods) {
-                    if("set".equalsIgnoreCase(method1.getName().substring(0,3))
-                            && method.getName().substring(3,method.getName().length()-1).equalsIgnoreCase(method1.getName().substring(3,method1.getName().length()-1))
-                            && "result".equalsIgnoreCase(method1.getName().substring(3,method1.getName().length()-1))) {
-                        try {
-                            method1.invoke(resultSeed,method.invoke(seed));
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }
-        resultSeed.setResult(list);
-        map.put("seed", resultSeed);
+//        Seed<HashMap<String, Object>> resultSeed = new Seed<HashMap<String,Object>>();
+//        Method[] methods = Seed.class.getMethods();
+//        for (Method method : methods){
+//            if("get".equalsIgnoreCase(method.getName().substring(0,3))){
+//                for(Method method1 : methods) {
+//                    if("set".equalsIgnoreCase(method1.getName().substring(0,3))
+//                            && method.getName().substring(3,method.getName().length()-1).equalsIgnoreCase(method1.getName().substring(3,method1.getName().length()-1))
+//                            && "result".equalsIgnoreCase(method1.getName().substring(3,method1.getName().length()-1))) {
+//                        try {
+//                            method1.invoke(resultSeed,method.invoke(seed));
+//                        } catch (IllegalAccessException e) {
+//                            e.printStackTrace();
+//                        } catch (InvocationTargetException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        resultSeed.setResult(list);
+        map.put("seed", seed);
         return mav;
     }
 }
