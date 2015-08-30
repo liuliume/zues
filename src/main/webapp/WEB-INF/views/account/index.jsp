@@ -5,9 +5,6 @@
 
 <head>
 <title>用用户管理</title>
-<script type="text/javascript" src="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.css"/>
-    <link rel="stylesheet" type="text/css" href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2-metronic.css"/>
 </head>
 <body>
 	<div class="row">
@@ -82,7 +79,7 @@
 										</label>
 										<div class="col-md-3">
 											<input type="text" class="form-control" id="mobile"
-												name="mobile"> <span
+												name="mobile" value="${account.mobile }"> <span
 												class="help-block display-hide" id="errorInfoMobile">请输入用户手机号!</span>
 										</div>
 									</div>
@@ -100,8 +97,8 @@
 									<div class="form-group">
 										<div style="text-align: center">
 											<input type="hidden" id="account_id" name="account_id"
-												value="${account_id.id}" />
-											<button class="btn green" id="btnConfirm" name="btnConfirm">创建</button>
+												value="${account.account_id}" />
+											<a href="" class="btn green" id="btnConfirm" name="btnConfirm">创建</a>
 										</div>
 									</div>
 								</div>
