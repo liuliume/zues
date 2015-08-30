@@ -4,12 +4,15 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Address;
+import com.liuliume.portal.model.AddressLevelEnum;
+import com.liuliume.portal.model.GenderEnum;
 import com.liuliume.portal.service.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by clement on 8/29/15.
@@ -69,7 +73,6 @@ public class AddressController {
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)String address_id){
-
         Address address = null;
         try {
             logger.info("call AddressController.index");
@@ -83,5 +86,14 @@ public class AddressController {
             model.put("address", address);
         }
         return mav;
+    }
+
+    @ModelAttribute("allGender")
+    public Map<Integer, AddressLevelEnum> getAllAddressLevel(){
+        Map<Integer, AddressLevelEnum> addresslevel = new HashMap<Integer, AddressLevelEnum>();
+        for(AddressLevelEnum type : AddressLevelEnum.values()){
+            addresslevel.put(type.getLevel(), type);
+        }
+        return addresslevel;
     }
 }

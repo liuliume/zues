@@ -19,7 +19,7 @@
             <if test="param.cond != null">
                 <if test="param.cond.addressMap != null">
                     <if test="param.cond.addressMap.name != null">
-                        and name like CONCAT('%',#{param.cond.addressMap.name},'%')
+                        and name like CONCAT(#{param.cond.addressMap.name},'%')
                     </if>
                     <!-- add query cond here -->
                 </if>
@@ -36,7 +36,7 @@
                     and a1.name like CONCAT('%',#{param.cond.addressMap.name},'%')
                 </if>
                 <if test="param.cond.addressMap.parent_name != null">
-                    and a2.name like CONCAT('%',#{param.cond.addressMap.parent_name},'%')
+                    and a2.name like CONCAT(#{param.cond.addressMap.parent_name},'%')
                 </if>
                 <!-- add query cond here -->
             </if>
