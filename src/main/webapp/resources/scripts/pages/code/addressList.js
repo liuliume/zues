@@ -105,5 +105,5 @@ function Trim(str,is_global)
 
 
 $(function(){
-	ZuesAccount.init();
+	Address.init();
 })
