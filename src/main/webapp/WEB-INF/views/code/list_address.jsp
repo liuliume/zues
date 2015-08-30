@@ -50,7 +50,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="blank-form-actions">
-				<a class="btn green" href="#" id="createGroupBatch"><i
+				<a class="btn green" href="#" id="createAddress"><i
 					class="fa fa-plus"></i>新建</a> <a class="btn blue" href="#"
 					id="deleteGroupBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
@@ -160,7 +160,7 @@
 	</div>
 	<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/code/" />
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->

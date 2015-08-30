@@ -37,7 +37,7 @@ var Address=function(){
     			}
     		});//全选结束
     		
-    		$("#createAccount").click(function(){
+    		$("#createAddress").click(function(){
     			var url =  $("#setOptionUrl").val() + "index";
     			window.location.href=url;  
     		});
