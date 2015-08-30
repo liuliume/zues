@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="list" resultType="com.liuliume.portal.entity.Account">
-		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name,gender,province_id,city_id,area_id,address,flag
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name as uniqname,gender,province_id,city_id,area_id,address,flag
 		from account where flag <![CDATA[<>]]>99
 		<if test="param.cond != null">
 				<if test="param.cond.account != null">
@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="findAccountById" resultType="com.liuliume.portal.entity.Account">
-		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name,gender,province_id,city_id,area_id,address,flag
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name as uniqname,gender,province_id,city_id,area_id,address,flag
 		from account where flag <![CDATA[<>]]>99 
 		<if test="account_id != null">
 			and account_id=#{account_id}

@@ -19,6 +19,26 @@ var ZuesAccount=function(){
 				window.location.reload();
 			}
 		});
+	};
+	
+	var deletePromotion = function(){
+//		alert("");
+		var accountId = $("#accountId_delete").val();
+		$.ajax({
+			type: "POST",
+			url: "/account/batchDelete",
+			data: {"accountIds":accountId},
+			dataType: "json",
+			success: function(result){
+				$.cookie.json = true;
+				if(result.success){
+					$.cookie('action-message',{action:"success",message:result.detail});
+				}else{
+					$.cookie('action-message',{action:"error",message:result.detail});
+				}
+				window.location.reload();
+			 }
+		})
 	}
 	
 	return{
@@ -52,11 +72,25 @@ var ZuesAccount=function(){
     			if(accountIds!=''){
     				accountIds=accountIds.substring(0,accountIds.length-1);
     				$("#accountId_delete").val(accountIds);
-    				confirm("Delete Account","Please confirm if delete all the selected Account?",batchDelete);
+    				confirm("删除用户","确认删除这些用户?",batchDelete);
     			}else{
-    				alert("Delete Account","Please choose the Account to be deleted.");
+    				alert("删除用户","请选择需要删除的用户.");
     			}
     		});
+    		
+    		$("a[name=deleteAccount]").click(function(){
+    			
+    			$("#accountId_delete").val($(this).attr("accountId"));
+    			
+    			var name=$($(this).parent().parent().find("td")[1]).text();
+    			name=name.replace(/(^\s*)|(\s*$)/g,'');
+    			confirm("删除用户","确认删除这些用户  "+name+"?",deletePromotion);
+    		});
+    		
+    		$("a[name=editAccount]").click(function(){
+    			var url = $("#setOptionUrl").val() + "index" + "?" + "account_id=" + $(this).attr("accountId");
+    			window.location.href=url;  
+    		})
     		
 		},
 		search:function(){

@@ -1,22 +1,34 @@
 var ZuesAccountIndex = function() {
-	// Handle Select2 Dropdowns
-//	var handleSelect2 = function() {
-//		if (jQuery().select2) {
-//			$('.select2me').select2({
-//				placeholder : "Select",
-//				allowClear : true
-//			});
-//		}
-//	}
 
 	var createOrUpdate = function() {
-		urls = $("#setOptionUrl").val() + "createOrUpdate"
+		urls = "/account/createOrUpdate";
+		
+		var name=$("#uniqname").val();
+		if(name==null || name==""){
+			$("#errorInfoName").css("display","block");
+			$("#name").css("border-color","red");
+			return;
+		}
+		var mobile = $("#mobile").val();
+		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		if(mobile==null || mobile == ""){
+			$("#errorInfoMobile").css("display","block");
+			$("#mobile").css("border-color","red");
+			return;
+		}
+		if(!reg.test(mobile)){
+			$("#errorInfoMobile").text("请输入正确的手机号");
+			$("#errorInfoMobile").css("display","block");
+			$("#mobile").css("border-color","red");
+			return;
+		}
+		
+		
 		$.ajax({
-			url : urls,
-			type : "POST",
-			data : $("#IndexForm").serialize(),
-			dataType : "json",
-			success : function(result) {
+			url:urls,
+			type:"POST",
+			data:$("#IndexForm").serialize(),
+			success:function(result) {
 				$.cookie.json = true;
 				if (result.success) {
 					$.cookie('action-message', {
@@ -30,15 +42,23 @@ var ZuesAccountIndex = function() {
 					});
 				}
 				window.location.href="/account/list";
+//				window.location.reload();
+			},failure:function(result){
+				alert("操作失败",result.detail);
 			}
 		});
 	}
 
 	return {
 		init : function() {
-			handleSelect2();
 
-			$("#btnConfirm").click(createOrUpdate);
+//			$("#btnConfirm").click(function(){
+//				createOrUpdate();
+//			});
+			$(document).on("click", "#btnConfirm", function(event){
+				createOrUpdate();
+				return false;
+    		});
 		}
 	}
 }();
