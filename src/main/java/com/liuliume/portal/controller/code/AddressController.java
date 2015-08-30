@@ -2,6 +2,8 @@ package com.liuliume.portal.controller.code;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.entity.Account;
+import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.service.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.MessageFormat;
@@ -61,6 +64,24 @@ public class AddressController {
 //        }
 //        resultSeed.setResult(list);
         map.put("seed", seed);
+        return mav;
+    }
+
+    @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)String address_id){
+
+        Address address = null;
+        try {
+            logger.info("call AddressController.index");
+            address = addressService.findAddressById(address_id);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),address_id,e);
+        }
+        ModelAndView mav = new ModelAndView("/code/index_address");
+        if(address != null){
+            model.put("address", address);
+        }
         return mav;
     }
 }

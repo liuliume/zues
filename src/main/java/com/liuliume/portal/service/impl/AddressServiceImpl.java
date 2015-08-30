@@ -4,6 +4,8 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.common.MBox;
 import com.liuliume.portal.dao.AddressDao;
 import com.liuliume.portal.dao.cond.AddressQueryCond;
+import com.liuliume.portal.entity.Account;
+import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.AddressService;
 import org.apache.commons.lang3.StringUtils;
@@ -58,5 +60,13 @@ public class AddressServiceImpl implements AddressService {
 		}
 		return result;
 	}
+
+    @Override
+    public Address findAddressById(String address_id) throws Exception {
+        Address address = null;
+        if(address_id!=null)
+            address = addressDao.findAddressById(address_id);
+        return address;
+    }
 
 }

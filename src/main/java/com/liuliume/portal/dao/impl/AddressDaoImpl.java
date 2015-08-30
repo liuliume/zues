@@ -1,6 +1,8 @@
 package com.liuliume.portal.dao.impl;
 
 import com.liuliume.portal.dao.AddressDao;
+import com.liuliume.portal.entity.Account;
+import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.mybatis.mapper.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,11 @@ public class AddressDaoImpl implements AddressDao{
 	public List<HashMap<String, Object>> list(Parameter parameter) {
 		return addressMapper.list(parameter);
 	}
+
+    @Override
+    public Address findAddressById(String address_id) {
+        return addressMapper.findAddressById(address_id);
+    }
+
 
 }

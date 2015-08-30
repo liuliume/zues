@@ -14,4 +14,7 @@ public interface AddressDao {
 	public int count(Parameter parameter);
 	
 	public List<HashMap<String, Object>> list(Parameter parameter);
+
+
+    public Address findAddressById(String address_id);
 }

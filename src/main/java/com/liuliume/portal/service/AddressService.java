@@ -17,4 +17,6 @@ public interface AddressService {
 	 * @throws Exception
 	 */
 	public List<HashMap<String, Object>> list(Seed<HashMap<String,Object>> seed) throws Exception;
+
+    public Address findAddressById(String address_id) throws Exception;
 }
