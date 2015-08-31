@@ -10,6 +10,10 @@ var AddressIndex = function() {
         } else if($("#level").val() == '3') {
             data = "level="+$("#level").val()+"&name="+$("#name").val()+"&parentId="+$("#parent_second_id").val();
         }
+        if($("#address_id").val()!='' || $("#address_id").val()!=null){
+            data = data + "&id=" + $("#address_id").val();
+        }
+
 		$.ajax({
 			url:urls,
 			type:"POST",

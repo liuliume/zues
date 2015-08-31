@@ -20,6 +20,26 @@ var Address=function(){
 			}
 		});
 	}
+
+    var deletePromotion = function(){
+//		alert("");
+        var accountId = $("#accountId_delete").val();
+        $.ajax({
+            type: "POST",
+            url: "/account/batchDelete",
+            data: {"accountIds":accountId},
+            dataType: "json",
+            success: function(result){
+                $.cookie.json = true;
+                if(result.success){
+                    $.cookie('action-message',{action:"success",message:result.detail});
+                }else{
+                    $.cookie('action-message',{action:"error",message:result.detail});
+                }
+                window.location.reload();
+            }
+        })
+    }
 	
 	return{
 		init:function(){
@@ -58,13 +78,13 @@ var Address=function(){
     			}
     		});
 
-            $("a[name=deleteAccount]").click(function(){
+            $("a[name=deleteAddress]").click(function(){
 
                 $("#accountId_delete").val($(this).attr("accountId"));
 
-                var name=$($(this).parent().parent().find("td")[1]).text();
+                var name=$($(this).parent().parent().find("td")[3]).text();
                 name=name.replace(/(^\s*)|(\s*$)/g,'');
-                confirm("删除用户","确认删除这些用户  "+name+"?",deletePromotion);
+                confirm("删除用户","确认删除这些地址  "+name+"?",deletePromotion);
             });
 
             $("a[name=editAddress]").click(function(){

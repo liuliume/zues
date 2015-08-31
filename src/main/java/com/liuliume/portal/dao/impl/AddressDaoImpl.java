@@ -51,5 +51,10 @@ public class AddressDaoImpl implements AddressDao{
         addressMapper.updateEntity(address);
     }
 
+    @Override
+    public void delete(Address address) {
+        addressMapper.deleteEntityLogically(address);
+    }
+
 
 }

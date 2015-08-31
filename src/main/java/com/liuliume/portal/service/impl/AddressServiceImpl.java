@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,6 +90,17 @@ public class AddressServiceImpl implements AddressService {
             addressDao.createAddress(address);
         }else {
             addressDao.updateAddress(address);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void batchDelete(String address_ids) throws Exception {
+        String[] aids = address_ids.split(",");
+        for (String aid : aids) {
+            Address address = new Address();
+            address.setId(new Integer(aid));
+            addressDao.delete(address);
         }
     }
 

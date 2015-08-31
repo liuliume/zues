@@ -106,8 +106,8 @@
 
                                     <div class="form-group">
 										<div style="text-align: center">
-											<input type="hidden" id="account_id" name="account_id"
-												value="${account.account_id}" />
+											<input type="hidden" id="address_id" name="address_id"
+												value="${address.id}" />
 											<a href="" class="btn green" id="btnConfirm1" name="btnConfirm">创建</a>
 										</div>
 									</div>
