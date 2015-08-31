@@ -36,6 +36,10 @@ public class AddressDaoImpl implements AddressDao{
         return addressMapper.findAddressByLevel(level);
     }
 
+    @Override
+    public List<Address> findAddressByParentId(int parent_id) {
+        return addressMapper.findAddressByParentId(parent_id);
+    }
 
 
 }

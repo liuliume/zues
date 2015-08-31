@@ -92,15 +92,16 @@ public class AddressController {
 
     @RequestMapping(value="index_parent",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public List<Address> index_parent(ModelMap model,@RequestParam(value="level",required=false)String level) {
+    public List<Address> index_parent(ModelMap model,@RequestParam(value="parent_id",required=false)int parent_id) {
         List<Address> firstAddress = null;
         try {
             logger.info("call AddressController.index");
-            firstAddress = addressService.findAddressByLevel(level);
+            firstAddress = addressService.findAddressByParentId(parent_id);
         } catch (Exception e) {
             logger.error("Error! reason:{}, Paramter:account_id:{}.",
-                    e.getMessage(),level,e);
+                    e.getMessage(),parent_id,e);
         }
+        System.out.println(firstAddress);
         return firstAddress;
     }
 

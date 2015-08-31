@@ -21,4 +21,6 @@ public interface AddressService {
     public Address findAddressById(String address_id) throws Exception;
 
     public List<Address> findAddressByLevel(String level) throws Exception;
+
+    public List<Address> findAddressByParentId(int parent_id) throws Exception;
 }

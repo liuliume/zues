@@ -63,21 +63,31 @@ var AddressIndex = function() {
             $("#level").change(function(){
                 if($("#level").val() == '1'){
                     $("#parent_first_div").css("display","none");
-                } else {
+                    $("#parent_second_div").css("display","none");
+                } else if($("#level").val() == '2') {
                     $("#parent_first_div").css("display","block");
+                    $("#parent_second_div").css("display","none");
+                } else if($("#level").val() == '3') {
+                    $("#parent_first_div").css("display","block");
+                    $("#parent_second_div").css("display","block");
+                }
+            });
+
+            $("#parent_first_id").change(function(){
+                if($("#level").val() == '3'){
                     $.ajax({
                         url:"/code/address/index_parent",
-                        type:"POST",
-                        data:$("#level").val(),
+                        type:"GET",
+                        data:'parentid='+$("#parent_first_id").val(),
                         success:function(result) {
-                           alert(result);
+                            var objTEST=eval("("+result+")");
+                            alert("bbb");
                         },failure:function(result){
                             alert("操作失败",result.detail);
                         }
                     });
                 }
-            });
-
+            })
 		}
 	}
 }();

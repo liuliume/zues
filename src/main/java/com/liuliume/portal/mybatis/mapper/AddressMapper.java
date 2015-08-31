@@ -27,4 +27,6 @@ public interface AddressMapper {
     public Address findAddressById(@Param("address_id")String address_id);
 
     public List<Address> findAddressByLevel(@Param("level")String level);
+
+    public List<Address> findAddressByParentId(@Param("parent_id")int parent_id);
 }

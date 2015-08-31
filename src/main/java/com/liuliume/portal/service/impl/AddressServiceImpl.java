@@ -75,4 +75,10 @@ public class AddressServiceImpl implements AddressService {
         return addressList;
     }
 
+    @Override
+    public List<Address> findAddressByParentId(int parent_id) throws Exception {
+        List<Address> addressList = addressDao.findAddressByParentId(parent_id);
+        return addressList;
+    }
+
 }

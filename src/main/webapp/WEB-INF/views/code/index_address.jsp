@@ -59,7 +59,7 @@
 												name="level" id="level">
 												<c:forEach var="addressLevel" items="${allAddressLevel}">
 													<option value="${addressLevel.value.level}"
-														<c:if test='${addressLevel.value.desc == "1"}'>selected</c:if>>${addressLevel.value.desc}</option>
+														<c:if test='${addressLevel.value.level == "1"}'>selected</c:if>>${addressLevel.value.desc}</option>
 												</c:forEach>
 
 											</select>
@@ -68,7 +68,25 @@
 									</div>
 
                                     <div class="form-group" id="parent_first_div" style="display:none">
-                                        <label class="col-md-2 control-label">父级地址: <span
+                                        <label class="col-md-2 control-label">二级地址: <span
+                                                class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-10">
+                                            <select
+                                                    class="table-group-action-input form-control input-medium select2me"
+                                                    name="parent_first_id" id="parent_first_id">
+                                                <option value='' selected="selected">请选择</option>
+                                                <c:forEach var="addressfirst" items="${firstAddress}">
+                                                    <option value="${addressfirst.id}">${addressfirst.name}</option>
+                                                </c:forEach>
+
+                                            </select>
+                                            <span class="help-block display-hide" id="parent_address_first_error">请选择一级地址</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="parent_second_div" style="display:none">
+                                        <label class="col-md-2 control-label">一级地址: <span
                                                 class="required"> * </span>
                                         </label>
                                         <div class="col-md-10">
@@ -76,16 +94,17 @@
                                                     class="table-group-action-input form-control input-medium select2me"
                                                     name="parent_first_id">
                                                 <option value='' selected="selected">请选择</option>
-                                                <c:forEach var="addressfirst" items="${firstAddress}">
-                                                    <option value="${addressfirst.id}">${addressfirst.name}</option>
+                                                <c:forEach var="addresssecond" items="${secondAddress}">
+                                                    <option value="${addresssecond.id}">${addresssecond.name}</option>
                                                 </c:forEach>
 
                                             </select>
-                                            <span class="help-block display-hide" id="parent_address_error">请选择一级地址</span>
+                                            <span class="help-block display-hide" id="parent_address_second_error">请选择二级地址</span>
                                         </div>
                                     </div>
 
-									<div class="form-group">
+
+                                    <div class="form-group">
 										<div style="text-align: center">
 											<input type="hidden" id="account_id" name="account_id"
 												value="${account.account_id}" />

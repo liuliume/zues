@@ -49,6 +49,12 @@
         from address where level = #{level}
     </select>
 
+    <select id="findAddressByParentId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from address where parent_id = #{parent_id}
+    </select>
+
 
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
