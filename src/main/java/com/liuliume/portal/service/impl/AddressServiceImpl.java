@@ -62,7 +62,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
     @Override
-    public Address findAddressById(String address_id) throws Exception {
+    public Address findAddressById(Integer address_id) throws Exception {
         Address address = null;
         if(address_id!=null)
             address = addressDao.findAddressById(address_id);

@@ -46,7 +46,7 @@
     <select id="findAddressById" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select
         <include refid="Base_Column_List" />
-        from address where id = #{level}
+        from address where id = #{address_id}
     </select>
 
     <select id="findAddressByLevel" resultMap="BaseResultMap" parameterType="java.lang.String" >

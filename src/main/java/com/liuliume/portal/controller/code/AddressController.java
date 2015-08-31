@@ -71,7 +71,7 @@ public class AddressController {
     }
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)String address_id) {
+    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)Integer address_id) {
         Address address = null;
         List<Address> firstAddress = null;
         try {

@@ -42,7 +42,6 @@
 												<%--class="help-block display-hide" id="errorInfoName">请输入用户昵称!</span> <span class="label label-warning">--%>
 												<%--最长128个字符. </span>--%>
 										<%--</div>--%>
-                                        ${address.name}
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="name"
                                                    name="name" value="${address.name}"> <span

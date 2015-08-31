@@ -27,7 +27,7 @@ public class AddressDaoImpl implements AddressDao{
 	}
 
     @Override
-    public Address findAddressById(String address_id) {
+    public Address findAddressById(Integer address_id) {
         return addressMapper.findAddressById(address_id);
     }
 

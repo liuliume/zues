@@ -26,7 +26,7 @@ public interface AddressMapper extends MyBatisBaseMapper<Address> {
 
     public List<HashMap<String,Object>> list(@Param("param")Parameter parameter);
 
-    public Address findAddressById(@Param("address_id")String address_id);
+    public Address findAddressById(@Param("address_id")Integer address_id);
 
     public List<Address> findAddressByLevel(@Param("level")String level);
 
