@@ -27,8 +27,28 @@ public class AddressDaoImpl implements AddressDao{
 	}
 
     @Override
-    public Address findAddressById(String address_id) {
+    public Address findAddressById(Integer address_id) {
         return addressMapper.findAddressById(address_id);
+    }
+
+    @Override
+    public List<Address> findAddressByLevel(String level) {
+        return addressMapper.findAddressByLevel(level);
+    }
+
+    @Override
+    public List<Address> findAddressByParentId(int parent_id) {
+        return addressMapper.findAddressByParentId(parent_id);
+    }
+
+    @Override
+    public void createAddress(Address address) {
+        addressMapper.createEntity(address);
+    }
+
+    @Override
+    public void updateAddress(Address address) {
+        addressMapper.updateEntity(address);
     }
 
 

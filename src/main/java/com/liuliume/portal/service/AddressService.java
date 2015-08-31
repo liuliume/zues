@@ -18,5 +18,11 @@ public interface AddressService {
 	 */
 	public List<HashMap<String, Object>> list(Seed<HashMap<String,Object>> seed) throws Exception;
 
-    public Address findAddressById(String address_id) throws Exception;
+    public Address findAddressById(Integer address_id) throws Exception;
+
+    public List<Address> findAddressByLevel(String level) throws Exception;
+
+    public List<Address> findAddressByParentId(int parent_id) throws Exception;
+
+    public void createOrUpdate(Address address) throws Exception;
 }

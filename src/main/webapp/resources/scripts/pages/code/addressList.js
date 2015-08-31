@@ -57,8 +57,23 @@ var Address=function(){
     				alert("Delete Account","Please choose the Account to be deleted.");
     			}
     		});
-    		
-		},
+
+            $("a[name=deleteAccount]").click(function(){
+
+                $("#accountId_delete").val($(this).attr("accountId"));
+
+                var name=$($(this).parent().parent().find("td")[1]).text();
+                name=name.replace(/(^\s*)|(\s*$)/g,'');
+                confirm("删除用户","确认删除这些用户  "+name+"?",deletePromotion);
+            });
+
+            $("a[name=editAddress]").click(function(){
+                var url = $("#setOptionUrl").val() + "index" + "?" + "address_id=" + $(this).attr("address_id");
+                window.location.href=url;
+            })
+
+
+        },
 		search:function(){
 			$("#form_search").submit();
 		}
@@ -105,5 +120,5 @@ function Trim(str,is_global)
 
 
 $(function(){
-	ZuesAccount.init();
+	Address.init();
 })

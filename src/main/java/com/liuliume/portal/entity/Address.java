@@ -1,24 +1,31 @@
 package com.liuliume.portal.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name="address")
 public class Address implements Serializable{
-    private String id;
+    private Integer id;
 
     private String name;
 
-    private String parentId;
+    private Integer parentId;
 
     private String level;
 
-    public String getId() {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id == null ? null : id.intValue();
     }
 
+    @Column(name="name")
     public String getName() {
         return name;
     }
@@ -27,14 +34,16 @@ public class Address implements Serializable{
         this.name = name == null ? null : name.trim();
     }
 
-    public String getParentId() {
+    @Column(name="parent_id")
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId == null ? null : parentId.trim();
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId == null ? null : parentId.intValue();
     }
 
+    @Column(name="level")
     public String getLevel() {
         return level;
     }

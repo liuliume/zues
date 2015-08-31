@@ -2,22 +2,26 @@ package com.liuliume.portal.controller.code;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Address;
+import com.liuliume.portal.model.AddressLevelEnum;
+import com.liuliume.portal.model.GenderEnum;
 import com.liuliume.portal.service.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by clement on 8/29/15.
@@ -34,7 +38,6 @@ public class AddressController {
     @RequestMapping(value="list",method=RequestMethod.GET)
     private ModelAndView list(ModelMap map,@SeedParam Seed<HashMap<String,Object>> seed){
         logger.info("call AddressController.list");
-        List<HashMap<String,Object>> list = null;
         try {
             addressService.list(seed);
         } catch (Exception e) {
@@ -68,12 +71,13 @@ public class AddressController {
     }
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)String address_id){
-
+    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)Integer address_id) {
         Address address = null;
+        List<Address> firstAddress = null;
         try {
             logger.info("call AddressController.index");
             address = addressService.findAddressById(address_id);
+            firstAddress = addressService.findAddressByLevel(AddressLevelEnum.First.getLevel());
         } catch (Exception e) {
             logger.error("Error! reason:{}, Paramter:account_id:{}.",
                     e.getMessage(),address_id,e);
@@ -82,6 +86,58 @@ public class AddressController {
         if(address != null){
             model.put("address", address);
         }
+        if(firstAddress != null && firstAddress.size() > 0) {
+            model.put("firstAddress",firstAddress);
+        }
         return mav;
     }
+
+    @RequestMapping(value="index_parent",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public List<Address> index_parent(ModelMap model,@RequestParam(value="parent_id",required=false)int parent_id) {
+        List<Address> firstAddress = null;
+        try {
+            logger.info("call AddressController.index");
+            firstAddress = addressService.findAddressByParentId(parent_id);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),parent_id,e);
+        }
+        System.out.println(firstAddress);
+        return firstAddress;
+    }
+
+
+    @RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
+    @ResponseBody
+    public JData createOrUpdate(Address address,HttpServletRequest request,HttpServletResponse response){
+        logger.info("call the createOrUpdate account");
+        logger.debug(address.toString());
+        JData jData = new JData();
+        try {
+            addressService.createOrUpdate(address);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("操作成功");
+        } catch (Exception e) {
+            logger.error("create Or Update  Error." + e.getMessage()
+                    + " account[" + address + "]", e);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("操作失败");
+        }
+        return jData;
+    }
+
+
+
+    @ModelAttribute("allAddressLevel")
+    public Map<String, AddressLevelEnum> getAllAddressLevel(){
+        Map<String, AddressLevelEnum> addressLevel = new HashMap<String, AddressLevelEnum>();
+        for(AddressLevelEnum type : AddressLevelEnum.values()){
+            addressLevel.put(type.getLevel(), type);
+        }
+        return addressLevel;
+    }
+
 }

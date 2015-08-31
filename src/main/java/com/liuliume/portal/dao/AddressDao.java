@@ -15,6 +15,13 @@ public interface AddressDao {
 	
 	public List<HashMap<String, Object>> list(Parameter parameter);
 
+    public Address findAddressById(Integer address_id);
 
-    public Address findAddressById(String address_id);
+    public List<Address> findAddressByLevel(String level);
+
+    public List<Address> findAddressByParentId(int parent_id);
+
+    public void createAddress(Address address);
+
+    public void updateAddress(Address address);
 }

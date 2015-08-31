@@ -101,7 +101,7 @@
 									<td>${item.level}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
-										name="editGroup" groupId="${item.id}"><i
+										name="editAddress" address_id="${item.id}"><i
 											class="fa fa-edit"></i> 修改</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
 										name="deleteGroup" groupId="${item.id}"><i
@@ -160,7 +160,7 @@
 	</div>
 	<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/code/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/code/address/" />
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->

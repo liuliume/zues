@@ -62,11 +62,34 @@ public class AddressServiceImpl implements AddressService {
 	}
 
     @Override
-    public Address findAddressById(String address_id) throws Exception {
+    public Address findAddressById(Integer address_id) throws Exception {
         Address address = null;
         if(address_id!=null)
             address = addressDao.findAddressById(address_id);
         return address;
+    }
+
+    @Override
+    public List<Address> findAddressByLevel(String level) throws Exception {
+        List<Address> addressList = addressDao.findAddressByLevel(level);
+        return addressList;
+    }
+
+    @Override
+    public List<Address> findAddressByParentId(int parent_id) throws Exception {
+        List<Address> addressList = addressDao.findAddressByParentId(parent_id);
+        return addressList;
+    }
+
+    @Override
+    public void createOrUpdate(Address address) throws Exception {
+        if(address==null)
+            throw new IllegalArgumentException("Account为空");
+        if(null == address.getId()){//add
+            addressDao.createAddress(address);
+        }else {
+            addressDao.updateAddress(address);
+        }
     }
 
 }
