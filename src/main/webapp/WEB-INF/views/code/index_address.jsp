@@ -68,7 +68,7 @@
 									</div>
 
                                     <div class="form-group" id="parent_first_div" style="display:none">
-                                        <label class="col-md-2 control-label">二级地址: <span
+                                        <label class="col-md-2 control-label">一级地址: <span
                                                 class="required"> * </span>
                                         </label>
                                         <div class="col-md-10">
@@ -86,13 +86,13 @@
                                     </div>
 
                                     <div class="form-group" id="parent_second_div" style="display:none">
-                                        <label class="col-md-2 control-label">一级地址: <span
+                                        <label class="col-md-2 control-label">二级地址: <span
                                                 class="required"> * </span>
                                         </label>
                                         <div class="col-md-10">
                                             <select
                                                     class="table-group-action-input form-control input-medium select2me"
-                                                    name="parent_first_id">
+                                                    name="parent_first_id" id="parent_second_id">
                                                 <option value='' selected="selected">请选择</option>
                                                 <c:forEach var="addresssecond" items="${secondAddress}">
                                                     <option value="${addresssecond.id}">${addresssecond.name}</option>

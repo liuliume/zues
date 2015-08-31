@@ -74,14 +74,18 @@ var AddressIndex = function() {
             });
 
             $("#parent_first_id").change(function(){
-                if($("#level").val() == '3'){
+                if($("#level").val() == '3' && $("#parent_first_id").val()!=''){
                     $.ajax({
                         url:"/code/address/index_parent",
                         type:"GET",
-                        data:'parentid='+$("#parent_first_id").val(),
+                        data:'parent_id='+$("#parent_first_id").val(),
                         success:function(result) {
-                            var objTEST=eval("("+result+")");
-                            alert("bbb");
+                            $("#parent_second_id").find("option").remove();
+                            $("#parent_second_id").append("<option value='' selected>请选择</option>");
+                            var obj = eval(result);
+                            for(var p in obj) {
+                                $("#parent_second_id").append("<option value='"+obj[p].id+"'>"+obj[p].name+"</option>");
+                            }
                         },failure:function(result){
                             alert("操作失败",result.detail);
                         }
