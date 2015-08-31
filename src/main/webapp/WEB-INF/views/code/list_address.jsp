@@ -104,7 +104,7 @@
 										name="editAddress" address_id="${item.id}"><i
 											class="fa fa-edit"></i> 修改</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
-										name="deleteGroup" groupId="${item.id}"><i
+										name="deleteAddress" address_id="${item.id}"><i
 											class="fa fa-times"></i> 删除</a></td>
 								</tr>
 							</c:forEach>

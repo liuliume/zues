@@ -25,4 +25,6 @@ public interface AddressService {
     public List<Address> findAddressByParentId(int parent_id) throws Exception;
 
     public void createOrUpdate(Address address) throws Exception;
+
+    public void batchDelete(String address_ids) throws Exception;
 }
