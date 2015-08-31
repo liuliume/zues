@@ -43,6 +43,12 @@
         </if>
     </select>
 
+    <select id="findAddressByLevel" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from address where level = #{level}
+    </select>
+
 
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >

@@ -15,6 +15,7 @@ public interface AddressDao {
 	
 	public List<HashMap<String, Object>> list(Parameter parameter);
 
-
     public Address findAddressById(String address_id);
+
+    public List<Address> findAddressByLevel(String level);
 }

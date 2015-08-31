@@ -56,37 +56,34 @@
 										<div class="col-md-10">
 											<select
 												class="table-group-action-input form-control input-medium select2me"
-												name="gender" id="gender">
-												<c:forEach var="genderEntry" items="${allGender}">
-													<option value="${genderEntry.value.id}"
-														<c:if test='${genderEntry.value.desc eq "All"}'>selected</c:if>>${genderEntry.value.desc}</option>
+												name="level" id="level">
+												<c:forEach var="addressLevel" items="${allAddressLevel}">
+													<option value="${addressLevel.value.level}"
+														<c:if test='${addressLevel.value.desc == "1"}'>selected</c:if>>${addressLevel.value.desc}</option>
 												</c:forEach>
 
 											</select>
-											<span class="help-block display-hide" id="errorInfoGender">请选择性别!</span>
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="col-md-2 control-label">手机: <span
-											class="required"> * </span>
-										</label>
-										<div class="col-md-3">
-											<input type="text" class="form-control" id="mobile"
-												name="mobile" value="${account.mobile }"> <span
-												class="help-block display-hide" id="errorInfoMobile">请输入用户手机号!</span>
+											<%--<span class="help-block display-hide" id="errorInfoGender">请选择性别!</span>--%>
 										</div>
 									</div>
 
-									<div class="form-group">
-										<label class="col-md-2 control-label">邮箱: <span
-											class="required"> * </span>
-										</label>
-										<div class="col-md-3">
-											<input type="text" class="form-control" id="email"
-												name="email"> 
-										</div>
-									</div>
+                                    <div class="form-group" id="parent_first_div" style="display:none">
+                                        <label class="col-md-2 control-label">父级地址: <span
+                                                class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-10">
+                                            <select
+                                                    class="table-group-action-input form-control input-medium select2me"
+                                                    name="parent_first_id">
+                                                <option value='' selected="selected">请选择</option>
+                                                <c:forEach var="addressfirst" items="${firstAddress}">
+                                                    <option value="${addressfirst.id}">${addressfirst.name}</option>
+                                                </c:forEach>
+
+                                            </select>
+                                            <span class="help-block display-hide" id="parent_address_error">请选择一级地址</span>
+                                        </div>
+                                    </div>
 
 									<div class="form-group">
 										<div style="text-align: center">
@@ -127,12 +124,12 @@
 	</div>
 	<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/code/address/" />
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 
 	<input type="hidden" id="nameExists" value="0">
-	<script src="${ctx}/resources/scripts/pages/account/accountIndex.js"
+	<script src="${ctx}/resources/scripts/pages/code/addressIndex.js"
 		type="text/javascript"></script>
 </body>
 

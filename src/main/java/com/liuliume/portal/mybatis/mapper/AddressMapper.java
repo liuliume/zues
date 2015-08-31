@@ -25,4 +25,6 @@ public interface AddressMapper {
     public List<HashMap<String,Object>> list(@Param("param")Parameter parameter);
 
     public Address findAddressById(@Param("address_id")String address_id);
+
+    public List<Address> findAddressByLevel(@Param("level")String level);
 }

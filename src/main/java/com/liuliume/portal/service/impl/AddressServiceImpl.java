@@ -69,4 +69,10 @@ public class AddressServiceImpl implements AddressService {
         return address;
     }
 
+    @Override
+    public List<Address> findAddressByLevel(String level) throws Exception {
+        List<Address> addressList = addressDao.findAddressByLevel(level);
+        return addressList;
+    }
+
 }

@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.MessageFormat;
@@ -72,11 +69,13 @@ public class AddressController {
     }
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)String address_id){
+    public ModelAndView index(ModelMap model,@RequestParam(value="address_id",required=false)String address_id) {
         Address address = null;
+        List<Address> firstAddress = null;
         try {
             logger.info("call AddressController.index");
             address = addressService.findAddressById(address_id);
+            firstAddress = addressService.findAddressByLevel(AddressLevelEnum.First.getLevel());
         } catch (Exception e) {
             logger.error("Error! reason:{}, Paramter:account_id:{}.",
                     e.getMessage(),address_id,e);
@@ -85,15 +84,35 @@ public class AddressController {
         if(address != null){
             model.put("address", address);
         }
+        if(firstAddress != null && firstAddress.size() > 0) {
+            model.put("firstAddress",firstAddress);
+        }
         return mav;
     }
 
-    @ModelAttribute("allGender")
-    public Map<Integer, AddressLevelEnum> getAllAddressLevel(){
-        Map<Integer, AddressLevelEnum> addresslevel = new HashMap<Integer, AddressLevelEnum>();
-        for(AddressLevelEnum type : AddressLevelEnum.values()){
-            addresslevel.put(type.getLevel(), type);
+    @RequestMapping(value="index_parent",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public List<Address> index_parent(ModelMap model,@RequestParam(value="level",required=false)String level) {
+        List<Address> firstAddress = null;
+        try {
+            logger.info("call AddressController.index");
+            firstAddress = addressService.findAddressByLevel(level);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),level,e);
         }
-        return addresslevel;
+        return firstAddress;
     }
+
+
+
+    @ModelAttribute("allAddressLevel")
+    public Map<String, AddressLevelEnum> getAllAddressLevel(){
+        Map<String, AddressLevelEnum> addressLevel = new HashMap<String, AddressLevelEnum>();
+        for(AddressLevelEnum type : AddressLevelEnum.values()){
+            addressLevel.put(type.getLevel(), type);
+        }
+        return addressLevel;
+    }
+
 }
