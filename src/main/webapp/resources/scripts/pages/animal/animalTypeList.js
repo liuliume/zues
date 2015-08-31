@@ -35,7 +35,7 @@ var typeList=function(){
     		});//全选结束
 			
 			$("#create").click(function(){
-				var url =  $("#setOptionUrl").val() + "index";
+				var url =  $("#setOptionUrl").val() + "typeIndex";
     			window.location.href=url;  
 			});
 			
@@ -66,9 +66,12 @@ var typeList=function(){
     		});
 			
 			$("a[name=edit]").click(function(){
-    			var url = $("#setOptionUrl").val() + "index" + "?" + "id=" + $(this).attr("id");
+    			var url = $("#setOptionUrl").val() + "typeIndex" + "?" + "id=" + $(this).attr("id");
     			window.location.href=url;  
     		})
+		},
+		search:function(){
+			$("#form_search").submit();
 		}
 	};
 }();

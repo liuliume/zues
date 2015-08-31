@@ -10,4 +10,8 @@ public interface AnimalService {
 	List<AnimalsType> list(Seed<AnimalsType> seed) throws Exception;
 	
 	void batchDeleteAnimalType(String idsStr) throws Exception;
+	
+	void createOrUpdateType(AnimalsType type) throws Exception;
+	
+	AnimalsType findAnimalsTypeById(Integer id);
 }

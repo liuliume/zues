@@ -34,4 +34,19 @@ public class AnimalDaoImpl implements AnimalDao{
 	public void deleteAnimalType(AnimalsType type) {
 		typeMapper.deleteEntityPhysically(type);
 	}
+
+	@Override
+	public void insertAnimalType(AnimalsType type) {
+		typeMapper.createEntity(type);
+	}
+
+	@Override
+	public void updateAnimalType(AnimalsType type) {
+		typeMapper.updateEntity(type);
+	}
+
+	@Override
+	public AnimalsType findAnimalsTypeById(Integer id) {
+		return typeMapper.findAnimalsTypeById(id);
+	}
 }

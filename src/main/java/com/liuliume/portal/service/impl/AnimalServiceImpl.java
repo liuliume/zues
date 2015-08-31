@@ -65,4 +65,22 @@ public class AnimalServiceImpl implements AnimalService{
 		}
 	}
 
+	@Override
+	public void createOrUpdateType(AnimalsType type) throws Exception {
+		if(type==null)
+			throw new IllegalArgumentException("参数错误，宠物类新为空");
+		if(type.getId()==null){
+			animalDao.insertAnimalType(type);
+		}else {
+			animalDao.updateAnimalType(type);
+		}
+	}
+
+	@Override
+	public AnimalsType findAnimalsTypeById(Integer id) {
+		if(id!=null)
+			return animalDao.findAnimalsTypeById(id);
+		return null;
+	}
+
 }

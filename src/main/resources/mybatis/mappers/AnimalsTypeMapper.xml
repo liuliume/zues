@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuliume.portal.dao.AnimalsTypeMapper" >
+<mapper namespace="com.liuliume.portal.mybatis.mapper.AnimalsTypeMapper" >
   <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.AnimalsType" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
@@ -28,5 +28,10 @@
   		</if>
   	</if>
   	limit #{parameter.start},#{parameter.limit}
+  </select>
+  
+  <select id="findAnimalsTypeById" resultMap="BaseResultMap">
+  	select id,type_name,expense_coefficient from animals_type 
+  	where id=#{id}; 
   </select>
 </mapper>

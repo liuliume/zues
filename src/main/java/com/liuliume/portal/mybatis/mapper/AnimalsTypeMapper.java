@@ -14,4 +14,6 @@ public interface AnimalsTypeMapper extends MyBatisBaseMapper<AnimalsType>{
     
     public List<AnimalsType> list(@Param("parameter")Parameter parameter);
     
+    AnimalsType findAnimalsTypeById(@Param("id")Integer id);
+    
 }

@@ -12,4 +12,10 @@ public interface AnimalDao {
 	public List<AnimalsType> listAnimalsType(Parameter parameter);
 	
 	void deleteAnimalType(AnimalsType type);
+	
+	void insertAnimalType(AnimalsType type);
+	
+	void updateAnimalType(AnimalsType type);
+	
+	AnimalsType findAnimalsTypeById(Integer id);
 }

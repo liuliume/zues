@@ -42,6 +42,23 @@ public class AnimalController {
 		map.put("seed", seed);
 		return "animal/typeList";
 	}
+	
+	@RequestMapping(value="typeIndex",method=RequestMethod.GET)
+	public String typeIndex(ModelMap model,@RequestParam(value="id",required=false)Integer id){
+		AnimalsType type =null;
+		logger.info("call AnimalController.typeIndex");
+		try {
+			type=animalService.findAnimalsTypeById(id);
+		} catch (Exception e) {
+			logger.error(MessageFormat.format(
+					"typeIndex AnimalsType error! reason:{0}, Paramter:ids:{1}.",
+					e.getMessage(), id), e);
+		}
+		if(type!=null){
+			model.put("type", type);
+		}
+		return "animal/typeIndex";
+	}
 
 	@RequestMapping(value = "batchDeleteAnimalType", method = RequestMethod.POST)
 	@ResponseBody
@@ -62,5 +79,22 @@ public class AnimalController {
 		}
 
 		return jdata;
+	}
+
+	@RequestMapping(value = "createOrUpdateType", method = RequestMethod.POST)
+	@ResponseBody
+	public JData createOrUpdateType(AnimalsType type) {
+		JData jData = new JData("操作成功", true);
+		try {
+			animalService.createOrUpdateType(type);
+		} catch (Exception e) {
+			logger.error(
+					MessageFormat
+							.format("createOrUpdate AnimalsType error! reason:{0}, Paramter:AnimalsType:{1}.",
+									e.getMessage(), type), e);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
+		return jData;
 	}
 }

@@ -22,7 +22,7 @@
 		<div class="col-md-12">
 			<div class="form-actions">
 				<form id="form_search" class="form-horizontal"
-					action="${seed.actionPath }" method="GET">
+					action="/animal/typeList" method="GET">
 					<div class="form-group">
 						<label class="col-md-1 control-label">宠物类型: </label>
 						<div class="col-md-3">
@@ -31,10 +31,10 @@
 								placeholder="Input name" value="${seed.filter['typeNameQ']}" />
 						</div>
 						<div class="pull-right">
-							<!-- <a href="javascript:ZuesAccount.search();" class="btn dark">搜索
+							<a href="javascript:typeList.search();" class="btn dark">搜索
 								<i class="fa fa-search"></i>
-							</a> -->
-							<button class="btn dark">搜索<i class="fa fa-search"></i></button>
+							</a>
+							<!-- <button class="btn dark">搜索<i class="fa fa-search"></i></button> -->
 						</div>
 					</div>
 				</form>
