@@ -31,7 +31,7 @@
 				<!-- add query cond here -->
 			</if>
 		</if>
-		limit #{parameter.start},#{parameter.limit}
+		limit #{param.start},#{param.limit}
 	</select>
 
 	<select id="findAccountById" resultType="com.liuliume.portal.entity.Account">
