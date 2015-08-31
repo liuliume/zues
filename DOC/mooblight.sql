@@ -94,11 +94,12 @@ DROP TABLE IF EXISTS `animals_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `animals_type` (
-  `id` int(11) NOT NULL,
-  `type_name` varchar(32) DEFAULT NULL,
-  `expense_coefficient` double DEFAULT NULL,
+  `id` INT(11) AUTO_INCREMENT NOT NULL ,
+  `type_name` VARCHAR(32) DEFAULT NULL,
+  `expense_coefficient` DOUBLE DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

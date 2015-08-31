@@ -16,7 +16,6 @@ import com.liuliume.portal.mybatis.Status;
 @Entity
 @Table(name="account")
 /**
- * 个人账户实体类
  * @author xiayun
  *
  */

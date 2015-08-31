@@ -3,17 +3,17 @@
 <%@ include file="/WEB-INF/layouts/fragment/taglib.jsp"%>
 
 <head>
-<title>用户管理</title>
+<title>宠物管理</title>
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="page-title">用户管理</h3>
+			<h3 class="page-title">宠物管理</h3>
 			<ul class="page-breadcrumb breadcrumb">
-				<li><i class="fa fa-home"></i> <span> 用户管理
+				<li><i class="fa fa-home"></i> <span> 宠物管理
 				</span> <i class="fa fa-angle-right"></i></li>
-				<li><span> 用户列表 </span></li>
+				<li><span> 宠物类型列表 </span></li>
 			</ul>
 		</div>
 	</div>
@@ -22,18 +22,19 @@
 		<div class="col-md-12">
 			<div class="form-actions">
 				<form id="form_search" class="form-horizontal"
-					action="/account/list" method="GET">
+					action="${seed.actionPath }" method="GET">
 					<div class="form-group">
-						<label class="col-md-1 control-label">昵称: </label>
+						<label class="col-md-1 control-label">宠物类型: </label>
 						<div class="col-md-3">
-							<input type="text" id="nameQ"
-								class="form-control input-medium input-inline" name="nameQ"
-								placeholder="Input name" value="${seed.filter['nameQ']}" />
+							<input type="text" id="typeNameQ"
+								class="form-control input-medium input-inline" name="typeNameQ"
+								placeholder="Input name" value="${seed.filter['typeNameQ']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:ZuesAccount.search();" class="btn dark">搜索
+							<!-- <a href="javascript:ZuesAccount.search();" class="btn dark">搜索
 								<i class="fa fa-search"></i>
-							</a>
+							</a> -->
+							<button class="btn dark">搜索<i class="fa fa-search"></i></button>
 						</div>
 					</div>
 				</form>
@@ -44,9 +45,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="blank-form-actions">
-				<a class="btn green" href="#" id="createAccount"><i
-					class="fa fa-plus"></i>创建</a> <a class="btn blue" href="#"
-					id="deleteAccountBatch"><i class="fa fa-times"></i>删除</a>
+				<a class="btn green" href="#" id="create"><i
+					class="fa fa-plus"></i>新增</a> <a class="btn blue" href="#"
+					id="deleteBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
 		</div>
 	</div>
@@ -56,7 +57,7 @@
 			<div class="portlet box grey">
 				<div class="portlet-title">
 					<div class="caption">
-						<i class="fa fa-calendar"></i> 用户列表
+						<i class="fa fa-calendar"></i> 宠物类型列表
 					</div>
 				</div>
 				<div class="portlet-body flip-scroll">
@@ -71,12 +72,9 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">昵称</th>
-								<th style="width: 5%;">邮箱</th>
-								<th style="width: 10%;">手机</th>
-								<th style="width: 15%;">注册时间</th>
-								<th style="width: 10%;">性别</th>
-								<th style="width: 15%;">地址</th>
+								<th style="width: 10%;">类型Id</th>
+								<th style="width: 10%;">宠物类型</th>
+								<th style="width: 10%;">折扣系数</th>
 								<th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
@@ -86,21 +84,18 @@
 									<td>
 										<div class="">
 											<span><input class="" type="checkbox" id="test"
-												value="${item.account_id}"> </span>
+												value="${item.id}"> </span>
 										</div>
 									</td>
-									<td>${item.uniqname}</td>
-									<td>${item.email}</td>
-									<td>${item.mobile}</td>
-									<td>${item.reg_time}</td>
-									<td>${item.gender}</td>
-									<td>${item.address}</td>
+									<td>${item.id}</td>
+									<td>${item.typeName}</td>
+									<td>${item.expenseCoefficient}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
-										name="editAccount" accountId="${item.account_id}"><i
+										name="edit" id="${item.id}"><i
 											class="fa fa-edit"></i> Edit</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
-										name="deleteAccount" accountId="${item.account_id}"><i
+										name="delete" id="${item.id}"><i
 											class="fa fa-times"></i> Delete</a></td>
 								</tr>
 							</c:forEach>
@@ -113,12 +108,12 @@
 	</div>
 
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/animal/" />
 	
-	<input type="hidden" id="accountId_delete"/>
+	<input type="hidden" id="type_delete"/>
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->
-	<script src="${ctx}/resources/scripts/pages/account/accountList.js"
+	<script src="${ctx}/resources/scripts/pages/animal/animalTypeList.js"
 		type="text/javascript"></script>
 </body>

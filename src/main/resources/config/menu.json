@@ -15,11 +15,11 @@
             },
             {
               "name":"宠物类型管理",
-              "url":"/room/list"
+              "url":"/animal/typeList"
             },
             {
               "name":"宠物品种管理",
-              "url":"/room/list"
+              "url":"/animal/animalCategoriesList"
             }
           ]
         },

@@ -5,34 +5,40 @@
 
 	<select id="count" resultType="int">
 		select count(1) from account where flag <![CDATA[<>]]>99
-			
-			<if test="param.cond != null">
-				<if test="param.cond.account != null">
-					<if test="param.cond.account.uniqname != null">
-						and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
-					</if>
-					<!-- add query cond here -->
-				</if>
-			</if>
-			
-	</select>
-	
-	<select id="list" resultType="com.liuliume.portal.entity.Account">
-		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name as uniqname,gender,province_id,city_id,area_id,address,flag
-		from account where flag <![CDATA[<>]]>99
+
 		<if test="param.cond != null">
-				<if test="param.cond.account != null">
-					<if test="param.cond.account.uniqname != null and param.cond.account.uniqname != ''">
-						and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
-					</if>
-					<!-- add query cond here -->
+			<if test="param.cond.account != null">
+				<if test="param.cond.account.uniqname != null">
+					and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
 				</if>
+				<!-- add query cond here -->
 			</if>
+		</if>
+
 	</select>
-	
+
+	<select id="list" resultType="com.liuliume.portal.entity.Account">
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
+		as uniqname,gender,province_id,city_id,area_id,address,flag
+		from
+		account where flag <![CDATA[<>]]>99
+		<if test="param.cond != null">
+			<if test="param.cond.account != null">
+				<if
+					test="param.cond.account.uniqname != null and param.cond.account.uniqname != ''">
+					and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
+				</if>
+				<!-- add query cond here -->
+			</if>
+		</if>
+		limit #{parameter.start},#{parameter.limit}
+	</select>
+
 	<select id="findAccountById" resultType="com.liuliume.portal.entity.Account">
-		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name as uniqname,gender,province_id,city_id,area_id,address,flag
-		from account where flag <![CDATA[<>]]>99 
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
+		as uniqname,gender,province_id,city_id,area_id,address,flag
+		from
+		account where flag <![CDATA[<>]]>99
 		<if test="account_id != null">
 			and account_id=#{account_id}
 		</if>

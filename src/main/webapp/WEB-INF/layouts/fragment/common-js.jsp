@@ -15,5 +15,6 @@
 <script type="text/javascript" src="${ctx}/resources/third-party/form/jquery.form.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/util.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common.js"></script>
 
 <!-- END GLOBAL MANDATORY SCRIPTS -->
