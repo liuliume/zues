@@ -20,4 +20,8 @@ public interface AddressDao {
     public List<Address> findAddressByLevel(String level);
 
     public List<Address> findAddressByParentId(int parent_id);
+
+    public void createAddress(Address address);
+
+    public void updateAddress(Address address);
 }

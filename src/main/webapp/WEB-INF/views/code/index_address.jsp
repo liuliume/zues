@@ -42,9 +42,10 @@
 												<%--class="help-block display-hide" id="errorInfoName">请输入用户昵称!</span> <span class="label label-warning">--%>
 												<%--最长128个字符. </span>--%>
 										<%--</div>--%>
+                                        ${address.name}
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" id="address"
-                                                   name="address" value="${account.address}"> <span
+                                            <input type="text" class="form-control" id="name"
+                                                   name="name" value="${address.name}"> <span
                                                 class="help-block display-hide" id="errorInfoAddress">请输入用户地址!</span>
                                         </div>
 									</div>
@@ -108,7 +109,7 @@
 										<div style="text-align: center">
 											<input type="hidden" id="account_id" name="account_id"
 												value="${account.account_id}" />
-											<a href="" class="btn green" id="btnConfirm" name="btnConfirm">创建</a>
+											<a href="" class="btn green" id="btnConfirm1" name="btnConfirm">创建</a>
 										</div>
 									</div>
 								</div>

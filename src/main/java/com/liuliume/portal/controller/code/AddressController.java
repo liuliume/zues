@@ -2,6 +2,7 @@ package com.liuliume.portal.controller.code;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.model.AddressLevelEnum;
@@ -15,6 +16,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +38,6 @@ public class AddressController {
     @RequestMapping(value="list",method=RequestMethod.GET)
     private ModelAndView list(ModelMap map,@SeedParam Seed<HashMap<String,Object>> seed){
         logger.info("call AddressController.list");
-        List<HashMap<String,Object>> list = null;
         try {
             addressService.list(seed);
         } catch (Exception e) {
@@ -103,6 +105,28 @@ public class AddressController {
         }
         System.out.println(firstAddress);
         return firstAddress;
+    }
+
+
+    @RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
+    @ResponseBody
+    public JData createOrUpdate(Address address,HttpServletRequest request,HttpServletResponse response){
+        logger.info("call the createOrUpdate account");
+        logger.debug(address.toString());
+        JData jData = new JData();
+        try {
+            addressService.createOrUpdate(address);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("操作成功");
+        } catch (Exception e) {
+            logger.error("create Or Update  Error." + e.getMessage()
+                    + " account[" + address + "]", e);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("操作失败");
+        }
+        return jData;
     }
 
 

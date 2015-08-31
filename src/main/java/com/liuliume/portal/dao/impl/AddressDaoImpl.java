@@ -41,5 +41,15 @@ public class AddressDaoImpl implements AddressDao{
         return addressMapper.findAddressByParentId(parent_id);
     }
 
+    @Override
+    public void createAddress(Address address) {
+        addressMapper.createEntity(address);
+    }
+
+    @Override
+    public void updateAddress(Address address) {
+        addressMapper.updateEntity(address);
+    }
+
 
 }

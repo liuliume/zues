@@ -81,4 +81,15 @@ public class AddressServiceImpl implements AddressService {
         return addressList;
     }
 
+    @Override
+    public void createOrUpdate(Address address) throws Exception {
+        if(address==null)
+            throw new IllegalArgumentException("Account为空");
+        if(null == address.getId()){//add
+            addressDao.createAddress(address);
+        }else {
+            addressDao.updateAddress(address);
+        }
+    }
+
 }

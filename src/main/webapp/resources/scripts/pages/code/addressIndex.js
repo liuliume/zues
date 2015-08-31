@@ -1,33 +1,19 @@
 var AddressIndex = function() {
 
 	var createOrUpdate = function() {
-		urls = "/account/createOrUpdate";
-		
-		var name=$("#uniqname").val();
-		if(name==null || name==""){
-			$("#errorInfoName").css("display","block");
-			$("#name").css("border-color","red");
-			return;
-		}
-		var mobile = $("#mobile").val();
-		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-		if(mobile==null || mobile == ""){
-			$("#errorInfoMobile").css("display","block");
-			$("#mobile").css("border-color","red");
-			return;
-		}
-		if(!reg.test(mobile)){
-			$("#errorInfoMobile").text("请输入正确的手机号");
-			$("#errorInfoMobile").css("display","block");
-			$("#mobile").css("border-color","red");
-			return;
-		}
-		
-		
+		urls = "/code/address/createOrUpdate";
+        var data;
+        if($("#level").val() == '1'){
+            data = "level="+$("#level").val()+"&name="+$("#name").val();
+        } else if($("#level").val() == '2') {
+            data = "level="+$("#level").val()+"&name="+$("#name").val()+"&parentId="+$("#parent_first_id").val();
+        } else if($("#level").val() == '3') {
+            data = "level="+$("#level").val()+"&name="+$("#name").val()+"&parentId="+$("#parent_second_id").val();
+        }
 		$.ajax({
 			url:urls,
 			type:"POST",
-			data:$("#IndexForm").serialize(),
+			data:data,
 			success:function(result) {
 				$.cookie.json = true;
 				if (result.success) {
@@ -41,7 +27,7 @@ var AddressIndex = function() {
 						message : result.detail
 					});
 				}
-				window.location.href="/account/list";
+				window.location.href="/code/address/list";
 //				window.location.reload();
 			},failure:function(result){
 				alert("操作失败",result.detail);
@@ -55,7 +41,7 @@ var AddressIndex = function() {
 //			$("#btnConfirm").click(function(){
 //				createOrUpdate();
 //			});
-			$(document).on("click", "#btnConfirm", function(event){
+			$(document).on("click", "#btnConfirm1", function(event){
 				createOrUpdate();
 				return false;
     		});
