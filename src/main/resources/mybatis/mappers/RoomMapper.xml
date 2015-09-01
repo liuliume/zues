@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuliume.portal.dao.RoomMapper" >
+<mapper namespace="com.liuliume.portal.mybatis.mapper.RoomMapper" >
   <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.Room" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="room_name" property="roomName" jdbcType="VARCHAR" />
@@ -11,7 +11,37 @@
     <result column="discount_180" property="discount180" jdbcType="DOUBLE" />
     <result column="room_num" property="roomNum" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List" >
+
+    <select id="count" resultType="int" parameterType="com.liuliume.portal.entity.Room">
+        select count(1) from room
+        <where>
+            <if test="param.cond != null">
+                <if test="param.cond.room != null">
+                    <if test="param.cond.room.roomName != null">
+                        and room_name like CONCAT(#{param.cond.room.roomName},'%')
+                    </if>
+                    <!-- add query cond here -->
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="com.liuliume.portal.entity.Room" resultMap="BaseResultMap">
+        select *
+        from room a1 where 1=1
+        <if test="param.cond != null">
+            <if test="param.cond.room != null">
+                <if test="param.cond.room.roomName != null">
+                    and room_name like CONCAT('%',#{param.cond.room.roomName},'%')
+                </if>
+                <!-- add query cond here -->
+            </if>
+        </if>
+        limit #{param.start},#{param.limit}
+    </select>
+
+
+    <sql id="Base_Column_List" >
     id, room_name, cost, weixin_discount, discount_30, discount_90, discount_180, room_num
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

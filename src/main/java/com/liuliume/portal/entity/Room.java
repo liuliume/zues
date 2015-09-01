@@ -1,6 +1,11 @@
 package com.liuliume.portal.entity;
 
-public class Room {
+import javax.persistence.*;
+import java.io.Serializable;
+@Entity
+@Table(name="room")
+public class Room implements Serializable {
+
     private Integer id;
 
     private String roomName;
@@ -17,6 +22,9 @@ public class Room {
 
     private Integer roomNum;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     public Integer getId() {
         return id;
     }
@@ -25,6 +33,7 @@ public class Room {
         this.id = id;
     }
 
+    @Column(name="room_name")
     public String getRoomName() {
         return roomName;
     }
@@ -33,6 +42,7 @@ public class Room {
         this.roomName = roomName == null ? null : roomName.trim();
     }
 
+    @Column(name="cost")
     public Double getCost() {
         return cost;
     }
@@ -41,6 +51,7 @@ public class Room {
         this.cost = cost;
     }
 
+    @Column(name="weixin_discount")
     public Double getWeixinDiscount() {
         return weixinDiscount;
     }
@@ -49,6 +60,7 @@ public class Room {
         this.weixinDiscount = weixinDiscount;
     }
 
+    @Column(name="discount_30")
     public Double getDiscount30() {
         return discount30;
     }
@@ -57,6 +69,7 @@ public class Room {
         this.discount30 = discount30;
     }
 
+    @Column(name="discount_90")
     public Double getDiscount90() {
         return discount90;
     }
@@ -65,6 +78,7 @@ public class Room {
         this.discount90 = discount90;
     }
 
+    @Column(name="discount_180")
     public Double getDiscount180() {
         return discount180;
     }
@@ -73,6 +87,7 @@ public class Room {
         this.discount180 = discount180;
     }
 
+    @Column(name="room_num")
     public Integer getRoomNum() {
         return roomNum;
     }
