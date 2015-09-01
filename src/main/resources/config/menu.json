@@ -35,11 +35,11 @@
         },
         {
           "name": "训练管理",
-          "url": "/code",
+          "url": "/course",
           "children": [
             {
               "name":"课程管理",
-              "url":"/room/list"
+              "url":"/course/list"
             }
           ]
         },

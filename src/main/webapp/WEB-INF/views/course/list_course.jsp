@@ -3,17 +3,17 @@
 <%@ include file="/WEB-INF/layouts/fragment/taglib.jsp"%>
 
 <head>
-<title>房间类型管理</title>
+<title>课程管理</title>
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="page-title">房间类型管理</h3>
+			<h3 class="page-title">课程管理</h3>
 			<ul class="page-breadcrumb breadcrumb">
-				<li><i class="fa fa-home"></i> <span> 房间类型管理
+				<li><i class="fa fa-home"></i> <span> 课程管理
 				</span> <i class="fa fa-angle-right"></i></li>
-				<li><span> 房间类型列表 </span></li>
+				<li><span> 课程列表 </span></li>
 			</ul>
 		</div>
 	</div>
@@ -22,16 +22,16 @@
 		<div class="col-md-12">
 			<div class="form-actions">
 				<form id="form_search" class="form-horizontal"
-					action="/room/list" method="GET">
+					action="/course/list" method="GET">
 					<div class="form-group">
-						<label class="col-md-1 control-label">房间类型: </label>
+						<label class="col-md-1 control-label">课程名称: </label>
 						<div class="col-md-3">
 							<input type="text"
 								class="form-control input-medium input-inline" name="name"
-								placeholder="房间类型" value="${seed.filter['name']}" />
+								placeholder="课程名称" value="${seed.filter['name']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:Room.search();" class="btn dark">查询
+							<a href="javascript:Course.search();" class="btn dark">查询
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
@@ -46,7 +46,7 @@
 			<div class="blank-form-actions">
 				<a class="btn green" href="#" id="createRoom"><i
 					class="fa fa-plus"></i>新建</a> <a class="btn blue" href="#"
-					id="deleteRoomBatch"><i class="fa fa-times"></i>删除</a>
+					id="deleteCourseBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
 		</div>
 	</div>
@@ -56,14 +56,14 @@
 			<div class="portlet box grey">
 				<div class="portlet-title">
 					<div class="caption">
-						<i class="fa fa-calendar"></i> 房间类型列表
+						<i class="fa fa-calendar"></i> 课程列表
 					</div>
 				</div>
 				<div class="portlet-body flip-scroll">
 					<liuliume:pagination position="above"></liuliume:pagination>
 					<table
 						class="table table-bordered table-striped table-condensed flip-content"
-						id="fromRoomTable">
+						id="fromCourseTable">
 						<thead class="flip-content">
 							<tr>
 								<th style="width: 42px;">
@@ -71,13 +71,9 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">类型名称</th>
-								<th style="width: 10%;">价格</th>
-                                <th style="width: 10%;">微信折扣</th>
-								<th style="width: 10%;">30天折扣</th>
-                                <th style="width: 10%;">90天折扣</th>
-                                <th style="width: 10%;">180天折扣</th>
-                                <th style="width: 10%;">房间数量</th>
+								<th style="width: 10%;">课程名称</th>
+								<th style="width: 50%;">课程描述</th>
+                                <th style="width: 10%;">价格</th>
                                 <th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
@@ -90,19 +86,15 @@
 												value="${item.id}"> </span>
 										</div>
 									</td>
-									<td>${item.roomName}</td>
-									<td>${item.cost}</td>
-                                    <td>${item.weixinDiscount}</td>
-									<td>${item.discount30}</td>
-                                    <td>${item.discount90}</td>
-                                    <td>${item.discount180}</td>
-                                    <td>${item.roomNum}</td>
+									<td>${item.courseName}</td>
+									<td>${item.courseDescribe}</td>
+                                    <td>${item.expense}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
-										name="editRoom" room_id="${item.id}"><i
+										name="editCourse" course_id="${item.id}"><i
 											class="fa fa-edit"></i> 修改</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
-										name="deleteRoom" room_id="${item.id}"><i
+										name="deleteCourse" room_id="${item.id}"><i
 											class="fa fa-times"></i> 删除</a></td>
 								</tr>
 							</c:forEach>
@@ -158,12 +150,12 @@
 	<%--</div>--%>
 	<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/room/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/course/" />
 
     <input type="hidden" id="accountId_delete"/>
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->
-	<script src="${ctx}/resources/scripts/pages/room/roomList.js"
+	<script src="${ctx}/resources/scripts/pages/course/courseList.js"
 		type="text/javascript"></script>
 </body>

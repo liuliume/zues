@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuliume.portal.dao.CourseMapper" >
+<mapper namespace="com.liuliume.portal.mybatis.mapper.CourseMapper" >
   <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.Course" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="course_name" property="courseName" jdbcType="VARCHAR" />
     <result column="course_describe" property="courseDescribe" jdbcType="VARCHAR" />
     <result column="expense" property="expense" jdbcType="DOUBLE" />
   </resultMap>
+
+    <select id="count" resultType="int" parameterType="com.liuliume.portal.entity.Course">
+        select count(1) from course
+        <where>
+            <if test="param.cond != null">
+                <if test="param.cond.course != null">
+                    <if test="param.cond.course.courseName != null">
+                        and course_name like CONCAT(#{param.cond.course.courseName},'%')
+                    </if>
+                    <!-- add query cond here -->
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="com.liuliume.portal.entity.Course" resultMap="BaseResultMap">
+        select *
+        from course where 1=1
+        <if test="param.cond != null">
+            <if test="param.cond.course != null">
+                <if test="param.cond.course.courseName != null">
+                    and course_name like CONCAT('%',#{param.cond.course.courseName},'%')
+                </if>
+                <!-- add query cond here -->
+            </if>
+        </if>
+        limit #{param.start},#{param.limit}
+    </select>
+
   <sql id="Base_Column_List" >
     id, course_name, course_describe, expense
   </sql>
