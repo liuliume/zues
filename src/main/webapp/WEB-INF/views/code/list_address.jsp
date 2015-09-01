@@ -52,7 +52,7 @@
 			<div class="blank-form-actions">
 				<a class="btn green" href="#" id="createAddress"><i
 					class="fa fa-plus"></i>新建</a> <a class="btn blue" href="#"
-					id="deleteGroupBatch"><i class="fa fa-times"></i>删除</a>
+					id="deleteAddressBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 					<liuliume:pagination position="above"></liuliume:pagination>
 					<table
 						class="table table-bordered table-striped table-condensed flip-content"
-						id="fromGroupTable">
+						id="fromAddressTable">
 						<thead class="flip-content">
 							<tr>
 								<th style="width: 42px;">
@@ -161,6 +161,8 @@
 	<!-- 提示弹出框结束 -->
 
 	<input type="hidden" id="setOptionUrl" value="${ctx}/code/address/" />
+
+    <input type="hidden" id="accountId_delete"/>
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->

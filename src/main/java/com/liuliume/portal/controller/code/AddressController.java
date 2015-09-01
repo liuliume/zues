@@ -131,16 +131,16 @@ public class AddressController {
 
     @RequestMapping(value="batchDelete",method = RequestMethod.POST)
     @ResponseBody
-    public JData batchDelete(@RequestParam(value="accountIds",required=true)String accountIds){
+    public JData batchDelete(@RequestParam(value="addressIds",required=true)String addressIds){
         logger.info("call the batch delete account");
         JData jdata = new JData();
         try {
-            addressService.batchDelete(accountIds);
+            addressService.batchDelete(addressIds);
             jdata.setSuccess(true);
             jdata.setDetail("操作成功");
         } catch (Exception e) {
             logger.error("Batch delete[Account] Error." + e.getMessage()
-                    + " accountIds[" + accountIds + "]", e);
+                    + " accountIds[" + addressIds + "]", e);
             jdata.setDetail("Batch delete [Account] failed!");
             jdata.setSuccess(false);
         }

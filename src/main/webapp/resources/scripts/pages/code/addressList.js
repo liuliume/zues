@@ -3,11 +3,11 @@ var Address=function(){
 	//批量删除Account
 	var batchDelete = function(){
 		var urls=$("#setOptionUrl").val()+"batchDelete";
-		var account_ids = $("#accountId_delete").val();
+		var addressIds = $("#accountId_delete").val();
 		$.ajax({
 			type: "POST",
 			url: urls,
-			data: {"accountIds":account_ids},
+			data: {"addressIds":addressIds},
 			dataType: "json",
 			success: function(result){
 				$.cookie.json = true;
@@ -23,11 +23,11 @@ var Address=function(){
 
     var deletePromotion = function(){
 //		alert("");
-        var accountId = $("#accountId_delete").val();
+        var addressId = $("#accountId_delete").val();
         $.ajax({
             type: "POST",
-            url: "/account/batchDelete",
-            data: {"accountIds":accountId},
+            url: "/code/address/batchDelete",
+            data: {"addressIds":addressId},
             dataType: "json",
             success: function(result){
                 $.cookie.json = true;
@@ -47,11 +47,11 @@ var Address=function(){
 			//单选框，全选或者全部不选的控制
     		$("#selectAll").change(function(){
     			if($(this).attr("checked")){
-    				$("table#fromAccountTable tbody input[type='checkbox']").uniform().each(function(index, item){
+    				$("table#fromAddressTable tbody input[type='checkbox']").uniform().each(function(index, item){
     					$.uniform.update($(item).attr("checked", true));
     				});
     			}else{
-    				$("table#fromAccountTable tbody input[type='checkbox']").uniform().each(function(index, item){
+    				$("table#fromAddressTable tbody input[type='checkbox']").uniform().each(function(index, item){
     					$.uniform.update($(item).attr("checked", false));
     				});
     			}
@@ -62,29 +62,29 @@ var Address=function(){
     			window.location.href=url;  
     		});
     		
-    		$("#deleteAccountBatch").click(function(){
-    			var accountIds='';
-    			$("table#fromAccountTable tbody input[type='checkbox']").uniform().each(function(index, item){
+    		$("#deleteAddressBatch").click(function(){
+    			var addressIds='';
+    			$("table#fromAddressTable tbody input[type='checkbox']").uniform().each(function(index, item){
     				if($(item).attr("checked")){
-    					accountIds+=$(item).val()+",";
+                        addressIds+=$(item).val()+",";
     				}
 				});
-    			if(accountIds!=''){
-    				accountIds=accountIds.substring(0,accountIds.length-1);
-    				$("#accountId_delete").val(accountIds);
-    				confirm("Delete Account","Please confirm if delete all the selected Account?",batchDelete);
+    			if(addressIds!=''){
+                    addressIds=addressIds.substring(0,addressIds.length-1);
+    				$("#accountId_delete").val(addressIds);
+    				confirm("删除地址","请确认是否删除这些地址?",batchDelete);
     			}else{
-    				alert("Delete Account","Please choose the Account to be deleted.");
+    				alert("删除地址","请选择需要删除的地址");
     			}
     		});
 
             $("a[name=deleteAddress]").click(function(){
 
-                $("#accountId_delete").val($(this).attr("accountId"));
+                $("#accountId_delete").val($(this).attr("address_id"));
 
-                var name=$($(this).parent().parent().find("td")[3]).text();
+                var name=$($(this).parent().parent().find("td")[2]).text();
                 name=name.replace(/(^\s*)|(\s*$)/g,'');
-                confirm("删除用户","确认删除这些地址  "+name+"?",deletePromotion);
+                confirm("删除地址","确认删除这些地址  "+ name +"?",deletePromotion);
             });
 
             $("a[name=editAddress]").click(function(){

@@ -53,7 +53,7 @@ public class AddressDaoImpl implements AddressDao{
 
     @Override
     public void delete(Address address) {
-        addressMapper.deleteEntityLogically(address);
+        addressMapper.deleteEntityPhysically(address);
     }
 
 
