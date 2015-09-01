@@ -28,7 +28,7 @@
 						<div class="col-md-3">
 							<input type="text"
 								class="form-control input-medium input-inline" name="name"
-								placeholder="地址" value="${seed.filter['name']}" />
+								placeholder="房间类型" value="${seed.filter['name']}" />
 						</div>
 						<div class="pull-right">
 							<a href="javascript:Room.search();" class="btn dark">查询

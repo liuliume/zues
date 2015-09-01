@@ -123,7 +123,7 @@
 	<%--</div>--%>
 	<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/room/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/course/" />
 
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 

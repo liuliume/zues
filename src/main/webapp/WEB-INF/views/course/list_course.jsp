@@ -28,10 +28,10 @@
 						<div class="col-md-3">
 							<input type="text"
 								class="form-control input-medium input-inline" name="name"
-								placeholder="地址" value="${seed.filter['name']}" />
+								placeholder="课程名称" value="${seed.filter['name']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:Room.search();" class="btn dark">查询
+							<a href="javascript:Course.search();" class="btn dark">查询
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
