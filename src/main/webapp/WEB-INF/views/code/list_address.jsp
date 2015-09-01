@@ -117,47 +117,47 @@
 	</div>
 
 	<!--确认modal，用于确认功能 ，仿照confirm-->
-	<div id="confirmModal" class="modal fade" aria-hidden="true"
-		tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true"></button>
-					<h4 class="modal-title" id="confirmModalTitle">Delete Segment</h4>
-				</div>
-				<div class="modal-body">
-					<div class="info" id="confirmModalContent">Please confirm if
-						you want to delete the Segment?</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn blue" id="confirmOkBtn">Confirm</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%--<div id="confirmModal" class="modal fade" aria-hidden="true"--%>
+		<%--tabindex="-1" role="dialog">--%>
+		<%--<div class="modal-dialog">--%>
+			<%--<div class="modal-content">--%>
+				<%--<div class="modal-header">--%>
+					<%--<button type="button" class="close" data-dismiss="modal"--%>
+						<%--aria-hidden="true"></button>--%>
+					<%--<h4 class="modal-title" id="confirmModalTitle">Delete Segment</h4>--%>
+				<%--</div>--%>
+				<%--<div class="modal-body">--%>
+					<%--<div class="info" id="confirmModalContent">Please confirm if--%>
+						<%--you want to delete the Segment?</div>--%>
+				<%--</div>--%>
+				<%--<div class="modal-footer">--%>
+					<%--<button type="button" class="btn default" data-dismiss="modal">Cancel</button>--%>
+					<%--<button type="button" class="btn blue" id="confirmOkBtn">Confirm</button>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
 	<!-- 确认弹出框结束 -->
 	<!-- 提示弹出框,用于弹出提示信息，仿照alert-->
-	<div id="alertModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true"></button>
-					<h4 class="modal-title" id="alertModalTitle">Delete Segment</h4>
-				</div>
-				<div class="modal-body">
-					<div class="info" id="alertModalContent">Please choose the
-						group to be deleted!</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn blue" data-dismiss="modal"
-						id="alertOkBtn">Confirm</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%--<div id="alertModal" class="modal fade">--%>
+		<%--<div class="modal-dialog">--%>
+			<%--<div class="modal-content">--%>
+				<%--<div class="modal-header">--%>
+					<%--<button type="button" class="close" data-dismiss="modal"--%>
+						<%--aria-hidden="true"></button>--%>
+					<%--<h4 class="modal-title" id="alertModalTitle">Delete Segment</h4>--%>
+				<%--</div>--%>
+				<%--<div class="modal-body">--%>
+					<%--<div class="info" id="alertModalContent">Please choose the--%>
+						<%--group to be deleted!</div>--%>
+				<%--</div>--%>
+				<%--<div class="modal-footer">--%>
+					<%--<button type="button" class="btn blue" data-dismiss="modal"--%>
+						<%--id="alertOkBtn">Confirm</button>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
 	<!-- 提示弹出框结束 -->
 
 	<input type="hidden" id="setOptionUrl" value="${ctx}/code/address/" />

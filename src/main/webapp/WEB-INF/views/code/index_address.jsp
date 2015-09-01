@@ -121,26 +121,26 @@
 	</div>
 
 	<!-- 提示弹出框,用于弹出提示信息，仿照alert-->
-	<div id="alertModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true"></button>
-					<h4 class="modal-title" id="alertModalTitle">Create Account</h4>
-				</div>
-				<div class="modal-body">
-					<div class="info" id="alertModalContent">Create Successfully!
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn blue" data-dismiss="modal"
-						id="alertOkBtn">Confirm</button>
-				</div>
+	<%--<div id="alertModal" class="modal fade">--%>
+		<%--<div class="modal-dialog">--%>
+			<%--<div class="modal-content">--%>
+				<%--<div class="modal-header">--%>
+					<%--<button type="button" class="close" data-dismiss="modal"--%>
+						<%--aria-hidden="true"></button>--%>
+					<%--<h4 class="modal-title" id="alertModalTitle">Create Account</h4>--%>
+				<%--</div>--%>
+				<%--<div class="modal-body">--%>
+					<%--<div class="info" id="alertModalContent">Create Successfully!--%>
+					<%--</div>--%>
+				<%--</div>--%>
+				<%--<div class="modal-footer">--%>
+					<%--<button type="button" class="btn blue" data-dismiss="modal"--%>
+						<%--id="alertOkBtn">Confirm</button>--%>
+				<%--</div>--%>
 
-			</div>
-		</div>
-	</div>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
 	<!-- 提示弹出框结束 -->
 
 	<input type="hidden" id="setOptionUrl" value="${ctx}/code/address/" />

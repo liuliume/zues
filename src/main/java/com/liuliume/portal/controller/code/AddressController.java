@@ -40,6 +40,7 @@ public class AddressController {
         logger.info("call AddressController.list");
         try {
             addressService.list(seed);
+            seed.setActionPath("code/address/list");
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",

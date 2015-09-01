@@ -41,6 +41,7 @@
                 <!-- add query cond here -->
             </if>
         </if>
+        limit #{param.start},#{param.limit}
     </select>
 
     <select id="findAddressById" resultMap="BaseResultMap" parameterType="java.lang.String" >
