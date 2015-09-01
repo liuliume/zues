@@ -34,4 +34,8 @@
   	select id,type_name,expense_coefficient from animals_type 
   	where id=#{id}; 
   </select>
+  
+  <select id="listAllTypes" resultMap="BaseResultMap">
+  	select id,type_name,expense_coefficient from animals_type 
+  </select>
 </mapper>

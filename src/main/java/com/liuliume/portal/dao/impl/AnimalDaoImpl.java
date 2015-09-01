@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.liuliume.portal.dao.AnimalDao;
+import com.liuliume.portal.entity.Animals;
 import com.liuliume.portal.entity.AnimalsType;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.mybatis.mapper.AnimalsMapper;
@@ -48,5 +49,42 @@ public class AnimalDaoImpl implements AnimalDao{
 	@Override
 	public AnimalsType findAnimalsTypeById(Integer id) {
 		return typeMapper.findAnimalsTypeById(id);
+	}
+
+	@Override
+	public int countAnimals(Parameter parameter) {
+		return animalsMapper.count(parameter);
+	}
+
+	
+	
+	@Override
+	public List<Animals> listAnimals(Parameter parameter) {
+		return animalsMapper.listAnimals(parameter);
+	}
+
+	@Override
+	public void deleteAnimals(Animals animals) {
+		animalsMapper.deleteEntityPhysically(animals);
+	}
+
+	@Override
+	public void addAnimals(Animals animals) {
+		animalsMapper.createEntity(animals);
+	}
+
+	@Override
+	public void editAnimals(Animals animals) {
+		animalsMapper.updateEntity(animals);
+	}
+
+	@Override
+	public Animals findAnimalsById(Integer id) {
+		return animalsMapper.findAnimalsById(id);
+	}
+
+	@Override
+	public List<AnimalsType> listAllTypes() {
+		return typeMapper.listAllTypes();
 	}
 }

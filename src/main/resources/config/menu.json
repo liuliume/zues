@@ -19,7 +19,7 @@
             },
             {
               "name":"宠物品种管理",
-              "url":"/animal/animalCategoriesList"
+              "url":"/animal/listAnimals"
             }
           ]
         },

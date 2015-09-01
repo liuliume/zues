@@ -1,17 +1,18 @@
 package com.liuliume.portal.mybatis.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.liuliume.portal.entity.Animals;
+import com.liuliume.portal.mybatis.MyBatisBaseMapper;
+import com.liuliume.portal.mybatis.Parameter;
 
-public interface AnimalsMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Animals record);
-
-    int insertSelective(Animals record);
-
-    Animals selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Animals record);
-
-    int updateByPrimaryKey(Animals record);
+public interface AnimalsMapper extends MyBatisBaseMapper<Animals>{
+	
+	int count(@Param("param") Parameter parameter);
+	
+	List<Animals> listAnimals(@Param("param")Parameter parameter);
+	
+	Animals findAnimalsById(@Param("id")Integer id);
 }

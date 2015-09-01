@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS `animals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `animals` (
-  `id` int(11) AUTO_INCREMENT NOT NULL,
+  `id` int(11) NOT NULL,
   `animals_name` varchar(128) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)

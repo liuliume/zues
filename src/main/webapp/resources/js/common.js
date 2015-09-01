@@ -18,3 +18,13 @@ function confirm(title,content,functionName){
 	$("#confirmOkBtn").bind("click",functionName);
 	$("#confirmModal").modal();
 }
+
+//Handle Select2 Dropdowns
+var handleSelect2 = function() {
+    if (jQuery().select2) {
+        $('.select2me').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    }
+}

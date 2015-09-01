@@ -30,5 +30,6 @@
         <mapper resource="mybatis/mappers/AddressMapper.xml"/>
         <mapper resource="mybatis/mappers/AnimalsTypeMapper.xml"/>
         <mapper resource="mybatis/mappers/RoomMapper.xml"/>
+        <mapper resource="mybatis/mappers/AnimalsMapper.xml"/>
     </mappers>
 </configuration>
