@@ -1,6 +1,11 @@
 package com.liuliume.portal.entity;
 
-public class Course {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name="course")
+public class Course implements Serializable {
     private Integer id;
 
     private String courseName;
@@ -9,6 +14,9 @@ public class Course {
 
     private Double expense;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     public Integer getId() {
         return id;
     }
@@ -17,6 +25,7 @@ public class Course {
         this.id = id;
     }
 
+    @Column(name="course_name")
     public String getCourseName() {
         return courseName;
     }
@@ -25,6 +34,7 @@ public class Course {
         this.courseName = courseName == null ? null : courseName.trim();
     }
 
+    @Column(name="course_describe")
     public String getCourseDescribe() {
         return courseDescribe;
     }
@@ -33,6 +43,7 @@ public class Course {
         this.courseDescribe = courseDescribe == null ? null : courseDescribe.trim();
     }
 
+    @Column(name="expense")
     public Double getExpense() {
         return expense;
     }

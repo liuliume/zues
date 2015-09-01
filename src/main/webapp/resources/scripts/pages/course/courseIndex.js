@@ -1,7 +1,8 @@
-var Room = function() {
+var Course = function() {
 
 	var createOrUpdate = function() {
-		urls = "/room/createOrUpdate";
+		urls = "/course/createOrUpdate";
+
 		$.ajax({
 			url:urls,
 			type:"POST",
@@ -19,7 +20,7 @@ var Room = function() {
 						message : result.detail
 					});
 				}
-				window.location.href="/room/list";
+				window.location.href="/course/list";
 //				window.location.reload();
 			},failure:function(result){
 				alert("操作失败",result.detail);
@@ -43,5 +44,5 @@ var Room = function() {
 }();
 
 $(function() {
-	Room.init();
+	Course.init();
 })
