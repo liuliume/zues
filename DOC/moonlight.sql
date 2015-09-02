@@ -15,27 +15,42 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Table structure for table `account`
+--
+
 DROP TABLE IF EXISTS `account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `account` (
+  `account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `passport_id` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobile` varchar(15) NOT NULL,
+  `reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `reg_ip` varchar(15) NOT NULL,
+  `avatar` varchar(128) DEFAULT NULL,
+  `uniq_name` varchar(127) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `province_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL,
+  `address` varchar(511) DEFAULT NULL,
+  `flag` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`account_id`),
+  KEY `idx_name` (`uniq_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE account(
-	account_id INT AUTO_INCREMENT NOT NULL,
-	passport_id VARCHAR(255) NULL,
-	email VARCHAR(255) NULL,
-	mobile VARCHAR(15) NOT NULL,
-	reg_time TIMESTAMP NOT NULL,
-	reg_ip VARCHAR(15) NOT NULL,
-	avatar varchar(128) NULL,
-	uniq_name VARCHAR(127) NULL,
-	gender TINYINT(1) NULL,
-	province_id INT NULL,
-	city_id INT NULL,
-	area_id INT NULL,
-	address VARCHAR(511) NULL,
-	flag TINYINT(4),
-	PRIMARY KEY (account_id),
-	INDEX idx_name(uniq_name)
-)ENGINE = INNODB DEFAULT CHARSET=utf8 COMMENT='用户表'
+--
+-- Dumping data for table `account`
+--
 
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (1,NULL,'lalss@sogou.com','13811633448','2015-08-31 16:53:17','0:0:0:0:0:0:0:1',NULL,'test',1,0,0,0,'12321',0);
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `address`
@@ -45,12 +60,12 @@ DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address` (
-  `id` varchar(32) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
-  `parent_id` varchar(32) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
   `level` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,6 +74,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'beijing213',NULL,'1'),(2,'haidian1234',1,'1'),(3,'beijing1',NULL,'1');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +86,7 @@ DROP TABLE IF EXISTS `animals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `animals` (
-  `id` int(11) AUTO_INCREMENT NOT NULL,
+  `id` int(11) NOT NULL,
   `animals_name` varchar(128) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -94,12 +110,11 @@ DROP TABLE IF EXISTS `animals_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `animals_type` (
-  `id` INT(11) AUTO_INCREMENT NOT NULL ,
-  `type_name` VARCHAR(32) DEFAULT NULL,
-  `expense_coefficient` DOUBLE DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `type_name` varchar(32) DEFAULT NULL,
+  `expense_coefficient` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,12 +134,12 @@ DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(128) DEFAULT NULL,
   `course_describe` varchar(256) DEFAULT NULL,
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,12 +159,12 @@ DROP TABLE IF EXISTS `hairdressing`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hairdressing` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `hairdressing_name` varchar(128) DEFAULT NULL,
   `hairdressing_describe` varchar(256) DEFAULT NULL,
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,6 +173,7 @@ CREATE TABLE `hairdressing` (
 
 LOCK TABLES `hairdressing` WRITE;
 /*!40000 ALTER TABLE `hairdressing` DISABLE KEYS */;
+INSERT INTO `hairdressing` VALUES (1,'test','test1',120);
 /*!40000 ALTER TABLE `hairdressing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,16 +245,16 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `room` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(128) DEFAULT NULL,
   `cost` double DEFAULT NULL,
   `weixin_discount` double DEFAULT NULL,
-  `30_discount` double DEFAULT NULL,
-  `90_discount` double DEFAULT NULL,
-  `180_discount` double DEFAULT NULL,
+  `discount_30` double DEFAULT NULL,
+  `discount_90` double DEFAULT NULL,
+  `discount_180` double DEFAULT NULL,
   `room_num` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,6 +263,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` VALUES (4,'1',1,1,1,1,11,1),(5,'2',2,22,22,2,2,2);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -259,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-27 23:09:10
+-- Dump completed on 2015-09-02 21:37:51

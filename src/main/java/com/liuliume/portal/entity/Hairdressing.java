@@ -1,6 +1,8 @@
 package com.liuliume.portal.entity;
 
-public class Hairdressing {
+import java.io.Serializable;
+
+public class Hairdressing implements Serializable {
     private Integer id;
 
     private String hairdressingName;
