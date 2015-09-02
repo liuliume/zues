@@ -31,7 +31,7 @@
 								placeholder="课程名称" value="${seed.filter['name']}" />
 						</div>
 						<div class="pull-right">
-							<a href="javascript:Course.search();" class="btn dark">查询
+							<a href="javascript:Hairdressing.search();" class="btn dark">查询
 								<i class="fa fa-search"></i>
 							</a>
 						</div>
