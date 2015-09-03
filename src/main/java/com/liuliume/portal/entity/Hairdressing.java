@@ -1,7 +1,10 @@
 package com.liuliume.portal.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name="hairdressing")
 public class Hairdressing implements Serializable {
     private Integer id;
 
@@ -11,6 +14,9 @@ public class Hairdressing implements Serializable {
 
     private Double expense;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     public Integer getId() {
         return id;
     }
@@ -19,6 +25,7 @@ public class Hairdressing implements Serializable {
         this.id = id;
     }
 
+    @Column(name="hairdressing_name")
     public String getHairdressingName() {
         return hairdressingName;
     }
@@ -27,6 +34,7 @@ public class Hairdressing implements Serializable {
         this.hairdressingName = hairdressingName == null ? null : hairdressingName.trim();
     }
 
+    @Column(name="hairdressing_describe")
     public String getHairdressingDescribe() {
         return hairdressingDescribe;
     }
@@ -35,6 +43,7 @@ public class Hairdressing implements Serializable {
         this.hairdressingDescribe = hairdressingDescribe == null ? null : hairdressingDescribe.trim();
     }
 
+    @Column(name="expense")
     public Double getExpense() {
         return expense;
     }

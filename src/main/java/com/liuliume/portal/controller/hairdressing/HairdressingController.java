@@ -80,7 +80,7 @@ public class HairdressingController {
             logger.error("Error! reason:{}, Paramter:account_id:{}.",
                     e.getMessage(),hairdressing_id,e);
         }
-        ModelAndView mav = new ModelAndView("/course/index_course");
+        ModelAndView mav = new ModelAndView("/hairdressing/index_hairdressing");
         if(hairdressing != null){
             model.put("hairdressing", hairdressing);
         }

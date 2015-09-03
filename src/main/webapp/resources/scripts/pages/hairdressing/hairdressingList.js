@@ -3,11 +3,11 @@ var Hairdressing=function(){
 	//批量删除Account
 	var batchDelete = function(){
 		var urls=$("#setOptionUrl").val()+"batchDelete";
-		var courseIds = $("#accountId_delete").val();
+		var hairdressingIds = $("#accountId_delete").val();
 		$.ajax({
 			type: "POST",
 			url: urls,
-			data: {"courseIds":courseIds},
+			data: {"hairdressingIds":hairdressingIds},
 			dataType: "json",
 			success: function(result){
 				$.cookie.json = true;
@@ -23,11 +23,11 @@ var Hairdressing=function(){
 
     var deletePromotion = function(){
 //		alert("");
-        var course_id = $("#accountId_delete").val();
+        var hairdressingIds = $("#accountId_delete").val();
         $.ajax({
             type: "POST",
-            url: "/course/batchDelete",
-            data: {"courseIds":course_id},
+            url: "/hairdressing/batchDelete",
+            data: {"hairdressingIds":hairdressingIds},
             dataType: "json",
             success: function(result){
                 $.cookie.json = true;
@@ -47,48 +47,48 @@ var Hairdressing=function(){
 			//单选框，全选或者全部不选的控制
     		$("#selectAll").change(function(){
     			if($(this).attr("checked")){
-    				$("table#fromCourseTable tbody input[type='checkbox']").uniform().each(function(index, item){
+    				$("table#fromHairdressingTable tbody input[type='checkbox']").uniform().each(function(index, item){
     					$.uniform.update($(item).attr("checked", true));
     				});
     			}else{
-    				$("table#fromCourseTable tbody input[type='checkbox']").uniform().each(function(index, item){
+    				$("table#fromHairdressingTable tbody input[type='checkbox']").uniform().each(function(index, item){
     					$.uniform.update($(item).attr("checked", false));
     				});
     			}
     		});//全选结束
     		
-    		$("#createRoom").click(function(){
+    		$("#createHairdressing").click(function(){
     			var url =  $("#setOptionUrl").val() + "index";
     			window.location.href=url;  
     		});
     		
-    		$("#deleteCourseBatch").click(function(){
-    			var courseIds='';
-    			$("table#fromCourseTable tbody input[type='checkbox']").uniform().each(function(index, item){
+    		$("#deleteHairdressingBatch").click(function(){
+    			var hairdressingIds='';
+    			$("table#fromHairdressingTable tbody input[type='checkbox']").uniform().each(function(index, item){
     				if($(item).attr("checked")){
-                        courseIds+=$(item).val()+",";
+                        hairdressingIds+=$(item).val()+",";
     				}
 				});
-    			if(courseIds!=''){
-                    courseIds=courseIds.substring(0,courseIds.length-1);
-    				$("#accountId_delete").val(courseIds);
-    				confirm("删除课程","请确认是否删除这些课程?",batchDelete);
+    			if(hairdressingIds!=''){
+                    hairdressingIds=hairdressingIds.substring(0,hairdressingIds.length-1);
+    				$("#accountId_delete").val(hairdressingIds);
+    				confirm("删除美容类型","请确认是否删除这些美容类型?",batchDelete);
     			}else{
-    				alert("删除课程","请选择需要删除的课程");
+    				alert("删除美容类型","请选择需要删除的美容类型");
     			}
     		});
 
-            $("a[name=deleteCourse]").click(function(){
+            $("a[name=deleteHairdressing]").click(function(){
 
-                $("#accountId_delete").val($(this).attr("room_id"));
+                $("#accountId_delete").val($(this).attr("hairdressing_id"));
 
                 var name=$($(this).parent().parent().find("td")[1]).text();
                 name=name.replace(/(^\s*)|(\s*$)/g,'');
-                confirm("删除课程","确认删除这些课程  "+ name +"?",deletePromotion);
+                confirm("删除美容类型","确认删除这些美容类型  "+ name +"?",deletePromotion);
             });
 
-            $("a[name=editCourse]").click(function(){
-                var url = $("#setOptionUrl").val() + "index" + "?" + "course_id=" + $(this).attr("course_id");
+            $("a[name=editHairdressing]").click(function(){
+                var url = $("#setOptionUrl").val() + "index" + "?" + "hairdressing_id=" + $(this).attr("hairdressing_id");
                 window.location.href=url;
             })
 
