@@ -1,145 +1,388 @@
 package com.liuliume.portal.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Orders {
-    private String orderId;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-    private Long accountId;
+import com.liuliume.portal.common.Constants;
+import com.liuliume.portal.model.OrderStatusEnum;
+import com.liuliume.portal.model.OrderTypeEnum;
 
-    private String orderType;
+@Entity
+@Table(name = "orders")
+public class Orders implements Serializable {
 
-    private Integer orderTypeId;
+	private static final long serialVersionUID = 1L;
 
-    private Integer animalsId;
+	/**
+	 * 
+	 */
+	private Integer orderId;
 
-    private String province;
+	/**
+	 * 订单账户
+	 */
+	private Integer accountId;
 
-    private String city;
+	/**
+	 * 订单类型,1-寄样,2-训练,3-美容
+	 */
+	private Integer orderType;
 
-    private String area;
+	/**
+	 * 宠物id
+	 */
+	private Integer animalsId;
 
-    private String status;
+	private Integer provinceId;
 
-    private Date orderTime;
+	private Integer cityId;
 
-    private Date updateAt;
+	private Integer areaId;
 
-    private Date startDate;
+	private String address;
 
-    private Date endDate;
+	/**
+	 * 服务方式:0-上门服务,1-到店服务
+	 */
+	private Integer serviceType;
 
-    private Integer day;
+	/**
+	 * 服务开始时间:如9:00
+	 */
+	private Integer serviceBegin;
 
-    public String getOrderId() {
-        return orderId;
-    }
+	/**
+	 * 服务结束时间如11:00
+	 */
+	private Integer serviceEnd;
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
-    }
+	/**
+	 * 服务开始日期 yyyy-MM-dd
+	 */
+	private String startDate;
 
-    public Long getAccountId() {
-        return accountId;
-    }
+	/**
+	 * 服务结束时间 yyyy-MM-dd
+	 */
+	private String endDate;
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
+	/**
+	 * 付款状态:0-未付款,1-已付款
+	 */
+	private Integer paymentStatus;
 
-    public String getOrderType() {
-        return orderType;
-    }
+	/**
+	 * 订单状态
+	 */
+	private Integer status;
 
-    public void setOrderType(String orderType) {
-        this.orderType = orderType == null ? null : orderType.trim();
-    }
+	/**
+	 * 订单中房间类型
+	 */
+	private Integer roomId;
 
-    public Integer getOrderTypeId() {
-        return orderTypeId;
-    }
+	/**
+	 * 订单中课程编号
+	 */
+	private Integer courseId;
 
-    public void setOrderTypeId(Integer orderTypeId) {
-        this.orderTypeId = orderTypeId;
-    }
+	/**
+	 * 订单金额
+	 */
+	private Double cost;
 
-    public Integer getAnimalsId() {
-        return animalsId;
-    }
+	/**
+	 * 下单时间
+	 */
+	private Date createTime;
 
-    public void setAnimalsId(Integer animalsId) {
-        this.animalsId = animalsId;
-    }
+	/**
+	 * 最近更新时间
+	 */
+	private Date lastModified;
 
-    public String getProvince() {
-        return province;
-    }
+	private String animalName;
 
-    public void setProvince(String province) {
-        this.province = province == null ? null : province.trim();
-    }
+	private Account account;
 
-    public String getCity() {
-        return city;
-    }
+	private OrderTypeEnum orderTypeEnum;
 
-    public void setCity(String city) {
-        this.city = city == null ? null : city.trim();
-    }
+	private OrderStatusEnum statusEnum;
+	
+	private String serviceTypeDesc;
 
-    public String getArea() {
-        return area;
-    }
+	private Room room;
 
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
-    }
+	private Course course;
 
-    public String getStatus() {
-        return status;
-    }
+	private String serviceTime;
+	
+	private String paymentStatusDesc;
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_id")
+	public Integer getOrderId() {
+		return orderId;
+	}
 
-    public Date getOrderTime() {
-        return orderTime;
-    }
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
 
-    public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
-    }
+	@Column(name = "account_id")
+	public Integer getAccountId() {
+		return accountId;
+	}
 
-    public Date getUpdateAt() {
-        return updateAt;
-    }
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
+	@Column(name = "order_type")
+	public Integer getOrderType() {
+		return orderType;
+	}
 
-    public Date getStartDate() {
-        return startDate;
-    }
+	public void setOrderTypeId(Integer orderType) {
+		this.orderType = orderType;
+	}
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+	@Column(name = "animals_id")
+	public Integer getAnimalsId() {
+		return animalsId;
+	}
 
-    public Date getEndDate() {
-        return endDate;
-    }
+	public void setAnimalsId(Integer animalsId) {
+		this.animalsId = animalsId;
+	}
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	@Column(name = "province_id")
+	public Integer getProvinceId() {
+		return provinceId;
+	}
 
-    public Integer getDay() {
-        return day;
-    }
+	public void setProvinceId(Integer provinceId) {
+		this.provinceId = provinceId;
+	}
 
-    public void setDay(Integer day) {
-        this.day = day;
-    }
+	@Column(name = "city_id")
+	public Integer getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
+
+	@Column(name = "area_id")
+	public Integer getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
+	}
+
+	@Column(name = "address")
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Column(name = "service_type")
+	public Integer getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(Integer serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	@Column(name = "service_begin")
+	public Integer getServiceBegin() {
+		return serviceBegin;
+	}
+
+	public void setServiceBegin(Integer serviceBegin) {
+		this.serviceBegin = serviceBegin;
+	}
+
+	@Column(name = "service_end")
+	public Integer getServiceEnd() {
+		return serviceEnd;
+	}
+
+	public void setServiceEnd(Integer serviceEnd) {
+		this.serviceEnd = serviceEnd;
+	}
+
+	@Column(name = "start_date")
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	@Column(name = "end_date")
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	@Column(name = "status")
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	@Column(name = "payment_status")
+	public Integer getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(Integer paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	@Column(name = "room_id")
+	public Integer getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(Integer roomId) {
+		this.roomId = roomId;
+	}
+
+	@Column(name = "course_id")
+	public Integer getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
+
+	@Column(name = "cost")
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+
+	@Column(name = "create_time")
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	@Column(name = "last_modified")
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
+
+	@Transient
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	@Transient
+	public OrderTypeEnum getOrderTypeEnum() {
+		OrderTypeEnum typeEnum = OrderTypeEnum.parse(this.orderType);
+		return typeEnum;
+	}
+
+	@Transient
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	@Transient
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	@Transient
+	public String getAnimalName() {
+		return animalName;
+	}
+
+	public void setAnimalName(String animalName) {
+		this.animalName = animalName;
+	}
+
+	@Transient
+	public OrderStatusEnum getStatusEnum() {
+		return OrderStatusEnum.parse(status);
+	}
+
+	@Transient
+	public String getServiceTime() {
+		String date = "";
+		String start = startDate.trim();
+		String end = endDate.trim();
+		if (start.equals(end)) {
+			date = start;
+		} else {
+			date = start + "~" + end;
+		}
+		return date + " " + serviceBegin+":00" + "-" + serviceEnd+":00";
+	}
+	
+	@Transient
+	public String getServiceTypeDesc() {
+		if(serviceType==Constants.SERVICE_DOOR)
+			return "上门服务";
+		if(serviceType==Constants.SERVICE_SHOP)
+			return "到店服务";
+		return "";
+	}
+	
+	@Transient
+	public String getPaymentStatusDesc() {
+		if(paymentStatus == Constants.PAYMENT_NO)
+			return "未付款";
+		return "已付款";
+	}
+
 }

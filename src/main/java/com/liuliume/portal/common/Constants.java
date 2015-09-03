@@ -7,8 +7,16 @@ public class Constants {
 	
 	public static final int SIMPLE_DELETE=99;
 	
-	public static final int NATION_LEVEL = 0;//国家级别
-	public static final int PROVINCE_LEVEL=1;
-	public static final int CITY_LEVEL=2;
-	public static final int AREA_LEVEL=3;
+	//地址级别
+	public static final int LEVEL_NATION = 0;//国家级别
+	public static final int LEVEL_PROVINCE=1;
+	public static final int LEVEL_CITY=2;
+	public static final int LEVEL_AREA=3;
+	
+	//服务类型Service Type
+	public static final int SERVICE_DOOR=0;//上门服务
+	public static final int SERVICE_SHOP=1;//到店服务
+	
+	public static final int PAYMENT_NO = 0;
+	public static final int PAYMENT_YES=1;
 }

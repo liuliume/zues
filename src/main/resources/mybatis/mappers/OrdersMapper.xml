@@ -1,199 +1,116 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuliume.portal.dao.OrdersMapper" >
-  <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.Orders" >
-    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <result column="account_id" property="accountId" jdbcType="BIGINT" />
-    <result column="order_type" property="orderType" jdbcType="CHAR" />
-    <result column="order_type_id" property="orderTypeId" jdbcType="INTEGER" />
-    <result column="animals_id" property="animalsId" jdbcType="INTEGER" />
-    <result column="province" property="province" jdbcType="VARCHAR" />
-    <result column="city" property="city" jdbcType="VARCHAR" />
-    <result column="area" property="area" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
-    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
-    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
-    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
-    <result column="day" property="day" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    order_id, account_id, order_type, order_type_id, animals_id, province, city, area, 
-    status, order_time, update_at, start_date, end_date, day
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from orders
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from orders
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" >
-    insert into orders (order_id, account_id, order_type, 
-      order_type_id, animals_id, province, 
-      city, area, status, order_time, 
-      update_at, start_date, end_date, 
-      day)
-    values (#{orderId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, #{orderType,jdbcType=CHAR}, 
-      #{orderTypeId,jdbcType=INTEGER}, #{animalsId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{updateAt,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
-      #{day,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.liuliume.portal.entity.Orders" >
-    insert into orders
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        order_id,
-      </if>
-      <if test="accountId != null" >
-        account_id,
-      </if>
-      <if test="orderType != null" >
-        order_type,
-      </if>
-      <if test="orderTypeId != null" >
-        order_type_id,
-      </if>
-      <if test="animalsId != null" >
-        animals_id,
-      </if>
-      <if test="province != null" >
-        province,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="area != null" >
-        area,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="orderTime != null" >
-        order_time,
-      </if>
-      <if test="updateAt != null" >
-        update_at,
-      </if>
-      <if test="startDate != null" >
-        start_date,
-      </if>
-      <if test="endDate != null" >
-        end_date,
-      </if>
-      <if test="day != null" >
-        day,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        #{orderId,jdbcType=VARCHAR},
-      </if>
-      <if test="accountId != null" >
-        #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="orderType != null" >
-        #{orderType,jdbcType=CHAR},
-      </if>
-      <if test="orderTypeId != null" >
-        #{orderTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="animalsId != null" >
-        #{animalsId,jdbcType=INTEGER},
-      </if>
-      <if test="province != null" >
-        #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="area != null" >
-        #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="orderTime != null" >
-        #{orderTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="startDate != null" >
-        #{startDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endDate != null" >
-        #{endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="day != null" >
-        #{day,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.liuliume.portal.entity.Orders" >
-    update orders
-    <set >
-      <if test="accountId != null" >
-        account_id = #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="orderType != null" >
-        order_type = #{orderType,jdbcType=CHAR},
-      </if>
-      <if test="orderTypeId != null" >
-        order_type_id = #{orderTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="animalsId != null" >
-        animals_id = #{animalsId,jdbcType=INTEGER},
-      </if>
-      <if test="province != null" >
-        province = #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null" >
-        city = #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="area != null" >
-        area = #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="orderTime != null" >
-        order_time = #{orderTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        update_at = #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="startDate != null" >
-        start_date = #{startDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endDate != null" >
-        end_date = #{endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="day != null" >
-        day = #{day,jdbcType=INTEGER},
-      </if>
-    </set>
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.liuliume.portal.entity.Orders" >
-    update orders
-    set account_id = #{accountId,jdbcType=BIGINT},
-      order_type = #{orderType,jdbcType=CHAR},
-      order_type_id = #{orderTypeId,jdbcType=INTEGER},
-      animals_id = #{animalsId,jdbcType=INTEGER},
-      province = #{province,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
-      area = #{area,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      order_time = #{orderTime,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      start_date = #{startDate,jdbcType=TIMESTAMP},
-      end_date = #{endDate,jdbcType=TIMESTAMP},
-      day = #{day,jdbcType=INTEGER}
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </update>
+<mapper namespace="com.liuliume.portal.mybatis.mapper.OrdersMapper">
+	<resultMap id="orders" type="com.liuliume.portal.entity.Orders">
+		<id column="order_id" property="orderId" jdbcType="INTEGER" />
+		<result column="account_id" property="accountId" jdbcType="INTEGER" />
+		<result column="order_type" property="orderType" jdbcType="CHAR" />
+		<result column="animals_id" property="animalsId" jdbcType="INTEGER" />
+		<result column="province_id" property="provinceId" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="area_id" property="areaId" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="service_type" property="serviceType" jdbcType="INTEGER" />
+		<result column="service_begin" property="serviceBegin"
+			jdbcType="INTEGER" />
+		<result column="service_end" property="serviceEnd" jdbcType="INTEGER" />
+		<result column="start_date" property="startDate" jdbcType="VARCHAR" />
+		<result column="end_date" property="endDate" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="payment_status" property="paymentStatus"
+			jdbcType="INTEGER" />
+		<result column="room_id" property="roomId" jdbcType="INTEGER" />
+		<result column="course_id" property="courseId" jdbcType="INTEGER" />
+		<result column="cost" property="cost" jdbcType="DOUBLE" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modified" property="lastModified"
+			jdbcType="TIMESTAMP" />
+		<association property="account" resultMap="account"></association>
+		<association property="room" resultMap="room"></association>
+		<association property="course" resultMap="course"></association>
+	</resultMap>
+
+	<resultMap type="com.liuliume.portal.entity.Account" id="account">
+		<id column="account_id" property="account_id" />
+		<result column="mobile" property="mobile" />
+		<result column="uniq_name" property="uniqname" />
+	</resultMap>
+
+	<resultMap id="room" type="com.liuliume.portal.entity.Room">
+		<id column="room_id" property="id" jdbcType="INTEGER" />
+		<result column="room_name" property="roomName" jdbcType="VARCHAR" />
+		<result column="cost" property="cost" jdbcType="DOUBLE" />
+		<result column="weixin_discount" property="weixinDiscount"
+			jdbcType="DOUBLE" />
+		<result column="discount_30" property="discount30" jdbcType="DOUBLE" />
+		<result column="discount_90" property="discount90" jdbcType="DOUBLE" />
+		<result column="discount_180" property="discount180" jdbcType="DOUBLE" />
+		<result column="room_num" property="roomNum" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="course" type="com.liuliume.portal.entity.Course">
+		<id column="course_id" property="id" jdbcType="INTEGER" />
+		<result column="course_name" property="courseName" jdbcType="VARCHAR" />
+		<result column="course_describe" property="courseDescribe"
+			jdbcType="VARCHAR" />
+		<result column="expense" property="expense" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<sql id="list-where">
+		<where>
+			<if test="param.cond != null">
+				<if test="param.cond.orders != null">
+					<if test="param.cond.orders.orderId !=null and param.cond.orders.orderId > 0">
+						and o.order_id = #{param.cond.orders.orderId}
+					</if>
+					<if test="param.cond.orders.createTime != null">
+						and DATEDIFF(o.create_time , #{param.cond.orders.createTime})=0
+					</if>
+					<if test="param.cond.orders.account != null">
+						<if test="param.cond.orders.account.mobile != null and param.cond.orders.account.mobile != ''">
+							and a.mobile = #{param.cond.orders.account.mobile}
+						</if>
+						<if test="param.cond.orders.account.uniqname != null and param.cond.orders.account.uniqname != ''">
+							and a.uniq_name like CONCAT(#{param.cond.orders.account.uniqname},'%')
+						</if>
+					</if>
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="int">
+		SELECT COUNT(1) FROM orders o
+		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		<include refid="list-where"></include>
+	</select>
+	
+	<select id="list" resultMap="orders">
+		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS room_id,r.`room_name`,c.`id` AS course_id,c.`course_name`,c.`course_describe`,c.`expense` 
+		FROM orders o
+		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		LEFT JOIN room r ON o.`room_id`=r.`id`
+		LEFT JOIN course c ON o.`course_id` = c.`id`
+		<include refid="list-where"></include>
+		limit #{param.start},#{param.limit}
+	</select>
+	
+	<select id="findOrdersByOrderId" resultMap="orders">
+		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS room_id,r.`room_name`,c.`id` AS course_id,c.`course_name`,c.`course_describe`,c.`expense` 
+		FROM orders o
+		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		LEFT JOIN room r ON o.`room_id`=r.`id`
+		LEFT JOIN course c ON o.`course_id` = c.`id`
+		WHERE o.order_id=#{orderId}
+	</select>
+
+	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
+		> insert into orders (order_id, account_id, order_type, order_type_id, animals_id, 
+		province, city, area, status, order_time, update_at, start_date, end_date, 
+		day) values (#{orderId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, #{orderType,jdbcType=CHAR}, 
+		#{orderTypeId,jdbcType=INTEGER}, #{animalsId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+		#{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+		#{orderTime,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, 
+		#{endDate,jdbcType=TIMESTAMP}, #{day,jdbcType=INTEGER}) </insert> -->
+
 </mapper>
