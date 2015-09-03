@@ -11,6 +11,7 @@ import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.AddressService;
 import com.liuliume.portal.service.RoomService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,5 +90,10 @@ public class RoomServiceImpl implements RoomService {
             roomDao.delete(room);
         }
     }
+
+	@Override
+	public List<Room> listAllRooms() throws Exception {
+		return roomDao.listAllRooms();
+	}
 
 }

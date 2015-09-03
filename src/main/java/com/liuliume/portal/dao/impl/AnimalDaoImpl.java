@@ -87,4 +87,9 @@ public class AnimalDaoImpl implements AnimalDao{
 	public List<AnimalsType> listAllTypes() {
 		return typeMapper.listAllTypes();
 	}
+
+	@Override
+	public List<Animals> listAllAnimals() {
+		return animalsMapper.listAllAnimals();
+	}
 }

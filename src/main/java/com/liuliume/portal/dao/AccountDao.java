@@ -18,4 +18,6 @@ public interface AccountDao {
 	public void createAccount(Account account);
 	
 	public void updateAccount(Account account);
+	
+	public List<Account> listAllAccount();
 }

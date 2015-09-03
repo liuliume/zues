@@ -150,4 +150,9 @@ public class AnimalServiceImpl implements AnimalService {
 		return animalDao.listAllTypes();
 	}
 
+	@Override
+	public List<Animals> listAllAnimals() {
+		return animalDao.listAllAnimals();
+	}
+
 }

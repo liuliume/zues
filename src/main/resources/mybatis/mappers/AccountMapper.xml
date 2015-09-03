@@ -9,7 +9,8 @@
 		<if test="param.cond != null">
 			<if test="param.cond.account != null">
 				<if test="param.cond.account.uniqname != null">
-					and uniq_name like CONCAT(#{param.cond.account.uniqname},'%')
+					and uniq_name like
+					CONCAT(#{param.cond.account.uniqname},'%')
 				</if>
 				<!-- add query cond here -->
 			</if>
@@ -42,5 +43,12 @@
 		<if test="account_id != null">
 			and account_id=#{account_id}
 		</if>
+	</select>
+
+	<select id="listAllAccount" resultType="com.liuliume.portal.entity.Account">
+		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
+		as uniqname,gender,province_id,city_id,area_id,address,flag
+		from
+		account where flag <![CDATA[<>]]>99
 	</select>
 </mapper>

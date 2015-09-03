@@ -24,4 +24,6 @@ public interface AccountService {
 	public Account findAccountById(Integer account_id) throws Exception;
 	
 	public void createOrUpdate(Account account) throws Exception;
+	
+	public List<Account> listAllAccount();
 }

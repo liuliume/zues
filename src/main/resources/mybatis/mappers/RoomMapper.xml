@@ -39,6 +39,10 @@
         </if>
         limit #{param.start},#{param.limit}
     </select>
+    
+    <select id="listAllRooms" resultMap="BaseResultMap">
+    	select * from room
+    </select>
 
 
     <sql id="Base_Column_List" >

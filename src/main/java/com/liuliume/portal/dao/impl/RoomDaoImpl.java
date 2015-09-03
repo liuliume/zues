@@ -4,6 +4,7 @@ import com.liuliume.portal.dao.RoomDao;
 import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.mybatis.mapper.RoomMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -46,6 +47,11 @@ public class RoomDaoImpl implements RoomDao{
     public void delete(Room room) {
         roomMapper.deleteEntityPhysically(room);
     }
+
+	@Override
+	public List<Room> listAllRooms() throws Exception {
+		return roomMapper.listAllRooms();
+	}
 
 
 }

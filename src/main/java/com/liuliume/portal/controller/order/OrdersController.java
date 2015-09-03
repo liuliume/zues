@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.entity.Account;
+import com.liuliume.portal.entity.Animals;
 import com.liuliume.portal.entity.Orders;
+import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.model.OrderStatusEnum;
 import com.liuliume.portal.model.OrderTypeEnum;
+import com.liuliume.portal.service.AccountService;
+import com.liuliume.portal.service.AnimalService;
 import com.liuliume.portal.service.OrdersService;
+import com.liuliume.portal.service.RoomService;
 
 @Controller
 @RequestMapping(value = "orders", method = RequestMethod.GET)
@@ -29,6 +35,15 @@ public class OrdersController {
 
 	@Autowired
 	private OrdersService ordersService;
+
+	@Autowired
+	private AnimalService animalService;
+
+	@Autowired
+	private RoomService roomService;
+
+	@Autowired
+	private AccountService accountService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(ModelMap map, @SeedParam Seed<Orders> seed) {
@@ -45,30 +60,48 @@ public class OrdersController {
 		return "orders/list";
 	}
 
-	@RequestMapping(value="index",method = RequestMethod.GET)
+	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(
 			@RequestParam(value = "ordersId", required = false) Integer ordersId,
 			@RequestParam(value = "orderType", required = true) Integer orderType,
 			ModelMap map) {
 		logger.info("call OrdersController.index");
-		
+
 		Orders orders = null;
-		
+		List<Animals> allAnimals = null;
+		List<Room> allRooms = null;
+		List<Account> allAccounts = null;
+
 		try {
 			orders = ordersService.findOrdersByOrderId(ordersId);
+			allAnimals = animalService.listAllAnimals();
+			allRooms = roomService.listAllRooms();
+			allAccounts = accountService.listAllAccount();
 		} catch (Exception e) {
-			logger.error("Error in OrdersController.index! reason:{}, Paramter:ordersId:{},orderType:{}.",
-					e.getMessage(),ordersId,orderType,e);
+			logger.error(
+					"Error in OrdersController.index! reason:{}, Paramter:ordersId:{},orderType:{}.",
+					e.getMessage(), ordersId, orderType, e);
 		}
-		
-		if(orders!=null)
+
+		// Add view models
+		if (orders != null) {
 			map.put("orders", orders);
-		
-		if(orderType==1){//寄养类型
+		}
+		if (allAnimals != null) {
+			map.put("allAnimals", allAnimals);
+		}
+		if (allRooms != null) {
+			map.put("allRooms", allRooms);
+		}
+		if(allAccounts!=null){
+			map.put("allAccounts", allAccounts);
+		}
+
+		if (orderType == 1) {// 寄养类型
 			return "orders/fosterIndex";
-		}else if(orderType==2){
+		} else if (orderType == 2) {
 			return "orders/trainingIndex";
-		}else if(orderType==3){
+		} else if (orderType == 3) {
 			return "orders/beautyIndex";
 		}
 		return null;
@@ -82,4 +115,8 @@ public class OrdersController {
 		}
 		return list;
 	}
+
+	// public List<Animals> genAllAnimals(){
+	// List<Animals> list = new ArrayList<Animals>();
+	// }
 }
