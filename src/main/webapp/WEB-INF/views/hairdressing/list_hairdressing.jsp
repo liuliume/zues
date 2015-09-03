@@ -28,7 +28,7 @@
 						<div class="col-md-3">
 							<input type="text"
 								class="form-control input-medium input-inline" name="name"
-								placeholder="课程名称" value="${seed.filter['name']}" />
+								placeholder="美容类型名称" value="${seed.filter['name']}" />
 						</div>
 						<div class="pull-right">
 							<a href="javascript:Hairdressing.search();" class="btn dark">查询
@@ -44,9 +44,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="blank-form-actions">
-				<a class="btn green" href="#" id="createRoom"><i
+				<a class="btn green" href="#" id="createHairdressing"><i
 					class="fa fa-plus"></i>新建</a> <a class="btn blue" href="#"
-					id="deleteCourseBatch"><i class="fa fa-times"></i>删除</a>
+					id="deleteHairdressingBatch"><i class="fa fa-times"></i>删除</a>
 			</div>
 		</div>
 	</div>
@@ -63,7 +63,7 @@
 					<liuliume:pagination position="above"></liuliume:pagination>
 					<table
 						class="table table-bordered table-striped table-condensed flip-content"
-						id="fromCourseTable">
+						id="fromHairdressingTable">
 						<thead class="flip-content">
 							<tr>
 								<th style="width: 42px;">
@@ -91,10 +91,10 @@
                                     <td>${item.expense}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
-										name="editCourse" course_id="${item.id}"><i
+										name="editHairdressing" hairdressing_id="${item.id}"><i
 											class="fa fa-edit"></i> 修改</a> <a
 										class="btn default btn-xs purple-stripe" href="#"
-										name="deleteCourse" room_id="${item.id}"><i
+										name="deleteHairdressing" hairdressing_id="${item.id}"><i
 											class="fa fa-times"></i> 删除</a></td>
 								</tr>
 							</c:forEach>
