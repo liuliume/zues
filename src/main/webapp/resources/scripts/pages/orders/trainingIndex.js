@@ -1,4 +1,4 @@
-var FosterIndex = function(){
+var trainIndex = function(){
 	
 	var createOrUpdate = function(){
 		console.log("111");
@@ -32,9 +32,9 @@ var FosterIndex = function(){
 			return;
 		}
 		
-		var roomId = $("#roomId").val();
-		if(roomId == null || roomId <=0){
-			$("#errorInfoRoom").css("display","block");
+		var courseId = $("#courseId").val();
+		if(courseId == null || courseId <=0){
+			$("#errorInfoCourse").css("display","block");
 			return;
 		}
 		
@@ -79,11 +79,11 @@ var FosterIndex = function(){
 			$("#btnConfirm").click(function(){
 				createOrUpdate();
 				return false;
-			})
+			});
 		}
 	}
 }();
 
 $(function(){
-	FosterIndex.init();
+	trainIndex.init();
 })

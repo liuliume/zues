@@ -65,7 +65,7 @@ CREATE TABLE `address` (
   `parent_id` int(11) DEFAULT NULL,
   `level` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `animals` (
   `animals_name` varchar(128) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `animals_type` (
   `type_name` varchar(32) DEFAULT NULL,
   `expense_coefficient` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `course` (
   `course_describe` varchar(256) DEFAULT NULL,
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `hairdressing` (
   `hairdressing_describe` varchar(256) DEFAULT NULL,
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `hairdressing_time` (
   `end_time` varchar(32) DEFAULT NULL,
   `service_persion_num` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,20 +221,21 @@ CREATE TABLE `orders` (
   `address` VARCHAR(255) DEFAULT NULL COMMENT '详细地址',
   `service_type` TINYINT(2) DEFAULT NULL COMMENT '服务方式:0-上门服务,1-到店服务',
   `service_begin` TINYINT(2) DEFAULT NULL COMMENT '服务开始时间',
-  `service_end` TINYINT DEFAULT NULL COMMENT '服务结束时间',
+  `service_end` TINYINT(4) DEFAULT NULL COMMENT '服务结束时间',
   `start_date` VARCHAR(15) NOT NULL COMMENT '开始时间 yyyy-MM-dd',
   `end_date` VARCHAR(15) NOT NULL COMMENT '结束时间 yyyy-MM-dd',
   `room_id` INT(11) DEFAULT NULL COMMENT '房间类型',
   `course_id` INT(11) DEFAULT NULL COMMENT '课程类型',
   `cost` DECIMAL(11,4) DEFAULT NULL COMMENT '订单价格',
-   payment_status TINYINT(2) NOT NULL DEFAULT 0 COMMENT '付款状态:0-未付款,1-已付款',
+  `hairdress_id` INT(11) DEFAULT NULL COMMENT '美容服务项目',
+  `payment_status` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '付款状态:0-未付款,1-已付款',
   `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '订单状态',
   `create_time` DATETIME NOT NULL COMMENT '下单时间',
   `last_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`order_id`),
   KEY `idx_account_id` (`account_id`),
   KEY `idx_create_time` (`create_time`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=INNODB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='订单表'
 
 
 

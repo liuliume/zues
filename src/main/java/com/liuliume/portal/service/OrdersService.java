@@ -10,4 +10,7 @@ public interface OrdersService {
 	public List<Orders> list(Seed<Orders> seed) throws Exception;
 	
 	public Orders findOrdersByOrderId(Integer orderId)throws Exception;
+	
+	public void createOrUpdate(Orders orders) throws Exception;
+	
 }

@@ -25,4 +25,6 @@ public interface CourseMapper extends MyBatisBaseMapper<Course> {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+    
+    public List<Course> listAllCourse();
 }

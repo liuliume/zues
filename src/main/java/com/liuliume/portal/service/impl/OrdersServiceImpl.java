@@ -8,13 +8,16 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.liuliume.common.pagination.Seed;
+import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.common.MBox;
 import com.liuliume.portal.dao.OrdersDao;
 import com.liuliume.portal.dao.cond.OrdersCond;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Orders;
+import com.liuliume.portal.model.OrderStatusEnum;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.OrdersService;
 
@@ -79,4 +82,20 @@ public class OrdersServiceImpl implements OrdersService {
 		return orders;
 	}
 
+	@Override
+	@Transactional
+	public void createOrUpdate(Orders orders) throws Exception {
+		if(orders == null)
+			throw new IllegalArgumentException("order为空");
+		orders.setCreateTime(new Date());
+		orders.setStatus(OrderStatusEnum.ORDERED.getId());
+		orders.setPaymentStatus(Constants.PAYMENT_NO);
+		if(orders.getOrderId()==null || orders.getOrderId()<=0){
+			ordersDao.createOrder(orders);
+		}else{
+			ordersDao.updateOrder(orders);
+		}
+	}
+
+	
 }

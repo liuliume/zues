@@ -49,5 +49,10 @@ public class CourseDaoImpl implements CourseDao{
         courseMapper.deleteEntityPhysically(course);
     }
 
+	@Override
+	public List<Course> listAllCourse() {
+		return courseMapper.listAllCourse();
+	}
+
 
 }

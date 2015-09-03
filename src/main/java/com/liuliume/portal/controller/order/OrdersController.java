@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Animals;
+import com.liuliume.portal.entity.Course;
+import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.entity.Orders;
 import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.model.OrderStatusEnum;
 import com.liuliume.portal.model.OrderTypeEnum;
 import com.liuliume.portal.service.AccountService;
 import com.liuliume.portal.service.AnimalService;
+import com.liuliume.portal.service.CourseService;
+import com.liuliume.portal.service.HairdressingService;
 import com.liuliume.portal.service.OrdersService;
 import com.liuliume.portal.service.RoomService;
 
@@ -44,6 +50,12 @@ public class OrdersController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private CourseService courseService;
+	
+	@Autowired
+	private HairdressingService hairdressingService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(ModelMap map, @SeedParam Seed<Orders> seed) {
@@ -71,12 +83,16 @@ public class OrdersController {
 		List<Animals> allAnimals = null;
 		List<Room> allRooms = null;
 		List<Account> allAccounts = null;
+		List<Course> allCourses = null;
+		List<Hairdressing> allHairdressings = null;
 
 		try {
 			orders = ordersService.findOrdersByOrderId(ordersId);
 			allAnimals = animalService.listAllAnimals();
 			allRooms = roomService.listAllRooms();
 			allAccounts = accountService.listAllAccount();
+			allCourses = courseService.listAllCourse();
+			allHairdressings = hairdressingService.listAllHairdressings();
 		} catch (Exception e) {
 			logger.error(
 					"Error in OrdersController.index! reason:{}, Paramter:ordersId:{},orderType:{}.",
@@ -85,6 +101,7 @@ public class OrdersController {
 
 		// Add view models
 		if (orders != null) {
+			orders.setOrderType(orderType);
 			map.put("orders", orders);
 		}
 		if (allAnimals != null) {
@@ -96,6 +113,14 @@ public class OrdersController {
 		if(allAccounts!=null){
 			map.put("allAccounts", allAccounts);
 		}
+		if(allCourses != null){
+			map.put("allCourse", allCourses);
+		}
+		if(allHairdressings!=null){
+			map.put("allHairdressings", allHairdressings);
+		}
+		
+		map.put("orderType", orderType);
 
 		if (orderType == 1) {// 寄养类型
 			return "orders/fosterIndex";
@@ -105,6 +130,26 @@ public class OrdersController {
 			return "orders/beautyIndex";
 		}
 		return null;
+	}
+	
+	@RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
+	@ResponseBody
+	public JData createOrUpdate(Orders orders){
+		logger.info("call the createOrUpdate Orders");
+		JData jData = new JData();
+		try {
+			ordersService.createOrUpdate(orders);
+			jData.setCode(200);
+			jData.setSuccess(true);
+			jData.setDetail("操作成功");
+		} catch (Exception e) {
+			logger.error("create Or Update  Error." + e.getMessage()
+					+ " orders[" + orders + "]", e);
+			jData.setCode(500);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
+		return jData;
 	}
 
 	@ModelAttribute("orderTypes")
@@ -116,7 +161,4 @@ public class OrdersController {
 		return list;
 	}
 
-	// public List<Animals> genAllAnimals(){
-	// List<Animals> list = new ArrayList<Animals>();
-	// }
 }

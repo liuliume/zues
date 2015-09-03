@@ -38,6 +38,11 @@
         </if>
         limit #{param.start},#{param.limit}
     </select>
+    
+    <select id="listAllHairdressings" resultMap="BaseResultMap">
+    	select *
+        from hairdressing 
+    </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

@@ -35,6 +35,11 @@
         </if>
         limit #{param.start},#{param.limit}
     </select>
+    
+    <select id="listAllCourse" resultMap="BaseResultMap">
+    	 select *
+        from course
+    </select>
 
   <sql id="Base_Column_List" >
     id, course_name, course_describe, expense

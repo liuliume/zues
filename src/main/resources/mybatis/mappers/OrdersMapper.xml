@@ -25,9 +25,11 @@
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="last_modified" property="lastModified"
 			jdbcType="TIMESTAMP" />
+		<result column="hairdress_id" property="hairdressId" />
 		<association property="account" resultMap="account"></association>
 		<association property="room" resultMap="room"></association>
 		<association property="course" resultMap="course"></association>
+		<association property="hairdressing" resultMap="hairdressing"></association>
 	</resultMap>
 
 	<resultMap type="com.liuliume.portal.entity.Account" id="account">
@@ -56,22 +58,36 @@
 		<result column="expense" property="expense" jdbcType="DOUBLE" />
 	</resultMap>
 
+	<resultMap id="hairdressing" type="com.liuliume.portal.entity.Hairdressing">
+		<id column="hairdressing_id" property="id" jdbcType="INTEGER" />
+		<result column="hairdressing_name" property="hairdressingName"
+			jdbcType="VARCHAR" />
+		<result column="hairdressing_describe" property="hairdressingDescribe"
+			jdbcType="VARCHAR" />
+		<result column="expense" property="expense" jdbcType="DOUBLE" />
+	</resultMap>
+
 	<sql id="list-where">
 		<where>
 			<if test="param.cond != null">
 				<if test="param.cond.orders != null">
-					<if test="param.cond.orders.orderId !=null and param.cond.orders.orderId > 0">
+					<if
+						test="param.cond.orders.orderId !=null and param.cond.orders.orderId > 0">
 						and o.order_id = #{param.cond.orders.orderId}
 					</if>
 					<if test="param.cond.orders.createTime != null">
-						and DATEDIFF(o.create_time , #{param.cond.orders.createTime})=0
+						and DATEDIFF(o.create_time ,
+						#{param.cond.orders.createTime})=0
 					</if>
 					<if test="param.cond.orders.account != null">
-						<if test="param.cond.orders.account.mobile != null and param.cond.orders.account.mobile != ''">
+						<if
+							test="param.cond.orders.account.mobile != null and param.cond.orders.account.mobile != ''">
 							and a.mobile = #{param.cond.orders.account.mobile}
 						</if>
-						<if test="param.cond.orders.account.uniqname != null and param.cond.orders.account.uniqname != ''">
-							and a.uniq_name like CONCAT(#{param.cond.orders.account.uniqname},'%')
+						<if
+							test="param.cond.orders.account.uniqname != null and param.cond.orders.account.uniqname != ''">
+							and a.uniq_name like
+							CONCAT(#{param.cond.orders.account.uniqname},'%')
 						</if>
 					</if>
 				</if>
@@ -81,26 +97,42 @@
 
 	<select id="count" resultType="int">
 		SELECT COUNT(1) FROM orders o
-		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		LEFT JOIN account a ON o.`account_id` =
+		a.`account_id` AND a.`flag` <![CDATA[<>]]>
+		99
 		<include refid="list-where"></include>
 	</select>
-	
+
 	<select id="list" resultMap="orders">
-		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS room_id,r.`room_name`,c.`id` AS course_id,c.`course_name`,c.`course_describe`,c.`expense` 
+		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS
+		room_id,r.`room_name`,c.`id` AS
+		course_id,c.`course_name`,c.`course_describe`,c.`expense`,
+		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`
 		FROM orders o
-		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
+		a.`flag` <![CDATA[<>]]>
+		99
 		LEFT JOIN room r ON o.`room_id`=r.`id`
-		LEFT JOIN course c ON o.`course_id` = c.`id`
+		LEFT JOIN course c ON
+		o.`course_id` = c.`id`
+		LEFT JOIN hairdressing h on o.`hairdress_id` = h.`id`
 		<include refid="list-where"></include>
 		limit #{param.start},#{param.limit}
 	</select>
-	
+
 	<select id="findOrdersByOrderId" resultMap="orders">
-		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS room_id,r.`room_name`,c.`id` AS course_id,c.`course_name`,c.`course_describe`,c.`expense` 
+		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS
+		room_id,r.`room_name`,c.`id` AS
+		course_id,c.`course_name`,c.`course_describe`,c.`expense`,
+		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`
 		FROM orders o
-		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
+		a.`flag` <![CDATA[<>]]>
+		99
 		LEFT JOIN room r ON o.`room_id`=r.`id`
-		LEFT JOIN course c ON o.`course_id` = c.`id`
+		LEFT JOIN course c ON
+		o.`course_id` = c.`id`
+		LEFT JOIN hairdressing h on o.`hairdress_id` = h.`id`
 		WHERE o.order_id=#{orderId}
 	</select>
 

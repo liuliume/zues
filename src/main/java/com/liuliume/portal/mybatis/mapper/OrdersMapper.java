@@ -5,9 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.liuliume.portal.entity.Orders;
+import com.liuliume.portal.mybatis.MyBatisBaseMapper;
 import com.liuliume.portal.mybatis.Parameter;
 
-public interface OrdersMapper {
+public interface OrdersMapper extends MyBatisBaseMapper<Orders>{
 	
 	public int count(@Param("param")Parameter parameter);
 	

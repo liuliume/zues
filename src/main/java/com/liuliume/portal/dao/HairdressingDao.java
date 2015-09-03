@@ -21,4 +21,5 @@ public interface HairdressingDao {
 
     public void delete(Hairdressing hairdressing);
 
+    public List<Hairdressing> listAllHairdressings();
 }

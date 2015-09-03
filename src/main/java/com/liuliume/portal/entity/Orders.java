@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.model.OrderStatusEnum;
 import com.liuliume.portal.model.OrderTypeEnum;
@@ -116,7 +118,7 @@ public class Orders implements Serializable {
 	private OrderTypeEnum orderTypeEnum;
 
 	private OrderStatusEnum statusEnum;
-	
+
 	private String serviceTypeDesc;
 
 	private Room room;
@@ -124,8 +126,12 @@ public class Orders implements Serializable {
 	private Course course;
 
 	private String serviceTime;
-	
+
 	private String paymentStatusDesc;
+	
+	private Integer hairdressId;
+	
+	private Hairdressing hairdressing;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -152,7 +158,7 @@ public class Orders implements Serializable {
 		return orderType;
 	}
 
-	public void setOrderTypeId(Integer orderType) {
+	public void setOrderType(Integer orderType) {
 		this.orderType = orderType;
 	}
 
@@ -366,23 +372,50 @@ public class Orders implements Serializable {
 		} else {
 			date = start + "~" + end;
 		}
-		return date + " " + serviceBegin+":00" + "-" + serviceEnd+":00";
+		String time = "";
+		if(serviceBegin!=null){
+			time+=serviceBegin+":00 ";
+		}
+		if(serviceEnd!=null){
+			time+="-" +serviceEnd+":00 ";
+		}
+		return date + " " +time;
 	}
-	
+
 	@Transient
 	public String getServiceTypeDesc() {
-		if(serviceType==Constants.SERVICE_DOOR)
-			return "上门服务";
-		if(serviceType==Constants.SERVICE_SHOP)
-			return "到店服务";
+		if (serviceType != null) {
+			if (serviceType == Constants.SERVICE_DOOR)
+				return "上门服务";
+			if (serviceType == Constants.SERVICE_SHOP)
+				return "到店服务";
+		}
 		return "";
 	}
-	
+
 	@Transient
 	public String getPaymentStatusDesc() {
-		if(paymentStatus == Constants.PAYMENT_NO)
+		if (paymentStatus == Constants.PAYMENT_NO)
 			return "未付款";
 		return "已付款";
+	}
+	
+	@Column(name="hairdress_id")
+	public Integer getHairdressId() {
+		return hairdressId;
+	}
+
+	public void setHairdressId(Integer hairdressId) {
+		this.hairdressId = hairdressId;
+	}
+
+	@Transient
+	public Hairdressing getHairdressing() {
+		return hairdressing;
+	}
+
+	public void setHairdressing(Hairdressing hairdressing) {
+		this.hairdressing = hairdressing;
 	}
 
 }

@@ -12,4 +12,8 @@ public interface OrdersDao {
 	public List<Orders> list(Parameter parameter);
 	
 	public Orders findOrdersByOrderId(Integer orderId) throws Exception;
+	
+	public void createOrder(Orders orders);
+	
+	public void updateOrder(Orders orders);
 }

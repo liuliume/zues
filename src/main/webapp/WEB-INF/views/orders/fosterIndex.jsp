@@ -46,7 +46,7 @@
 										<div class="col-md-10">
 											<select
 												class="table-group-action-input form-control input-medium select2me"
-												name="animalsId">
+												name="animalsId" id="animalsId">
 												<c:forEach items="${allAnimals }" var="item">
 													<option value="${item.id}"
 														<c:choose>
@@ -59,7 +59,7 @@
 														</c:choose>>
 														${item.animalsName }</option>
 												</c:forEach>
-											</select> <span class="help-block display-hide" id="errorInfoName">请选择宠物类型!</span>
+											</select> <span class="help-block display-hide" id="errorInfoAnimal">请选择宠物类型!</span>
 
 										</div>
 									</div>
@@ -94,7 +94,7 @@
 										<div class="col-md-10">
 											<select
 												class="table-group-action-input form-control input-medium select2me"
-												name="roomId">
+												name="roomId" id="roomId">
 												<c:forEach items="${allRooms }" var="item">
 													<option value="${item.id}"
 														<c:choose>
@@ -112,11 +112,12 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-2 control-label">订单账户: </label>
+										<label class="col-md-2 control-label">订单账户: <span
+											class="required"> * </span></label>
 										<div class="col-md-10">
 											<select
 												class="table-group-action-input form-control input-medium select2me"
-												name="accountId">
+												name="accountId" id="accountId">
 												<c:forEach items="${allAccounts }" var="item">
 													<option value="${item.account_id}"
 														<c:choose>
@@ -135,6 +136,8 @@
 
 									<div class="form-group">
 										<div style="text-align: center">
+											<input type="hidden" id="orderType" name="orderType"
+												value="${orderType}" /> 
 											<input type="hidden" id="orderId" name="orderId"
 												value="${orders.orderId}" /> <a href=""
 												class="btn green" id="btnConfirm" name="btnConfirm">保存</a>

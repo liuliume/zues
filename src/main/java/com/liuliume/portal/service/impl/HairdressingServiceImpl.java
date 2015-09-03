@@ -88,4 +88,9 @@ public class HairdressingServiceImpl implements HairdressingService {
         }
     }
 
+	@Override
+	public List<Hairdressing> listAllHairdressings() {
+		return hairdressingDao.listAllHairdressings();
+	}
+
 }

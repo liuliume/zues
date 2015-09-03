@@ -19,5 +19,7 @@ public interface CourseDao {
     public void updateCourse(Course course);
 
     public void delete(Course course);
+    
+    public List<Course> listAllCourse();
 
 }

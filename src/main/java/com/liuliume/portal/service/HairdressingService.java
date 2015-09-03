@@ -20,4 +20,6 @@ public interface HairdressingService {
     public void createOrUpdate(Hairdressing hairdressing) throws Exception;
 
     public void batchDelete(String hairdressIds) throws Exception;
+    
+    public List<Hairdressing> listAllHairdressings();
 }

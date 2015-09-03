@@ -1,6 +1,5 @@
 package com.liuliume.portal.mybatis.mapper;
 
-import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.mybatis.MyBatisBaseMapper;
 import com.liuliume.portal.mybatis.Parameter;
@@ -24,5 +23,7 @@ public interface HairdressingMapper extends MyBatisBaseMapper<Hairdressing> {
     int count(@Param("param")Parameter parameter);
 
     public List<Hairdressing> list(@Param("param")Parameter parameter);
+    
+    public List<Hairdressing> listAllHairdressings();
 
 }

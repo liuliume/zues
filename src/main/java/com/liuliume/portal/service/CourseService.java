@@ -20,4 +20,6 @@ public interface CourseService {
     public void createOrUpdate(Course course) throws Exception;
 
     public void batchDelete(String course_ids) throws Exception;
+    
+    public List<Course> listAllCourse();
 }

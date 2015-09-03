@@ -31,4 +31,14 @@ public class OrdersDaoImpl implements OrdersDao{
 		return ordersMapper.findOrdersByOrderId(orderId);
 	}
 
+	@Override
+	public void createOrder(Orders orders) {
+		ordersMapper.createEntity(orders);
+	}
+
+	@Override
+	public void updateOrder(Orders orders) {
+		ordersMapper.updateEntity(orders);
+	}
+
 }
