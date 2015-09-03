@@ -59,7 +59,7 @@
         },
         {
           "name":"订单管理",
-          "url":"/order"
+          "url":"/orders/list"
         }
 	]
 }
