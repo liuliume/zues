@@ -45,7 +45,7 @@ public class HairdressingController {
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), seed.toString()), e);
         }
-        ModelAndView mav = new ModelAndView("course/list_course");
+        ModelAndView mav = new ModelAndView("hairdressing/list_hairdressing");
 //        Seed<HashMap<String, Object>> resultSeed = new Seed<HashMap<String,Object>>();
 //        Method[] methods = Seed.class.getMethods();
 //        for (Method method : methods){
