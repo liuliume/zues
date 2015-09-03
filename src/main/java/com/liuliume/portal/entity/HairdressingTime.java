@@ -1,6 +1,11 @@
 package com.liuliume.portal.entity;
 
-public class HairdressingTime {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name="hairdressing_time")
+public class HairdressingTime implements Serializable {
     private Integer id;
 
     private String startTime;
@@ -9,6 +14,9 @@ public class HairdressingTime {
 
     private Integer servicePersionNum;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     public Integer getId() {
         return id;
     }
@@ -17,6 +25,7 @@ public class HairdressingTime {
         this.id = id;
     }
 
+    @Column(name="start_time")
     public String getStartTime() {
         return startTime;
     }
@@ -25,6 +34,7 @@ public class HairdressingTime {
         this.startTime = startTime == null ? null : startTime.trim();
     }
 
+    @Column(name="end_time")
     public String getEndTime() {
         return endTime;
     }
@@ -33,6 +43,7 @@ public class HairdressingTime {
         this.endTime = endTime == null ? null : endTime.trim();
     }
 
+    @Column(name="service_persion_num")
     public Integer getServicePersionNum() {
         return servicePersionNum;
     }
