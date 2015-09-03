@@ -112,11 +112,8 @@
 		</div>
 	</div>
 
-
 	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
 	
-	<input type="hidden" id="accountId_delete"/>
-
 	<input type="hidden" id="ctxUrl" value="${ctx}" />
 	<!-- PAGE LEVEL JS REFERENCES -->
 	<script src="${ctx}/resources/scripts/pages/account/accountList.js"

@@ -70,4 +70,13 @@ public class OrdersServiceImpl implements OrdersService {
 		return result;
 	}
 
+	@Override
+	public Orders findOrdersByOrderId(Integer orderId) throws Exception {
+		if(orderId==null || orderId<=0)
+			return null;
+		
+		Orders orders=ordersDao.findOrdersByOrderId(orderId);
+		return orders;
+	}
+
 }

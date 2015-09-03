@@ -12,4 +12,6 @@ public interface OrdersMapper {
 	public int count(@Param("param")Parameter parameter);
 	
 	public List<Orders> list(@Param("param")Parameter parameter);
+	
+	public Orders findOrdersByOrderId(@Param("orderId")Integer orderId);
 }

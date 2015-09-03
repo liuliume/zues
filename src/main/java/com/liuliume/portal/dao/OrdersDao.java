@@ -10,4 +10,6 @@ public interface OrdersDao {
 	public int count(Parameter parameter);
 	
 	public List<Orders> list(Parameter parameter);
+	
+	public Orders findOrdersByOrderId(Integer orderId) throws Exception;
 }

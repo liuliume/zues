@@ -5,6 +5,12 @@
 <head>
 <title>订单管理</title>
 <!-- PAGE LEVEL STYLE REFERENCES -->
+<script type="text/javascript"
+	src="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.css" />
+<link rel="stylesheet" type="text/css"
+	href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2-metronic.css" />
 </head>
 <body>
 	<div class="row">
@@ -70,9 +76,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="blank-form-actions">
-				<a class="btn green" href="#" id="createAccount"><i
-					class="fa fa-plus"></i>创建</a> <a class="btn blue" href="#"
-					id="deleteAccountBatch"><i class="fa fa-times"></i>删除</a>
+				<a class="btn green" href="#" id="create"><i
+					class="fa fa-plus"></i>创建</a> <!-- <a class="btn blue" href="#"
+					id="deleteBatch"><i class="fa fa-times"></i>删除</a> -->
 			</div>
 		</div>
 	</div>
@@ -121,7 +127,7 @@
 												value="${item.orderId}"> </span>
 										</div>
 									</td>
-									<td><a href="/orders/index?orders_id=${item.orderId}">${item.orderId}</a></td>
+									<td><a href="/orders/index?ordersId=${item.orderId}&orderType=${item.orderType}">${item.orderId}</a></td>
 									<td>${item.orderTypeEnum.desc }</td>
 									<td>${item.account.uniqname }</td>
 									<td>${item.account.mobile }</td>
@@ -143,8 +149,47 @@
 		</div>
 	</div>
 
+	<!-- 提示弹出框,用于弹出提示信息，仿照alert-->
+			<div id="selectModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true"></button>
+							<h4 class="modal-title" id="selectOrderType">请选择订单类型</h4>
+						</div>
+						<div class="modal-body">
+							<div class="info form-group" id="alertModalContent">
+								<label class="col-md-3 control-label">订单类型: </label>
+								<div class="col-md-3">
+									<select
+												class="table-group-action-input form-control input-medium select2me"
+												name="typeId" id="typeId">
+												<c:forEach var="type" items="${orderTypes}">
+													<option value="${type.id}"
+														<c:if test='${type.id eq -1}'>selected</c:if>>
+														${type.desc }</option>
+												</c:forEach>
+										</select> <span class="help-block display-hide" id="errorInfoType">请选择订单类型!</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div style="text-align: center">
+											<button type="button" class="btn blue" data-dismiss="modal"
+								id="btnConfirm">确认</button>
+										</div>
+							</div>
+						</div>
+						<!-- <div class="modal-footer">
+							<button type="button" class="btn blue" data-dismiss="modal"
+								id="btnConfirm">确认</button>
+						</div> -->
+					</div>
+				</div>
+			</div>
+			<!-- 提示弹出框结束 -->
 
-	<input type="hidden" id="setOptionUrl" value="${ctx}/account/" />
+	<input type="hidden" id="setOptionUrl" value="${ctx}/orders/" />
 
 	<input type="hidden" id="accountId_delete" />
 

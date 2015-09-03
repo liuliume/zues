@@ -94,6 +94,15 @@
 		<include refid="list-where"></include>
 		limit #{param.start},#{param.limit}
 	</select>
+	
+	<select id="findOrdersByOrderId" resultMap="orders">
+		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS room_id,r.`room_name`,c.`id` AS course_id,c.`course_name`,c.`course_describe`,c.`expense` 
+		FROM orders o
+		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND a.`flag` <![CDATA[<>]]> 99
+		LEFT JOIN room r ON o.`room_id`=r.`id`
+		LEFT JOIN course c ON o.`course_id` = c.`id`
+		WHERE o.order_id=#{orderId}
+	</select>
 
 	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
 		> insert into orders (order_id, account_id, order_type, order_type_id, animals_id, 

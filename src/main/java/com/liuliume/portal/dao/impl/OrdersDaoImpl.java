@@ -26,4 +26,9 @@ public class OrdersDaoImpl implements OrdersDao{
 		return ordersMapper.list(parameter);
 	}
 
+	@Override
+	public Orders findOrdersByOrderId(Integer orderId) throws Exception {
+		return ordersMapper.findOrdersByOrderId(orderId);
+	}
+
 }
