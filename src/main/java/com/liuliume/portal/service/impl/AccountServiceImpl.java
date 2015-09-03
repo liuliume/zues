@@ -84,4 +84,9 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 
+	@Override
+	public List<Account> listAllAccount() {
+		return accountDao.listAllAccount();
+	}
+
 }

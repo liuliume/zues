@@ -21,4 +21,6 @@ public interface RoomService {
     public void createOrUpdate(Room room) throws Exception;
 
     public void batchDelete(String address_ids) throws Exception;
+    
+    public List<Room> listAllRooms() throws Exception;
 }

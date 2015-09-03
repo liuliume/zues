@@ -46,4 +46,9 @@ public class AccountDaoImpl implements AccountDao{
 		accountMapper.updateEntity(account);
 	}
 
+	@Override
+	public List<Account> listAllAccount() {
+		return accountMapper.listAllAccount();
+	}
+
 }

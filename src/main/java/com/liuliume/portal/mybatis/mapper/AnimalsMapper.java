@@ -3,6 +3,7 @@ package com.liuliume.portal.mybatis.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.liuliume.portal.entity.Animals;
 import com.liuliume.portal.mybatis.MyBatisBaseMapper;
@@ -15,4 +16,6 @@ public interface AnimalsMapper extends MyBatisBaseMapper<Animals>{
 	List<Animals> listAnimals(@Param("param")Parameter parameter);
 	
 	Animals findAnimalsById(@Param("id")Integer id);
+	
+	List<Animals> listAllAnimals();
 }

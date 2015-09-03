@@ -21,4 +21,5 @@ public interface RoomDao {
 
     public void delete(Room room);
 
+    public List<Room> listAllRooms() throws Exception;
 }

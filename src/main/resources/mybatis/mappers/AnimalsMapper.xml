@@ -50,4 +50,9 @@
 		and a.id=#{id}
 	</if>
   </select>
+  
+  <select id="listAllAnimals" resultMap="BaseResultMap">
+  	SELECT a.id,animals_name,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient` 
+	FROM animals a LEFT JOIN animals_type t ON a.`type_id` = t.`id` 
+  </select>
 </mapper>

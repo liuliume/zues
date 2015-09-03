@@ -36,4 +36,6 @@ public interface AnimalDao {
 	void editAnimals(Animals animals);
 	
 	Animals findAnimalsById(Integer id);
+	
+	List<Animals> listAllAnimals();
 }

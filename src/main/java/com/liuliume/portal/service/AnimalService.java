@@ -36,4 +36,6 @@ public interface AnimalService {
 	void createOrUpdateAnimals(Animals animals) throws Exception;
 	
 	Animals findAnimalsById(Integer id);
+	
+	List<Animals> listAllAnimals();
 }
