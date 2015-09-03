@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuliume.portal.dao.HairdressingTimeMapper" >
+<mapper namespace="com.liuliume.portal.mybatis.mapper.HairdressingTimeMapper" >
   <resultMap id="BaseResultMap" type="com.liuliume.portal.entity.HairdressingTime" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="start_time" property="startTime" jdbcType="VARCHAR" />
@@ -10,6 +10,41 @@
   <sql id="Base_Column_List" >
     id, start_time, end_time, service_persion_num
   </sql>
+
+    <select id="count" resultType="int" parameterType="com.liuliume.portal.entity.HairdressingTime">
+        select count(1) from hairdressing_time
+        <where>
+            <if test="param.cond != null">
+                <if test="param.cond.hairdressingTime != null">
+                    <if test="param.cond.hairdressingTime.startTime != null">
+                        and start_time like CONCAT(#{param.cond.hairdressingTime.startTime},'%')
+                    </if>
+                    <if test="param.cond.hairdressingTime.endTime != null">
+                        and end_time like CONCAT(#{param.cond.hairdressingTime.endTime},'%')
+                    </if>
+                    <!-- add query cond here -->
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="com.liuliume.portal.entity.HairdressingTime" resultMap="BaseResultMap">
+        select *
+        from hairdressing_time where 1=1
+        <if test="param.cond != null">
+            <if test="param.cond.hairdressingTime != null">
+                <if test="param.cond.hairdressingTime.startTime != null">
+                    and start_time like CONCAT(#{param.cond.hairdressingTime.startTime},'%')
+                </if>
+                <if test="param.cond.hairdressingTime.endTime != null">
+                    and end_time like CONCAT(#{param.cond.hairdressingTime.endTime},'%')
+                </if>
+                <!-- add query cond here -->
+            </if>
+        </if>
+        limit #{param.start},#{param.limit}
+    </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

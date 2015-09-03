@@ -3,10 +3,10 @@ package com.liuliume.portal.controller.hairdressing;
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
 import com.liuliume.portal.common.JData;
-import com.liuliume.portal.entity.Course;
 import com.liuliume.portal.entity.Hairdressing;
-import com.liuliume.portal.service.CourseService;
+import com.liuliume.portal.entity.HairdressingTime;
 import com.liuliume.portal.service.HairdressingService;
+import com.liuliume.portal.service.HairdressingTimeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,26 +26,26 @@ import java.text.MessageFormat;
  * Created by clement on 8/29/15.
  */
 @Controller
-@RequestMapping(value={"/hairdressing"},method= RequestMethod.GET)
-public class HairdressingController {
+@RequestMapping(value={"/hairdressing_time"},method= RequestMethod.GET)
+public class HairdressingTimeController {
 
-    private Logger logger = LoggerFactory.getLogger(HairdressingController.class);
+    private Logger logger = LoggerFactory.getLogger(HairdressingTimeController.class);
 
     @Autowired
-    private HairdressingService hairdressingService;
+    private HairdressingTimeService hairdressingTimeService;
 
     @RequestMapping(value="list",method=RequestMethod.GET)
-    private ModelAndView list(ModelMap map,@SeedParam Seed<Hairdressing> seed){
+    private ModelAndView list(ModelMap map,@SeedParam Seed<HairdressingTime> seed){
         logger.info("call AddressController.list");
         try {
-            hairdressingService.list(seed);
-            seed.setActionPath("hairdressing/list");
+            hairdressingTimeService.list(seed);
+            seed.setActionPath("hairdressing_time/list");
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), seed.toString()), e);
         }
-        ModelAndView mav = new ModelAndView("hairdressing/list_hairdressing");
+        ModelAndView mav = new ModelAndView("hairdressing_time/list_hairdressingTime");
 //        Seed<HashMap<String, Object>> resultSeed = new Seed<HashMap<String,Object>>();
 //        Method[] methods = Seed.class.getMethods();
 //        for (Method method : methods){
@@ -71,36 +71,36 @@ public class HairdressingController {
     }
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView index(ModelMap model,@RequestParam(value="hairdressing_id",required=false)Integer hairdressing_id) {
-        Hairdressing hairdressing = null;
+    public ModelAndView index(ModelMap model,@RequestParam(value="hairdressingTime_id",required=false)Integer hairdressingTime_id) {
+        HairdressingTime hairdressingTime = null;
         try {
             logger.info("call AddressController.index");
-            hairdressing = hairdressingService.findHairdressingById(hairdressing_id);
+            hairdressingTime = hairdressingTimeService.findHairdressingTimeById(hairdressingTime_id);
         } catch (Exception e) {
             logger.error("Error! reason:{}, Paramter:account_id:{}.",
-                    e.getMessage(),hairdressing_id,e);
+                    e.getMessage(),hairdressingTime_id,e);
         }
-        ModelAndView mav = new ModelAndView("/hairdressing/index_hairdressing");
-        if(hairdressing != null){
-            model.put("hairdressing", hairdressing);
+        ModelAndView mav = new ModelAndView("/hairdressing_time/index_hairdressingTime");
+        if(hairdressingTime != null){
+            model.put("hairdressingTime", hairdressingTime);
         }
         return mav;
     }
 
     @RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
     @ResponseBody
-    public JData createOrUpdate(Hairdressing hairdressing,HttpServletRequest request,HttpServletResponse response){
+    public JData createOrUpdate(HairdressingTime hairdressingTime,HttpServletRequest request,HttpServletResponse response){
         logger.info("call the createOrUpdate account");
-        logger.debug(hairdressing.toString());
+        logger.debug(hairdressingTime.toString());
         JData jData = new JData();
         try {
-            hairdressingService.createOrUpdate(hairdressing);
+            hairdressingTimeService.createOrUpdate(hairdressingTime);
             jData.setCode(200);
             jData.setSuccess(true);
             jData.setDetail("操作成功");
         } catch (Exception e) {
             logger.error("create Or Update  Error." + e.getMessage()
-                    + " account[" + hairdressing + "]", e);
+                    + " account[" + hairdressingTime + "]", e);
             jData.setCode(500);
             jData.setSuccess(false);
             jData.setDetail("操作失败");
@@ -110,16 +110,16 @@ public class HairdressingController {
 
     @RequestMapping(value="batchDelete",method = RequestMethod.POST)
     @ResponseBody
-    public JData batchDelete(@RequestParam(value="hairdressingIds",required=true)String hairdressingIds){
+    public JData batchDelete(@RequestParam(value="hairdressingTimeIds",required=true)String hairdressingTimeIds){
         logger.info("call the batch delete account");
         JData jdata = new JData();
         try {
-            hairdressingService.batchDelete(hairdressingIds);
+            hairdressingTimeService.batchDelete(hairdressingTimeIds);
             jdata.setSuccess(true);
             jdata.setDetail("操作成功");
         } catch (Exception e) {
             logger.error("Batch delete[Account] Error." + e.getMessage()
-                    + " accountIds[" + hairdressingIds + "]", e);
+                    + " accountIds[" + hairdressingTimeIds + "]", e);
             jdata.setDetail("Batch delete [Account] failed!");
             jdata.setSuccess(false);
         }
