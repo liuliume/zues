@@ -151,6 +151,42 @@ public class OrdersController {
 		}
 		return jData;
 	}
+	
+	@RequestMapping(value="orderDetail",method=RequestMethod.GET)
+	public String orderDetail(Integer ordersId,ModelMap map) {
+		
+		logger.info("call OrdersController.orderDetail");
+
+		Orders orders = null;
+
+		try {
+			orders = ordersService.findOrdersByOrderId(ordersId);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.index! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), ordersId, e);
+		}
+		if (orders != null) {
+			map.put("orders", orders);
+		}
+		return "orders/orderDetail";
+	}
+	
+	@RequestMapping(value="payOrder",method=RequestMethod.POST)
+	@ResponseBody
+	public JData payOrder(@RequestParam(value = "orderId", required = true)Integer orderId){
+		JData jData = new JData("确认收款成功", true);
+		try {
+			ordersService.payOrder(orderId);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.payOrder! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), orderId, e);
+			jData.setDetail(e.getMessage());
+			jData.setSuccess(false);
+		}
+		return jData;
+	}
 
 	@ModelAttribute("orderTypes")
 	public List<OrderTypeEnum> genAllOrderTypeEnums() {

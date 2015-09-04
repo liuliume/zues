@@ -13,4 +13,5 @@ public interface OrdersService {
 	
 	public void createOrUpdate(Orders orders) throws Exception;
 	
+	public void payOrder(Integer orderId) throws Exception;
 }

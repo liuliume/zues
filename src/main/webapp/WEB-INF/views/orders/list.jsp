@@ -127,7 +127,8 @@
 												value="${item.orderId}"> </span>
 										</div>
 									</td>
-									<td><a href="/orders/index?ordersId=${item.orderId}&orderType=${item.orderType}">${item.orderId}</a></td>
+									<%-- <td><a href="/orders/index?ordersId=${item.orderId}&orderType=${item.orderType}">${item.orderId}</a></td> --%>
+									<td><a href="/orders/orderDetail?ordersId=${item.orderId}&orderType=${item.orderType}">${item.orderId}</a></td>
 									<td>${item.orderTypeEnum.desc }</td>
 									<td>${item.account.uniqname }</td>
 									<td>${item.account.mobile }</td>

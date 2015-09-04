@@ -6,6 +6,7 @@
 		<result column="account_id" property="accountId" jdbcType="INTEGER" />
 		<result column="order_type" property="orderType" jdbcType="CHAR" />
 		<result column="animals_id" property="animalsId" jdbcType="INTEGER" />
+		<result column="animals_name" property="animalName" jdbcType="VARCHAR"/>
 		<result column="province_id" property="provinceId" jdbcType="INTEGER" />
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="area_id" property="areaId" jdbcType="VARCHAR" />
@@ -107,7 +108,8 @@
 		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS
 		room_id,r.`room_name`,c.`id` AS
 		course_id,c.`course_name`,c.`course_describe`,c.`expense`,
-		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`
+		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`,
+		an.animals_name
 		FROM orders o
 		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
 		a.`flag` <![CDATA[<>]]>
@@ -116,6 +118,7 @@
 		LEFT JOIN course c ON
 		o.`course_id` = c.`id`
 		LEFT JOIN hairdressing h on o.`hairdress_id` = h.`id`
+		LEFT JOIN animals an ON o.`animals_id` = an.`id`
 		<include refid="list-where"></include>
 		limit #{param.start},#{param.limit}
 	</select>
@@ -124,7 +127,8 @@
 		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS
 		room_id,r.`room_name`,c.`id` AS
 		course_id,c.`course_name`,c.`course_describe`,c.`expense`,
-		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`
+		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`,
+		an.animals_name
 		FROM orders o
 		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
 		a.`flag` <![CDATA[<>]]>
@@ -133,6 +137,7 @@
 		LEFT JOIN course c ON
 		o.`course_id` = c.`id`
 		LEFT JOIN hairdressing h on o.`hairdress_id` = h.`id`
+		LEFT JOIN animals an ON o.`animals_id` = an.`id`
 		WHERE o.order_id=#{orderId}
 	</select>
 

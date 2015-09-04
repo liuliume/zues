@@ -97,5 +97,19 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 	}
 
+	@Override
+	@Transactional
+	public void payOrder(Integer orderId) throws Exception {
+		if(orderId == null || orderId<=0){
+			throw new IllegalArgumentException("订单ID错误,请检查");
+		}
+		Orders orders = findOrdersByOrderId(orderId);
+		if(orders.getPaymentStatus()==Constants.PAYMENT_YES){
+			throw new Exception("订单已支付,请检查");
+		}
+		orders.setPaymentStatus(Constants.PAYMENT_YES);
+		ordersDao.updateOrder(orders);
+	}
+
 	
 }

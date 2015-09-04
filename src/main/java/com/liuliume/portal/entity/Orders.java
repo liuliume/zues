@@ -132,6 +132,20 @@ public class Orders implements Serializable {
 	private Integer hairdressId;
 	
 	private Hairdressing hairdressing;
+	
+	/**
+	 * 支付方式
+	 */
+	private Integer paymentType;
+
+	
+	public Integer getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(Integer paymentType) {
+		this.paymentType = paymentType;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
