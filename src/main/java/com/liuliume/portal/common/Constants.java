@@ -17,6 +17,11 @@ public class Constants {
 	public static final int SERVICE_DOOR=0;//上门服务
 	public static final int SERVICE_SHOP=1;//到店服务
 	
+	//付款状态
 	public static final int PAYMENT_NO = 0;
 	public static final int PAYMENT_YES=1;
+	
+	//付款方式
+	public static final int PAYMENTTYPE_ONLINE = 1;//在线付款
+	public static final int PAYMENTTYPE_OFFLINE=2;//线下付款
 }

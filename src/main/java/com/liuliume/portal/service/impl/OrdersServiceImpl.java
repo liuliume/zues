@@ -18,6 +18,7 @@ import com.liuliume.portal.dao.cond.OrdersCond;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Orders;
 import com.liuliume.portal.model.OrderStatusEnum;
+import com.liuliume.portal.model.OrderTypeEnum;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.OrdersService;
 
@@ -108,6 +109,65 @@ public class OrdersServiceImpl implements OrdersService {
 			throw new Exception("订单已支付,请检查");
 		}
 		orders.setPaymentStatus(Constants.PAYMENT_YES);
+		orders.setPaymentType(Constants.PAYMENTTYPE_OFFLINE);
+		ordersDao.updateOrder(orders);
+	}
+
+	@Override
+	@Transactional
+	public void invalidOrder(Integer orderId) throws Exception {
+		if(orderId == null || orderId<=0){
+			throw new IllegalArgumentException("订单ID错误,请检查");
+		}
+		Orders orders = findOrdersByOrderId(orderId);
+		if(orders.getStatus() == OrderStatusEnum.INVALID.getId()){
+			throw new Exception("订单不能重复置无效");
+		}
+		if(orders.getStatus() >= OrderStatusEnum.SERVICING.getId()){
+			throw new Exception("订单已经开始服务,不能置无效");
+		}
+		if(orders.getPaymentStatus() == Constants.PAYMENT_YES){
+			throw new Exception("订单已经付款,不能置无效,请先退款");
+		}
+		orders.setStatus(OrderStatusEnum.INVALID.getId());
+		ordersDao.updateOrder(orders);
+	}
+
+	@Override
+	@Transactional
+	public void transferOrder(Integer orderId) throws Exception {
+		if(orderId == null)
+			throw new IllegalArgumentException("Order Id错误");
+		Orders orders = findOrdersByOrderId(orderId);
+		if(orders == null)
+			throw new Exception("订单ID["+orderId+"]对应的订单不存在");
+		if(orders.getOrderType()!=OrderTypeEnum.BEAUTY.getId()){
+			throw new Exception("订单ID["+orderId+"]不是美容订单,不能转发");
+		}
+		if(orders.getStatus()!=OrderStatusEnum.ORDERED.getId()){
+			throw new Exception("订单ID["+orderId+"]不是下单状态,不能转发");
+		}
+		if(orders.getServiceType()!=Constants.SERVICE_DOOR){
+			throw new Exception("订单ID["+orderId+"]不是上门服务,不能转发");
+		}
+		orders.setStatus(OrderStatusEnum.TRANSFER.getId());
+		ordersDao.updateOrder(orders);
+	}
+
+	@Override
+	public void completeOrder(Integer orderId) throws Exception {
+		if(orderId == null)
+			throw new IllegalArgumentException("Order Id错误");
+		Orders orders = findOrdersByOrderId(orderId);
+		if(orders == null)
+			throw new Exception("订单ID["+orderId+"]对应的订单不存在");
+		if(orders.getStatus()==OrderStatusEnum.COMPLETE.getId()){
+			throw new Exception("订单ID["+orderId+"]已经完成,不能重复操作");
+		}
+		if(orders.getStatus() == OrderStatusEnum.INVALID.getId() ||orders.getStatus() == OrderStatusEnum.DELETE.getId()){
+			throw new Exception("订单ID["+orderId+"]无效,不能完成");
+		}
+		orders.setStatus(OrderStatusEnum.COMPLETE.getId());
 		ordersDao.updateOrder(orders);
 	}
 

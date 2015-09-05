@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.commons.lang.StringUtils;
 
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.model.OrderStatusEnum;
@@ -138,7 +137,7 @@ public class Orders implements Serializable {
 	 */
 	private Integer paymentType;
 
-	
+	@Column(name="payment_type")
 	public Integer getPaymentType() {
 		return paymentType;
 	}

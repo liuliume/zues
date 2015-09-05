@@ -187,6 +187,54 @@ public class OrdersController {
 		}
 		return jData;
 	}
+	
+	@RequestMapping(value="invalidOrder",method=RequestMethod.POST)
+	@ResponseBody
+	public JData invalidOrder(@RequestParam(value = "orderId", required = true)Integer orderId){
+		JData jData = new JData("订单置无效成功", true);
+		try {
+			ordersService.invalidOrder(orderId);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.payOrder! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), orderId, e);
+			jData.setDetail(e.getMessage());
+			jData.setSuccess(false);
+		}
+		return jData;
+	}
+	
+	@RequestMapping(value="transferOrder",method = RequestMethod.POST)
+	@ResponseBody
+	public JData transferOrder(@RequestParam(value = "orderId", required = true)Integer orderId) {
+		JData jData = new JData("订单转发成功", true);
+		try {
+			ordersService.transferOrder(orderId);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.payOrder! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), orderId, e);
+			jData.setDetail(e.getMessage());
+			jData.setSuccess(false);
+		}
+		return jData;
+	}
+	
+	@RequestMapping(value="completeOrder",method = RequestMethod.POST)
+	@ResponseBody
+	public JData completeOrder(@RequestParam(value = "orderId", required = true)Integer orderId) {
+		JData jData = new JData("操作成功", true);
+		try {
+			ordersService.transferOrder(orderId);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.payOrder! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), orderId, e);
+			jData.setDetail(e.getMessage());
+			jData.setSuccess(false);
+		}
+		return jData;
+	}
 
 	@ModelAttribute("orderTypes")
 	public List<OrderTypeEnum> genAllOrderTypeEnums() {

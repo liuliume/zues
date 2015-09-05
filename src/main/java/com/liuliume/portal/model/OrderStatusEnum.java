@@ -1,5 +1,7 @@
 package com.liuliume.portal.model;
 
+
+
 /**
  * 订单状态枚举类
  * @author xiayun
@@ -7,10 +9,13 @@ package com.liuliume.portal.model;
  */
 public enum OrderStatusEnum {
 
+	INVALID(-3,"无效"),
+	DELETE(99,"删除"),
 	ORDERED(0,"下单"),
 	SERVICING(1,"服务中"),
-	COMPLETE(2,"已完成"),
-	ASSESSED(3,"已评价");
+	TRANSFER(2,"转发"),
+	COMPLETE(10,"已完成"),
+	ASSESSED(20,"已评价");
 	
 	private int id;
 	private String desc;

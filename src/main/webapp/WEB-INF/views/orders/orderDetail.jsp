@@ -29,25 +29,39 @@
 							<i class="fa fa-calendar"></i>查看订单
 						</div>
 						<div class="actions btn-set">
-							<button class="btn default" id="">
-								<i class="fa fa-reply"></i> 置无效
-							</button>
-							<button class="btn green" type="button" id="BtnTransfer">
-								<i class="fa fa-share"></i> 转发
-							</button>
-							<c:if test="${orders.paymentStatus eq 0 }">
-								<button class="btn green" type="button" id="btnPay">
-									<i class="fa fa-check-circle"></i> 收款
+							<c:if test="${orders.status ne -3 }">
+								<button class="btn default" id="btnInvalid">
+									<i class="fa fa-reply"></i> 置无效
 								</button>
+
+								<c:if test="${orders.status eq 0}">
+									<c:choose>
+										<c:when test="${orders.orderType eq 3}">
+											<button class="btn green" type="button" id="BtnTransfer">
+											<i class="fa fa-share"></i> 转发
+											</button>
+										</c:when>
+										<%-- <c:otherwise>
+											<button class="btn green" type="button" id="BtnService">
+												<i class="fa fa-share"></i> 开始服务
+											</button>
+										</c:otherwise> --%>
+									</c:choose>
+								</c:if>
+								<c:if test="${orders.paymentStatus eq 0 }">
+									<button class="btn green" type="button" id="btnPay">
+										<i class="fa fa-check-circle"></i> 收款
+									</button>
+								</c:if>
+								<div class="btn-group">
+									<a class="btn yellow" href="#" data-toggle="dropdown"> More
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="dropdown-menu pull-right">
+										<li><a href="#" name="done" id="done"> 完成 </a></li>
+									</ul>
+								</div>
 							</c:if>
-							<div class="btn-group">
-								<a class="btn yellow" href="#" data-toggle="dropdown"> More
-									<i class="fa fa-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu pull-right">
-									<li><a href="#" name="delete" id="delete"> Delete </a></li>
-								</ul>
-							</div>
 						</div>
 					</div>
 					<div class="portlet-body">
@@ -55,7 +69,8 @@
 							<div class="tab-content no-space">
 								<div class="form-body">
 									<input type="hidden" value="${orders.orderId }" id="orderId" />
-									<input type="hidden" value="${orders.paymentStatus }" id="paymentStatus" />
+									<input type="hidden" value="${orders.paymentStatus }"
+										id="paymentStatus" />
 
 									<div class="form-group">
 										<label class="col-md-2 control-label">订单类型: </label>
@@ -150,6 +165,8 @@
 										<div class="col-md-3">
 											<label class="form-control">${orders.statusEnum.desc }</label>
 										</div>
+										<input type="hidden" value="${orders.status }"
+											id="orderStatus" />
 									</div>
 
 									<div class="form-group">

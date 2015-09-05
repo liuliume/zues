@@ -232,10 +232,11 @@ CREATE TABLE `orders` (
   `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '订单状态',
   `create_time` DATETIME NOT NULL COMMENT '下单时间',
   `last_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `payment_type` TINYINT(4) DEFAULT NULL COMMENT "付款方式",
   PRIMARY KEY (`order_id`),
   KEY `idx_account_id` (`account_id`),
   KEY `idx_create_time` (`create_time`)
-) ENGINE=INNODB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='订单表'
+) ENGINE=INNODB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单表'
 
 
 
