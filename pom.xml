@@ -3,9 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liuliume</groupId>
 	<artifactId>zues</artifactId>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>zues</name>
+    <modules>
+        <module>../front</module>
+    </modules>
+    <name>zues</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
