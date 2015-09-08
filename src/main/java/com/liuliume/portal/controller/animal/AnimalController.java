@@ -46,19 +46,21 @@ public class AnimalController {
 		map.put("seed", seed);
 		return "animal/typeList";
 	}
-	
-	@RequestMapping(value="typeIndex",method=RequestMethod.GET)
-	public String typeIndex(ModelMap model,@RequestParam(value="id",required=false)Integer id){
-		AnimalsType type =null;
+
+	@RequestMapping(value = "typeIndex", method = RequestMethod.GET)
+	public String typeIndex(ModelMap model,
+			@RequestParam(value = "id", required = false) Integer id) {
+		AnimalsType type = null;
 		logger.info("call AnimalController.typeIndex");
 		try {
-			type=animalService.findAnimalsTypeById(id);
+			type = animalService.findAnimalsTypeById(id);
 		} catch (Exception e) {
-			logger.error(MessageFormat.format(
-					"typeIndex AnimalsType error! reason:{0}, Paramter:ids:{1}.",
-					e.getMessage(), id), e);
+			logger.error(
+					MessageFormat
+							.format("typeIndex AnimalsType error! reason:{0}, Paramter:ids:{1}.",
+									e.getMessage(), id), e);
 		}
-		if(type!=null){
+		if (type != null) {
 			model.put("type", type);
 		}
 		return "animal/typeIndex";
@@ -101,10 +103,10 @@ public class AnimalController {
 		}
 		return jData;
 	}
-	
+
 	@RequestMapping("listAnimals")
-	public String listAnimals(ModelMap map,@SeedParam Seed<Animals> seed){
-		
+	public String listAnimals(ModelMap map, @SeedParam Seed<Animals> seed) {
+
 		logger.info("calling AnimalController.listAnimals begins");
 		try {
 			seed.setActionPath("animal/listAnimals");
@@ -115,32 +117,35 @@ public class AnimalController {
 							.format("Get AnimalsType list error! reason:{0}, Paramter:seed:{1}.",
 									e.getMessage(), seed.toString()), e);
 		}
-		
+
 		map.put("seed", seed);
 		return "animal/animalList";
 	}
-	
+
 	@RequestMapping("animalsIndex")
-	public String animalsIndex(ModelMap model,@RequestParam(value="id",required=false)Integer id) {
+	public String animalsIndex(ModelMap model,
+			@RequestParam(value = "id", required = false) Integer id) {
 		Animals animals = null;
 		logger.info("call AnimalController.animalsIndex");
 		try {
 			animals = animalService.findAnimalsById(id);
 		} catch (Exception e) {
-			logger.error(MessageFormat.format(
-					"animalsIndex Animals error! reason:{0}, Paramter:ids:{1}.",
-					e.getMessage(), id), e);
+			logger.error(
+					MessageFormat
+							.format("animalsIndex Animals error! reason:{0}, Paramter:ids:{1}.",
+									e.getMessage(), id), e);
 		}
-		if(animals!=null){
+		if (animals != null) {
 			model.put("animals", animals);
 		}
-		
+
 		return "animal/animalIndex";
 	}
-	
-	@RequestMapping(value="batchDeleteAnimas",method=RequestMethod.POST)
+
+	@RequestMapping(value = "batchDeleteAnimas", method = RequestMethod.POST)
 	@ResponseBody
-	public JData batchDeleteAnimas(@RequestParam(value = "ids", required = true) String ids) {
+	public JData batchDeleteAnimas(
+			@RequestParam(value = "ids", required = true) String ids) {
 		logger.info("call the batch delete animalType");
 		JData jdata = new JData();
 		try {
@@ -156,10 +161,10 @@ public class AnimalController {
 		}
 		return jdata;
 	}
-	
+
 	@RequestMapping(value = "createOrUpdateAnimals", method = RequestMethod.POST)
 	@ResponseBody
-	public JData createOrUpdateAnimals(Animals animals){
+	public JData createOrUpdateAnimals(Animals animals) {
 		JData jData = new JData("操作成功", true);
 		try {
 			animalService.createOrUpdateAnimals(animals);
@@ -173,16 +178,33 @@ public class AnimalController {
 		}
 		return jData;
 	}
-	
+
+	@RequestMapping(value = "listAllAnimals", method = RequestMethod.GET)
+	@ResponseBody
+	public JData listAllAnimals() {
+		JData jData = new JData("操作成功", true);
+		try {
+			animalService.listAllAnimals();
+		} catch (Exception e) {
+			logger.error(
+					"listAllAnimals error! reason:{}, Paramter:Animals:{}.",
+					e.getMessage(), e);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
+		return jData;
+	}
+
 	@ModelAttribute("allTypes")
 	public List<AnimalsType> getAllAnimalsTypes() {
 		List<AnimalsType> list = animalService.listAllTypes();
 		AnimalsType type = new AnimalsType();
 		type.setId(-1);
 		type.setTypeName("All");
-		if(list==null)
-			list= new ArrayList<AnimalsType>();
+		if (list == null)
+			list = new ArrayList<AnimalsType>();
 		list.add(type);
 		return list;
 	}
+
 }

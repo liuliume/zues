@@ -20,5 +20,7 @@ public interface HairdressingTimeDao {
     public void updateHairdressingTime(HairdressingTime hairdressingTime);
 
     public void delete(HairdressingTime hairdressingTime);
+    
+    public List<HairdressingTime> listAllHairdressingTime();
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.mybatis.Status;
@@ -39,6 +40,10 @@ public class Account implements Serializable{
 	private int city_id;
 	private int area_id;
 	private String address;
+	
+	private String province;
+	private String city;
+	private String area;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -158,6 +163,33 @@ public class Account implements Serializable{
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	@Transient
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	@Transient
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Transient
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	@Override

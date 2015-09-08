@@ -140,6 +140,14 @@
 		LEFT JOIN animals an ON o.`animals_id` = an.`id`
 		WHERE o.order_id=#{orderId}
 	</select>
+	
+	<select id="countHairDressingOrders" resultType="int">
+		select count(*) from orders
+		where order_type= 3 and status=1
+		and start_date <![CDATA[<=]]>#{serviceDate} and end_date <![CDATA[>=]]>#{serviceDate}
+		and (service_begin=#{startTime} or service_begin=#{startTime}+1 )
+		and service_end <![CDATA[>=]]>#{endTime}
+	</select>
 
 	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
 		> insert into orders (order_id, account_id, order_type, order_type_id, animals_id, 

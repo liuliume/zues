@@ -111,6 +111,30 @@ public class AccountController {
 		return jData;
 	}
 	
+	/**
+	 * 前端根据用户ID请求用户信息(包括地址)
+	 * @param account_id
+	 * @return
+	 */
+	@RequestMapping(value="listAccountByUserId",method=RequestMethod.GET)
+	public JData listAccountByUserId(@RequestParam(value="account_id",required=true)Integer account_id ) {
+		JData jData = new JData("操作成功",true);
+		Account account = null;
+		try {
+			logger.info("call AccountCOntroller.index");
+			account = accountService.findAccountById(account_id);
+			jData.setCode(200);
+			jData.setData(account);
+		} catch (Exception e) {
+			logger.error("Error! reason:{}, Paramter:account_id:{}.",
+					e.getMessage(),account_id,e);
+			jData.setCode(500);
+			jData.setData(null);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
+		return jData;
+	}
 	
 	@ModelAttribute("allGender")
 	public Map<Integer, GenderEnum> getAllGender(){

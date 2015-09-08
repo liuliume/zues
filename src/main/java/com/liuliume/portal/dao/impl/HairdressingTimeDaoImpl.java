@@ -49,5 +49,10 @@ public class HairdressingTimeDaoImpl implements HairdressingTimeDao{
         hairdressingTimeMapper.deleteEntityPhysically(hairdressingTime);
     }
 
+	@Override
+	public List<HairdressingTime> listAllHairdressingTime() {
+		return hairdressingTimeMapper.listAllHairdressingTime();
+	}
+
 
 }

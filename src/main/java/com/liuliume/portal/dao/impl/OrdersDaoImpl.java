@@ -1,5 +1,6 @@
 package com.liuliume.portal.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class OrdersDaoImpl implements OrdersDao{
 	@Override
 	public void updateOrder(Orders orders) {
 		ordersMapper.updateEntity(orders);
+	}
+
+	@Override
+	public int countHairDressingOrders(Date serviceDate, String startTime,
+			String endTime) {
+		return ordersMapper.countHairDressingOrders(serviceDate, startTime, endTime);
 	}
 
 }

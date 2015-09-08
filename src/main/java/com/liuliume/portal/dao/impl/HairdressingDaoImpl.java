@@ -54,5 +54,4 @@ public class HairdressingDaoImpl implements HairdressingDao{
 		return hairdressingMapper.listAllHairdressings();
 	}
 
-
 }

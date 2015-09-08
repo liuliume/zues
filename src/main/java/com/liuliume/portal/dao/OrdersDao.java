@@ -1,5 +1,6 @@
 package com.liuliume.portal.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.liuliume.portal.entity.Orders;
@@ -16,4 +17,13 @@ public interface OrdersDao {
 	public void createOrder(Orders orders);
 	
 	public void updateOrder(Orders orders);
+	
+	/**
+	 * 获取某个时间段的美容订单数量
+	 * @param serviceDate
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public int countHairDressingOrders(Date serviceDate,String startTime,String endTime);
 }

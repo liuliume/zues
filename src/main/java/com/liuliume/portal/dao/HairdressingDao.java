@@ -12,6 +12,7 @@ public interface HairdressingDao {
     public int count(Parameter parameter);
 
     public List<Hairdressing> list(Parameter parameter);
+    
 
     public Hairdressing findHairdressingById(Integer hairdress_id);
 
