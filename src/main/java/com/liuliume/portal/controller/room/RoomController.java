@@ -78,7 +78,7 @@ public class RoomController {
         logger.info("call AddressController.list");
         List<Room> room = null;
         try {
-            room = roomService.list();
+            room = roomService.listAllRooms();
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",

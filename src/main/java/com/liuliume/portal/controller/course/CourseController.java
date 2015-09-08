@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * Created by clement on 8/29/15.
@@ -68,6 +69,21 @@ public class CourseController {
 //        resultSeed.setResult(list);
         map.put("seed", seed);
         return mav;
+    }
+
+    @RequestMapping(value="listForJson",method=RequestMethod.GET)
+    @ResponseBody
+    private List<Course> listForJson(){
+        logger.info("call AddressController.list");
+        List<Course> list = null;
+        try {
+            list = courseService.listAllCourse();
+        } catch (Exception e) {
+            logger.error(MessageFormat.format(
+                    "Get Account list error! reason:{0}, Paramter:seed:{1}.",
+                    e.getMessage(), null), e);
+        }
+        return list;
     }
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})

@@ -3,10 +3,12 @@ package com.liuliume.portal.service.impl;
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.common.MBox;
 import com.liuliume.portal.dao.AnimalDao;
+import com.liuliume.portal.dao.CourseDao;
 import com.liuliume.portal.dao.RoomDao;
 import com.liuliume.portal.dao.cond.RoomQueryCond;
 import com.liuliume.portal.entity.Animals;
 import com.liuliume.portal.entity.AnimalsType;
+import com.liuliume.portal.entity.Course;
 import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.CountService;
@@ -34,6 +36,9 @@ public class CountServiceImpl implements CountService {
     @Autowired
     private AnimalDao animalDao;
 
+    @Autowired
+    private CourseDao courseDao;
+
     public double roomCountMoney(Date startDate,Date endDate,Integer room_id,Integer animals_id){
         Room room = null;
         Animals animals = null;
@@ -58,6 +63,25 @@ public class CountServiceImpl implements CountService {
             } else {
                 money = room.getCost() * animalsType.getExpenseCoefficient() * days;
             }
+        }
+        return money;
+    }
+
+    public double courseCountMoney(Integer course_id,Integer animals_id){
+        Course course = null;
+        Animals animals = null;
+        AnimalsType animalsType = null;
+        double money = 0.0;
+        if(StringUtils.isNotBlank(String.valueOf(course_id))) {
+            course = courseDao.findCourseById(course_id);
+        }
+        if(StringUtils.isNotBlank(String.valueOf(animals_id))) {
+            animals = animalDao.findAnimalsById(animals_id);
+        }
+        int type_id = animals.getTypeId();
+        animalsType = animalDao.findAnimalsTypeById(type_id);
+        if(course != null && animalsType != null) {
+            money = course.getExpense() * animalsType.getExpenseCoefficient();
         }
         return money;
     }
