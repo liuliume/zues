@@ -37,9 +37,13 @@
 
 	<select id="findAccountById" resultType="com.liuliume.portal.entity.Account">
 		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
-		as uniqname,gender,province_id,city_id,area_id,address,flag
-		from
-		account where flag <![CDATA[<>]]>99
+		as uniqname,gender,province_id,city_id,area_id,address,flag,ad1.name as province,
+		ad2.name as city,ad3.name as area
+		from account ac
+		left join address ad1 on ac.province_id=ad1.id and ad1.level=1
+		left join address ad2 on ac.city_id = ad2.id and ad2.level=2
+		left join address ad3 on ac.city_id = ad3.id and ad3.level=2
+		where flag <![CDATA[<>]]>99
 		<if test="account_id != null">
 			and account_id=#{account_id}
 		</if>
@@ -47,8 +51,12 @@
 
 	<select id="listAllAccount" resultType="com.liuliume.portal.entity.Account">
 		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
-		as uniqname,gender,province_id,city_id,area_id,address,flag
-		from
-		account where flag <![CDATA[<>]]>99
+		as uniqname,gender,province_id,city_id,area_id,address,flag,ad1.name as province,
+		ad2.name as city,ad3.name as area
+		from account ac
+		left join address ad1 on ac.province_id=ad1.id and ad1.level=1
+		left join address ad2 on ac.city_id = ad2.id and ad2.level=2
+		left join address ad3 on ac.city_id = ad3.id and ad3.level=2
+		where flag <![CDATA[<>]]>99
 	</select>
 </mapper>

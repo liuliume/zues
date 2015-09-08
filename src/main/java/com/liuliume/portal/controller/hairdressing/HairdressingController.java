@@ -7,6 +7,7 @@ import com.liuliume.portal.entity.Course;
 import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.service.CourseService;
 import com.liuliume.portal.service.HairdressingService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.text.MessageFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by clement on 8/29/15.
@@ -124,6 +128,28 @@ public class HairdressingController {
             jdata.setSuccess(false);
         }
         return jdata;
+    }
+    
+    @RequestMapping(value="listAllHairDressing",method=RequestMethod.GET)
+    @ResponseBody
+    public JData listAllHairDressing(){
+    	JData jData = new JData();
+    	logger.info("call AddressController.listHairDressingType");
+        try {
+            List<Hairdressing> list = hairdressingService.listAllHairdressings();
+            jData.setData(list);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("获取美容类型成功");
+        } catch (Exception e) {
+            logger.error(
+                    "Get Account list error! reason:{0}, Paramter:seed:{1}.",e.getMessage(),e);
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("获取美容类型失败");
+        }
+        return jData;
     }
 
 }

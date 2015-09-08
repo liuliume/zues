@@ -22,4 +22,5 @@ public interface HairdressingService {
     public void batchDelete(String hairdressIds) throws Exception;
     
     public List<Hairdressing> listAllHairdressings();
+    
 }

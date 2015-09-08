@@ -149,6 +149,44 @@ public class AddressController {
     }
 
 
+    @RequestMapping(value="listAllProvince",method=RequestMethod.GET)
+    @ResponseBody
+    public JData listAllProvince() {
+    	JData jData = new JData("操作成功",true);
+    	List<Address> firstAddress = null;
+        try {
+            logger.info("call AddressController.listAllProvince");
+            firstAddress = addressService.findAddressByLevel(AddressLevelEnum.First.getLevel());
+            jData.setCode(200);
+            jData.setData(firstAddress);
+        } catch (Exception e) {
+            logger.error("AddressController.listAllProvince Error! reason:{},",
+                    e.getMessage(),e);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("操作失败");
+        }
+        return jData;
+	}
+    
+    @RequestMapping(value="listAllProvince",method=RequestMethod.GET)
+    @ResponseBody
+    public JData listAllSubAddress(@RequestParam(value="parent_id",required=true)int parent_id) {
+    	List<Address> firstAddress = null;
+    	JData jData = new JData("操作成功",true);
+        try {
+            logger.info("call AddressController.listAllSubAddress");
+            firstAddress = addressService.findAddressByParentId(parent_id);
+            jData.setData(firstAddress);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),parent_id,e);
+            jData.setSuccess(false);
+            jData.setDetail("操作失败");
+        }
+        System.out.println(firstAddress);
+        return jData;
+	}
 
     @ModelAttribute("allAddressLevel")
     public Map<String, AddressLevelEnum> getAllAddressLevel(){

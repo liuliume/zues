@@ -24,5 +24,7 @@ public interface HairdressingTimeMapper extends MyBatisBaseMapper<HairdressingTi
     int count(@Param("param")Parameter parameter);
 
     public List<HairdressingTime> list(@Param("param")Parameter parameter);
+    
+    public List<HairdressingTime> listAllHairdressingTime();
 
 }

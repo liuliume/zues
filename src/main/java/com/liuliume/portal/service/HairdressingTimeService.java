@@ -4,6 +4,7 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.entity.HairdressingTime;
 
+import java.util.Date;
 import java.util.List;
 
 public interface HairdressingTimeService {
@@ -20,4 +21,6 @@ public interface HairdressingTimeService {
     public void createOrUpdate(HairdressingTime hairdressingTime) throws Exception;
 
     public void batchDelete(String hairdressingIds) throws Exception;
+    
+    public List<HairdressingTime> listValidHairingDressingTime(Date serviceDate) throws Exception;
 }

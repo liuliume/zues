@@ -11,6 +11,7 @@ import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.CourseService;
 import com.liuliume.portal.service.HairdressingService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
