@@ -71,6 +71,22 @@ public class RoomController {
         return mav;
     }
 
+
+    @RequestMapping(value="listForJson",method=RequestMethod.GET)
+    @ResponseBody
+    private List<Room> listForJson(){
+        logger.info("call AddressController.list");
+        List<Room> room = null;
+        try {
+            room = roomService.list();
+        } catch (Exception e) {
+            logger.error(MessageFormat.format(
+                    "Get Account list error! reason:{0}, Paramter:seed:{1}.",
+                    e.getMessage(), "", e));
+        }
+        return room;
+    }
+
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView index(ModelMap model,@RequestParam(value="room_id",required=false)Integer room_id) {
         Room room = null;

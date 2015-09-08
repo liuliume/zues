@@ -28,6 +28,11 @@ public class RoomDaoImpl implements RoomDao{
 	}
 
     @Override
+    public List<Room> list() throws Exception {
+        return roomMapper.listAllRooms();
+    }
+
+    @Override
     public Room findRoomById(Integer room_id) {
         return roomMapper.selectByPrimaryKey(room_id);
     }

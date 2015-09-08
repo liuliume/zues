@@ -16,6 +16,8 @@ public interface RoomService {
 	 */
 	public List<Room> list(Seed<Room> seed) throws Exception;
 
+    public List<Room> list() throws Exception;
+
     public Room findRoomById(Integer room_id) throws Exception;
 
     public void createOrUpdate(Room room) throws Exception;

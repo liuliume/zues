@@ -13,6 +13,8 @@ public interface RoomDao {
 	
 	public List<Room> list(Parameter parameter);
 
+    public List<Room> list() throws Exception;
+
     public Room findRoomById(Integer room_id);
 
     public void createRoom(Room room);

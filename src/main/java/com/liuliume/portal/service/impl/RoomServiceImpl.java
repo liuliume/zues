@@ -62,6 +62,17 @@ public class RoomServiceImpl implements RoomService {
 	}
 
     @Override
+    public List<Room> list() throws Exception{
+        logger.info("Address Service list bengins.");
+        List<Room> result = new ArrayList<Room>();
+
+        result = roomDao.list();
+        return result;
+    }
+
+
+
+    @Override
     public Room findRoomById(Integer room_id) throws Exception {
         Room room = null;
         if(room_id!=null)
