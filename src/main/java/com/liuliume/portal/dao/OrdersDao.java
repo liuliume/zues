@@ -26,4 +26,6 @@ public interface OrdersDao {
 	 * @return
 	 */
 	public int countHairDressingOrders(Date serviceDate,String startTime,String endTime);
+
+    public int countRoomOrders(Date startTime);
 }

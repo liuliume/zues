@@ -155,18 +155,31 @@ public class RoomController {
     }
 
 
-    public void verifyRoomNum(@RequestParam(value="startDate",required=true)String startDate,
+    @RequestMapping(value="verifyRoomNum",method = RequestMethod.POST)
+    @ResponseBody
+    public JData verifyRoomNum(@RequestParam(value="startDate",required=true)String startDate,
                               @RequestParam(value="endDate",required=true)String endDate,
                               @RequestParam(value="room_id",required=true)Integer room_id) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+        JData jData = new JData();
         try {
             Date start_Date = sdf.parse(startDate);
             Date end_Date = sdf.parse(endDate);
+            boolean flag = roomService.isRoomNotEmpty(start_Date,end_Date,room_id);
+            jData.setData(flag);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("获取成功");
         }catch (Exception e){
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), null), e);
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("获取失败");
         }
+        return jData;
     }
 
 }
