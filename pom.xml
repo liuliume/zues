@@ -363,6 +363,13 @@
 			<version>${httpclient.version}</version>
 		</dependency>
 
+        <dependency>
+            <groupId>sms</groupId>
+            <artifactId>test</artifactId>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/resources/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar</systemPath>
+        </dependency>
+
 		<!--<dependency>-->
 			<!--<groupId>net.sf.json-lib</groupId>-->
 			<!--<artifactId>json-lib</artifactId>-->
