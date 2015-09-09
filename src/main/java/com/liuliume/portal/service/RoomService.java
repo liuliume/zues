@@ -4,6 +4,7 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.entity.Room;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface RoomService {
     public void batchDelete(String address_ids) throws Exception;
     
     public List<Room> listAllRooms() throws Exception;
+
+    public boolean isRoomNotEmpty(Date startDate,Date endDate,Integer room_id);
 }

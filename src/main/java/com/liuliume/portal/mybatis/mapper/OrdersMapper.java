@@ -21,5 +21,5 @@ public interface OrdersMapper extends MyBatisBaseMapper<Orders> {
 			@Param("startTime") String startTime,
 			@Param("endTime") String endTime);
 
-    public int countRoomOrders(@Param("startDate") String startDate);
+    public int countRoomOrders(@Param("startDate") Date startDate);
 }

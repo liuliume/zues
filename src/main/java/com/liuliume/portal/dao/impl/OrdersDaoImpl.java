@@ -49,7 +49,7 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
     @Override
-    public int countRoomOrders(String startTime) {
+    public int countRoomOrders(Date startTime) {
         return ordersMapper.countRoomOrders(startTime);
     }
 
