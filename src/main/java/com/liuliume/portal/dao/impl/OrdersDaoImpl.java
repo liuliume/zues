@@ -48,4 +48,9 @@ public class OrdersDaoImpl implements OrdersDao{
 		return ordersMapper.countHairDressingOrders(serviceDate, startTime, endTime);
 	}
 
+    @Override
+    public int countRoomOrders(String startTime) {
+        return ordersMapper.countRoomOrders(startTime);
+    }
+
 }
