@@ -151,7 +151,8 @@
 
     <select id="countRoomOrders" resultType="int">
       select count(*) from orders
-      where order_type=1 and status=1
+      where order_type=1 and status!=-3 and status!=99
+      and start_date <![CDATA[<=]]> #{startDate} and end_date <![CDATA[>=]]> #{startDate}
     </select>
 
 	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
