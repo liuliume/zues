@@ -4,15 +4,18 @@ import com.liuliume.common.pagination.Seed;
 import com.liuliume.portal.common.MBox;
 import com.liuliume.portal.dao.AnimalDao;
 import com.liuliume.portal.dao.CourseDao;
+import com.liuliume.portal.dao.HairdressingDao;
 import com.liuliume.portal.dao.RoomDao;
 import com.liuliume.portal.dao.cond.RoomQueryCond;
 import com.liuliume.portal.entity.Animals;
 import com.liuliume.portal.entity.AnimalsType;
 import com.liuliume.portal.entity.Course;
+import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.service.CountService;
 import com.liuliume.portal.service.RoomService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +41,9 @@ public class CountServiceImpl implements CountService {
 
     @Autowired
     private CourseDao courseDao;
+    
+    @Autowired
+    private HairdressingDao hairdressingDao;
 
     public double roomCountMoney(Date startDate,Date endDate,Integer room_id,Integer animals_id){
         Room room = null;
@@ -95,6 +101,29 @@ public class CountServiceImpl implements CountService {
         long days = (e.getTimeInMillis() - s.getTimeInMillis())/(1000*3600*24);
         return Integer.parseInt(String.valueOf(days));
     }
+
+	@Override
+	public double hairDressingCountMoney(Integer animals_id,
+			Integer hairDressing_id) throws Exception {
+		double money=0;
+		
+		if(animals_id == null || animals_id <=0 ||hairDressing_id==null||hairDressing_id<=0){
+			throw new IllegalArgumentException("参数错误");
+		}
+		Animals animals = animalDao.findAnimalsById(animals_id);
+		if(animals==null){
+			throw new Exception("该宠物不存在");
+		}
+		int type_id = animals.getTypeId();
+		AnimalsType animalsType = animalDao.findAnimalsTypeById(type_id);
+		
+		Hairdressing hairdress = hairdressingDao.findHairdressingById(hairDressing_id);
+		if(hairdress==null){
+			throw new Exception("服务项目不存在");
+		}
+		money = hairdress.getExpense()*animalsType.getExpenseCoefficient();
+		return money;
+	}
 
 
 }
