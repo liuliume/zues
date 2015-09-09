@@ -1,5 +1,6 @@
 package com.liuliume.portal.controller.count;
 
+import com.liuliume.portal.common.JData;
 import com.liuliume.portal.service.CountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,36 +29,53 @@ public class CountController {
 
     @RequestMapping(value = "room_count", method = RequestMethod.GET)
     @ResponseBody
-    public Double roomCountMoney(@RequestParam(value="startDate",required=true)String startDate,
+    public JData roomCountMoney(@RequestParam(value="startDate",required=true)String startDate,
                                @RequestParam(value="endDate",required=true)String endDate,
                                @RequestParam(value="room_id",required=true)Integer room_id,
                                @RequestParam(value="animals_id",required=true)Integer animals_id) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        JData jData = new JData();
         try {
             Date start_Date = sdf.parse(startDate);
             Date end_Date = sdf.parse(endDate);
             double money = countService.roomCountMoney(start_Date,end_Date,room_id,animals_id);
-            return money;
+            jData.setData(money);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("获取费用成功");
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), null), e);
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("获取费用失败");
         }
-        return null;
+        return jData;
     }
 
     @RequestMapping(value = "course_count", method = RequestMethod.GET)
     @ResponseBody
-    public Double courseCountMoney(@RequestParam(value="course_id",required=true)Integer course_id,
+    public JData courseCountMoney(@RequestParam(value="course_id",required=true)Integer course_id,
                                    @RequestParam(value="animals_id",required=true)Integer animals_id) {
         double money = 0.0;
+        JData jData = new JData();
         try{
             money = countService.courseCountMoney(course_id,animals_id);
+            jData.setData(money);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("获取费用成功");
         } catch (Exception e){
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), null), e);
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("获取费用失败");
         }
-        return money;
+        return jData;
     }
 }

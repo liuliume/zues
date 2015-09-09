@@ -76,17 +76,26 @@ public class RoomController {
 
     @RequestMapping(value="listForJson",method=RequestMethod.GET)
     @ResponseBody
-    private List<Room> listForJson(){
+    private JData listForJson(){
         logger.info("call AddressController.list");
+        JData jData = new JData();
         List<Room> room = null;
         try {
             room = roomService.listAllRooms();
+            jData.setData(room);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("获取房间类型成功");
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), "", e));
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("获取房间类型失败");
         }
-        return room;
+        return jData;
     }
 
     @RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})

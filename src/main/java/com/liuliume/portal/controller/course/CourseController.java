@@ -76,12 +76,21 @@ public class CourseController {
     private List<Course> listForJson(){
         logger.info("call AddressController.list");
         List<Course> list = null;
+        JData jData = new JData();
         try {
             list = courseService.listAllCourse();
+            jData.setData(list);
+            jData.setCode(200);
+            jData.setSuccess(true);
+            jData.setDetail("获取课程类型成功");
         } catch (Exception e) {
             logger.error(MessageFormat.format(
                     "Get Account list error! reason:{0}, Paramter:seed:{1}.",
                     e.getMessage(), null), e);
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("获取课程类型失败");
         }
         return list;
     }

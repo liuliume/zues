@@ -149,6 +149,11 @@
 		and service_end <![CDATA[>=]]>#{endTime}
 	</select>
 
+    <select id="countRoomOrders" resultType="int">
+      select count(*) from orders
+      where order_type=1 and status=1
+    </select>
+
 	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
 		> insert into orders (order_id, account_id, order_type, order_type_id, animals_id, 
 		province, city, area, status, order_time, update_at, start_date, end_date, 
