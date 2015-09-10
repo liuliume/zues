@@ -24,4 +24,7 @@ public class Constants {
 	//付款方式
 	public static final int PAYMENTTYPE_ONLINE = 1;//在线付款
 	public static final int PAYMENTTYPE_OFFLINE=2;//线下付款
+
+    //内存缓存时间
+    public static final int CACHE_REFRESH_INTERVAL = 5;
 }
