@@ -20,4 +20,6 @@ public interface OrdersService {
 	public void transferOrder(Integer orderId) throws Exception;
 	
 	public void completeOrder(Integer orderId) throws Exception;
+	
+	public void create(Orders orders) throws Exception;
 }

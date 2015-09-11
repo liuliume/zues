@@ -1,9 +1,13 @@
 package com.liuliume.portal.common;
 
 public class Constants {
+	//后台系统Session key
 	public static final String SESSION_ADMIN = "SESSION_ADMIN";
 	public static final String SESSION_AUTHORIZED_ACTION = "SESSION_AUTHORIZED_ACTION";
 	public static final String SESSION_FILTERED_MENU = "SESSION_FILTERED_MENU";
+	
+	//前端普通用户Session Key
+	public static final String SESSION_USER = "SESSION_USER"; 
 	
 	public static final int SIMPLE_DELETE=99;
 	

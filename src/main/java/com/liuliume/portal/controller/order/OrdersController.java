@@ -4,6 +4,9 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Animals;
@@ -225,13 +229,39 @@ public class OrdersController {
 	public JData completeOrder(@RequestParam(value = "orderId", required = true)Integer orderId) {
 		JData jData = new JData("操作成功", true);
 		try {
-			ordersService.transferOrder(orderId);
+			ordersService.completeOrder(orderId);
 		} catch (Exception e) {
 			logger.error(
 					"Error in OrdersController.payOrder! reason:{}, Paramter:ordersId:{}.",
 					e.getMessage(), orderId, e);
 			jData.setDetail(e.getMessage());
 			jData.setSuccess(false);
+		}
+		return jData;
+	}
+	
+	@RequestMapping(value="create",method=RequestMethod.POST)
+	@ResponseBody
+	public JData create(Orders orders,HttpServletRequest request,HttpSession session){
+		logger.info("call the create Orders");
+		JData jData = new JData();
+		try {
+			
+			//获取Session中的用户信息
+			Account account = (Account) session.getAttribute(Constants.SESSION_USER);
+			orders.setAccount(account);
+			orders.setAccountId(account.getAccount_id());
+			
+			ordersService.create(orders);
+			jData.setCode(200);
+			jData.setSuccess(true);
+			jData.setDetail("操作成功");
+		} catch (Exception e) {
+			logger.error("create Or Update  Error." + e.getMessage()
+					+ " orders[" + orders + "]", e);
+			jData.setCode(500);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
 		}
 		return jData;
 	}

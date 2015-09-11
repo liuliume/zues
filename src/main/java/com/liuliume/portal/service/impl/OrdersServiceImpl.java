@@ -16,17 +16,28 @@ import com.liuliume.portal.common.MBox;
 import com.liuliume.portal.dao.OrdersDao;
 import com.liuliume.portal.dao.cond.OrdersCond;
 import com.liuliume.portal.entity.Account;
+import com.liuliume.portal.entity.Animals;
 import com.liuliume.portal.entity.Orders;
+import com.liuliume.portal.entity.Room;
 import com.liuliume.portal.model.OrderStatusEnum;
 import com.liuliume.portal.model.OrderTypeEnum;
 import com.liuliume.portal.mybatis.Parameter;
+import com.liuliume.portal.service.AnimalService;
+import com.liuliume.portal.service.CountService;
 import com.liuliume.portal.service.OrdersService;
+import com.liuliume.portal.service.RoomService;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
 
 	@Autowired
 	private OrdersDao ordersDao;
+	@Autowired
+	private RoomService roomService;
+	@Autowired
+	private AnimalService animalService;
+	@Autowired
+	CountService countService;
 
 	@Override
 	public List<Orders> list(Seed<Orders> seed) throws Exception {
@@ -171,5 +182,67 @@ public class OrdersServiceImpl implements OrdersService {
 		ordersDao.updateOrder(orders);
 	}
 
+	@Override
+	@Transactional
+	public void create(Orders orders) throws Exception {
+		if(orders==null)
+			throw new IllegalArgumentException("订单不能为空");
+		if(orders.getOrderType()==null)
+			throw new IllegalArgumentException("订单类型不能为空");
+		OrderTypeEnum orderTypeEnum = OrderTypeEnum.parse(orders.getOrderType());
+		switch (orderTypeEnum) {
+		case FOSTER://寄养订单
+			_createFosterOrder(orders);
+			break;
+		case TRAINING://训练订单
+			_createTrainingOrders(orders);
+			break;
+		case BEAUTY://美容订单
+			_createBeautyOrders(orders);
+			break;
+		default:
+			throw new IllegalArgumentException("订单类型错误");
+		}
+	}
 	
+	private void _createFosterOrder(Orders orders) throws Exception{
+		if(StringUtils.isBlank(orders.getStartDate())){
+			throw new Exception("开始时间不能为空");
+		}
+		if(StringUtils.isBlank(orders.getEndDate())){
+			throw new Exception("结束时间不能为空");
+		}
+		if(orders.getRoomId()==null || orders.getRoomId()<=0){
+			throw new IllegalArgumentException("寄养房间必填");
+		}
+		Room room = roomService.findRoomById(orders.getRoomId());
+		if(room==null){
+			throw new Exception("寄养房间类型错误");
+		}
+		Date startDate = new Date(orders.getStartDate());
+		Date endDate = new Date(orders.getEndDate());
+		boolean empty = roomService.isRoomNotEmpty(startDate, endDate, orders.getRoomId());
+		if(!empty){
+			throw new Exception("该房间已满,请选择其他房间类型");
+		}
+		if(orders.getAnimalsId()==null || orders.getAnimalsId()<=0){
+			throw new Exception("宠物类型不能为空");
+		}
+		Animals animals = animalService.findAnimalsById(orders.getAnimalsId());
+		if(animals==null){
+			throw new Exception("宠物类型错误");
+		}
+		double cost = countService.roomCountMoney(startDate, endDate, orders.getRoomId(), orders.getAnimalsId());
+		orders.setCost(cost);
+		orders.setCreateTime(new Date());
+		ordersDao.createOrder(orders);
+	}
+
+	private void _createTrainingOrders(Orders orders) throws Exception{
+		
+	}
+	
+	private void _createBeautyOrders(Orders orders) throws Exception{
+		
+	}
 }
