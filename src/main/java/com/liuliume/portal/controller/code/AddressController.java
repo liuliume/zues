@@ -169,7 +169,7 @@ public class AddressController {
         return jData;
 	}
     
-    @RequestMapping(value="listAllProvince",method=RequestMethod.GET)
+    @RequestMapping(value="listAllSubAddress",method=RequestMethod.GET)
     @ResponseBody
     public JData listAllSubAddress(@RequestParam(value="parent_id",required=true)int parent_id) {
     	List<Address> firstAddress = null;

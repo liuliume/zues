@@ -1,7 +1,19 @@
 package com.liuliume.portal.controller.Sms;
 
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
+import com.liuliume.portal.common.JData;
+import com.liuliume.portal.service.SmsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -12,7 +24,14 @@ import java.util.Set;
  * Time: 下午5:30
  * To change this template use File | Settings | File Templates.
  */
+@Controller
+@RequestMapping(value={"/sms"},method= RequestMethod.GET)
 public class SmsController {
+
+    private Logger logger = LoggerFactory.getLogger(SmsController.class);
+
+    @Autowired
+    private SmsService smsService;
 
     public static void main(String args[]){
 //        CCPRestSmsSDK smsSDK = new CCPRestSmsSDK();
@@ -80,5 +99,35 @@ public class SmsController {
             //异常返回输出错误码和错误信息
             System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
         }
+    }
+
+    @RequestMapping(value="getMsgCode",method= RequestMethod.POST)
+    @ResponseBody
+    public JData getMsgCode(@RequestParam(value="mobile",required=true)String mobile,HttpServletRequest request){
+        JData jData = new JData();
+        try {
+            boolean flag = smsService.getMsgCode(mobile);
+            if(flag){
+                jData.setData(flag);
+                jData.setCode(200);
+                jData.setSuccess(true);
+                jData.setDetail("发送短信成功");
+            } else {
+                jData.setData(flag);
+                jData.setCode(200);
+                jData.setSuccess(true);
+                jData.setDetail("发送短信失败");
+            }
+
+        } catch (Exception e) {
+            logger.error(MessageFormat.format(
+                    "Get Account list error! reason:{0}, Paramter:seed:{1}.",
+                    e.getMessage(), "", e));
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("发送短信异常");
+        }
+        return jData;
     }
 }
