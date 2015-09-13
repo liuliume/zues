@@ -73,10 +73,10 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">宠物Id</th>
-								<th style="width: 10%;">宠物名称</th>
-								<th style="width: 10%;">宠物类型</th>
-								<th style="width: 20%;">操作</th>
+								<th style="width: 20%;">宠物Id</th>
+								<th style="width: 20%;">宠物名称</th>
+								<th style="width: 20%;">宠物类型</th>
+								<th style="width: 30%;">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -88,7 +88,9 @@
 												value="${item.id}"> </span>
 										</div>
 									</td>
-									<td>${item.id}</td>
+									<td>
+										<a href="/animal/animalsIndex?id=${item.id }">${item.id}</a>
+									</td>
 									<td>${item.animalsName}</td>
 									<td>${item.type.typeName}</td>
 

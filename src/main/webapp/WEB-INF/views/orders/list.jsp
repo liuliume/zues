@@ -45,10 +45,10 @@
 						</div>
 						<label class="col-md-1 control-label">用户手机: </label>
 						<div class="col-md-3">
-							<input type="text" id="account_name"
+							<input type="text" id="mobile"
 								class="form-control input-medium input-inline"
-								name="account_name" placeholder="用户名称"
-								value="${seed.filter['account_name']}" />
+								name="mobile" placeholder="用户手机号"
+								value="${seed.filter['mobile']}" />
 						</div>
 					</div>
 					<div class="form-group">

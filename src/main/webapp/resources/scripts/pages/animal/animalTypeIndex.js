@@ -1,6 +1,13 @@
 var typeIndex=function(){
 	
 	var createOrUpdate = function(){
+		$("span[id^=errorInfo]").each(function(index,item){
+			$(item).hide();
+		});
+		$("input[type=text]").each(function(index,item){
+			$(item).removeAttr("style");
+		})
+		
 		var typeName = $("#typeName").val();
 		if(typeName ==null || typeName==""){
 			$("#errorInfoName").text("宠物类型不能为空");

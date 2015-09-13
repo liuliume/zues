@@ -1,18 +1,26 @@
 var animalIndex=function(){
 	
 	var createOrUpdate = function(){
+		
+		$("span[id^=errorInfo]").each(function(index,item){
+			$(item).hide();
+		});
+		$("input[type=text]").each(function(index,item){
+			$(item).removeAttr("style");
+		})
+		
 		var animalsName = $("#animalsName").val();
 		if(animalsName ==null || animalsName==""){
 			$("#errorInfoName").text("宠物名称不能为空");
 			$("#errorInfoName").css("display","block");
-			$("#typeName").css("border-color","red");
+			$("#animalsName").css("border-color","red");
 			return false;
 		}
 		
 		if(animalsName.length>32){
 			$("#errorInfoName").text("宠物名称长度不超过32");
 			$("#errorInfoName").css("display","block");
-			$("#typeName").css("border-color","red");
+			$("#typeId").css("border-color","red");
 			return false;
 		}
 		

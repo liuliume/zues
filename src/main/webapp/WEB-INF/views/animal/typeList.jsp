@@ -72,10 +72,10 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">类型Id</th>
-								<th style="width: 10%;">宠物类型</th>
-								<th style="width: 10%;">折扣系数</th>
-								<th style="width: 20%;">操作</th>
+								<th style="width: 20%;">类型Id</th>
+								<th style="width: 20%;">宠物类型</th>
+								<th style="width: 20%;">折扣系数</th>
+								<th style="width: 30%;">操作</th>
 							</tr>
 						</thead>
 						<tbody>

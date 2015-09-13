@@ -99,8 +99,13 @@
 									<td><a href="/account/index?account_id=${item.account_id }">${item.uniqname}</a></td>
 									<td>${item.email}</td>
 									<td>${item.mobile}</td>
-									<td>${item.reg_time}</td>
-									<td>${item.gender}</td>
+									<td><fmt:formatDate value="${item.reg_time}" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
+									<td><%-- ${item.gender} --%>
+										<c:choose>
+											<c:when test="${item.gender eq 0}">男</c:when>
+											<c:when test="${item.gender eq 1}">女</c:when>
+										</c:choose>
+									</td>
 									<td>${item.address}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"

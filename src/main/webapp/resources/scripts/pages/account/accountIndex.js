@@ -5,6 +5,9 @@ var ZuesAccountIndex = function() {
 		
 		$("span[id^=errorInfo]").each(function(index,item){
 			$(item).hide();
+		});
+		$("input[type=text]").each(function(index,item){
+			$(item).removeAttr("style");
 		})
 
 		var name = $("#uniqname").val();
