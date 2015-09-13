@@ -9,4 +9,6 @@ import java.util.List;
 public interface SmsService {
 
     public boolean getMsgCode(String mobile) throws Exception;
+
+    public boolean verifyMsgCode(String mobile,String code);
 }
