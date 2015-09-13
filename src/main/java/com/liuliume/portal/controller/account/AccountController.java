@@ -2,6 +2,7 @@ package com.liuliume.portal.controller.account;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.liuliume.common.pagination.Seed;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
+import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Account;
+import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.model.GenderEnum;
 import com.liuliume.portal.service.AccountService;
+import com.liuliume.portal.service.AddressService;
 
 @Controller
 @RequestMapping(value={"/account"},method=RequestMethod.GET)
@@ -34,6 +38,8 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private AddressService addressService;
 	
 	@RequestMapping(value="list",method=RequestMethod.GET)
 	public ModelAndView list(ModelMap map,@SeedParam Seed<Account> seed){
@@ -144,5 +150,13 @@ public class AccountController {
 		 }
 		 return genders;
 	}
-	
+	@ModelAttribute("allProvince")
+	public List<Address> genAllProvince() throws Exception{
+		List<Address> list = addressService.findAddressByLevel(Constants.LEVEL_PROVINCE.toString());
+		Address all = new Address();
+		all.setId(-1);
+		all.setName("All");
+		list.add(all);
+		return list;
+	}
 }

@@ -30,6 +30,12 @@
 								class="form-control input-medium input-inline" name="nameQ"
 								placeholder="Input name" value="${seed.filter['nameQ']}" />
 						</div>
+						<label class="col-md-1 control-label">手机号: </label>
+						<div class="col-md-3">
+							<input type="text" id="mobileQ"
+								class="form-control input-medium input-inline" name="mobileQ"
+								placeholder="Input mobile" value="${seed.filter['mobileQ']}" />
+						</div>
 						<div class="pull-right">
 							<a href="javascript:ZuesAccount.search();" class="btn dark">搜索
 								<i class="fa fa-search"></i>
@@ -89,7 +95,8 @@
 												value="${item.account_id}"> </span>
 										</div>
 									</td>
-									<td>${item.uniqname}</td>
+									<%-- <td>${item.uniqname}</td> --%>
+									<td><a href="/account/index?account_id=${item.account_id }">${item.uniqname}</a></td>
 									<td>${item.email}</td>
 									<td>${item.mobile}</td>
 									<td>${item.reg_time}</td>

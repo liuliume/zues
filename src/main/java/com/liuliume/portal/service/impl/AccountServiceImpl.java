@@ -40,6 +40,10 @@ public class AccountServiceImpl implements AccountService {
 			String name = seed.getFilter().get("nameQ");
 			account.setUniqname(name);
 		}
+		if(seed.getFilter().containsKey("mobileQ")){
+			String mobile = seed.getFilter().get("mobileQ");
+			account.setMobile(mobile);
+		}
 		//add other query condition here
 		
 		cond.setAccount(account);
