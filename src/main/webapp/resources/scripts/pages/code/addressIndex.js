@@ -3,12 +3,32 @@ var AddressIndex = function() {
 	var createOrUpdate = function() {
 		urls = "/code/address/createOrUpdate";
         var data;
+        if($("#name").val()==null || $("#name").val()==''){
+            $("#errorInfoAddress").css("display", "block");
+            $("#name").css("border-color", "red");
+            return;
+        }
         if($("#level").val() == '1'){
             data = "level="+$("#level").val()+"&name="+$("#name").val();
         } else if($("#level").val() == '2') {
             data = "level="+$("#level").val()+"&name="+$("#name").val()+"&parentId="+$("#parent_first_id").val();
+            if($("#parent_first_id").val()==null || $("#parent_first_id").val()==''){
+                $("#parent_address_first_error").css("display", "block");
+                $("#parent_first_id").css("border-color", "red");
+                return;
+            }
         } else if($("#level").val() == '3') {
             data = "level="+$("#level").val()+"&name="+$("#name").val()+"&parentId="+$("#parent_second_id").val();
+            if($("#parent_first_id").val()==null || $("#parent_first_id").val()==''){
+                $("#parent_address_first_error").css("display", "block");
+                $("#parent_first_id").css("border-color", "red");
+                return;
+            }
+            if($("#parent_second_id").val()==null || $("#parent_second_id").val()==''){
+                $("#parent_address_second_error").css("display", "block");
+                $("#parent_second_id").css("border-color", "red");
+                return;
+            }
         }
         if($("#address_id").val()!='' || $("#address_id").val()!=null){
             data = data + "&id=" + $("#address_id").val();

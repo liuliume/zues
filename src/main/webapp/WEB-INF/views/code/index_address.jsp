@@ -45,7 +45,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="name"
                                                    name="name" value="${address.name}"> <span
-                                                class="help-block display-hide" id="errorInfoAddress">请输入用户地址!</span>
+                                                class="help-block display-hide" id="errorInfoAddress">请输入地址名称!</span>
                                         </div>
 									</div>
 
@@ -63,7 +63,7 @@
 												</c:forEach>
 
 											</select>
-											<%--<span class="help-block display-hide" id="errorInfoGender">请选择性别!</span>--%>
+											<span class="help-block display-hide" id="parent_address_error">请选择地址!</span>
 										</div>
 									</div>
 
@@ -81,7 +81,7 @@
                                                 </c:forEach>
 
                                             </select>
-                                            <span class="help-block display-hide" id="parent_address_first_error">请选择一级地址</span>
+                                            <span class="help-block display-hide" id="parent_address_first_error">请选择地址</span>
                                         </div>
                                     </div>
 
@@ -99,7 +99,7 @@
                                                 </c:forEach>
 
                                             </select>
-                                            <span class="help-block display-hide" id="parent_address_second_error">请选择二级地址</span>
+                                            <span class="help-block display-hide" id="parent_address_second_error">请选择地址</span>
                                         </div>
                                     </div>
 
