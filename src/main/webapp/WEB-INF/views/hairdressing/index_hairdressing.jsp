@@ -45,7 +45,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="hairdressing_name"
                                                    name="hairdressingName" value="${hairdressing.hairdressingName}"> <span
-                                                class="help-block display-hide" id="course_name_error">请输入美容类型!</span>
+                                                class="help-block display-hide" id="hairdressing_name_error">请输入美容类型!</span>
                                         </div>
 									</div>
 
@@ -60,9 +60,9 @@
                                         <%--最长128个字符. </span>--%>
                                         <%--</div>--%>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" id="course_describe"
+                                            <input type="text" class="form-control" id="hairdressingDescribe"
                                                    name="hairdressingDescribe" value="${hairdressing.hairdressingDescribe}"> <span
-                                                class="help-block display-hide" id="errorInfoAddress">请输入房间类型!</span>
+                                                class="help-block display-hide" id="hairdressingDescribe_error">请输入美容类型描述!</span>
                                         </div>
                                     </div>
 
@@ -79,7 +79,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="expense"
                                                    name="expense" value="${hairdressing.expense}"> <span
-                                                class="help-block display-hide" id="expense_error">请输入房间类型!</span>
+                                                class="help-block display-hide" id="expense_error">请输入费用!</span>
                                         </div>
                                     </div>
 

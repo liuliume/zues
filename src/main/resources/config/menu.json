@@ -45,15 +45,15 @@
         },
         {
           "name": "美容管理",
-          "url": "/code",
+          "url": "//hairdressing",
           "children": [
             {
               "name":"类型管理",
-              "url":"/room/list"
+              "url":"//hairdressing/list"
             },
             {
               "name":"服务时间管理",
-              "url":"/room/list"
+              "url":"/hairdressing_time/list"
             }
           ]
         },

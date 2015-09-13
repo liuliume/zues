@@ -45,7 +45,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="course_name"
                                                    name="courseName" value="${course.courseName}"> <span
-                                                class="help-block display-hide" id="course_name_error">请输入房间类型!</span>
+                                                class="help-block display-hide" id="course_name_error">请输入课程名称!</span>
                                         </div>
 									</div>
 
@@ -62,7 +62,7 @@
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="course_describe"
                                                    name="courseDescribe" value="${course.courseDescribe}"> <span
-                                                class="help-block display-hide" id="errorInfoAddress">请输入房间类型!</span>
+                                                class="help-block display-hide" id="errorCourseDescribe">请输入课程描述!</span>
                                         </div>
                                     </div>
 
@@ -79,7 +79,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="expense"
                                                    name="expense" value="${course.expense}"> <span
-                                                class="help-block display-hide" id="expense_error">请输入房间类型!</span>
+                                                class="help-block display-hide" id="expense_error">请输入正确费用!</span>
                                         </div>
                                     </div>
 

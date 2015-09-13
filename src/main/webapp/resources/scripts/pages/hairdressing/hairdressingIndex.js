@@ -3,6 +3,30 @@ var Course = function() {
 	var createOrUpdate = function() {
 		urls = "/hairdressing/createOrUpdate";
 
+        if ($("#hairdressing_name").val() == null || $("#hairdressing_name").val() == "") {
+            $("#hairdressing_name_error").css("display", "block");
+            $("#hairdressing_name").css("border-color", "red");
+            return;
+        }
+
+        if ($("#hairdressingDescribe").val() == null || $("#hairdressingDescribe").val() == "") {
+            $("#hairdressingDescribe_error").css("display", "block");
+            $("#hairdressingDescribe").css("border-color", "red");
+            return;
+        }
+
+        if ($("#expense").val() == null || $("#expense").val() == "") {
+            $("#expense_error").css("display", "block");
+            $("#expense").css("border-color", "red");
+            return;
+        }
+        if(isNaN($("#expense").val())){
+            $("#expense_error").text("价格系数必须为数字");
+            $("#expense_error").css("display","block");
+            $("#expense").css("border-color","red");
+            return false;
+        }
+
 		$.ajax({
 			url:urls,
 			type:"POST",
