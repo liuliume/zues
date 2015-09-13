@@ -7,6 +7,7 @@ import com.google.common.cache.LoadingCache;
 import com.liuliume.common.util.RedisUtils;
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.service.SmsService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SmsServiceImpl implements SmsService {
 
-//    @Autowired
-//    private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public boolean getMsgCode(String mobile) throws Exception {
@@ -31,7 +32,6 @@ public class SmsServiceImpl implements SmsService {
         for (int i = 0; i < 4 ; i++){
             sb.append(new Random().nextInt(9));
         }
-//        redisUtils.set(mobile + "_verifyNo",sb.toString());
         Map<String,Object> result = sendMsg(mobile,sb.toString());
         if("000000".equals(result.get("statusCode"))){
             //正常返回输出data包体信息（map）
@@ -41,10 +41,21 @@ public class SmsServiceImpl implements SmsService {
                 Object object = data.get(key);
                 System.out.println(key +" = "+object);
             }
+            redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 5);
             return true;
         }else{
             //异常返回输出错误码和错误信息
             System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+            return false;
+        }
+    }
+
+    public boolean verifyMsgCode(String mobile,String code) {
+        String redisCode = redisUtils.get(mobile + "_verifyNo");
+        if(StringUtils.isNotEmpty(code) && code.equals(redisCode)) {
+            redisUtils.delete(mobile + "_verifyNo");
+            return true;
+        } else {
             return false;
         }
     }

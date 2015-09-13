@@ -25,7 +25,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value={"/sms"},method= RequestMethod.GET)
+@RequestMapping(value={"/sms"})
 public class SmsController {
 
     private Logger logger = LoggerFactory.getLogger(SmsController.class);
@@ -101,9 +101,9 @@ public class SmsController {
         }
     }
 
-    @RequestMapping(value="getMsgCode",method= RequestMethod.POST)
+    @RequestMapping(value="getMsgCode",method= RequestMethod.GET)
     @ResponseBody
-    public JData getMsgCode(@RequestParam(value="mobile",required=true)String mobile,HttpServletRequest request){
+    public JData getMsgCode(@RequestParam(value="mobile",required=true)String mobile){
         JData jData = new JData();
         try {
             boolean flag = smsService.getMsgCode(mobile);
@@ -130,4 +130,36 @@ public class SmsController {
         }
         return jData;
     }
+
+    @RequestMapping(value="verifyMsgCode",method= RequestMethod.GET)
+    @ResponseBody
+    public JData verifyMsgCode(@RequestParam(value="mobile",required=true)String mobile,
+                               @RequestParam(value="code",required=true)String code){
+        JData jData = new JData();
+        try {
+            boolean flag = smsService.verifyMsgCode(mobile,code);
+            if(flag){
+                jData.setData(flag);
+                jData.setCode(200);
+                jData.setSuccess(true);
+                jData.setDetail("验证成功");
+            } else {
+                jData.setData(flag);
+                jData.setCode(200);
+                jData.setSuccess(true);
+                jData.setDetail("验证失败");
+            }
+
+        } catch (Exception e) {
+            logger.error(MessageFormat.format(
+                    "Get Account list error! reason:{0}, Paramter:seed:{1}.",
+                    e.getMessage(), "", e));
+            jData.setData(null);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail("验证服务异常");
+        }
+        return jData;
+    }
+
 }
