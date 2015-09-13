@@ -20,7 +20,7 @@ var animalIndex=function(){
 		if(animalsName.length>32){
 			$("#errorInfoName").text("宠物名称长度不超过32");
 			$("#errorInfoName").css("display","block");
-			$("#typeId").css("border-color","red");
+			$("#animalsName").css("border-color","red");
 			return false;
 		}
 		

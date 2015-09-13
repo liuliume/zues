@@ -90,7 +90,9 @@
 												value="${item.id}"> </span>
 										</div>
 									</td>
-									<td>${item.roomName}</td>
+									<td>
+										<a href="/room/index?room_id=${item.id }">${item.roomName}</a>
+									</td>
 									<td>${item.cost}</td>
                                     <td>${item.weixinDiscount}</td>
 									<td>${item.discount30}</td>

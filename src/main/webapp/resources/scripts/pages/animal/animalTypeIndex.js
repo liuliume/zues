@@ -15,7 +15,6 @@ var typeIndex=function(){
 			$("#typeName").css("border-color","red");
 			return false;
 		}
-		
 		var expenseCoefficient = $("#expenseCoefficient").val();
 		if(expenseCoefficient== null || expenseCoefficient==""){
 			$("#errorInfoExpense").text("价格系数信息不能为空");

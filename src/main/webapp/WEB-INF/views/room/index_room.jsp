@@ -44,8 +44,8 @@
 										<%--</div>--%>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="name"
-                                                   name="roomName" value="${room.roomName}"> <span
-                                                class="help-block display-hide" id="errorInfoAddress">请输入房间类型!</span>
+                                                   name="roomName" value="${room.roomName}" placeholder="请输入房间名称"> <span
+                                                class="help-block display-hide" id="roomName_error">请输入房间类型!</span>
                                         </div>
 									</div>
 
@@ -62,7 +62,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="cost"
                                                    name="cost" value="${room.cost}"> <span
-                                                class="help-block display-hide" id="cost_error">请输入房间类型!</span>
+                                                class="help-block display-hide" id="cost_error">请输入房间名称!</span>
                                         </div>
                                     </div>
 
