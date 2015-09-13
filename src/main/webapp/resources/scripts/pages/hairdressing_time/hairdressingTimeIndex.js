@@ -16,6 +16,14 @@ var HairdressingTime = function() {
             return false;
         }
 
+        var reg= /^\d+$/;
+        if(!reg.test($("#servicePersionNum").val())){
+            $("#servicePersionNum_error").css("display", "block");
+            $("#servicePersionNum_error").text("房间数量必须为正整数")
+            $("#servicePersionNum").css("border-color", "red");
+            return;
+        }
+
 		$.ajax({
 			url:urls,
 			type:"POST",

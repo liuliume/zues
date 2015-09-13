@@ -123,7 +123,7 @@ insert  into `hairdressing`(`id`,`hairdressing_name`,`hairdressing_describe`,`ex
 DROP TABLE IF EXISTS `hairdressing_time`;
 
 CREATE TABLE `hairdressing_time` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_time` varchar(32) DEFAULT NULL,
   `end_time` varchar(32) DEFAULT NULL,
   `service_persion_num` int(11) DEFAULT NULL,
