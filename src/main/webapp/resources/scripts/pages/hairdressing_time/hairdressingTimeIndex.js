@@ -3,6 +3,19 @@ var HairdressingTime = function() {
 	var createOrUpdate = function() {
 		urls = "/hairdressing_time/createOrUpdate";
 
+        if ($("#servicePersionNum").val() == null || $("#servicePersionNum").val() == "") {
+            $("#servicePersionNum_error").css("display", "block");
+            $("#servicePersionNum").css("border-color", "red");
+            return;
+        }
+
+        if(isNaN($("#servicePersionNum").val())){
+            $("#servicePersionNum_error").text("必须为数字");
+            $("#servicePersionNum_error").css("display","block");
+            $("#servicePersionNum").css("border-color","red");
+            return false;
+        }
+
 		$.ajax({
 			url:urls,
 			type:"POST",

@@ -67,7 +67,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">人数: <span
+                                        <label class="col-md-2 control-label">服务人数: <span
                                                 class="required"> * </span>
                                         </label>
                                         <%--<div class="col-md-10">--%>
@@ -77,9 +77,9 @@
                                         <%--最长128个字符. </span>--%>
                                         <%--</div>--%>
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" id="expense"
+                                            <input type="text" class="form-control" id="servicePersionNum"
                                                    name="servicePersionNum" value="${hairdressingTime.servicePersionNum}"> <span
-                                                class="help-block display-hide" id="expense_error">请输入房间类型!</span>
+                                                class="help-block display-hide" id="servicePersionNum_error">请输入服务人数!</span>
                                         </div>
                                     </div>
 
