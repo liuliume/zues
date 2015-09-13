@@ -96,7 +96,7 @@ CREATE TABLE `course` (
   `course_describe` varchar(256) DEFAULT NULL,
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `course` */
 
@@ -112,7 +112,7 @@ CREATE TABLE `hairdressing` (
   `hairdressing_describe` varchar(256) DEFAULT NULL,
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `hairdressing` */
 
@@ -128,7 +128,7 @@ CREATE TABLE `hairdressing_time` (
   `end_time` varchar(32) DEFAULT NULL,
   `service_persion_num` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `hairdressing_time` */
 
