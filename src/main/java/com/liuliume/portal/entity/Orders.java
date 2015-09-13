@@ -128,6 +128,9 @@ public class Orders implements Serializable {
 
 	private String paymentStatusDesc;
 	
+	/**
+	 * 服务项目
+	 */
 	private Integer hairdressId;
 	
 	private Hairdressing hairdressing;
