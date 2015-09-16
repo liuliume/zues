@@ -1,6 +1,8 @@
 package com.liuliume.portal.controller.Sms;
 
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
+import com.liuliume.common.util.MD5Util;
+import com.liuliume.common.util.ServletUtil;
 import com.liuliume.portal.common.JData;
 import com.liuliume.portal.service.SmsService;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Set;
@@ -134,15 +137,19 @@ public class SmsController {
     @RequestMapping(value="verifyMsgCode",method= RequestMethod.GET)
     @ResponseBody
     public JData verifyMsgCode(@RequestParam(value="mobile",required=true)String mobile,
-                               @RequestParam(value="code",required=true)String code){
+                               @RequestParam(value="code",required=true)String code,HttpServletResponse response){
         JData jData = new JData();
         try {
             boolean flag = smsService.verifyMsgCode(mobile,code);
+//            boolean flag = true;
             if(flag){
                 jData.setData(flag);
                 jData.setCode(200);
                 jData.setSuccess(true);
                 jData.setDetail("验证成功");
+                String sgid = MD5Util.MD5WithSalt(mobile);
+                ServletUtil.setCookie(response,"sgid",sgid,6 * 30 * 24 * 60 * 60);
+                ServletUtil.setCookie(response,"mobile",mobile,6 * 30 * 24 * 60 * 60);
             } else {
                 jData.setData(flag);
                 jData.setCode(200);
