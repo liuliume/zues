@@ -6,6 +6,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.liuliume.common.util.RedisUtils;
 import com.liuliume.portal.common.Constants;
+import com.liuliume.portal.dao.AccountDao;
 import com.liuliume.portal.service.SmsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class SmsServiceImpl implements SmsService {
     @Autowired
     private RedisUtils redisUtils;
 
+    @Autowired
+    private AccountDao accountDao;
+
     @Override
     public boolean getMsgCode(String mobile) throws Exception {
         StringBuffer sb = new StringBuffer();
@@ -41,7 +45,7 @@ public class SmsServiceImpl implements SmsService {
                 Object object = data.get(key);
                 System.out.println(key +" = "+object);
             }
-            redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 5);
+            redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
             return true;
         }else{
             //异常返回输出错误码和错误信息
