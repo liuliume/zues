@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  scan="true" scanPeriod="30 seconds" >
 	<appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>${user.home}/liuliume_portal/logs/portal/rolling.log</file>
+	    <file>/liuliume/log/portal/rolling.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-	        <fileNamePattern>${user.home}/liuliume_portal/logs/portal/rolling.log.%i</fileNamePattern>
+	        <fileNamePattern>/liuliume/log/portal/rolling.log.%i</fileNamePattern>
 	        <minIndex>1</minIndex>
 	        <maxIndex>10</maxIndex>
 	    </rollingPolicy>
@@ -18,9 +18,9 @@
 
 	<appender name="main" class="ch.qos.logback.core.rolling.RollingFileAppender">
 	    <Encoding>UTF-8</Encoding>
-	    <File>${user.home}/liuliume_portal/logs/portal/main.log</File>
+	    <File>/liuliume/log/portal/main.log</File>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-	        <FileNamePattern>${user.home}/liuliume_portal/logs/portal/bak/main.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+	        <FileNamePattern>/liuliume/log/portal/bak/main.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
 	    </rollingPolicy>
 	    <layout class="ch.qos.logback.classic.PatternLayout">
 	    
