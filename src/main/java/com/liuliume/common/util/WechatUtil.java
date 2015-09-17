@@ -1,4 +1,4 @@
-package com.liuliume.portal;
+package com.liuliume.common.util;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -9,7 +9,6 @@ import java.net.URL;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.liuliume.common.util.RedisUtils;
 import com.liuliume.portal.common.Constants;
 
 import net.sf.json.JSONObject;

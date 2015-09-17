@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.liuliume.common.util.RedisUtils;
-import com.liuliume.portal.WechatUtil;
+import com.liuliume.common.util.WechatUtil;
 import com.liuliume.portal.model.wechat.Button;
 import com.liuliume.portal.model.wechat.CommonButton;
 import com.liuliume.portal.model.wechat.ComplexButton;

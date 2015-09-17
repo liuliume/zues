@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import net.sf.json.JSONObject;
 
 import com.liuliume.common.util.RedisUtils;
-import com.liuliume.portal.WechatUtil;
+import com.liuliume.common.util.WechatUtil;
 import com.liuliume.portal.common.Constants;
 
 public class WechatAccessTokenTest {
