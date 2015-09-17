@@ -7,6 +7,7 @@ import com.google.common.cache.LoadingCache;
 import com.liuliume.common.util.RedisUtils;
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.dao.AccountDao;
+import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.service.SmsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,9 @@ public class SmsServiceImpl implements SmsService {
         String redisCode = redisUtils.get(mobile + "_verifyNo");
         if(StringUtils.isNotEmpty(code) && code.equals(redisCode)) {
             redisUtils.delete(mobile + "_verifyNo");
+            Account account = new Account();
+            account.setMobile(mobile);
+            accountDao.createAccount(account);
             return true;
         } else {
             return false;
