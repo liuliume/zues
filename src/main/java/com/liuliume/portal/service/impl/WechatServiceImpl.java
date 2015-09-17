@@ -3,6 +3,7 @@ package com.liuliume.portal.service.impl;
 import java.security.MessageDigest;
 import java.util.Arrays;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,9 +39,10 @@ public class WechatServiceImpl implements WechatService{
 		String str = arr[0]+arr[1]+arr[2];
 		logger.info("after sort:{}",str);
 		
-		MessageDigest digest = MessageDigest.getInstance("SHA1");
-		digest.update(str.getBytes());
-		String sha = getFormattedText(digest.digest());
+//		MessageDigest digest = MessageDigest.getInstance("SHA1");
+//		digest.update(str.getBytes());
+//		String sha = getFormattedText(digest.digest());
+        String sha = DigestUtils.sha1Hex(str);
 		if(sha.equalsIgnoreCase(signature)){
 			return echoStr;
 		}
