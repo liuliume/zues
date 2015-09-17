@@ -47,6 +47,18 @@
 		</if>
 	</select>
 
+
+    <select id="findAccountByMobile" resultType="com.liuliume.portal.entity.Account">
+        select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
+        as uniqname,gender,province_id,city_id,area_id,address,flag
+        from account ac
+        where flag <![CDATA[<>]]>99
+        and mobile=#{mobile}
+    </select>
+
+
+
+
 	<select id="listAllAccount" resultType="com.liuliume.portal.entity.Account">
 		select account_id,passport_id,email,mobile,reg_time,reg_ip,uniq_name
 		as uniqname,gender,province_id,city_id,area_id,address,flag,ad1.name as province,

@@ -7,6 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.liuliume.common.util.MD5Util;
+import com.liuliume.common.util.ServletUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -246,16 +249,21 @@ public class OrdersController {
 		logger.info("call the create Orders");
 		JData jData = new JData();
 		try {
-			
-			//获取Session中的用户信息
-			Account account = (Account) session.getAttribute(Constants.SESSION_USER);
-			orders.setAccount(account);
-			orders.setAccountId(account.getAccount_id());
-			
-			ordersService.create(orders);
-			jData.setCode(200);
-			jData.setSuccess(true);
-			jData.setDetail("操作成功");
+            String mobile = ServletUtil.getCookie(request, "mobile");
+            String sgid = ServletUtil.getCookie(request,"sgid");
+            if(StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid) && MD5Util.MD5WithSalt(mobile).equals(sgid)){
+                Account account = accountService.findAccountByMobile(mobile);
+                orders.setAccount(account);
+                orders.setAccountId(account.getAccount_id());
+                ordersService.create(orders);
+                jData.setCode(200);
+                jData.setSuccess(true);
+                jData.setDetail("操作成功");
+            } else {
+                jData.setCode(302);
+                jData.setSuccess(false);
+                jData.setDetail("请登陆！");
+            }
 		} catch (Exception e) {
 			logger.error("create Or Update  Error." + e.getMessage()
 					+ " orders[" + orders + "]", e);

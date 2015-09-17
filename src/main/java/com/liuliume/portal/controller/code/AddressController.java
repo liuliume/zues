@@ -1,13 +1,17 @@
 package com.liuliume.portal.controller.code;
 
 import com.liuliume.common.pagination.Seed;
+import com.liuliume.common.util.MD5Util;
+import com.liuliume.common.util.ServletUtil;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
 import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.entity.Address;
 import com.liuliume.portal.model.AddressLevelEnum;
 import com.liuliume.portal.model.GenderEnum;
+import com.liuliume.portal.service.AccountService;
 import com.liuliume.portal.service.AddressService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
@@ -34,6 +39,9 @@ public class AddressController {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping(value="list",method=RequestMethod.GET)
     private ModelAndView list(ModelMap map,@SeedParam Seed<HashMap<String,Object>> seed){
@@ -168,7 +176,7 @@ public class AddressController {
         }
         return jData;
 	}
-    
+
     @RequestMapping(value="listAllSubAddress",method=RequestMethod.GET)
     @ResponseBody
     public JData listAllSubAddress(@RequestParam(value="parent_id",required=true)int parent_id) {
@@ -187,6 +195,28 @@ public class AddressController {
         System.out.println(firstAddress);
         return jData;
 	}
+
+    @RequestMapping(value="listUserAddress",method=RequestMethod.GET)
+    @ResponseBody
+    public JData listUserAddress(HttpServletRequest request) {
+        JData jData = new JData();
+        String mobile = ServletUtil.getCookie(request,"mobile");
+        String sgid = ServletUtil.getCookie(request,"sgid");
+        if(StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid) && MD5Util.MD5WithSalt(mobile).equals(sgid)){
+            try {
+                Account account = accountService.findAccountByMobile(mobile);
+                jData.setData(account);
+            } catch (Exception e) {
+                logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                        e.getMessage(),mobile,e);
+                jData.setSuccess(false);
+                jData.setDetail("操作失败");
+            }
+        } else {
+            jData.setData(null);
+        }
+        return jData;
+    }
 
     @ModelAttribute("allAddressLevel")
     public Map<String, AddressLevelEnum> getAllAddressLevel(){
