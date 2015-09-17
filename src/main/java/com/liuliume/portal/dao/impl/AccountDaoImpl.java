@@ -2,6 +2,7 @@ package com.liuliume.portal.dao.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +39,9 @@ public class AccountDaoImpl implements AccountDao{
 
 	@Override
 	public void createAccount(Account account) {
+        if(StringUtils.isEmpty(account.getMobile())){
+           account.setPassport_id(account.getMobile() + "@liuliume.com");
+        }
 		accountMapper.createEntity(account);
 	}
 
