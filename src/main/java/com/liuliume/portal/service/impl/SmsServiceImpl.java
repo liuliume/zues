@@ -59,10 +59,14 @@ public class SmsServiceImpl implements SmsService {
         String redisCode = redisUtils.get(mobile + "_verifyNo");
         if(StringUtils.isNotEmpty(code) && code.equals(redisCode)) {
             redisUtils.delete(mobile + "_verifyNo");
-            Account account = new Account();
-            account.setMobile(mobile);
-            accountDao.createAccount(account);
-            return true;
+            Account tmp = accountDao.findAccountByMobile(mobile);
+            if(null != tmp) {
+                Account account = new Account();
+                account.setMobile(mobile);
+                accountDao.createAccount(account);
+                return true;
+            } else
+                return true;
         } else {
             return false;
         }

@@ -37,7 +37,12 @@ public class AccountDaoImpl implements AccountDao{
 		return accountMapper.findAccountById(account_id);
 	}
 
-	@Override
+    @Override
+    public Account findAccountByMobile(String mobile) {
+        return accountMapper.findAccountByMobile(mobile);
+    }
+
+    @Override
 	public void createAccount(Account account) {
         if(StringUtils.isEmpty(account.getMobile())){
            account.setPassport_id(account.getMobile() + "@liuliume.com");

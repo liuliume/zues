@@ -3,6 +3,7 @@ package com.liuliume.portal.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,16 @@ public class AccountServiceImpl implements AccountService {
 		return account;
 	}
 
-	@Override
+    @Override
+    public Account findAccountByMobile(String mobile) throws Exception {
+        Account account = null;
+        if(!StringUtils.isEmpty(mobile)){
+            account = accountDao.findAccountByMobile(mobile);
+        }
+        return account;
+    }
+
+    @Override
 	public void createOrUpdate(Account account) throws Exception {
 		if(account==null)
 			throw new IllegalArgumentException("Account为空");

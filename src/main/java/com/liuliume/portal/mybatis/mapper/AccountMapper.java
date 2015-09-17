@@ -15,6 +15,8 @@ public interface AccountMapper extends MyBatisBaseMapper<Account>{
 	public List<Account> list(@Param("param")Parameter parameter);
 	
 	public Account findAccountById(@Param("account_id")Integer account_id);
+
+    public Account findAccountByMobile(@Param("mobile")String mobile);
 	
 	public List<Account> listAllAccount();
 }
