@@ -1,5 +1,6 @@
 package com.liuliume.portal.common;
 
+
 public class Constants {
 	//后台系统Session key
 	public static final String SESSION_ADMIN = "SESSION_ADMIN";
@@ -34,4 +35,6 @@ public class Constants {
     
     public static final String APP_ID = "wx2d60b47537b993fa";
     public static final String APP_SECRET="1e7dc4d6eaa531dc1e38c0543a66aa44";
+    
+    public static final String Token = "qwerasdfzxcv";
 }
