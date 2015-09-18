@@ -6,7 +6,8 @@ public class TestUnit {
 
 	@Test
 	public void test(){
-		assert(1==0);
-		System.out.println("Test");
+		String[] arrStrings={"111","222","333"};
+		
+		System.out.println(arrStrings);
 	}
 }

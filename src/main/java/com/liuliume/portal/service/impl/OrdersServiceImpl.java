@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.liuliume.common.pagination.Seed;
+import com.liuliume.common.util.OrdersUtil;
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.common.MBox;
 import com.liuliume.portal.dao.OrdersDao;
@@ -66,7 +67,7 @@ public class OrdersServiceImpl implements OrdersService {
 		if (seed.getFilter().containsKey("id")) {
 			String id = seed.getFilter().get("id");
 			if (StringUtils.isNotBlank(id))
-				orders.setOrderId(Integer.parseInt(id));
+				orders.setOrderId(id);
 		}
 		if (seed.getFilter().containsKey("account_name")) {
 			String account_name = seed.getFilter().get("account_name");
@@ -110,16 +111,16 @@ public class OrdersServiceImpl implements OrdersService {
 	@Override
 	@Transactional
 	public void createOrUpdate(Orders orders) throws Exception {
-		if (orders == null)
-			throw new IllegalArgumentException("order为空");
-		orders.setCreateTime(new Date());
-		orders.setStatus(OrderStatusEnum.ORDERED.getId());
-		orders.setPaymentStatus(Constants.PAYMENT_NO);
-		if (orders.getOrderId() == null || orders.getOrderId() <= 0) {
-			ordersDao.createOrder(orders);
-		} else {
-			ordersDao.updateOrder(orders);
-		}
+//		if (orders == null)
+//			throw new IllegalArgumentException("order为空");
+//		orders.setCreateTime(new Date());
+//		orders.setStatus(OrderStatusEnum.ORDERED.getId());
+//		orders.setPaymentStatus(Constants.PAYMENT_NO);
+//		if (orders.getOrderId() == null || orders.getOrderId() <= 0) {
+//			ordersDao.createOrder(orders);
+//		} else {
+//			ordersDao.updateOrder(orders);
+//		}
 	}
 
 	@Override
@@ -203,6 +204,7 @@ public class OrdersServiceImpl implements OrdersService {
 			throw new IllegalArgumentException("订单不能为空");
 		if (orders.getOrderType() == null)
 			throw new IllegalArgumentException("订单类型不能为空");
+		OrdersUtil.genOrderNo(orders);
 		OrderTypeEnum orderTypeEnum = OrderTypeEnum
 				.parse(orders.getOrderType());
 		switch (orderTypeEnum) {

@@ -25,7 +25,7 @@ public class Orders implements Serializable {
 	/**
 	 * 
 	 */
-	private Integer orderId;
+	private String orderId;
 
 	/**
 	 * 订单账户
@@ -150,13 +150,12 @@ public class Orders implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	public Integer getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 

@@ -32,6 +32,10 @@ public class WechatServiceImpl implements WechatService{
 		Long timestamp = model.getTimestamp();
 		String echoStr = model.getEchostr();
 		Long nonce = model.getNonce();
+		logger.info("signature:{}",signature);
+		logger.info("timestam:{}",timestamp);
+		logger.info("echoStr:{}",echoStr);
+		logger.info("nonce:{}",nonce);
 		
 		String[] arr = {token,timestamp.toString(),nonce.toString()};
 		logger.info("arr:{}",arr);
@@ -43,6 +47,8 @@ public class WechatServiceImpl implements WechatService{
 //		digest.update(str.getBytes());
 //		String sha = getFormattedText(digest.digest());
         String sha = DigestUtils.sha1Hex(str);
+        
+        logger.info(sha);
 		if(sha.equalsIgnoreCase(signature)){
 			return echoStr;
 		}

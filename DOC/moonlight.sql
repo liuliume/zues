@@ -2,8 +2,7 @@
 SQLyog Ultimate v11.11 (32 bit)
 MySQL - 5.5.21 : Database - moonlight
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -50,11 +49,11 @@ CREATE TABLE `address` (
   `parent_id` int(11) DEFAULT NULL,
   `level` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `address` */
 
-insert  into `address`(`id`,`name`,`parent_id`,`level`) values (1,'beijing213',NULL,'1'),(2,'haidian1234',1,'1'),(3,'beijing1',NULL,'1'),(4,'北京市',NULL,'1'),(5,'北京市',4,'2'),(6,'朝阳区',5,'3'),(7,'海淀区',5,'3');
+insert  into `address`(`id`,`name`,`parent_id`,`level`) values (1,'beijing213',NULL,'1'),(2,'haidian1234',1,'1'),(3,'beijing1',NULL,'1'),(4,'北京市',NULL,'1'),(5,'北京市',4,'2'),(6,'朝阳区',5,'3'),(7,'海淀区',5,'3'),(8,'test',NULL,'1');
 
 /*Table structure for table `animals` */
 
@@ -137,7 +136,7 @@ CREATE TABLE `hairdressing_time` (
 DROP TABLE IF EXISTS `orders`;
 
 CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单id',
+  `order_id` varchar(31) NOT NULL COMMENT '唯一订单号',
   `account_id` int(11) NOT NULL COMMENT '下单人账号',
   `order_type` tinyint(2) NOT NULL COMMENT '订单类型,1-寄样,2-训练,3-美容',
   `animals_id` int(11) NOT NULL COMMENT '宠物id',
@@ -162,11 +161,11 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`order_id`),
   KEY `idx_account_id` (`account_id`),
   KEY `idx_create_time` (`create_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 /*Data for the table `orders` */
 
-insert  into `orders`(`order_id`,`account_id`,`order_type`,`animals_id`,`province_id`,`city_id`,`area_id`,`address`,`service_type`,`service_begin`,`service_end`,`start_date`,`end_date`,`room_id`,`course_id`,`cost`,`hairdress_id`,`payment_status`,`status`,`create_time`,`last_modified`,`payment_type`) values (1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/01/2015','09/17/2015',4,NULL,NULL,NULL,0,-3,'2015-09-04 23:32:20','2015-09-04 23:32:20',NULL),(2,1,2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/07/2015','09/18/2015',NULL,1,NULL,NULL,1,0,'2015-09-04 23:55:44','2015-09-04 23:55:45',NULL),(3,1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:15','2015-09-04 23:57:15',NULL),(4,1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:16','2015-09-04 23:57:16',NULL);
+insert  into `orders`(`order_id`,`account_id`,`order_type`,`animals_id`,`province_id`,`city_id`,`area_id`,`address`,`service_type`,`service_begin`,`service_end`,`start_date`,`end_date`,`room_id`,`course_id`,`cost`,`hairdress_id`,`payment_status`,`status`,`create_time`,`last_modified`,`payment_type`) values ('1',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/01/2015','09/17/2015',4,NULL,NULL,NULL,0,-3,'2015-09-04 23:32:20','2015-09-04 23:32:20',NULL),('2',1,2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/07/2015','09/18/2015',NULL,1,NULL,NULL,1,0,'2015-09-04 23:55:44','2015-09-04 23:55:45',NULL),('3',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:15','2015-09-04 23:57:15',NULL),('4',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:16','2015-09-04 23:57:16',NULL);
 
 /*Table structure for table `room` */
 
