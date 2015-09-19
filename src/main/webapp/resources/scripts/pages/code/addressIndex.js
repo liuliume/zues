@@ -30,6 +30,13 @@ var AddressIndex = function() {
                 return;
             }
         }
+        if($("#orderBy").val()==null || $("#orderBy").val()==''){
+            $("#errorOrderBy").css("display", "block");
+            $("#orderBy").css("border-color", "red");
+            return;
+        }else{
+            data = data + "&orderBy=" + $("#orderBy").val();
+        }
         if($("#address_id").val()!='' || $("#address_id").val()!=null){
             data = data + "&id=" + $("#address_id").val();
         }

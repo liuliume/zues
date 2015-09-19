@@ -14,6 +14,8 @@ public class Address implements Serializable{
 
     private String level;
 
+    private Integer orderBy;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
@@ -50,5 +52,14 @@ public class Address implements Serializable{
 
     public void setLevel(String level) {
         this.level = level == null ? null : level.trim();
+    }
+
+    @Column(name = "order_by")
+    public Integer getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(Integer orderBy) {
+        this.orderBy = orderBy;
     }
 }

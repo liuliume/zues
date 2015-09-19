@@ -8,18 +8,26 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
         <result column="level" property="level" jdbcType="CHAR" />
+        <result column="order_by" property="orderBy" jdbcType="INTEGER" />
     </resultMap>
     <sql id="Base_Column_List" >
-        id, name, parent_id, level
+        id, name, parent_id, level,order_by
     </sql>
 
     <select id="count" resultType="int" parameterType="java.util.Map">
-        select count(1) from address
+        select count(a1.id)
+        from address a1 left join address a2 on a2.id=a1.parent_id
         <where>
             <if test="param.cond != null">
                 <if test="param.cond.addressMap != null">
                     <if test="param.cond.addressMap.name != null">
                         and name like CONCAT(#{param.cond.addressMap.name},'%')
+                    </if>
+                    <if test="param.cond.addressMap.parent_name != null">
+                        and a2.name like CONCAT(#{param.cond.addressMap.parent_name},'%')
+                    </if>
+                    <if test="param.cond.addressMap.level != null">
+                        and a1.level = #{param.cond.addressMap.level}
                     </if>
                     <!-- add query cond here -->
                 </if>
@@ -28,7 +36,7 @@
     </select>
 
     <select id="list" parameterType="java.util.Map" resultType="java.util.HashMap">
-        select a1.*,a2.name as parent_name
+        select a1.*,a1.order_by,a2.name as parent_name
         from address a1 left join address a2 on a2.id=a1.parent_id where 1=1
         <if test="param.cond != null">
             <if test="param.cond.addressMap != null">
@@ -38,9 +46,13 @@
                 <if test="param.cond.addressMap.parent_name != null">
                     and a2.name like CONCAT(#{param.cond.addressMap.parent_name},'%')
                 </if>
+                <if test="param.cond.addressMap.level != null">
+                    and a1.level = #{param.cond.addressMap.level}
+                </if>
                 <!-- add query cond here -->
             </if>
         </if>
+        order by a1.level,a1.order_by
         limit #{param.start},#{param.limit}
     </select>
 
@@ -54,12 +66,14 @@
         select
         <include refid="Base_Column_List" />
         from address where level = #{level}
+        order by level,order_by
     </select>
 
     <select id="findAddressByParentId" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select
         <include refid="Base_Column_List" />
         from address where parent_id = #{parent_id}
+        order by level,order_by
     </select>
 
 

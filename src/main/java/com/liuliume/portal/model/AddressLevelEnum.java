@@ -5,9 +5,9 @@ package com.liuliume.portal.model;
  */
 public enum AddressLevelEnum {
 
-    First("1","一级地址"),
-    Second("2","二级地址"),
-    Third("3","三级地址");
+    First("1","省"),
+    Second("2","市"),
+    Third("3","区域");
 
     private String level;
 

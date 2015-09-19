@@ -4,6 +4,12 @@
 
 <head>
 <title>地址管理</title>
+    <script type="text/javascript"
+            src="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css"
+          href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2-metronic.css" />
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
@@ -35,6 +41,17 @@
                             <input type="text"
                                    class="form-control input-medium input-inline" name="parent_name"
                                    placeholder="父级地址" value="${seed.filter['parent_name']}" />
+                        </div>
+                        <label class="col-md-1 control-label">级别: </label>
+                        <div class="col-md-3">
+                            <select
+                                    class="table-group-action-input form-control input-medium select2me"
+                                    name="level" id="level">
+                                <option value="" selected="selected">请选择</option>
+                                <c:forEach var="addressLevel" items="${allAddressLevel}">
+                                    <option value="${addressLevel.value.level}">${addressLevel.value.desc}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 						<div class="pull-right">
 							<a href="javascript:Address.search();" class="btn dark">查询
@@ -81,7 +98,8 @@
 								<th style="width: 20%;">名称</th>
 								<th style="width: 10%;">父级标示</th>
                                 <th style="width: 20%;">父级名称</th>
-								<th style="width: 20%;">级别</th>
+								<th style="width: 10%;">级别</th>
+                                <th style="width: 10%;">排序</th>
                                 <th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
@@ -98,7 +116,8 @@
 									<td>${item.name}</td>
 									<td>${item.parent_id}</td>
                                     <td>${item.parent_name}</td>
-									<td>${item.level}</td>
+									<td><c:if test="${item.level==1}">省</c:if><c:if test="${item.level==2}">市</c:if><c:if test="${item.level==3}">区域</c:if></td>
+                                    <td>${item.order_by}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
 										name="editAddress" address_id="${item.id}"><i
@@ -168,4 +187,8 @@
 	<!-- PAGE LEVEL JS REFERENCES -->
 	<script src="${ctx}/resources/scripts/pages/code/addressList.js"
 		type="text/javascript"></script>
+
+    <script type="application/javascript">
+        $("#level option[value=${seed.filter['level']}]").attr("selected",true);
+    </script>
 </body>

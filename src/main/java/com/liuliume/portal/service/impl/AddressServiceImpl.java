@@ -48,6 +48,11 @@ public class AddressServiceImpl implements AddressService {
             if(!StringUtils.isEmpty(parent_name))
                 addressParams.put("parent_name",parent_name);
         }
+        if(seed.getFilter().containsKey("level")){
+            String level = seed.getFilter().get("level");
+            if(!StringUtils.isEmpty(level))
+                addressParams.put("level",Integer.valueOf(level));
+        }
 		//add other query condition here
 		
 		cond.setAddressMap(addressParams);

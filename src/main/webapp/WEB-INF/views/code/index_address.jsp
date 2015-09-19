@@ -103,6 +103,23 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">排序: <span
+                                                class="required"> * </span>
+                                        </label>
+                                        <%--<div class="col-md-10">--%>
+                                        <%--<input type="text" class="form-control" name="uniqname" id="uniqname"--%>
+                                        <%--placeholder="请输入用户昵称" value="${account.uniqname}"> <span--%>
+                                        <%--class="help-block display-hide" id="errorInfoName">请输入用户昵称!</span> <span class="label label-warning">--%>
+                                        <%--最长128个字符. </span>--%>
+                                        <%--</div>--%>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="orderBy"
+                                                   name="orderBy" value="${address.orderBy}"> <span
+                                                class="help-block display-hide" id="errorOrderBy">请输入排序!</span>
+                                        </div>
+                                    </div>
+
 
                                     <div class="form-group">
 										<div style="text-align: center">

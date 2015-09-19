@@ -4,6 +4,12 @@
 
 <head>
 <title>宠物管理</title>
+    <script type="text/javascript"
+            src="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css"
+          href="${ctx }/resources/third-party/metronic/assets/plugins/select2/select2-metronic.css" />
 <!-- PAGE LEVEL STYLE REFERENCES -->
 </head>
 <body>
@@ -28,8 +34,42 @@
 						<div class="col-md-3">
 							<input type="text" id="nameQ"
 								class="form-control input-medium input-inline" name="nameQ"
-								placeholder="Input name" value="${seed.filter['nameQ']}" />
+								placeholder="宠物名称" value="${seed.filter['nameQ']}" />
 						</div>
+                        <label class="col-md-1 control-label">首字母: </label>
+                        <div class="col-md-3">
+                            <select
+                                    class="table-group-action-input form-control input-medium select2me"
+                                    name="orderType" id="orderType">
+                                <option value="">请选择</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                                <option value="H">H</option>
+                                <option value="I">I</option>
+                                <option value="J">J</option>
+                                <option value="K">K</option>
+                                <option value="L">L</option>
+                                <option value="M">M</option>
+                                <option value="N">N</option>
+                                <option value="O">O</option>
+                                <option value="P">P</option>
+                                <option value="Q">Q</option>
+                                <option value="R">R</option>
+                                <option value="S">S</option>
+                                <option value="T">T</option>
+                                <option value="U">U</option>
+                                <option value="V">V</option>
+                                <option value="W">W</option>
+                                <option value="X">X</option>
+                                <option value="Y">Y</option>
+                                <option value="Z">Z</option>
+                            </select>
+                        </div>
 						<div class="pull-right">
 							<!-- <a href="javascript:typeList.search();" class="btn dark">搜索
 								<i class="fa fa-search"></i>
@@ -73,10 +113,12 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 20%;">宠物Id</th>
+								<th style="width: 10%;">宠物Id</th>
 								<th style="width: 20%;">宠物名称</th>
-								<th style="width: 20%;">宠物类型</th>
-								<th style="width: 30%;">操作</th>
+								<th style="width: 10%;">宠物类型</th>
+                                <th style="width: 20%;">宠物首字母</th>
+                                <th style="width: 20%;">排序</th>
+								<th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -93,6 +135,8 @@
 									</td>
 									<td>${item.animalsName}</td>
 									<td>${item.type.typeName}</td>
+                                    <td>${item.orderType}</td>
+                                    <td>${item.orderTypeOrderBy}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
 										name="edit" id="${item.id}"><i
@@ -119,4 +163,8 @@
 	<!-- PAGE LEVEL JS REFERENCES -->
 	<script src="${ctx}/resources/scripts/pages/animal/animalList.js"
 		type="text/javascript"></script>
+
+    <script type="application/javascript">
+        $("#orderType option[value=${seed.filter['orderType']}]").attr("selected",true);
+    </script>
 </body>

@@ -6,6 +6,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="animals_name" property="animalsName" jdbcType="VARCHAR" />
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
+      <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+      <result column="order_type_orderby" property="orderTypeOrderBy" jdbcType="INTEGER" />
     <association property="type" javaType="com.liuliume.portal.entity.AnimalsType">
     	<id column="typeid" property="id" jdbcType="INTEGER" />
    		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
@@ -14,7 +16,7 @@
   </resultMap>
   
   <select id="listAnimals" resultMap="BaseResultMap">
-  	SELECT a.id,animals_name,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient` 
+  	SELECT a.id,animals_name,a.order_type,a.order_type_orderby,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient`
 	FROM animals a LEFT JOIN animals_type t ON a.`type_id` = t.`id` WHERE 1=1
 	<if test="param.cond != null">
 			<if test="param.cond.animals != null">
@@ -22,9 +24,14 @@
 					test="param.cond.animals.animalsName != null and param.cond.animals.animalsName != ''">
 					and animals_name like CONCAT(#{param.cond.animals.animalsName},'%')
 				</if>
+                <if
+                        test="param.cond.animals.orderType != null and param.cond.animals.orderType != ''">
+                    and order_type = #{param.cond.animals.orderType}
+                </if>
 				<!-- add query cond here -->
 			</if>
 		</if>
+        order by a.order_type,a.order_type_orderby
 		limit #{param.start},#{param.limit}
   </select>
   
@@ -38,13 +45,17 @@
 					test="param.cond.animals.animalsName != null and param.cond.animals.animalsName != ''">
 					and animals_name like CONCAT(#{param.cond.animals.animalsName},'%')
 				</if>
+                <if
+                        test="param.cond.animals.orderType != null and param.cond.animals.orderType != ''">
+                    and order_type = #{param.cond.animals.orderType}
+                </if>
 				<!-- add query cond here -->
 			</if>
 		</if>
   </select>
   
   <select id="findAnimalsById" resultMap="BaseResultMap">
-  	SELECT a.id,animals_name,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient` 
+  	SELECT a.id,animals_name,a.order_type,a.order_type_orderBy,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient`
 	FROM animals a LEFT JOIN animals_type t ON a.`type_id` = t.`id` WHERE 1=1
 	<if test="id!=null || id>0">
 		and a.id=#{id}
@@ -53,6 +64,7 @@
   
   <select id="listAllAnimals" resultMap="BaseResultMap">
   	SELECT a.id,animals_name,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient` 
-	FROM animals a LEFT JOIN animals_type t ON a.`type_id` = t.`id` 
+	FROM animals a LEFT JOIN animals_type t ON a.`type_id` = t.`id`
+	order by a.order_type,a.order_type_orderby
   </select>
 </mapper>

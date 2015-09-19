@@ -24,6 +24,10 @@ public class Animals implements Serializable{
     
     private AnimalsType type;
 
+    private String orderType;
+
+    private Integer orderTypeOrderBy;
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -61,4 +65,22 @@ public class Animals implements Serializable{
 	public void setType(AnimalsType type) {
 		this.type = type;
 	}
+
+    @Column(name = "order_type")
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    @Column(name = "order_type_orderby")
+    public Integer getOrderTypeOrderBy() {
+        return orderTypeOrderBy;
+    }
+
+    public void setOrderTypeOrderBy(Integer orderTypeOrderBy) {
+        this.orderTypeOrderBy = orderTypeOrderBy;
+    }
 }

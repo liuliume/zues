@@ -101,6 +101,10 @@ public class AnimalServiceImpl implements AnimalService {
 			String name = seed.getFilter().get("nameQ");
 			animals.setAnimalsName(name);
 		}
+        if (seed.getFilter().containsKey("orderType")) {
+            String orderType = seed.getFilter().get("orderType");
+            animals.setOrderType(orderType);
+        }
 
 		cond.setAnimals(animals);
 		parameter.setCond(cond);
