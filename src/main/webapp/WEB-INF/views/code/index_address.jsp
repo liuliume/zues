@@ -167,5 +167,39 @@
 	<input type="hidden" id="nameExists" value="0">
 	<script src="${ctx}/resources/scripts/pages/code/addressIndex.js"
 		type="text/javascript"></script>
+
+    <script type="application/javascript">
+        $("#level option[value=${address.level}]").attr("selected",true);
+        if($("#level").val() == '1'){
+            $("#parent_first_div").css("display","none");
+            $("#parent_second_div").css("display","none");
+        } else if($("#level").val() == '2') {
+            $("#parent_first_div").css("display","block");
+            $("#parent_second_div").css("display","none");
+            $.ajax({
+                url : "/code/address/listAllProvince",
+                type : "GET",
+                //data : 'parent_id=' + ${address.parentId},
+                success : function(result) {
+                    var obj = eval(result);
+                    $("#parent_first_id").empty();
+                    $("#parent_first_id").append(
+                            "<option value='' selected=true>请选择</option>");
+                    for ( var p in obj) {
+                        $("#parent_first_id").append(
+                                "<option value='" + obj[p].id + "'>" + obj[p].name
+                                + "</option>");
+                    }
+
+                },
+                failure : function(result) {
+                    alert("操作失败", result.detail);
+                }
+            })
+        } else if($("#level").val() == '3') {
+            $("#parent_first_div").css("display","block");
+            $("#parent_second_div").css("display","block");
+        }
+    </script>
 </body>
 

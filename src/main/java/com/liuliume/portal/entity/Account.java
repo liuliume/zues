@@ -44,6 +44,8 @@ public class Account implements Serializable{
 	private String province;
 	private String city;
 	private String area;
+    private String real_name;
+    private String animals_name;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -192,7 +194,25 @@ public class Account implements Serializable{
 		this.area = area;
 	}
 
-	@Override
+    @Column(name="real_name")
+    public String getReal_name() {
+        return real_name;
+    }
+
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
+    }
+
+    @Column(name="animals_name")
+    public String getAnimals_name() {
+        return animals_name;
+    }
+
+    public void setAnimals_name(String animals_name) {
+        this.animals_name = animals_name;
+    }
+
+    @Override
 	public String toString() {
 		return "Account [account_id=" + account_id + ", passport_id="
 				+ passport_id + ", email=" + email + ", mobile=" + mobile

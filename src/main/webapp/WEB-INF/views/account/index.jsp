@@ -158,6 +158,30 @@
 										</div>
 									</div>
 
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">用户真实姓名: <span
+                                                class="required"></span>
+                                        </label>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="real_name"
+                                                   name="real_name" value="${account.real_name }">
+												<span
+                                                        class="help-block display-hide" id="errorInfoRealName">请填写用户真实姓名!</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">宠物姓名: <span
+                                                class="required"></span>
+                                        </label>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="animals_name"
+                                                   name="animals_name" value="${account.animals_name }">
+												<span
+                                                        class="help-block display-hide" id="errorInfoAnimalsName">请填写宠物名称!</span>
+                                        </div>
+                                    </div>
+
 									<div class="form-group">
 										<div style="text-align: center">
 											<input type="hidden" id="account_id" name="account_id"

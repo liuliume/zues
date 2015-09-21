@@ -82,10 +82,12 @@
 								<th style="width: 5%;">手机</th>
 								<th style="width: 10%;">注册时间</th>
 								<th style="width: 5%;">性别</th>
-                                <th style="width: 10%;">省份</th>
-                                <th style="width: 10%;">市</th>
-                                <th style="width: 10%;">区域</th>
+                                <th style="width: 5%;">省份</th>
+                                <th style="width: 5%;">市</th>
+                                <th style="width: 5%;">区域</th>
 								<th style="width: 20%;">地址</th>
+                                <th style="width: 10%;">用户真实姓名</th>
+                                <th style="width: 10%;">宠物姓名</th>
 								<th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
@@ -113,6 +115,8 @@
                                     <td>${item.city}</td>
                                     <td>${item.area}</td>
 									<td>${item.address}</td>
+                                    <td>${item.real_name}</td>
+                                    <td>${item.animals_name}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
 										name="editAccount" accountId="${item.account_id}"><i
