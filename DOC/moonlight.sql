@@ -1,21 +1,27 @@
-/*
-SQLyog Ultimate v11.11 (32 bit)
-MySQL - 5.5.21 : Database - moonlight
-*********************************************************************
-*/
+-- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: moonlight
+-- ------------------------------------------------------
+-- Server version	5.5.44-0ubuntu0.14.04.1
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE=''*/;
-
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Table structure for table `account` */
+
+--
+-- Table structure for table `account`
+--
 
 DROP TABLE IF EXISTS `account`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `account` (
   `account_id` int(11) NOT NULL AUTO_INCREMENT,
   `passport_id` varchar(255) DEFAULT NULL,
@@ -34,61 +40,104 @@ CREATE TABLE `account` (
   PRIMARY KEY (`account_id`),
   KEY `idx_name` (`uniq_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `account` */
+--
+-- Dumping data for table `account`
+--
 
-insert  into `account`(`account_id`,`passport_id`,`email`,`mobile`,`reg_time`,`reg_ip`,`avatar`,`uniq_name`,`gender`,`province_id`,`city_id`,`area_id`,`address`,`flag`) values (1,NULL,'lalss@sogou.com','13811633448','2015-09-13 20:11:05','0:0:0:0:0:0:0:1',NULL,'test',0,4,5,6,'12321',0),(2,NULL,'sb@litb.com','18888888888','2015-09-13 19:54:39','0:0:0:0:0:0:0:1',NULL,'test sb',-1,4,5,6,'望京丽泽中二路',0);
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (1,NULL,'lalss@sogou.com','13811633448','2015-09-13 12:11:05','0:0:0:0:0:0:0:1',NULL,'test',0,4,5,6,'12321',0),(2,NULL,'sb@litb.com','18888888888','2015-09-13 11:54:39','0:0:0:0:0:0:0:1',NULL,'test sb',-1,4,5,6,'望京丽泽中二路',0);
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `address` */
+--
+-- Table structure for table `address`
+--
 
 DROP TABLE IF EXISTS `address`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `level` char(1) DEFAULT NULL,
+  `order_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `address` */
+--
+-- Dumping data for table `address`
+--
 
-insert  into `address`(`id`,`name`,`parent_id`,`level`) values (1,'beijing213',NULL,'1'),(2,'haidian1234',1,'1'),(3,'beijing1',NULL,'1'),(4,'北京市',NULL,'1'),(5,'北京市',4,'2'),(6,'朝阳区',5,'3'),(7,'海淀区',5,'3'),(8,'test',NULL,'1');
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (4,'北京市',NULL,'1',4),(6,'朝阳区',4,'2',6),(7,'海淀区',4,'2',7),(9,'测试',4,'2',1);
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `animals` */
+--
+-- Table structure for table `animals`
+--
 
 DROP TABLE IF EXISTS `animals`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `animals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `animals_name` varchar(128) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
+  `order_type` char(1) DEFAULT NULL,
+  `order_type_orderby` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `animals` */
+--
+-- Dumping data for table `animals`
+--
 
-insert  into `animals`(`id`,`animals_name`,`type_id`) values (1,'哈士奇',1),(2,'喵喵咪',2),(3,'小白鼠',3);
+LOCK TABLES `animals` WRITE;
+/*!40000 ALTER TABLE `animals` DISABLE KEYS */;
+INSERT INTO `animals` VALUES (1,'哈士奇',1,'H',1),(2,'喵喵咪',2,'M',0),(3,'小白鼠',3,'X',0),(4,'哈士奇2',1,'H',2),(5,'哈士奇3',1,'H',3),(6,'测试宠物',1,'C',0);
+/*!40000 ALTER TABLE `animals` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `animals_type` */
+--
+-- Table structure for table `animals_type`
+--
 
 DROP TABLE IF EXISTS `animals_type`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `animals_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(32) DEFAULT NULL,
   `expense_coefficient` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `animals_type` */
+--
+-- Dumping data for table `animals_type`
+--
 
-insert  into `animals_type`(`id`,`type_name`,`expense_coefficient`) values (1,'大型动物',1.2),(2,'中型动物',1.1),(3,'小型动物',1);
+LOCK TABLES `animals_type` WRITE;
+/*!40000 ALTER TABLE `animals_type` DISABLE KEYS */;
+INSERT INTO `animals_type` VALUES (1,'大型动物',1.2),(2,'中型动物',1.1),(3,'小型动物',1);
+/*!40000 ALTER TABLE `animals_type` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `course` */
+--
+-- Table structure for table `course`
+--
 
 DROP TABLE IF EXISTS `course`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(128) DEFAULT NULL,
@@ -96,15 +145,25 @@ CREATE TABLE `course` (
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `course` */
+--
+-- Dumping data for table `course`
+--
 
-insert  into `course`(`id`,`course_name`,`course_describe`,`expense`) values (1,'course1','test course',100),(2,'course22222','course test',1000);
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES (1,'course1','test course',100),(2,'course22222','course test',1000);
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `hairdressing` */
+--
+-- Table structure for table `hairdressing`
+--
 
 DROP TABLE IF EXISTS `hairdressing`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hairdressing` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `hairdressing_name` varchar(128) DEFAULT NULL,
@@ -112,15 +171,25 @@ CREATE TABLE `hairdressing` (
   `expense` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `hairdressing` */
+--
+-- Dumping data for table `hairdressing`
+--
 
-insert  into `hairdressing`(`id`,`hairdressing_name`,`hairdressing_describe`,`expense`) values (1,'test','test1',120);
+LOCK TABLES `hairdressing` WRITE;
+/*!40000 ALTER TABLE `hairdressing` DISABLE KEYS */;
+INSERT INTO `hairdressing` VALUES (1,'test','test1',120);
+/*!40000 ALTER TABLE `hairdressing` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `hairdressing_time` */
+--
+-- Table structure for table `hairdressing_time`
+--
 
 DROP TABLE IF EXISTS `hairdressing_time`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hairdressing_time` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_time` varchar(32) DEFAULT NULL,
@@ -128,13 +197,24 @@ CREATE TABLE `hairdressing_time` (
   `service_persion_num` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `hairdressing_time` */
+--
+-- Dumping data for table `hairdressing_time`
+--
 
-/*Table structure for table `orders` */
+LOCK TABLES `hairdressing_time` WRITE;
+/*!40000 ALTER TABLE `hairdressing_time` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hairdressing_time` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
 
 DROP TABLE IF EXISTS `orders`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `order_id` varchar(31) NOT NULL COMMENT '唯一订单号',
   `account_id` int(11) NOT NULL COMMENT '下单人账号',
@@ -162,15 +242,25 @@ CREATE TABLE `orders` (
   KEY `idx_account_id` (`account_id`),
   KEY `idx_create_time` (`create_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `orders` */
+--
+-- Dumping data for table `orders`
+--
 
-insert  into `orders`(`order_id`,`account_id`,`order_type`,`animals_id`,`province_id`,`city_id`,`area_id`,`address`,`service_type`,`service_begin`,`service_end`,`start_date`,`end_date`,`room_id`,`course_id`,`cost`,`hairdress_id`,`payment_status`,`status`,`create_time`,`last_modified`,`payment_type`) values ('1',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/01/2015','09/17/2015',4,NULL,NULL,NULL,0,-3,'2015-09-04 23:32:20','2015-09-04 23:32:20',NULL),('2',1,2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/07/2015','09/18/2015',NULL,1,NULL,NULL,1,0,'2015-09-04 23:55:44','2015-09-04 23:55:45',NULL),('3',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:15','2015-09-04 23:57:15',NULL),('4',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:16','2015-09-04 23:57:16',NULL);
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES ('1',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/01/2015','09/17/2015',4,NULL,NULL,NULL,0,-3,'2015-09-04 23:32:20','2015-09-04 15:32:20',NULL),('2',1,2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/07/2015','09/18/2015',NULL,1,NULL,NULL,1,0,'2015-09-04 23:55:44','2015-09-04 15:55:45',NULL),('3',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:15','2015-09-04 15:57:15',NULL),('4',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:16','2015-09-04 15:57:16',NULL);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `room` */
+--
+-- Table structure for table `room`
+--
 
 DROP TABLE IF EXISTS `room`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `room` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(255) DEFAULT NULL,
@@ -182,12 +272,25 @@ CREATE TABLE `room` (
   `room_num` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `room` */
+--
+-- Dumping data for table `room`
+--
 
-insert  into `room`(`id`,`room_name`,`cost`,`weixin_discount`,`discount_30`,`discount_90`,`discount_180`,`room_num`) values (4,'低调奢华房',1,1,1,1,11,1),(5,'高端大气房',2,22,22,2,2,2);
+LOCK TABLES `room` WRITE;
+/*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` VALUES (4,'低调奢华房',1,1,1,1,11,1),(5,'高端大气房',2,22,22,2,2,2);
+/*!40000 ALTER TABLE `room` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-09-21 21:14:19
