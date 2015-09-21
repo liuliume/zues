@@ -77,12 +77,15 @@
 										<span><input type="checkbox" id="selectAll"></span>
 									</div>
 								</th>
-								<th style="width: 10%;">昵称</th>
+								<th style="width: 5%;">昵称</th>
 								<th style="width: 5%;">邮箱</th>
-								<th style="width: 10%;">手机</th>
-								<th style="width: 15%;">注册时间</th>
-								<th style="width: 10%;">性别</th>
-								<th style="width: 15%;">地址</th>
+								<th style="width: 5%;">手机</th>
+								<th style="width: 10%;">注册时间</th>
+								<th style="width: 5%;">性别</th>
+                                <th style="width: 10%;">省份</th>
+                                <th style="width: 10%;">市</th>
+                                <th style="width: 10%;">区域</th>
+								<th style="width: 20%;">地址</th>
 								<th style="width: 20%;">操作</th>
 							</tr>
 						</thead>
@@ -106,6 +109,9 @@
 											<c:when test="${item.gender eq 1}">女</c:when>
 										</c:choose>
 									</td>
+                                    <td>${item.province}</td>
+                                    <td>${item.city}</td>
+                                    <td>${item.area}</td>
 									<td>${item.address}</td>
 
 									<td><a class="btn default btn-xs blue-stripe" href="#"
