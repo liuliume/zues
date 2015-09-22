@@ -206,5 +206,57 @@
 	<input type="hidden" id="nameExists" value="0">
 	<script src="${ctx}/resources/scripts/pages/account/accountIndex.js"
 		type="text/javascript"></script>
+
+    <script type="application/javascript">
+        $.ajax({
+            url : "/code/address/listAllSubAddress",
+            type : "GET",
+            data : 'parent_id=' + $("#province_id").val(),
+            success : function(result) {
+                var obj = eval(result);
+                for ( var p in obj.data) {
+                    if(obj.data[p].id == ${account.city_id}) {
+//                        console.info("test");
+//                        $("#city_id").append(
+//                                "<option value='" + obj.data[p].id + "' selected >" + obj.data[p].name
+//                                        + "</option>");
+                    } else{
+                        $("#city_id").append(
+                                "<option value='" + obj.data[p].id + "'>" + obj.data[p].name
+                                        + "</option>");
+                    }
+
+                }
+            },
+            failure : function(result) {
+                alert("操作失败", result.detail);
+            }
+        })
+        $.ajax({
+            url : "/code/address/listAllSubAddress",
+            type : "GET",
+            data : 'parent_id=' + $("#city_id").val(),
+            success : function(result) {
+                var obj = eval(result);
+                for ( var p in obj.data) {
+                    if(obj.data[p].id == ${account.area_id}) {
+//                        console.info("test");
+//                        $("#city_id").append(
+//                                "<option value='" + obj.data[p].id + "' selected >" + obj.data[p].name
+//                                        + "</option>");
+                    } else{
+                        $("#area_id").append(
+                                "<option value='" + obj.data[p].id + "'>" + obj.data[p].name
+                                        + "</option>");
+                    }
+
+                }
+            },
+            failure : function(result) {
+                alert("操作失败", result.detail);
+            }
+        })
+    </script>
+
 </body>
 
