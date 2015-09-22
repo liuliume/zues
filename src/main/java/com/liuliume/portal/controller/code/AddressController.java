@@ -101,6 +101,21 @@ public class AddressController {
         return mav;
     }
 
+    @RequestMapping(value="indexForJson",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Address indexForJson(ModelMap model,@RequestParam(value="address_id",required=false)int address_id) {
+        Address firstAddress = null;
+        try {
+            logger.info("call AddressController.index");
+            firstAddress = addressService.findAddressById(address_id);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),address_id,e);
+        }
+        System.out.println(firstAddress);
+        return firstAddress;
+    }
+
     @RequestMapping(value="index_parent",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public List<Address> index_parent(ModelMap model,@RequestParam(value="parent_id",required=false)int parent_id) {

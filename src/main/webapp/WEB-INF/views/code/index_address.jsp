@@ -185,12 +185,17 @@
                     $("#parent_first_id").empty();
                     $("#parent_first_id").append(
                             "<option value='' selected=true>请选择</option>");
-                    for ( var p in obj) {
-                        $("#parent_first_id").append(
-                                "<option value='" + obj[p].id + "'>" + obj[p].name
-                                + "</option>");
+                    for ( var p in obj.data) {
+                        if(obj.data[p].id == ${address.parentId}) {
+                            $("#parent_first_id").append(
+                                    "<option value='" + obj.data[p].id + "' selected=true>" + obj.data[p].name
+                                            + "</option>");
+                        } else{
+                            $("#parent_first_id").append(
+                                    "<option value='" + obj.data[p].id + "'>" + obj.data[p].name
+                                            + "</option>");
+                        }
                     }
-
                 },
                 failure : function(result) {
                     alert("操作失败", result.detail);
@@ -199,6 +204,69 @@
         } else if($("#level").val() == '3') {
             $("#parent_first_div").css("display","block");
             $("#parent_second_div").css("display","block");
+            var index_parentid=null;
+            $.ajax({
+                url : "/code/address/indexForJson",
+                type : "GET",
+                async: false,
+                data : 'address_id=' + ${address.parentId},
+                success : function(result) {
+                    index_parentid = result.parentId;
+                },
+                failure : function(result) {
+                    alert("操作失败", result.detail);
+                }
+            })
+            $.ajax({
+                url : "/code/address/listAllProvince",
+                type : "GET",
+                //data : 'parent_id=' + ${address.parentId},
+                success : function(result) {
+                    var obj = eval(result);
+                    $("#parent_first_id").empty();
+                    $("#parent_first_id").append(
+                            "<option value='' selected=true>请选择</option>");
+                    for ( var p in obj.data) {
+                        if(obj.data[p].id == index_parentid) {
+                            $("#parent_first_id").append(
+                                    "<option value='" + obj.data[p].id + "' selected=true>" + obj.data[p].name
+                                            + "</option>");
+                        } else{
+                            $("#parent_first_id").append(
+                                    "<option value='" + obj.data[p].id + "'>" + obj.data[p].name
+                                            + "</option>");
+                        }
+                    }
+                },
+                failure : function(result) {
+                    alert("操作失败", result.detail);
+                }
+            })
+            $.ajax({
+                url : "/code/address/listAllSubAddress",
+                type : "GET",
+                data : 'parent_id=' + index_parentid,
+                success : function(result) {
+                    var obj = eval(result);
+                    $("#parent_second_id").empty();
+                    $("#parent_second_id").append(
+                            "<option value='' selected=true>请选择</option>");
+                    for ( var p in obj.data) {
+                        if(obj.data[p].id == ${address.parentId}) {
+                            $("#parent_second_id").append(
+                                    "<option value='" + obj.data[p].id + "' selected=true>" + obj.data[p].name
+                                            + "</option>");
+                        } else{
+                            $("#parent_second_id").append(
+                                    "<option value='" + obj.data[p].id + "'>" + obj.data[p].name
+                                            + "</option>");
+                        }
+                    }
+                },
+                failure : function(result) {
+                    alert("操作失败", result.detail);
+                }
+            })
         }
     </script>
 </body>
