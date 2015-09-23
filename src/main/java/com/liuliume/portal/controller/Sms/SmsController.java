@@ -118,7 +118,7 @@ public class SmsController {
             } else {
                 jData.setData(flag);
                 jData.setCode(200);
-                jData.setSuccess(false);
+                jData.setSuccess(true);
                 jData.setDetail("发送短信失败");
             }
 
@@ -140,8 +140,8 @@ public class SmsController {
                                @RequestParam(value="code",required=true)String code,HttpServletResponse response){
         JData jData = new JData();
         try {
-//            boolean flag = smsService.verifyMsgCode(mobile,code);
-            boolean flag = true;
+            boolean flag = smsService.verifyMsgCode(mobile,code);
+//            boolean flag = true;
             if(flag){
                 jData.setData(flag);
                 jData.setCode(200);

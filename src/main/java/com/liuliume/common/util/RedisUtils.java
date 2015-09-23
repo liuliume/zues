@@ -110,7 +110,7 @@ public class RedisUtils {
             valueOperations.set(key, value, timeout, timeUnit);
         } catch (Exception e) {
             logger.error("[Cache] set cache fail, key:" + key + " value:" + value, e);
-
+            throw new Exception(e);
         }
     }
 

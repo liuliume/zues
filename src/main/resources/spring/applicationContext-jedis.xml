@@ -13,7 +13,7 @@
           p:connectionFactory-ref="cacheConnectionFactory"/>
     <bean id="cacheConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
           p:usePool="true">
-        <property name="hostName" value="localhost"/>
+        <property name="hostName" value="10.211.55.4"/>
         <property name="port" value="6379"/>
         <constructor-arg index="0" ref="cachePoolConfig"/>
     </bean>

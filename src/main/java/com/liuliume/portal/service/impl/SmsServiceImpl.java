@@ -37,7 +37,12 @@ public class SmsServiceImpl implements SmsService {
         for (int i = 0; i < 4 ; i++){
             sb.append(new Random().nextInt(9));
         }
-        Map<String,Object> result = sendMsg(mobile,sb.toString());
+//        Map<String,Object> result = sendMsg(mobile,sb.toString());
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("statusCode","000000");
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("code",sb.toString());
+        result.put("data", map);
         if("000000".equals(result.get("statusCode"))){
             //正常返回输出data包体信息（map）
             HashMap<String,Object> data = (HashMap<String, Object>) result.get("data");
@@ -58,15 +63,16 @@ public class SmsServiceImpl implements SmsService {
     public boolean verifyMsgCode(String mobile,String code) {
         String redisCode = redisUtils.get(mobile + "_verifyNo");
         if(StringUtils.isNotEmpty(code) && code.equals(redisCode)) {
-            redisUtils.delete(mobile + "_verifyNo");
+
             Account tmp = accountDao.findAccountByMobile(mobile);
-            if(null != tmp) {
+            if(null == tmp) {
                 Account account = new Account();
                 account.setMobile(mobile);
                 accountDao.createAccount(account);
-                return true;
-            } else
-                return true;
+            }
+            redisUtils.delete(mobile + "_verifyNo");
+            return true;
+
         } else {
             return false;
         }
