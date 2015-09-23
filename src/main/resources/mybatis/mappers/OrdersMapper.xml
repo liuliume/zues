@@ -120,6 +120,7 @@
 		LEFT JOIN hairdressing h on o.`hairdress_id` = h.`id`
 		LEFT JOIN animals an ON o.`animals_id` = an.`id`
 		<include refid="list-where"></include>
+		ORDER BY create_time DESC
 		limit #{param.start},#{param.limit}
 	</select>
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.liuliume.common.util.MD5Util;
 import com.liuliume.common.util.ServletUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,10 +58,10 @@ public class OrdersController {
 
 	@Autowired
 	private AccountService accountService;
-	
+
 	@Autowired
 	private CourseService courseService;
-	
+
 	@Autowired
 	private HairdressingService hairdressingService;
 
@@ -117,16 +118,16 @@ public class OrdersController {
 		if (allRooms != null) {
 			map.put("allRooms", allRooms);
 		}
-		if(allAccounts!=null){
+		if (allAccounts != null) {
 			map.put("allAccounts", allAccounts);
 		}
-		if(allCourses != null){
+		if (allCourses != null) {
 			map.put("allCourse", allCourses);
 		}
-		if(allHairdressings!=null){
+		if (allHairdressings != null) {
 			map.put("allHairdressings", allHairdressings);
 		}
-		
+
 		map.put("orderType", orderType);
 
 		if (orderType == 1) {// 寄养类型
@@ -138,10 +139,10 @@ public class OrdersController {
 		}
 		return null;
 	}
-	
-	@RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
+
+	@RequestMapping(value = "createOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	public JData createOrUpdate(Orders orders){
+	public JData createOrUpdate(Orders orders) {
 		logger.info("call the createOrUpdate Orders");
 		JData jData = new JData();
 		try {
@@ -158,10 +159,10 @@ public class OrdersController {
 		}
 		return jData;
 	}
-	
-	@RequestMapping(value="orderDetail",method=RequestMethod.GET)
-	public String orderDetail(Integer ordersId,ModelMap map) {
-		
+
+	@RequestMapping(value = "orderDetail", method = RequestMethod.GET)
+	public String orderDetail(Integer ordersId, ModelMap map) {
+
 		logger.info("call OrdersController.orderDetail");
 
 		Orders orders = null;
@@ -178,10 +179,11 @@ public class OrdersController {
 		}
 		return "orders/orderDetail";
 	}
-	
-	@RequestMapping(value="payOrder",method=RequestMethod.POST)
+
+	@RequestMapping(value = "payOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public JData payOrder(@RequestParam(value = "orderId", required = true)Integer orderId){
+	public JData payOrder(
+			@RequestParam(value = "orderId", required = true) Integer orderId) {
 		JData jData = new JData("确认收款成功", true);
 		try {
 			ordersService.payOrder(orderId);
@@ -194,10 +196,11 @@ public class OrdersController {
 		}
 		return jData;
 	}
-	
-	@RequestMapping(value="invalidOrder",method=RequestMethod.POST)
+
+	@RequestMapping(value = "invalidOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public JData invalidOrder(@RequestParam(value = "orderId", required = true)Integer orderId){
+	public JData invalidOrder(
+			@RequestParam(value = "orderId", required = true) Integer orderId) {
 		JData jData = new JData("订单置无效成功", true);
 		try {
 			ordersService.invalidOrder(orderId);
@@ -210,10 +213,11 @@ public class OrdersController {
 		}
 		return jData;
 	}
-	
-	@RequestMapping(value="transferOrder",method = RequestMethod.POST)
+
+	@RequestMapping(value = "transferOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public JData transferOrder(@RequestParam(value = "orderId", required = true)Integer orderId) {
+	public JData transferOrder(
+			@RequestParam(value = "orderId", required = true) Integer orderId) {
 		JData jData = new JData("订单转发成功", true);
 		try {
 			ordersService.transferOrder(orderId);
@@ -226,10 +230,11 @@ public class OrdersController {
 		}
 		return jData;
 	}
-	
-	@RequestMapping(value="completeOrder",method = RequestMethod.POST)
+
+	@RequestMapping(value = "completeOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public JData completeOrder(@RequestParam(value = "orderId", required = true)Integer orderId) {
+	public JData completeOrder(
+			@RequestParam(value = "orderId", required = true) Integer orderId) {
 		JData jData = new JData("操作成功", true);
 		try {
 			ordersService.completeOrder(orderId);
@@ -242,34 +247,66 @@ public class OrdersController {
 		}
 		return jData;
 	}
-	
-	@RequestMapping(value="create",method=RequestMethod.POST)
+
+	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
-	public JData create(Orders orders,HttpServletRequest request,HttpSession session){
+	public JData create(Orders orders, HttpServletRequest request,
+			HttpSession session) {
 		logger.info("call the create Orders");
 		JData jData = new JData();
 		try {
-            String mobile = ServletUtil.getCookie(request, "mobile");
-            String sgid = ServletUtil.getCookie(request,"sgid");
-            if(StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid) && MD5Util.MD5WithSalt(mobile).equals(sgid)){
-                Account account = accountService.findAccountByMobile(mobile);
-                orders.setAccount(account);
-                orders.setAccountId(account.getAccount_id());
-                ordersService.create(orders);
-                jData.setCode(200);
-                jData.setSuccess(true);
-                jData.setDetail("操作成功");
-            } else {
-                jData.setCode(302);
-                jData.setSuccess(false);
-                jData.setDetail("请登陆！");
-            }
+			String mobile = ServletUtil.getCookie(request, "mobile");
+			String sgid = ServletUtil.getCookie(request, "sgid");
+			if (StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid)
+					&& MD5Util.MD5WithSalt(mobile).equals(sgid)) {
+				Account account = accountService.findAccountByMobile(mobile);
+				orders.setAccount(account);
+				orders.setAccountId(account.getAccount_id());
+				ordersService.create(orders);
+				jData.setCode(200);
+				jData.setSuccess(true);
+				jData.setDetail("操作成功");
+			} else {
+				jData.setCode(302);
+				jData.setSuccess(false);
+				jData.setDetail("请登陆！");
+			}
 		} catch (Exception e) {
 			logger.error("create Or Update  Error." + e.getMessage()
 					+ " orders[" + orders + "]", e);
 			jData.setCode(500);
 			jData.setSuccess(false);
 			jData.setDetail("操作失败");
+		}
+		return jData;
+	}
+
+	@RequestMapping(value = "getAllOrders", method = RequestMethod.GET)
+	@ResponseBody
+	public JData getAllOrders(HttpServletRequest request) {
+		JData jData = new JData();
+		String mobile = ServletUtil.getCookie(request, "mobile");
+		String sgid = ServletUtil.getCookie(request, "sgid");
+		String sid = MD5Util.MD5WithSalt(mobile);
+		if (sid.equals(sgid)) {
+			jData.setCode(500);
+			jData.setSuccess(false);
+			jData.setDetail("用户身份验证失败");
+		} else {
+			Seed<Orders> seed = new Seed<Orders>();
+			seed.getFilter().put("mobile", mobile);
+			try {
+				List<Orders> list = ordersService.list(seed);
+				jData.setCode(200);
+				jData.setData(list);
+				jData.setSuccess(true);
+			} catch (Exception e) {
+				logger.error("getAllOrders Error." + e.getMessage(), e);
+				jData.setCode(500);
+				jData.setSuccess(false);
+				jData.setDetail("操作失败");
+				e.printStackTrace();
+			}
 		}
 		return jData;
 	}

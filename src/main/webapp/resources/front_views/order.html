@@ -9,16 +9,60 @@
 <title>主人的信息</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script src="js/slide_show.js"></script>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+
+<script type="text/javascript">
+	$(function(){
+		
+		$.ajax({
+			url:'/orders/getAllOrders',
+			type:"GET",
+			success:function(result){
+				if(result.success){
+					$.each(result.data,function(index,item){
+						/* alert(item); */
+						var detail = $("<a class='order-list'>");
+						var id = item.orderId;
+						var href = "order-detail.html?id="+id;
+						detail.attr("href",href);
+						var obj = $("<div />");
+						obj.addClass("list-detail");
+						var orderType = "";
+						if(item.orderType==1){
+							orderType = "寄养";
+						}else if(item.orderType==2){
+							orderType = "训练";
+						}else if(orderType ==3){
+							orderType = "美容";
+						}else{
+							alert("订单类型错误");
+							return false;
+						}
+						obj.html(item.createTime+"<br>"+orderType+"<br>联系电话:"+item.account.mobile);
+						var obj2 = $("<span class='arrow'>&#8250;</span>");
+						obj2.appendTo(obj);
+						obj.appendTo(detail);
+						detail.appendTo($("#order_list"));
+					})
+				}
+			}
+		});
+	})
+</script>
+
 </head>
 
 <body>
 <div class="wrapper">
 	
-    <a class="order-list" href="order-detail.html">
+     <!-- <a class="order-list" href="order-detail.html">
     	<div class="list-detail">2015-9-17 15:00<br />宠物寄养 30天<br />联系电话：15010248416
         	<span class="arrow">&#8250;</span>
         </div>
-    </a>
+    </a> --> 
+    <div id="order_list">
+    	
+    </div>
 
     <div class="nav">
     	<a href="#">主人的信息</a>
