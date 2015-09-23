@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>遛遛</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script>
+    $(function(){
+        $("#login").click(function(){
+            var mobile = $("#phone").val();
+            var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+            if (mobile == null || mobile == "") {
+                alert("请输入手机号！");
+                return;
+            }
+            if (!reg.test(mobile)) {
+                alert("请输入正确手机号！")
+                return;
+            }
+            var code = $("#yzm").val();
+            if (code == null || code == "") {
+                alert("请输入验证码！");
+                return;
+            }
+            $.ajax({
+                url : "/sms/verifyMsgCode",
+                type : "GET",
+                data : 'mobile=' + $("#phone").val()+'&code=' + $("#yzm").val(),
+                success : function(result) {
+                    var obj = eval(result);
+                    if(obj.success){
+                        //发送短信成功；
+                        alert(obj.detail);
+                    } else {
+                        //发送短信失败
+                        alert(obj.detail);
+                    }
+                },
+                failure : function(result) {
+                    alert("操作失败", result.detail);
+                }
+            })
+        })
+    })
+
+</script>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="cd-logo"><img src="img/logo.png" width="40%"></div>
+    <input class="phoneNum" id="phone" type="tel" placeholder="手机号">
+    <div style="position:relative">
+    	<input class="yzm" id="yzm" type="tel" placeholder="验证码">
+        <span class="get-code">获取验证码</span>
+    </div>
+    <input type="submit" id="login" value="登 录">
+</div>
+</body>
+</html>
