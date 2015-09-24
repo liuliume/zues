@@ -288,7 +288,7 @@ public class OrdersController {
 		String mobile = ServletUtil.getCookie(request, "mobile");
 		String sgid = ServletUtil.getCookie(request, "sgid");
 		String sid = MD5Util.MD5WithSalt(mobile);
-		if (sid.equals(sgid)) {
+		if (!sid.equals(sgid)) {
 			jData.setCode(500);
 			jData.setSuccess(false);
 			jData.setDetail("用户身份验证失败");
