@@ -8,13 +8,34 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>主人的信息</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url:'/account/listAccount',
+			type:'GET',
+			success:function(result){
+				if(result.success){
+					var uniqname = result.data.uniqname;
+					$("#txt_user").val(uniqname);
+				}else{
+					alert(result.detail);
+				}
+			},failure:function(){
+				alert("系统错误");
+			}
+		})
+	});
+</script>
+
 </head>
 
 <body>
 <div class="wrapper">
 	
     <div class="username"><span></span>
-    	<input type="text" placeholder="用户名">
+    	<input type="text" placeholder="用户名" id="txt_user">
     </div>
     <a class="list info-order" href="order.html">我的订单<span class="arrow">&#8250;</span></a>
     <a class="list info-addr" href="addr.html">我的地址<span class="arrow">&#8250;</span></a>

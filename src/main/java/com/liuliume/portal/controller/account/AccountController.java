@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.liuliume.common.pagination.Seed;
+import com.liuliume.common.util.MD5Util;
+import com.liuliume.common.util.ServletUtil;
 import com.liuliume.common.web.spring.mvc.annotation.SeedParam;
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.common.JData;
@@ -134,6 +137,42 @@ public class AccountController {
 		} catch (Exception e) {
 			logger.error("Error! reason:{}, Paramter:account_id:{}.",
 					e.getMessage(),account_id,e);
+			jData.setCode(500);
+			jData.setData(null);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
+		return jData;
+	}
+	
+	/**
+	 * 前端根据用户ID请求用户信息(包括地址)
+	 * @param account_id
+	 * @return
+	 */
+	@RequestMapping(value="listAccount",method=RequestMethod.GET)
+	@ResponseBody
+	public JData listAccount(HttpServletRequest request) {
+		JData jData = new JData("操作成功",true);
+		String mobile = ServletUtil.getCookie(request, "mobile");
+		String sgid = ServletUtil.getCookie(request, "sgid");
+		String sid = MD5Util.MD5WithSalt(mobile);
+		if (StringUtils.isBlank(mobile) || !sid.equals(sgid)) {
+			jData.setCode(500);
+			jData.setSuccess(false);
+			jData.setDetail("用户身份验证失败");
+			return jData;
+		}
+		
+		Account account = null;
+		try {
+			logger.info("call AccountCOntroller.listAccountByMobile");
+			account = accountService.findAccountByMobile(mobile);
+			jData.setCode(200);
+			jData.setData(account);
+		} catch (Exception e) {
+			logger.error("Error! reason:{}, Paramter:mobile:{}.",
+					e.getMessage(),mobile,e);
 			jData.setCode(500);
 			jData.setData(null);
 			jData.setSuccess(false);
