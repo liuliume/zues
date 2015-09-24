@@ -37,9 +37,11 @@ CREATE TABLE `account` (
   `area_id` int(11) DEFAULT NULL,
   `address` varchar(511) DEFAULT NULL,
   `flag` tinyint(4) DEFAULT NULL,
+  `real_name` varchar(32) DEFAULT NULL,
+  `animals_name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`account_id`),
   KEY `idx_name` (`uniq_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +50,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,NULL,'lalss@sogou.com','13811633448','2015-09-13 12:11:05','0:0:0:0:0:0:0:1',NULL,'test',0,4,5,6,'12321',0),(2,NULL,'sb@litb.com','18888888888','2015-09-13 11:54:39','0:0:0:0:0:0:0:1',NULL,'test sb',-1,4,5,6,'望京丽泽中二路',0);
+INSERT INTO `account` VALUES (1,NULL,'lalss@sogou.com','13811633448','2015-09-21 14:29:54','0:0:0:0:0:0:0:1',NULL,'test',0,4,6,10,'12321',0,'test_real1','aniamals1'),(2,NULL,'sb@litb.com','18888888888','2015-09-21 14:30:32','0:0:0:0:0:0:0:1',NULL,'test sb',0,4,5,6,'望京丽泽中二路',0,'test1','test2'),(3,NULL,'lao@sogou.com','13811633447','2015-09-23 13:55:24','0:0:0:0:0:0:0:1',NULL,'test',0,4,9,-1,'test',0,'','');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +68,7 @@ CREATE TABLE `address` (
   `level` char(1) DEFAULT NULL,
   `order_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +77,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (4,'北京市',NULL,'1',4),(6,'朝阳区',4,'2',6),(7,'海淀区',4,'2',7),(9,'测试',4,'2',1);
+INSERT INTO `address` VALUES (4,'北京市',NULL,'1',4),(6,'朝阳区',4,'2',6),(7,'海淀区',4,'2',7),(9,'测试',4,'2',1),(10,'三环',6,'3',1);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +95,7 @@ CREATE TABLE `animals` (
   `order_type` char(1) DEFAULT NULL,
   `order_type_orderby` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,4 +295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-21 21:14:19
+-- Dump completed on 2015-09-25  0:19:20
