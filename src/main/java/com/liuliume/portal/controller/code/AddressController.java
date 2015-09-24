@@ -221,6 +221,7 @@ public class AddressController {
             try {
                 Account account = accountService.findAccountByMobile(mobile);
                 jData.setData(account);
+                jData.setSuccess(true);
             } catch (Exception e) {
                 logger.error("Error! reason:{}, Paramter:account_id:{}.",
                         e.getMessage(),mobile,e);
@@ -228,6 +229,8 @@ public class AddressController {
                 jData.setDetail("操作失败");
             }
         } else {
+            jData.setSuccess(false);
+            jData.setDetail("用户身份验证失败");
             jData.setData(null);
         }
         return jData;

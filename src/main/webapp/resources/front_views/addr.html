@@ -8,17 +8,40 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>我的地址</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
 <script src="js/slide_show.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+            url:'/code/address/listUserAddress',
+            type:"GET",
+            success:function(result){
+                if(result.success){
+                    console.info(result);
+                    var detail = $("<a class='addr-list'>");
+                    var href = "addr-detail.html?province_id="+result.province_id+"&city_id="+result.city_id+"&area_id="+result.area_id+"&address="+result.address;
+                    detail.attr("href",href);
+                    var obj = $("<div />");
+                    obj.addClass("addr-detail");
+                    obj.html(result.province + result.city + result.area + result.address)
+                } else {
+                    alert(result.detail);
+                }
+            }
+        });
+    })
+</script>
 </head>
 
 <body>
 <div class="wrapper">
 	
-    <a class="addr-list" href="order-detail.html">
+    <!-- <a class="addr-list" href="order-detail.html">
     	<div class="addr-detail">团结湖15号楼 -118室<br />联系电话：15010248416
         	<span class="arrow">&#8250;</span>
         </div>
-    </a>
+    </a>  -->
+    <div id="address_list"></div>
 
     <div class="nav">
     	<a href="info.html">主人的信息</a>
