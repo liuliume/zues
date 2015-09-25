@@ -158,9 +158,9 @@ public class AccountController {
 		String sgid = ServletUtil.getCookie(request, "sgid");
 		String sid = MD5Util.MD5WithSalt(mobile);
 		if (StringUtils.isBlank(mobile) || !sid.equals(sgid)) {
-			jData.setCode(500);
+			jData.setCode(320);
 			jData.setSuccess(false);
-			jData.setDetail("用户身份验证失败");
+			jData.setDetail("用户身份验证失败,请登陆！");
 			return jData;
 		}
 		

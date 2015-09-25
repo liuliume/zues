@@ -20,7 +20,12 @@
 					var uniqname = result.data.uniqname;
 					$("#txt_user").val(uniqname);
 				}else{
-					alert(result.detail);
+                    if(result.code==320){
+                        alert(result.detail);
+                        window.location.href="login.html?ru=info.html&test=test1";
+                    }else{
+                        alert(result.detail);
+                    }
 				}
 			},failure:function(){
 				alert("系统错误");
