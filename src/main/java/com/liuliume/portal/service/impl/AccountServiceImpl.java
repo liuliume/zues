@@ -103,4 +103,17 @@ public class AccountServiceImpl implements AccountService {
 		return accountDao.listAllAccount();
 	}
 
+	@Override
+	public void updateNameByMobile(String name, String mobile) throws Exception{
+		if(StringUtils.isBlank(mobile) || StringUtils.isBlank(name)){
+			throw new IllegalArgumentException("用户名不能为空");
+		}
+		Account account = accountDao.findAccountByMobile(mobile);
+		if(account == null){
+			account = new Account();
+		}
+		account.setUniqname(name);
+		createOrUpdate(account);
+	}
+
 }

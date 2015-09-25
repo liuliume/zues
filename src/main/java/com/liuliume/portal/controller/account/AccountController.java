@@ -181,6 +181,23 @@ public class AccountController {
 		return jData;
 	}
 	
+	@RequestMapping(value="updateUserName",method=RequestMethod.POST)
+	@ResponseBody
+	public JData updateUserName(String name,HttpServletRequest request){
+		JData jData = new JData("操作成功",true);
+		String mobile = ServletUtil.getCookie(request, "mobile");
+		String sgid = ServletUtil.getCookie(request, "sgid");
+		String sid = MD5Util.MD5WithSalt(mobile);
+		if (StringUtils.isBlank(mobile) || !sid.equals(sgid)) {
+			jData.setCode(320);
+			jData.setSuccess(false);
+			jData.setDetail("用户身份验证失败,请登陆！");
+			return jData;
+		}
+		
+		return jData;
+	}
+	
 	@ModelAttribute("allGender")
 	public Map<Integer, GenderEnum> getAllGender(){
 		Map<Integer, GenderEnum> genders = new HashMap<Integer, GenderEnum>();

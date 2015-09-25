@@ -19,6 +19,7 @@
 				if(result.success){
 					var uniqname = result.data.uniqname;
 					$("#txt_user").val(uniqname);
+					$("#txt_user").data("old_value",txt_user);
 				}else{
                     if(result.code==320){
                         alert(result.detail);
@@ -30,7 +31,30 @@
 			},failure:function(){
 				alert("系统错误");
 			}
-		})
+		});
+		
+		$("#txt_user").blur(function(){
+			var old_value = $("#txt_user").data("old_value");
+			var value = $("#txt_user").val();
+			if( value!=null && value!="" && old_value != value){
+				$.ajax({
+					url:'/account/updateUserName',
+					type:'POST',
+					data:{'name':value},
+					success:function(result){
+						if(result.success){
+							alert("更新用户名成功");
+						}
+						else{
+							alert(result.detail);
+						}
+					},failure:function(){
+						alert("系统错误");
+					}
+					
+				});
+			}
+		});
 	});
 </script>
 

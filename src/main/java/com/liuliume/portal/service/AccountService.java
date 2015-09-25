@@ -28,4 +28,6 @@ public interface AccountService {
 	public void createOrUpdate(Account account) throws Exception;
 	
 	public List<Account> listAllAccount();
+	
+	public void updateNameByMobile(String name,String mobile) throws Exception;
 }
