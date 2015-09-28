@@ -17,13 +17,29 @@
             type:"GET",
             success:function(result){
                 if(result.success){
-                    console.info(result.data);
                     var detail = $("<a class='addr-list'>");
                     var href = "addr-detail.html?province_id="+result.data.province_id+"&city_id="+result.data.city_id+"&area_id="+result.data.area_id+"&address="+result.data.address;
                     detail.attr("href",href);
                     var obj = $("<div />");
                     obj.addClass("addr-detail");
-                    obj.html(result.data.province + result.data.city + result.data.area + result.data.address+"<br/>联系电话："+result.data.mobile);
+                    if(result.data.province!=null){
+                        if(result.data.city!=null) {
+                            if(result.data.area!=null) {
+                                if(result.data.address!=null){
+                                    obj.html(result.data.province + result.data.city + result.data.area + result.data.address+"<br/>联系电话："+result.data.mobile);
+                                } else{
+                                    obj.html(result.data.province + result.data.city + result.data.area +"<br/>联系电话："+result.data.mobile);
+                                }
+                            } else{
+                                obj.html(result.data.province + result.data.city+"<br/>联系电话："+result.data.mobile);
+                            }
+                        }  else {
+                            obj.html(result.data.province +"<br/>联系电话："+result.data.mobile);
+                        }
+
+                    } else {
+                        obj.html("<br/>联系电话："+result.data.mobile);
+                    }
                     var obj2 = $("<span class='arrow'>&#8250;</span>");
                     obj2.appendTo(obj);
                     obj.appendTo(detail);

@@ -30,4 +30,6 @@ public interface AccountService {
 	public List<Account> listAllAccount();
 	
 	public void updateNameByMobile(String name,String mobile) throws Exception;
+
+    public void updateAddressByMobile(Integer province_id,Integer city_id,Integer area_id,String address, String mobile) throws Exception;
 }

@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>我的地址</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="js/slide_show.js"></script>
+<style>
+.addr-detail input,.addr-select,.addr-detail select{width:90%;margin:30px auto 0;padding:0;height:60px;line-height:60px;text-indent:30px;border:1px solid #927d76}
+.addr-detail select{ display:block;font-size:16px;color:#493939; position:relative}
+.arrow{ position:absolute}
+.addr-list{ border:none;text-indent:0px; margin:20px 0 0 0}
+</style>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript">
+    $(function(){
+
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var requestParam = GetRequest();
+
+        //获取省份
+        $.ajax({
+            url:'/code/address/listAllProvince',
+            type:"GET",
+            async:false,
+            success:function(result){
+                if(result.success){
+                    $("#province").empty();
+                    $("#province").append("<option value=''>选择省份</option>");
+                    $.each(result.data,function(index,item){
+                        $("#province").append("<option value='"+item.id+"'>"+item.name+"</option>")
+                    });
+                } else {
+                    alert(result.detail);
+                }
+            }
+        });
+
+        var province_id =  requestParam.province_id;
+        if(province_id!=null && province_id!='null'){
+            $("#province").val(province_id);
+            //获取市
+            $.ajax({
+                url:'/code/address/listAllSubAddress',
+                type:"GET",
+                data : 'parent_id=' + province_id,
+                async:false,
+                success:function(result){
+                    if(result.success){
+                        $("#city").empty();
+                        $("#city").append("<option value=''>选择市</option>");
+                        $("#area").empty();
+                        $("#area").append("<option value=''>选择区域</option>");
+                        $.each(result.data,function(index,item){
+                            $("#city").append("<option value='"+item.id+"'>"+item.name+"</option>")
+                        });
+                    } else {
+                        alert(result.detail);
+                    }
+                }
+            });
+
+
+            var city_id =  requestParam.city_id;
+            if(city_id!=null && city_id!='null'){
+                $("#city").val(city_id);
+                //获取区域
+                $.ajax({
+                    url:'/code/address/listAllSubAddress',
+                    type:"GET",
+                    data : 'parent_id=' + city_id,
+                    async:false,
+                    success:function(result){
+                        if(result.success){
+                            $("#area").empty();
+                            $("#area").append("<option value=''>选择市</option>");
+                            $.each(result.data,function(index,item){
+                                $("#area").append("<option value='"+item.id+"'>"+item.name+"</option>")
+                            });
+                        } else {
+                            alert(result.detail);
+                        }
+                    }
+                });
+                var area_id =  requestParam.area_id;
+                $("#area").val(area_id);
+
+                $.ajax({
+                    url:'/code/address/listUserAddress',
+                    type:"GET",
+                    async:false,
+                    success:function(result){
+                        if(result.success){
+                            $("#address").val(result.data.address);
+                        } else {
+                            alert(result.detail);
+                        }
+                    }
+                });
+            }
+
+
+        }
+
+        $("#province").change(function(){
+            $.ajax({
+                url:'/code/address/listAllSubAddress',
+                type:"GET",
+                data : 'parent_id=' + $("#province").val(),
+                async:false,
+                success:function(result){
+                    if(result.success){
+                        $("#city").empty();
+                        $("#area").empty();
+                        $("#city").append("<option value=''>选择市</option>");
+                        $("#area").append("<option value=''>选择区域</option>");
+                        $.each(result.data,function(index,item){
+                            $("#city").append("<option value='"+item.id+"'>"+item.name+"</option>")
+                        });
+                    } else {
+                        alert(result.detail);
+                    }
+                }
+            });
+        })
+
+        $("#city").change(function(){
+            $.ajax({
+                url:'/code/address/listAllSubAddress',
+                type:"GET",
+                data : 'parent_id=' + $("#city").val(),
+                async:false,
+                success:function(result){
+                    if(result.success){
+                        $("#area").empty();
+                        $("#area").append("<option value=''>选择区域</option>");
+                        $.each(result.data,function(index,item){
+                            $("#area").append("<option value='"+item.id+"'>"+item.name+"</option>")
+                        });
+                    } else {
+                        alert(result.detail);
+                    }
+                }
+            });
+        })
+
+        $("#confirm").click(function(){
+            $.ajax({
+                url:'/account/updateUserAddress',
+                type:'POST',
+                data:{'province_id':$("#province").val(),"city_id":$("#city").val(),"area_id":$("#area").val(),"address":$("#address").val()},
+                success:function(result){
+                    if(result.success){
+                        alert("更新地址成功");
+                    }
+                    else{
+                        alert(result.detail);
+                    }
+                },failure:function(){
+                    alert("系统错误");
+                }
+
+            });
+        })
+
+    });
+</script>
+</head>
+
+<body>
+<div class="wrapper">
+	
+    <a class="list addr-list">服务范围五环内</a>
+    
+    <div class="addr-detail">
+        <select id="province">
+        	<span class="arrow">&#8250;</span>
+        	<option>城市：北京市</option>
+            <!--<option></option>-->
+        </select>
+        <select id="city">
+        	<span class="arrow">&#8250;</span>
+        	<option>选择地区</option>
+            <!--<option></option>-->
+        </select>
+        <select id="area">
+        	<span class="arrow">&#8250;</span>
+        	<option>区域范围</option>
+            <!--<option></option>-->
+        </select>
+        
+    	<input class="list" id="address" placeholder="请完善您的街道、楼号、单元、门号">
+    </div>
+    
+    <input type="submit" id="confirm" value="确 定">
+    
+    <div class="nav">
+    	<a href="info.html">主人的信息</a>
+		<a href="index.html">为主人服务</a>
+    </div>
+</div>
+
+</body>
+</html>

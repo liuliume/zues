@@ -147,7 +147,7 @@ public class AccountController {
 	
 	/**
 	 * 前端根据用户ID请求用户信息(包括地址)
-	 * @param account_id
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value="listAccount",method=RequestMethod.GET)
@@ -193,10 +193,41 @@ public class AccountController {
 			jData.setSuccess(false);
 			jData.setDetail("用户身份验证失败,请登陆！");
 			return jData;
-		}
-		
+		} else {
+            try {
+                accountService.updateNameByMobile(name,mobile);
+            } catch (Exception e) {
+                jData.setSuccess(false);
+                jData.setCode(500);
+                jData.setDetail("更改用户名失败！");
+            }
+        }
 		return jData;
 	}
+
+    @RequestMapping(value="updateUserAddress",method=RequestMethod.POST)
+    @ResponseBody
+    public JData updateUserAddress(Integer province_id,Integer city_id,Integer area_id,String address,HttpServletRequest request){
+        JData jData = new JData("操作成功",true);
+        String mobile = ServletUtil.getCookie(request, "mobile");
+        String sgid = ServletUtil.getCookie(request, "sgid");
+        String sid = MD5Util.MD5WithSalt(mobile);
+        if (StringUtils.isBlank(mobile) || !sid.equals(sgid)) {
+            jData.setCode(320);
+            jData.setSuccess(false);
+            jData.setDetail("用户身份验证失败,请登陆！");
+            return jData;
+        } else {
+            try {
+                accountService.updateAddressByMobile(province_id,city_id,area_id,address,mobile);
+            } catch (Exception e) {
+                jData.setSuccess(false);
+                jData.setCode(500);
+                jData.setDetail("更改用户地址失败！");
+            }
+        }
+        return jData;
+    }
 	
 	@ModelAttribute("allGender")
 	public Map<Integer, GenderEnum> getAllGender(){

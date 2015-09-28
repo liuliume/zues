@@ -36,9 +36,9 @@ public class Account implements Serializable{
 	private int flag;
 	private String uniqname;//昵称
 	private int gender;
-	private int province_id;
-	private int city_id;
-	private int area_id;
+	private Integer province_id;
+	private Integer city_id;
+	private Integer area_id;
 	private String address;
 	
 	private String province;
@@ -132,29 +132,29 @@ public class Account implements Serializable{
 	}
 
 	@Column(name="province_id")
-	public int getProvince_id() {
+	public Integer getProvince_id() {
 		return province_id;
 	}
 
-	public void setProvince_id(int province_id) {
+	public void setProvince_id(Integer province_id) {
 		this.province_id = province_id;
 	}
 
 	@Column(name="city_id")
-	public int getCity_id() {
+	public Integer getCity_id() {
 		return city_id;
 	}
 
-	public void setCity_id(int city_id) {
+	public void setCity_id(Integer city_id) {
 		this.city_id = city_id;
 	}
 
 	@Column(name="area_id")
-	public int getArea_id() {
+	public Integer getArea_id() {
 		return area_id;
 	}
 
-	public void setArea_id(int area_id) {
+	public void setArea_id(Integer area_id) {
 		this.area_id = area_id;
 	}
 

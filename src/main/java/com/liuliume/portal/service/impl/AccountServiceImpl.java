@@ -110,10 +110,28 @@ public class AccountServiceImpl implements AccountService {
 		}
 		Account account = accountDao.findAccountByMobile(mobile);
 		if(account == null){
-			account = new Account();
+//			account = new Account();
+            throw new Exception("没有此用户");
 		}
 		account.setUniqname(name);
 		createOrUpdate(account);
 	}
+
+    @Override
+    public void updateAddressByMobile(Integer province_id,Integer city_id,Integer area_id,String address, String mobile) throws Exception{
+        if(StringUtils.isBlank(mobile)){
+            throw new IllegalArgumentException("用户名不能为空");
+        }
+        Account account = accountDao.findAccountByMobile(mobile);
+        if(account == null){
+//            account = new Account();
+            throw new Exception("没有此用户");
+        }
+        account.setProvince_id(province_id);
+        account.setCity_id(city_id);
+        account.setArea_id(area_id);
+        account.setAddress(address);
+        createOrUpdate(account);
+    }
 
 }

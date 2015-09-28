@@ -181,6 +181,7 @@ public class AddressController {
             logger.info("call AddressController.listAllProvince");
             firstAddress = addressService.findAddressByLevel(AddressLevelEnum.First.getLevel());
             jData.setCode(200);
+            jData.setSuccess(true);
             jData.setData(firstAddress);
         } catch (Exception e) {
             logger.error("AddressController.listAllProvince Error! reason:{},",
