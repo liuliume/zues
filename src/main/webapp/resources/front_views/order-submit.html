@@ -6,67 +6,48 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>我的订单</title>
+<title>支付下单</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<script src="js/slide_show.js"></script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript">
-	$(function(){
-		
-		$.ajax({
-			url:'/orders/getAllOrders',
-			type:"GET",
-			success:function(result){
-				if(result.success){
-					$.each(result.data,function(index,item){
-						/* alert(item); */
-						var detail = $("<a class='order-list'>");
-						var id = item.orderId;
-						var href = "order-detail.html?id="+id;
-						detail.attr("href",href);
-						var obj = $("<div />");
-						obj.addClass("list-detail");
-						var orderType = "";
-						if(item.orderType==1){
-							orderType = "寄养";
-						}else if(item.orderType==2){
-							orderType = "训练";
-						}else if(orderType ==3){
-							orderType = "美容";
-						}else{
-							alert("订单类型错误");
-							return false;
-						}
-						obj.html(item.createTime+"<br>"+orderType+"<br>联系电话:"+item.account.mobile);
-						var obj2 = $("<span class='arrow'>&#8250;</span>");
-						obj2.appendTo(obj);
-						obj.appendTo(detail);
-						detail.appendTo($("#order_list"));
-					})
-				}
-			}
-		});
-	})
-</script>
+    $(function(){
 
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+        var requestParam = GetRequest();
+
+
+        $("#createOrder").click(function(){
+
+        })
+
+    })
+</script>
 </head>
 
 <body>
 <div class="wrapper">
 	
-     <!-- <a class="order-list" href="order-detail.html">
-    	<div class="list-detail">2015-9-17 15:00<br />宠物寄养 30天<br />联系电话：15010248416
-        	<span class="arrow">&#8250;</span>
-        </div>
-    </a> --> 
-    <div id="order_list">
-    	
-    </div>
-
-    <div class="nav">
-    	<a href="info.html">主人的信息</a>
-		<a href="index.html">为主人服务</a>
-    </div>
+    <a class="list order-submit ico-check">您已选择<span>寄养-酒店式-30天</span></a>
+    <a class="list order-submit ico-time">服务时间<span>2015-9-17至2015-10-01</span></a>
+    <a class="list order-submit ico-ask">特殊要求</a>
+    <a class="list order-submit ico-check">联系电话<span>15010248416</span></a>
+    <a class="list order-submit ico-time">服务价格<span>1500元</span></a>
+    <a class="list order-submit ico-check">支付方式</a>
+    
+    <div class="list foster-room">已阅读<span>同意服务协议</span></div>
+    
+    <div class="next" id="createOrder">立即下单</div>
 </div>
 
 </body>

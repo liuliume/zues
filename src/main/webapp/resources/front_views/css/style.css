@@ -66,6 +66,17 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .foster-total{ border:none; text-align:right; height:50px; line-height:50px; text-indent:1%;}
 .foster-room{border:none;background:url(../img/info-icon-order.png) no-repeat 13px center;background-size:auto 37%;}
 
+/* 支付下单 */
+.order-submit{ border-top:none}
+.order-submit span{ display:inline-block;text-indent:30px;font-size:14px}
+.ico-check{background:url(../img/order-icon-check.png) no-repeat 13px center;background-size:auto 37%;}
+.ico-time{background:url(../img/order-icon-time.png) no-repeat 13px center;background-size:auto 37%;}
+.ico-ask{background:url(../img/order-icon-ask.png) no-repeat 13px center;background-size:auto 37%;}
+
+/* 订单详情 */
+.order-detail{ border:none; height:45px; line-height:45px}
+.order-detail span{ display:inline-block;text-indent:30px;font-size:14px}
+
 /* 弹窗组件 */
 .ui-dialog{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;background:rgba(0,0,0,.4)}
 .ui-dialog-cnt{border-radius:6px;width:270px;-webkit-background-clip:padding-box;background-clip:padding-box;pointer-events:auto;background-color:rgba(253,253,253,.95);position:relative;font-size:16px}

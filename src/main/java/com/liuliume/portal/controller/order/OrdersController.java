@@ -180,7 +180,34 @@ public class OrdersController {
 		return "orders/orderDetail";
 	}
 
-	@RequestMapping(value = "payOrder", method = RequestMethod.POST)
+
+    @RequestMapping(value = "orderDetailForJson", method = RequestMethod.GET)
+    @ResponseBody
+    public JData orderDetailForJson(Integer ordersId, ModelMap map) {
+
+        logger.info("call OrdersController.orderDetail");
+        JData jData = new JData();
+
+        Orders orders = null;
+
+        try {
+            orders = ordersService.findOrdersByOrderId(ordersId);
+            jData.setData(orders);
+            jData.setSuccess(true);
+            jData.setCode(200);
+        } catch (Exception e) {
+            logger.error(
+                    "Error in OrdersController.index! reason:{}, Paramter:ordersId:{}.",
+                    e.getMessage(), ordersId, e);
+            jData.setData(null);
+            jData.setSuccess(false);
+            jData.setCode(500);
+        }
+        return jData;
+    }
+
+
+    @RequestMapping(value = "payOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public JData payOrder(
 			@RequestParam(value = "orderId", required = true) Integer orderId) {
