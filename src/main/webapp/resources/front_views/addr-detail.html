@@ -19,6 +19,10 @@
 <script type="text/javascript">
     $(function(){
 
+        $("#button_confirm").click(function(){
+            $(".ui-dialog").hide();
+        })
+
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
             var theRequest = new Object();
@@ -47,7 +51,9 @@
                         $("#province").append("<option value='"+item.id+"'>"+item.name+"</option>")
                     });
                 } else {
-                    alert(result.detail);
+//                    alert(result.detail);
+                    $("#div_text").text(result.detail);
+                    $(".ui-dialog").show();
                 }
             }
         });
@@ -71,7 +77,9 @@
                             $("#city").append("<option value='"+item.id+"'>"+item.name+"</option>")
                         });
                     } else {
-                        alert(result.detail);
+//                        alert(result.detail);
+                        $("#div_text").text(result.detail);
+                        $(".ui-dialog").show();
                     }
                 }
             });
@@ -94,7 +102,9 @@
                                 $("#area").append("<option value='"+item.id+"'>"+item.name+"</option>")
                             });
                         } else {
-                            alert(result.detail);
+//                            alert(result.detail);
+                            $("#div_text").text(result.detail);
+                            $(".ui-dialog").show();
                         }
                     }
                 });
@@ -109,7 +119,9 @@
                         if(result.success){
                             $("#address").val(result.data.address);
                         } else {
-                            alert(result.detail);
+//                            alert(result.detail);
+                            $("#div_text").text(result.detail);
+                            $(".ui-dialog").show();
                         }
                     }
                 });
@@ -134,7 +146,9 @@
                             $("#city").append("<option value='"+item.id+"'>"+item.name+"</option>")
                         });
                     } else {
-                        alert(result.detail);
+//                        alert(result.detail);
+                        $("#div_text").text(result.detail);
+                        $(".ui-dialog").show();
                     }
                 }
             });
@@ -154,7 +168,9 @@
                             $("#area").append("<option value='"+item.id+"'>"+item.name+"</option>")
                         });
                     } else {
-                        alert(result.detail);
+//                        alert(result.detail);
+                        $("#div_text").text(result.detail);
+                        $(".ui-dialog").show();
                     }
                 }
             });
@@ -167,13 +183,19 @@
                 data:{'province_id':$("#province").val(),"city_id":$("#city").val(),"area_id":$("#area").val(),"address":$("#address").val()},
                 success:function(result){
                     if(result.success){
-                        alert("更新地址成功");
+//                        alert("更新地址成功");
+                        $("#div_text").text("更新地址成功");
+                        $(".ui-dialog").show();
                     }
                     else{
-                        alert(result.detail);
+//                        alert(result.detail);
+                        $("#div_text").text(result.detail);
+                        $(".ui-dialog").show();
                     }
                 },failure:function(){
-                    alert("系统错误");
+//                    alert("系统错误");
+                    $("#div_text").text("系统错误");
+                    $(".ui-dialog").show();
                 }
 
             });
@@ -215,6 +237,13 @@
 		<a href="index.html">为主人服务</a>
     </div>
 </div>
-
+<div class="ui-dialog" style="display:none">
+    <div class="ui-dialog-cnt">
+        <div class="ui-dialog-hd" id="div_text">请选择服务项目</div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button" id="button_confirm">确定</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -12,6 +12,11 @@
 
 <script type="text/javascript">
 	$(function(){
+
+        $("#button_confirm").click(function(){
+            $(".ui-dialog").hide();
+        })
+
 		$.ajax({
 			url:'/account/listAccount',
 			type:'GET',
@@ -22,14 +27,20 @@
 					$("#txt_user").data("old_value",txt_user);
 				}else{
                     if(result.code==320){
-                        alert(result.detail);
+//                        alert(result.detail);
+                        $("#div_text").text(result.detail)
+                        $(".ui-dialog").show();
                         window.location.href="login.html?ru=info.html&test=test1";
                     }else{
-                        alert(result.detail);
+//                        alert(result.detail);
+                        $("#div_text").text(result.detail)
+                        $(".ui-dialog").show();
                     }
 				}
 			},failure:function(){
-				alert("系统错误");
+//				alert("系统错误");
+                $("#div_text").text("系统错误！")
+                $(".ui-dialog").show();
 			}
 		});
 		
@@ -43,13 +54,19 @@
 					data:{'name':value},
 					success:function(result){
 						if(result.success){
-							alert("更新用户名成功");
+//							alert("更新用户名成功");
+                            $("#div_text").text("更新用户名成功！")
+                            $(".ui-dialog").show();
 						}
 						else{
-							alert(result.detail);
+//							alert(result.detail);
+                            $("#div_text").text(result.detail)
+                            $(".ui-dialog").show();
 						}
 					},failure:function(){
-						alert("系统错误");
+//						alert("系统错误");
+                        $("#div_text").text("系统错误！")
+                        $(".ui-dialog").show();
 					}
 					
 				});
@@ -72,6 +89,14 @@
     <div class="nav">
     	<a href="info.html">主人的信息</a>
 		<a href="index.html">为主人服务</a>
+    </div>
+</div>
+<div class="ui-dialog" style="display:none">
+    <div class="ui-dialog-cnt">
+        <div class="ui-dialog-hd" id="div_text">请选择服务项目</div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button" id="button_confirm">确定</button>
+        </div>
     </div>
 </div>
 

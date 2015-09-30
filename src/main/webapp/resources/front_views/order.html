@@ -12,6 +12,10 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript">
 	$(function(){
+
+        $("#button_confirm").click(function(){
+            $(".ui-dialog").hide();
+        })
 		
 		$.ajax({
 			url:'/orders/getAllOrders',
@@ -34,7 +38,9 @@
 						}else if(orderType ==3){
 							orderType = "美容";
 						}else{
-							alert("订单类型错误");
+//							alert("订单类型错误");
+                            $("#div_text").text("订单类型错误");
+                            $(".ui-dialog").show();
 							return false;
 						}
 						obj.html(item.createTime+"<br>"+orderType+"<br>联系电话:"+item.account.mobile);
@@ -68,6 +74,13 @@
 		<a href="index.html">为主人服务</a>
     </div>
 </div>
-
+<div class="ui-dialog" style="display:none">
+    <div class="ui-dialog-cnt">
+        <div class="ui-dialog-hd" id="div_text">请选择服务项目</div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button" id="button_confirm">确定</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
