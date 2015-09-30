@@ -21,6 +21,7 @@
 			url:'/account/listAccount',
 			type:'GET',
 			success:function(result){
+                console.info(result);
 				if(result.success){
 					var uniqname = result.data.uniqname;
 					$("#txt_user").val(uniqname);
@@ -29,8 +30,8 @@
                     if(result.code==320){
 //                        alert(result.detail);
                         $("#div_text").text(result.detail)
-                        $(".ui-dialog").show();
-                        window.location.href="login.html?ru=info.html&test=test1";
+                            $(".ui-dialog").show();
+                        window.location.href="login.html?ru=info.html";
                     }else{
 //                        alert(result.detail);
                         $("#div_text").text(result.detail)

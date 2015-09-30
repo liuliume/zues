@@ -23,7 +23,7 @@
 			success:function(result){
 				if(result.success){
 					$.each(result.data,function(index,item){
-						/* alert(item); */
+						// alert(item);
 						var detail = $("<a class='order-list'>");
 						var id = item.orderId;
 						var href = "order-detail.html?id="+id;
@@ -38,7 +38,7 @@
 						}else if(orderType ==3){
 							orderType = "美容";
 						}else{
-//							alert("订单类型错误");
+							//alert("订单类型错误");
                             $("#div_text").text("订单类型错误");
                             $(".ui-dialog").show();
 							return false;
@@ -60,19 +60,15 @@
 <body>
 <div class="wrapper">
 	
-     <!-- <a class="order-list" href="order-detail.html">
+	<a class="order-list" href="order-detail.html">
     	<div class="list-detail">2015-9-17 15:00<br />宠物寄养 30天<br />联系电话：15010248416
         	<span class="arrow">&#8250;</span>
         </div>
-    </a> --> 
+    </a>  
     <div id="order_list">
     	
     </div>
 
-    <div class="nav">
-    	<a href="info.html">主人的信息</a>
-		<a href="index.html">为主人服务</a>
-    </div>
 </div>
 <div class="ui-dialog" style="display:none">
     <div class="ui-dialog-cnt">

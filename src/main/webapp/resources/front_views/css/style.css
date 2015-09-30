@@ -53,6 +53,31 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .order-list,.addr-list{color:#493939;display:block;width:100%; height:auto; padding:10px 0;border-bottom:1px solid #927d76;background:url(../img/info-icon-order.png) no-repeat 13px 15px;background-size:7% auto;}
 .list-detail,.addr-list{ padding-left:60px;line-height:35px;position:relative}
 
+/* 订单列表 */
+.order-detail{ border:none; height:50px; line-height:50px}
+.order-detail span{ display:inline-block;text-indent:20px}
+.ico-item{background:url(../img/ico-item.png) no-repeat 13px center;background-size:auto 42%}
+.ico-time{background:url(../img/ico-time.png) no-repeat 13px center;background-size:auto 42%}
+.ico-phone{background:url(../img/cd-icon-username.png) no-repeat 17px center;background-size:auto 42%}
+.ico-addr{background:url(../img/info-icon-addr.png) no-repeat 13px center;background-size:auto 42%}
+.ico-price{background:url(../img/ico-price.png) no-repeat 15px center;background-size:auto 42%}
+.serve-title{border-top:1px solid #927d76; padding:20px 0 0; height:30px; line-height:30px}
+.serve-supply{font-size:14px; height:30px; line-height:30px}
+.going-on-title{height:30px; line-height:30px; padding-top:15px}
+.going-on{background:url(../img/ico-yellow-dot.png) no-repeat 30px center;background-size:auto 30%; font-size:14px; height:30px; line-height:30px}
+
+/* 订单提交 */
+.order-submit{border-top:none; height:58px; line-height:58px}
+.order-submit span{ display:inline-block;text-indent:20px; font-size:14px}
+.ico-check{background:url(../img/ico-check.png) no-repeat 13px center;background-size:auto 37%}
+.order-submit.ico-time{background-size:auto 37%}
+.ico-ask{background:url(../img/ico-ask.png) no-repeat 13px center;background-size:auto 37%}
+.order-submit.ico-price{background-size:auto 37%; background-position:13px center}
+.ico-pay{background:url(../img/ico-pay.png) no-repeat 13px center;background-size:auto 42%}
+.pay-metod input{ height:15px; width:15px; border-radius:15px; border:2px solid #666; margin-right:10px;vertical-align:middle}
+.pay-metod .list{ border:none}
+.list input[type=checkbox]{ height:15px; width:15px;border:2px solid #666;margin-right:10px;vertical-align:middle}
+
 /* 地址列表 */
 .addr-list{background:url(../img/info-icon-addr.png) no-repeat 13px 15px;background-size:7% auto;}
 
@@ -66,20 +91,45 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .foster-total{ border:none; text-align:right; height:50px; line-height:50px; text-indent:1%;}
 .foster-room{border:none;background:url(../img/info-icon-order.png) no-repeat 13px center;background-size:auto 37%;}
 
-/* 支付下单 */
-.order-submit{ border-top:none}
-.order-submit span{ display:inline-block;text-indent:30px;font-size:14px}
-.ico-check{background:url(../img/order-icon-check.png) no-repeat 13px center;background-size:auto 37%;}
-.ico-time{background:url(../img/order-icon-time.png) no-repeat 13px center;background-size:auto 37%;}
-.ico-ask{background:url(../img/order-icon-ask.png) no-repeat 13px center;background-size:auto 37%;}
-
-/* 订单详情 */
-.order-detail{ border:none; height:45px; line-height:45px}
-.order-detail span{ display:inline-block;text-indent:30px;font-size:14px}
-
 /* 弹窗组件 */
 .ui-dialog{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;background:rgba(0,0,0,.4)}
 .ui-dialog-cnt{border-radius:6px;width:270px;-webkit-background-clip:padding-box;background-clip:padding-box;pointer-events:auto;background-color:rgba(253,253,253,.95);position:relative;font-size:16px}
 .ui-dialog-hd{height:48px;line-height:48px;text-align:center;position:relative}
 .ui-dialog-ft{border-bottom-left-radius:6px;border-bottom-right-radius:6px;display:-webkit-box;width:100%;box-sizing:border-box;-webkit-box-align:center;border-top:1px solid #e0e0e0;height:42px;line-height:42px}
 .ui-dialog-ft button{color:#00a5e0;text-align:center;width:100%;line-height:42px;background:0 0;display:block;margin:0!important;-webkit-box-flex:1}
+
+/* 宠物列表 */
+.mui-content{background-color:#efeff4;-webkit-overflow-scrolling:touch}
+.mui-table-view{background-color: #fff; list-style: outside none none; margin-bottom: 0; margin-top: 0; padding-left: 0; position: relative;}
+.mui-table-view::after{background-color: #c8c7cc; bottom: 0; content: ""; height: 1px; left: 0; position: absolute; right: 0; transform: scaleY(0.5);}
+.mui-table-view::before{background-color: #c8c7cc; content: ""; height: 1px; left: 0; position: absolute; right: 0; top: 0; transform: scaleY(0.5);}
+.mui-table-view-divider{background-color: #fafafa; color: #999; font-weight: 500; margin-left: 0; margin-top: -1px; padding-bottom: 6px; padding-left: 15px; padding-top: 6px; position: relative;}
+.mui-table-view-cell{background-color: inherit; overflow: hidden; padding: 11px 15px; position: relative;}
+.mui-table-view-divider::before{background-color: #c8c7cc; content: ""; height: 1px; left: 0; position: absolute; right: 0; top: 0; transform: scaleY(0.5);}
+.mui-table-view-cell::after{background-color: #c8c7cc; bottom: 0; content: ""; height: 1px; left: 15px; position: absolute; right: 0; transform: scaleY(0.5);}
+.mui-table-view-divider::after{background-color: #c8c7cc; bottom: 0; content: ""; height: 1px; left: 0; position: absolute; right: 0; transform: scaleY(0.5);}
+.mui-group-list{position: relative;border-top: solid 1px #e3e3e3;border-bottom: solid 1px #e3e3e3;overflow: hidden;background-color: #fafafa;height: 300px;cursor: default;}
+.mui-group-list-inner{margin: 0px;padding: 0px;overflow-y: auto;border: none;}
+.mui-group-list-inner::-webkit-scrollbar{width: 0px;height: 0px;visibility: hidden;}
+.mui-group-list-empty-alert,
+.mui-group-list-inner.empty ul{display: none;}
+.mui-group-list-inner.empty .mui-group-list-empty-alert{display: block;}
+.mui-group-list-empty-alert{padding: 30px 15px;text-align: center;color: #ccc;padding-right: 45px;}
+.mui-ios .mui-group-list-inner{width: calc(100% + 10px);}
+.mui-group-list-group,
+.mui-group-list-item{padding-right: 45px;}
+.mui-ios .mui-group-list-group,
+.mui-ios .mui-group-list-item,
+.mui-ios .mui-group-list-empty-alert{padding-right: 55px;}
+.mui-group-list-group{background-color: #f7f7f7;}
+.mui-group-list-group{padding-top: 3px;padding-bottom: 3px;}
+.mui-group-list-search{border-bottom: solid 1px #e3e3e3;z-index: 15;}
+.mui-group-list-search.mui-search:before{margin-top: -10px;}
+.mui-group-list-search input{border-radius: 0px;margin: 0px;background-color: #fafafa;}
+.mui-group-list-bar{width: 23px;background-color: lightgrey;position: absolute;height: 100%;z-index: 10;right: 0px;-webkit-transition: .2s;}
+.mui-group-list-bar a{display: block;text-align: center;font-size: 11px;padding: 0px;margin: 0px;line-height: 15px;color: #aaa;}
+.mui-group-list-bar.active{background-color: rgb(200,200,200);}
+.mui-group-list-bar.active a{color: #333;}
+.mui-group-list-bar.active a.active{color: #007aff;}
+.mui-group-list-alert{position: absolute;z-index: 20;background-color: rgba(0, 0, 0, 0.5);width: 80px;height: 80px;left: 50%;top: 50%;margin-left: -40px;margin-top: -40px;border-radius: 40px;text-align: center;line-height: 80px;font-size: 35px;color: #fff;display: none;-webkit-transition: .2s;}
+.mui-group-list-alert.active{display: block;}

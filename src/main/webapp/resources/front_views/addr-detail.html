@@ -10,7 +10,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script src="js/slide_show.js"></script>
 <style>
-.addr-detail input,.addr-select,.addr-detail select{width:90%;margin:30px auto 0;padding:0;height:60px;line-height:60px;text-indent:30px;border:1px solid #927d76}
+.addr-detail input,.addr-select,.addr-detail select{width:90%;margin:30px auto 0;padding:0;height:55px;line-height:55px;text-indent:30px;border:1px solid #c6c6c6}
 .addr-detail select{ display:block;font-size:16px;color:#493939; position:relative}
 .arrow{ position:absolute}
 .addr-list{ border:none;text-indent:0px; margin:20px 0 0 0}
@@ -137,6 +137,7 @@
                 data : 'parent_id=' + $("#province").val(),
                 async:false,
                 success:function(result){
+                    console.info(result);
                     if(result.success){
                         $("#city").empty();
                         $("#area").empty();
@@ -230,12 +231,8 @@
     	<input class="list" id="address" placeholder="请完善您的街道、楼号、单元、门号">
     </div>
     
-    <input type="submit" id="confirm" value="确 定">
+    <input type="submit" id="confirm" value="确 定" style="bottom:5%; width:80%; left:11%">
     
-    <div class="nav">
-    	<a href="info.html">主人的信息</a>
-		<a href="index.html">为主人服务</a>
-    </div>
 </div>
 <div class="ui-dialog" style="display:none">
     <div class="ui-dialog-cnt">
