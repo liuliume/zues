@@ -11,7 +11,7 @@ public enum OrderStatusEnum {
 
 	INVALID(-3,"无效"),
 	DELETE(99,"删除"),
-	ORDERED(0,"下单"),
+	ORDERED(0,"下单成功"),
 	SERVICING(1,"服务中"),
 	TRANSFER(2,"转发"),
 	COMPLETE(10,"已完成"),

@@ -118,6 +118,8 @@ public class Orders implements Serializable {
 
 	private OrderStatusEnum statusEnum;
 
+    private String orderStatusEnumDesc;
+
 	private String serviceTypeDesc;
 
 	private Room room;
@@ -377,7 +379,11 @@ public class Orders implements Serializable {
 		return OrderStatusEnum.parse(status);
 	}
 
-	@Transient
+    public String getOrderStatusEnumDesc() {
+        return OrderStatusEnum.parse(status).getDesc();
+    }
+
+    @Transient
 	public String getServiceTime() {
 		String date = "";
 		String start = startDate.trim();
