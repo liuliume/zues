@@ -26,7 +26,6 @@
         }
         var requestParam = GetRequest();
         var id = requestParam.id;
-
         if(id!=null){
             $.ajax({
                 url:'/orders/orderDetailForJson',
@@ -54,6 +53,16 @@
                         console.info(startDate);
                         console.info(endData);
                         console.info(cost);
+                        $(".wrapper").append("<a class='list order-detail ico-item' style='margin-top:20px'>服务项目<span>"+order_type+"</span></a>")
+                                .append("<a class='list order-detail ico-time'>服务时间<span>"+startDate+" 至 "+endData+"</span></a>")
+                                .append("<a class='list order-detail ico-phone'>联系电话<span>"+result.data.account.mobile+"</span></a>")
+                                .append("<a class='list order-detail ico-addr'>"+order_type+"地址<span>"+"test"+"</span></a>")
+                                .append("<a class='list order-detail ico-price' style='margin-bottom:30px'>服务价格<span>"+cost+"元</span></a>")
+                                .append("<a class='list order-detail serve-title'>服务提供</a>")
+                                .append("<a class='list order-detail serve-supply'>溜溜五星级服务中心</a>")
+                                .append("<a class='list order-detail serve-supply'>服务热线：400-123-123</a>")
+                                .append("<a class='list order-detail going-on-title'>订单当前进度</a>")
+                                .append("<a class='list order-detail going-on'>20155-09-15 15:25 创建订单</a>")
 
 
                     }
@@ -69,19 +78,19 @@
 <body>
 <div class="wrapper">
 
-    <a class="list order-detail ico-item" style="margin-top:20px">服务项目<span>训犬-成犬训练</span></a>
-    <a class="list order-detail ico-time">服务时间<span>2015-9-17至2015-10-01</span></a>
-    <a class="list order-detail ico-phone">联系电话<span>15010248416</span></a>
-    <a class="list order-detail ico-addr">宠物地址<span>团结湖11-15楼</span></a>
-    <a class="list order-detail ico-price" style="margin-bottom:30px">服务价格<span>1500元</span></a>
-    
-    <a class="list order-detail serve-title">服务提供</a>
-    <a class="list order-detail serve-supply">溜溜五星级服务中心 训犬师</a>
-    <a class="list order-detail serve-supply">服务热线：400-123-123</a>
-    
-    <a class="list order-detail going-on-title">订单当前进度</a>
-    <a class="list order-detail going-on">20155-09-15 15:25 创建订单</a>
-    <a class="list order-detail going-on">20155-09-15 15:25 订单已确定</a>
+    <!--<a class="list order-detail ico-item" style="margin-top:20px">服务项目<span>训犬-成犬训练</span></a>-->
+    <!--<a class="list order-detail ico-time">服务时间<span>2015-9-17至2015-10-01</span></a>-->
+    <!--<a class="list order-detail ico-phone">联系电话<span>15010248416</span></a>-->
+    <!--<a class="list order-detail ico-addr">宠物地址<span>团结湖11-15楼</span></a>-->
+    <!--<a class="list order-detail ico-price" style="margin-bottom:30px">服务价格<span>1500元</span></a>-->
+    <!---->
+    <!--<a class="list order-detail serve-title">服务提供</a>-->
+    <!--<a class="list order-detail serve-supply">溜溜五星级服务中心 训犬师</a>-->
+    <!--<a class="list order-detail serve-supply">服务热线：400-123-123</a>-->
+    <!---->
+    <!--<a class="list order-detail going-on-title">订单当前进度</a>-->
+    <!--<a class="list order-detail going-on">20155-09-15 15:25 创建订单</a>-->
+    <!--<a class="list order-detail going-on">20155-09-15 15:25 订单已确定</a>-->
     
 </div>
 

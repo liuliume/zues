@@ -78,6 +78,17 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .pay-metod .list{ border:none}
 .list input[type=checkbox]{ height:15px; width:15px;border:2px solid #666;margin-right:10px;vertical-align:middle}
 
+/* 订单确认 */
+.order-confirm{border-top:none; height:58px; line-height:58px}
+.order-confirm span{ display:inline-block;text-indent:20px; font-size:14px}
+.ico-confirm{ text-align:center; border-bottom:none; font-size:20px;background:url(../img/ico-confirm.png) no-repeat 35% center;background-size:auto 42%}
+.order-numb{text-align:center; width:90%; border-bottom:none; height:30px; line-height:30px; padding-bottom:20px}
+.order-confirm.ico-addr{background-size:auto 46%;background-position:10px center}
+.order-confirm.ico-item{border-top:1px solid #927d76; border-bottom:none; height:30px;line-height:30px; padding-top:20px;background-position:10px 25px}
+.confirm-detail{ border-bottom:none;height:30px; line-height:30px; font-size:14px;text-indent:144px;}
+.order-confirm.ico-time{border-top:1px solid #927d76; margin-top:10px;background-size:auto 38%}
+
+
 /* 地址列表 */
 .addr-list{background:url(../img/info-icon-addr.png) no-repeat 13px 15px;background-size:7% auto;}
 
