@@ -11,6 +11,7 @@
 <style>
 html,body {height: 100%;overflow: hidden}
 </style>
+
 </head>
 <body>
     <div class="mui-content">
@@ -124,25 +125,84 @@ html,body {height: 100%;overflow: hidden}
             </div>
         </div>
     </div>
+    <div class="ui-dialog" style="display:none">
+        <div class="ui-dialog-cnt">
+            <div class="ui-dialog-hd" id="div_text">请选择服务项目</div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button" id="button_confirm">确定</button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="js/mui.min.js"></script>
 <script src="js/mui.indexedlist.js"></script>
-<script type="text/javascript" charset="utf-8">
-    mui.init();
-    mui.ready(function() {
-        var list = document.getElementById('list');
-        list.style.height = (document.body.offsetHeight) + 'px';
-        window.groupList = new mui.GroupList(list);
-        //点击列表选择
-        var ul_pet = document.getElementById('ul_pet');
-        ul_pet.addEventListener("tap", function(e) {
-            var tagClass = e.target.getAttribute("class");
-            console.log("tagClass==" + tagClass);
-            if (tagClass && tagClass.indexOf("mui-table-view-cell") != -1) {
-                var selectPet = e.target.innerText;
-                alert("选择的宠物=" + selectPet);
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript">
+    $(function(){
+
+        $.ajax({
+            url:'/animal/listAllAnimals',
+            type:'GET',
+            success:function(result){
+                $("li.mui-table-view-cell.mui-group-list-item").remove();
+                if(result.success){
+                    console.info(result);
+                    $.each(result.data,function(index,item){
+                        var type = item.orderType;
+                        console.info($("li[data-group='"+type+"']"));
+                        $("li[data-group='"+type+"']").after("<li value='"+item.id+"' class='mui-table-view-cell mui-group-list-item'>"+item.animalsName+"</li>");
+                    })
+                } else{
+                    $("#div_text").text(result.detail);
+                    $(".ui-dialog").show();
+                }
+            },failure:function(){
+//				alert("系统错误");
+                $("#div_text").text("系统错误！")
+                $(".ui-dialog").show();
             }
         });
+
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var requestParam = GetRequest();
+        var ru = requestParam.ru;
+
+        mui.init();
+        mui.ready(function() {
+            var list = document.getElementById('list');
+            list.style.height = (document.body.offsetHeight) + 'px';
+            window.groupList = new mui.GroupList(list);
+            //点击列表选择
+            var ul_pet = document.getElementById('ul_pet');
+            ul_pet.addEventListener("tap", function(e) {
+                var tagClass = e.target.getAttribute("class");
+                console.log("tagClass==" + tagClass);
+                if (tagClass && tagClass.indexOf("mui-table-view-cell") != -1) {
+                    var selectPet = e.target.innerText;
+                    var selectPetId = e.target.value;
+                    window.location.href=ru+"?animalsName="+selectPet+"&animalsId="+selectPetId;
+//                    alert("选择的宠物=" + selectPet);
+//                    alert("选择的宠物=" + selectPetId);
+//                    alert(ru);
+                }
+            });
+        });
+
+        $("#button_confirm").click(function(){
+            $(".ui-dialog").hide();
+        })
     });
 </script>
 

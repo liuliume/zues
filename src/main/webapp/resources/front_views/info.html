@@ -31,7 +31,11 @@
 //                        alert(result.detail);
                         $("#div_text").text(result.detail)
                             $(".ui-dialog").show();
-                        window.location.href="login.html?ru=info.html";
+                        $("#button_confirm").unbind("click");
+                        $("#button_confirm").one("click",function(){
+                            window.location.href="login.html?ru=info.html";
+                        });
+//                        window.location.href="login.html?ru=info.html";
                     }else{
 //                        alert(result.detail);
                         $("#div_text").text(result.detail)

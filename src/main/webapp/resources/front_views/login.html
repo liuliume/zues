@@ -71,7 +71,13 @@
                             $("#div_text").text(obj.detail)
                             $(".ui-dialog").show();
 //                            console.info(ru);
-                            window.location.href=ru;
+//                            window.location.href=ru;
+                            $("#button_confirm").unbind("click");
+                            $("#button_confirm").one("click",function(){
+                                window.location.href=ru;
+                            });
+
+
                         } else {
                             //验证短信失败；
 //                            alert(obj.detail);

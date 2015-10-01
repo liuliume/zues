@@ -6,8 +6,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="animals_name" property="animalsName" jdbcType="VARCHAR" />
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
-      <result column="order_type" property="orderType" jdbcType="VARCHAR" />
-      <result column="order_type_orderby" property="orderTypeOrderBy" jdbcType="INTEGER" />
+    <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="order_type_orderby" property="orderTypeOrderBy" jdbcType="INTEGER" />
     <association property="type" javaType="com.liuliume.portal.entity.AnimalsType">
     	<id column="typeid" property="id" jdbcType="INTEGER" />
    		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
@@ -63,7 +63,7 @@
   </select>
   
   <select id="listAllAnimals" resultMap="BaseResultMap">
-  	SELECT a.id,animals_name,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient` 
+  	SELECT a.id,animals_name,a.order_type,a.order_type_orderby,type_id,t.id as typeid,t.`type_name`,t.`expense_coefficient`
 	FROM animals a LEFT JOIN animals_type t ON a.`type_id` = t.`id`
 	order by a.order_type,a.order_type_orderby
   </select>

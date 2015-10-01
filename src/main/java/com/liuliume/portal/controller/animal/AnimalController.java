@@ -184,7 +184,7 @@ public class AnimalController {
 	public JData listAllAnimals() {
 		JData jData = new JData("操作成功", true);
 		try {
-			animalService.listAllAnimals();
+            jData.setData(animalService.listAllAnimals());
 		} catch (Exception e) {
 			logger.error(
 					"listAllAnimals error! reason:{}, Paramter:Animals:{}.",

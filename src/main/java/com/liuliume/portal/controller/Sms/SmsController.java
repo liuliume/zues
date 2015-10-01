@@ -137,7 +137,7 @@ public class SmsController {
     @RequestMapping(value="verifyMsgCode",method= RequestMethod.GET)
     @ResponseBody
     public JData verifyMsgCode(@RequestParam(value="mobile",required=true)String mobile,
-                               @RequestParam(value="code",required=true)String code,HttpServletResponse response){
+                               @RequestParam(value="code",required=true)String code,HttpServletRequest request,HttpServletResponse response){
         JData jData = new JData();
         try {
             boolean flag = smsService.verifyMsgCode(mobile,code);
@@ -148,8 +148,8 @@ public class SmsController {
                 jData.setSuccess(true);
                 jData.setDetail("验证成功");
                 String sgid = MD5Util.MD5WithSalt(mobile);
-                ServletUtil.setCookie(response,"sgid",sgid,6 * 30 * 24 * 60 * 60);
-                ServletUtil.setCookie(response,"mobile",mobile,6 * 30 * 24 * 60 * 60);
+                ServletUtil.setCookie(request,response,"sgid",sgid,6 * 30 * 24 * 60 * 60);
+                ServletUtil.setCookie(request,response,"mobile",mobile,6 * 30 * 24 * 60 * 60);
             } else {
                 jData.setData(flag);
                 jData.setCode(200);
