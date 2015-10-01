@@ -12,6 +12,19 @@
 <script type="text/javascript">
     $(function(){
 
+        var mobile = null;
+        $.ajax({
+            url:'/account/listAccount',
+            type:'GET',
+            async:false,
+            success:function(result){
+                mobile = result.data.mobile;
+            },failure:function(){
+                alert("系统错误");
+            }
+        });
+        console.info(mobile);
+
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
             var theRequest = new Object();
@@ -25,11 +38,62 @@
             return theRequest;
         }
         var requestParam = GetRequest();
+        var order_type = requestParam.order_type;
+        var startDate = requestParam.startDate;
+        var endDate = requestParam.endDate;
+        var service_type = requestParam.service_type;
+        var order_type_inner_name = null;
+        var dataDiff = DateDiff(startDate,endDate);
+        var money = null;
+        if(order_type==1){
+            var order_type_name = "寄养";
+            var room_id = requestParam.room_id;
+            service_type = 0;
+            var service_type_name = "到店服务";
+            order_type_inner_name = null;
+            $.ajax({
+                url:'/room/indexForJson',
+                type:'GET',
+                async:false,
+                data:"room_id=" + room_id,
+                success:function(result){
+                    console.info(result);
+                    order_type_inner_name = result.roomName;
+                    money = result.cost * dataDiff;
+                },failure:function(){
+                    alert("系统错误");
+                }
+            });
+
+        } else if(order_type==2){
+            var course_id = requestParam.course_id;
+        }else if(order_type==3){
+            var hairdress_id = requestParam.hairdress_id;
+        }
+
+        $("#div").append("<a class='list order-submit ico-check'>您已选择<span>"+order_type_name+"-"+order_type_inner_name+"-"+dataDiff+"天</span></a>")
+                .append("<a class='list order-submit ico-time'>服务时间<span>"+startDate+" 至 "+endDate+"</span></a>")
+                .append("<a class='list order-submit ico-ask'>特殊要求<span>"+service_type_name+"</span></a>")
+                .append("<a class='list order-submit ico-phone'>联系电话<span>"+mobile+"</span></a>")
+                .append("<a class='list order-submit ico-price'>服务价格<span>"+money+"元</span></a>")
+//                .append("<a class='list order-submit ico-pay' style='border-bottom:none; height:50px; line-height:50px'>支付方式</a>")
+//                .append("<div class='pay-metod'>")
+//                .append("<a class='list' style='height:25px; line-height:25px'><label><input name='pay-metod' type='radio'>微信支付 (优惠信息及折扣)</label></a>")
+//                .append("<a class='list' style='height:40px; line-height:40px'><label><input name='pay-metod' type='radio'>到店支付</label></a></div>")
+
 
 
         $("#createOrder").click(function(){
 			window.location.href="order-confirm.html"; 
         })
+
+        function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式
+            var begintime_ms = Date.parse(new Date(sDate1.replace(/-/g, "/"))); //begintime 为开始时间
+            var endtime_ms = Date.parse(new Date(sDate2.replace(/-/g, "/")));
+            var days=Math.floor((endtime_ms-begintime_ms)/(24*3600*1000));
+            console.info(days)
+            return days;
+        }
 
     })
 </script>
@@ -37,22 +101,22 @@
 
 <body>
 
-	
-    <a class="list order-submit ico-check">您已选择<span>寄养-酒店式-30天</span></a>
-    <a class="list order-submit ico-time">服务时间<span>2015-9-17至2015-10-01</span></a>
-    <a class="list order-submit ico-ask">特殊要求</a>
-    <a class="list order-submit ico-phone">联系电话<span>15010248416</span></a>
-    <a class="list order-submit ico-price">服务价格<span>1500元</span></a>
-    
-    <a class="list order-submit ico-pay" style="border-bottom:none; height:50px; line-height:50px">支付方式</a>
-    <div class="pay-metod">
-        <a class="list" style="height:25px; line-height:25px"><label><input name="pay-metod" type="radio">微信支付 (优惠信息及折扣)</label></a>
-        <a class="list" style="height:40px; line-height:40px"><label><input name="pay-metod" type="radio">到店支付</label></a>
+	<div id="div">
+        <!--<a class="list order-submit ico-check">您已选择<span>寄养-酒店式-30天</span></a>-->
+        <!--<a class="list order-submit ico-time">服务时间<span>2015-9-17 至 2015-10-01</span></a>-->
+        <!--<a class="list order-submit ico-ask">特殊要求</a>-->
+        <!--<a class="list order-submit ico-phone">联系电话<span>15010248416</span></a>-->
+        <!--<a class="list order-submit ico-price">服务价格<span>1500元</span></a>-->
     </div>
-    
-    <div class="list" style="margin-top:10px;border-bottom:none"><label><input class="deal" type="checkbox">已阅读，<span>同意<a href="#" style="text-decoration:underline">服务协议</a></span></label></div>
-    
-    <div class="next" id="createOrder" style="margin-top:30px; width:75%">立即下单</div>
+        <a class="list order-submit ico-pay" style="border-bottom:none; height:50px; line-height:50px">支付方式</a>
+        <div class="pay-metod">
+            <a class="list" style="height:25px; line-height:25px"><label><input name="pay-metod" type="radio">微信支付 (优惠信息及折扣)</label></a>
+            <a class="list" style="height:40px; line-height:40px"><label><input name="pay-metod" type="radio">到店支付</label></a>
+        </div>
+
+        <div class="list" style="margin-top:10px;border-bottom:none"><label><input class="deal" type="checkbox">已阅读，<span>同意<a href="#" style="text-decoration:underline">服务协议</a></span></label></div>
+
+        <div class="next" id="createOrder" style="margin-top:30px; width:75%">立即下单</div>
 
 
 </body>

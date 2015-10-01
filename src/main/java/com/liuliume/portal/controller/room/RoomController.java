@@ -115,6 +115,20 @@ public class RoomController {
         return mav;
     }
 
+    @RequestMapping(value="indexForJson",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Room indexForJson(@RequestParam(value="room_id",required=true)Integer room_id) {
+        Room room = null;
+        try {
+            logger.info("call AddressController.index");
+            room = roomService.findRoomById(room_id);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),room_id,e);
+        }
+        return room;
+    }
+
     @RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
     @ResponseBody
     public JData createOrUpdate(Room room,HttpServletRequest request,HttpServletResponse response){
