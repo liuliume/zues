@@ -42,7 +42,7 @@
 	<resultMap id="room" type="com.liuliume.portal.entity.Room">
 		<id column="room_id" property="id" jdbcType="INTEGER" />
 		<result column="room_name" property="roomName" jdbcType="VARCHAR" />
-		<result column="cost" property="cost" jdbcType="DOUBLE" />
+		<result column="room_cost" property="cost" jdbcType="DOUBLE" />
 		<result column="weixin_discount" property="weixinDiscount"
 			jdbcType="DOUBLE" />
 		<result column="discount_30" property="discount30" jdbcType="DOUBLE" />
@@ -56,7 +56,7 @@
 		<result column="course_name" property="courseName" jdbcType="VARCHAR" />
 		<result column="course_describe" property="courseDescribe"
 			jdbcType="VARCHAR" />
-		<result column="expense" property="expense" jdbcType="DOUBLE" />
+		<result column="expense_course" property="expense" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="hairdressing" type="com.liuliume.portal.entity.Hairdressing">
@@ -65,7 +65,7 @@
 			jdbcType="VARCHAR" />
 		<result column="hairdressing_describe" property="hairdressingDescribe"
 			jdbcType="VARCHAR" />
-		<result column="expense" property="expense" jdbcType="DOUBLE" />
+		<result column="expense_hairdressing" property="expense" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<sql id="list-where">
@@ -106,9 +106,9 @@
 
 	<select id="list" resultMap="orders">
 		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS
-		room_id,r.`room_name`,c.`id` AS
-		course_id,c.`course_name`,c.`course_describe`,c.`expense`,
-		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`,
+		room_id,r.`room_name`,r.cost AS room_cost,c.`id` AS
+		course_id,c.`course_name`,c.`course_describe`,c.`expense` AS expense_course,
+		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense` AS expense_hairdressing,
 		an.animals_name
 		FROM orders o
 		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
@@ -126,9 +126,9 @@
 
 	<select id="findOrdersByOrderId" resultMap="orders">
 		SELECT o.*,a.`account_id`,a.`mobile`,a.`uniq_name`,r.`id` AS
-		room_id,r.`room_name`,c.`id` AS
-		course_id,c.`course_name`,c.`course_describe`,c.`expense`,
-		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense`,
+		room_id,r.`room_name`,r.cost AS room_cost,c.`id` AS
+		course_id,c.`course_name`,c.`course_describe`,c.`expense` AS expense_course,
+		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense` AS expense_hairdressing,
 		an.animals_name
 		FROM orders o
 		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
