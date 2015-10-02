@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.liuliume.portal.mybatis.mapper.OrdersMapper">
 	<resultMap id="orders" type="com.liuliume.portal.entity.Orders">
-		<id column="order_id" property="orderId" jdbcType="INTEGER" />
+		<id column="order_id" property="orderId" jdbcType="VARCHAR" />
 		<result column="account_id" property="accountId" jdbcType="INTEGER" />
 		<result column="order_type" property="orderType" jdbcType="CHAR" />
 		<result column="animals_id" property="animalsId" jdbcType="INTEGER" />

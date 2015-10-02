@@ -379,6 +379,7 @@ public class Orders implements Serializable {
 		return OrderStatusEnum.parse(status);
 	}
 
+    @Transient
     public String getOrderStatusEnumDesc() {
         return OrderStatusEnum.parse(status).getDesc();
     }

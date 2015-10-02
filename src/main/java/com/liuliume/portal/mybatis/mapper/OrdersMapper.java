@@ -15,7 +15,7 @@ public interface OrdersMapper extends MyBatisBaseMapper<Orders> {
 
 	public List<Orders> list(@Param("param") Parameter parameter);
 
-	public Orders findOrdersByOrderId(@Param("orderId") Integer orderId);
+	public Orders findOrdersByOrderId(@Param("orderId") String orderId);
 
 	public int countHairDressingOrders(@Param("serviceDate") Date serviceDate,
 			@Param("startTime") String startTime,

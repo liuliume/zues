@@ -12,19 +12,22 @@
 <script type="text/javascript">
     $(function(){
 
+        //获取用户信息
         var mobile = null;
+        var account_id = null;
         $.ajax({
             url:'/account/listAccount',
             type:'GET',
             async:false,
             success:function(result){
                 mobile = result.data.mobile;
+                account_id = result.data.accountId;
             },failure:function(){
                 alert("系统错误");
             }
         });
-        console.info(mobile);
 
+        //获取请求参数
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
             var theRequest = new Object();
@@ -37,11 +40,13 @@
             }
             return theRequest;
         }
+        //拼凑页面与参数
         var requestParam = GetRequest();
         var order_type = requestParam.order_type;
         var startDate = requestParam.startDate;
         var endDate = requestParam.endDate;
         var service_type = requestParam.service_type;
+        var animalsId = requestParam.animalsId;
         var order_type_inner_name = null;
         var dataDiff = DateDiff(startDate,endDate);
         var money = null;
@@ -57,7 +62,6 @@
                 async:false,
                 data:"room_id=" + room_id,
                 success:function(result){
-                    console.info(result);
                     order_type_inner_name = result.roomName;
                     money = result.cost * dataDiff;
                 },failure:function(){
@@ -66,9 +70,48 @@
             });
 
         } else if(order_type==2){
+            var order_type_name = "训练";
             var course_id = requestParam.course_id;
-        }else if(order_type==3){
+            service_type = 0;
+            var service_type_name = "到店服务";
+            order_type_inner_name = null;
+            $.ajax({
+                url:'/course/indexForJson',
+                type:'GET',
+                async:false,
+                data:"course_id=" + course_id,
+                success:function(result){
+                    console.info(result);
+                    order_type_inner_name = result.courseName;
+                    money = result.expense * dataDiff;
+                },failure:function(){
+                    alert("系统错误");
+                }
+            });
+
+        } else if(order_type==3){
+            var order_type_name = "美容";
             var hairdress_id = requestParam.hairdress_id;
+            service_type = requestParam.service_type;
+            if(service_type==0){
+                var service_type_name = "到店服务";
+            } else {
+                var service_type_name = "上门服务";
+            }
+            order_type_inner_name = null;
+            $.ajax({
+                url:'/hairdressing/indexForJson',
+                type:'GET',
+                async:false,
+                data:"hairdressing_id=" + hairdress_id,
+                success:function(result){
+                    console.info(result);
+                    order_type_inner_name = result.hairdressingName;
+                    money = result.expense * dataDiff;
+                },failure:function(){
+                    alert("系统错误");
+                }
+            });
         }
 
         $("#div").append("<a class='list order-submit ico-check'>您已选择<span>"+order_type_name+"-"+order_type_inner_name+"-"+dataDiff+"天</span></a>")
@@ -82,16 +125,63 @@
 //                .append("<a class='list' style='height:40px; line-height:40px'><label><input name='pay-metod' type='radio'>到店支付</label></a></div>")
 
 
+        //下单参数
+        if(order_type==1){
+            var order_param = {"accountId":account_id,"orderType":order_type,"animalsId":animalsId,
+                "serviceType":service_type,"startDate":startDate,"endDate":endDate,"paymentStatus":0,"roomId":room_id,
+                "cost":money
+            };
+        }else if(order_type==2){
+            var order_param = {"accountId":account_id,"orderType":order_type,"animalsId":animalsId,
+                "serviceType":service_type,"startDate":startDate,"paymentStatus":0,"courseId":course_id,
+                "cost":money
+            };
+        }else if(order_type==3){
+            var order_param = {"accountId":account_id,"orderType":order_type,"animalsId":animalsId,
+                "serviceType":service_type,"startDate":startDate,"paymentStatus":0,"hairdressId":hairdress_id,
+                "cost":money
+            };
+        }
 
+
+
+        //下单按钮
         $("#createOrder").click(function(){
-			window.location.href="order-confirm.html"; 
+            if($(".deal").attr("checked")==false){
+                $("#div_text").text("请阅读并同意服务协议!");
+                $(".ui-dialog").show();
+                return;
+            }
+            $.ajax({
+                url:'/orders/create',
+                type:'POST',
+                async:false,
+                data:order_param,
+                success:function(result){
+                    console.info(result);
+                    if(result.success){
+
+                    }else{
+                        $("#div_text").text(result.detail);
+                        $(".ui-dialog").show();
+                        return;
+                    }
+                },failure:function(){
+                    alert("系统错误");
+                }
+            });
+//			window.location.href="order-confirm.html";
         })
 
+        $("#button_confirm").click(function(){
+            $(".ui-dialog").hide();
+        })
+
+        //日期
         function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式
             var begintime_ms = Date.parse(new Date(sDate1.replace(/-/g, "/"))); //begintime 为开始时间
             var endtime_ms = Date.parse(new Date(sDate2.replace(/-/g, "/")));
             var days=Math.floor((endtime_ms-begintime_ms)/(24*3600*1000));
-            console.info(days)
             return days;
         }
 
@@ -114,9 +204,18 @@
             <a class="list" style="height:40px; line-height:40px"><label><input name="pay-metod" type="radio">到店支付</label></a>
         </div>
 
-        <div class="list" style="margin-top:10px;border-bottom:none"><label><input class="deal" type="checkbox">已阅读，<span>同意<a href="#" style="text-decoration:underline">服务协议</a></span></label></div>
+        <div class="list" style="margin-top:10px;border-bottom:none"><label><input class="deal" type="checkbox" checked="true">已阅读，<span>同意<a href="#" style="text-decoration:underline">服务协议</a></span></label></div>
 
         <div class="next" id="createOrder" style="margin-top:30px; width:75%">立即下单</div>
+
+    <div class="ui-dialog" style="display:none">
+        <div class="ui-dialog-cnt">
+            <div class="ui-dialog-hd" id="div_text">请选择服务项目</div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button" id="button_confirm">确定</button>
+            </div>
+        </div>
+    </div>
 
 
 </body>

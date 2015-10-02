@@ -82,7 +82,7 @@ public class OrdersController {
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(
-			@RequestParam(value = "ordersId", required = false) Integer ordersId,
+			@RequestParam(value = "ordersId", required = false) String ordersId,
 			@RequestParam(value = "orderType", required = true) Integer orderType,
 			ModelMap map) {
 		logger.info("call OrdersController.index");
@@ -161,7 +161,7 @@ public class OrdersController {
 	}
 
 	@RequestMapping(value = "orderDetail", method = RequestMethod.GET)
-	public String orderDetail(Integer ordersId, ModelMap map) {
+	public String orderDetail(String ordersId, ModelMap map) {
 
 		logger.info("call OrdersController.orderDetail");
 
@@ -183,7 +183,7 @@ public class OrdersController {
 
     @RequestMapping(value = "orderDetailForJson", method = RequestMethod.GET)
     @ResponseBody
-    public JData orderDetailForJson(Integer ordersId, ModelMap map) {
+    public JData orderDetailForJson(String ordersId, ModelMap map) {
 
         logger.info("call OrdersController.orderDetail");
         JData jData = new JData();
@@ -210,7 +210,7 @@ public class OrdersController {
     @RequestMapping(value = "payOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public JData payOrder(
-			@RequestParam(value = "orderId", required = true) Integer orderId) {
+			@RequestParam(value = "orderId", required = true) String orderId) {
 		JData jData = new JData("确认收款成功", true);
 		try {
 			ordersService.payOrder(orderId);
@@ -227,7 +227,7 @@ public class OrdersController {
 	@RequestMapping(value = "invalidOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public JData invalidOrder(
-			@RequestParam(value = "orderId", required = true) Integer orderId) {
+			@RequestParam(value = "orderId", required = true) String orderId) {
 		JData jData = new JData("订单置无效成功", true);
 		try {
 			ordersService.invalidOrder(orderId);
@@ -244,7 +244,7 @@ public class OrdersController {
 	@RequestMapping(value = "transferOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public JData transferOrder(
-			@RequestParam(value = "orderId", required = true) Integer orderId) {
+			@RequestParam(value = "orderId", required = true) String orderId) {
 		JData jData = new JData("订单转发成功", true);
 		try {
 			ordersService.transferOrder(orderId);
@@ -261,7 +261,7 @@ public class OrdersController {
 	@RequestMapping(value = "completeOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public JData completeOrder(
-			@RequestParam(value = "orderId", required = true) Integer orderId) {
+			@RequestParam(value = "orderId", required = true) String orderId) {
 		JData jData = new JData("操作成功", true);
 		try {
 			ordersService.completeOrder(orderId);
@@ -277,8 +277,7 @@ public class OrdersController {
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
-	public JData create(Orders orders, HttpServletRequest request,
-			HttpSession session) {
+	public JData create(Orders orders, HttpServletRequest request) {
 		logger.info("call the create Orders");
 		JData jData = new JData();
 		try {
@@ -303,7 +302,7 @@ public class OrdersController {
 					+ " orders[" + orders + "]", e);
 			jData.setCode(500);
 			jData.setSuccess(false);
-			jData.setDetail("操作失败");
+			jData.setDetail(e.getMessage());
 		}
 		return jData;
 	}

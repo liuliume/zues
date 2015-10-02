@@ -100,8 +100,8 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public Orders findOrdersByOrderId(Integer orderId) throws Exception {
-		if (orderId == null || orderId <= 0)
+	public Orders findOrdersByOrderId(String orderId) throws Exception {
+		if (StringUtils.isEmpty(orderId))
 			return null;
 
 		Orders orders = ordersDao.findOrdersByOrderId(orderId);
@@ -125,8 +125,8 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public void payOrder(Integer orderId) throws Exception {
-		if (orderId == null || orderId <= 0) {
+	public void payOrder(String orderId) throws Exception {
+		if (StringUtils.isEmpty(orderId)) {
 			throw new IllegalArgumentException("订单ID错误,请检查");
 		}
 		Orders orders = findOrdersByOrderId(orderId);
@@ -140,8 +140,8 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public void invalidOrder(Integer orderId) throws Exception {
-		if (orderId == null || orderId <= 0) {
+	public void invalidOrder(String orderId) throws Exception {
+		if (StringUtils.isEmpty(orderId)) {
 			throw new IllegalArgumentException("订单ID错误,请检查");
 		}
 		Orders orders = findOrdersByOrderId(orderId);
@@ -160,7 +160,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public void transferOrder(Integer orderId) throws Exception {
+	public void transferOrder(String orderId) throws Exception {
 		if (orderId == null)
 			throw new IllegalArgumentException("Order Id错误");
 		Orders orders = findOrdersByOrderId(orderId);
@@ -180,7 +180,7 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public void completeOrder(Integer orderId) throws Exception {
+	public void completeOrder(String orderId) throws Exception {
 		if (orderId == null)
 			throw new IllegalArgumentException("Order Id错误");
 		Orders orders = findOrdersByOrderId(orderId);
@@ -236,8 +236,9 @@ public class OrdersServiceImpl implements OrdersService {
 		if (room == null) {
 			throw new Exception("寄养房间类型错误");
 		}
-		Date startDate = new Date(orders.getStartDate());
-		Date endDate = new Date(orders.getEndDate());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = sdf.parse(orders.getStartDate());
+		Date endDate = sdf.parse(orders.getEndDate());
 		boolean empty = roomService.isRoomNotEmpty(startDate, endDate,
 				orders.getRoomId());
 		if (!empty) {

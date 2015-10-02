@@ -112,6 +112,20 @@ public class CourseController {
         return mav;
     }
 
+    @RequestMapping(value="indexForJson",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Course indexForJson(@RequestParam(value="course_id",required=true)Integer course_id) {
+        Course course = null;
+        try {
+            logger.info("call AddressController.index");
+            course = courseService.findCourseById(course_id);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),course_id,e);
+        }
+        return course;
+    }
+
     @RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
     @ResponseBody
     public JData createOrUpdate(Course course,HttpServletRequest request,HttpServletResponse response){

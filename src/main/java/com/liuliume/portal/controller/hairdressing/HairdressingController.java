@@ -91,6 +91,20 @@ public class HairdressingController {
         return mav;
     }
 
+    @RequestMapping(value="indexForJson",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Hairdressing indexForJson(@RequestParam(value="hairdressing_id",required=false)Integer hairdressing_id) {
+        Hairdressing hairdressing = null;
+        try {
+            logger.info("call AddressController.index");
+            hairdressing = hairdressingService.findHairdressingById(hairdressing_id);
+        } catch (Exception e) {
+            logger.error("Error! reason:{}, Paramter:account_id:{}.",
+                    e.getMessage(),hairdressing_id,e);
+        }
+       return hairdressing;
+    }
+
     @RequestMapping(value="createOrUpdate",method=RequestMethod.POST)
     @ResponseBody
     public JData createOrUpdate(Hairdressing hairdressing,HttpServletRequest request,HttpServletResponse response){

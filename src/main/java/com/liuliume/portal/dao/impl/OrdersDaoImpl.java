@@ -28,7 +28,7 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
 	@Override
-	public Orders findOrdersByOrderId(Integer orderId) throws Exception {
+	public Orders findOrdersByOrderId(String orderId) throws Exception {
 		return ordersMapper.findOrdersByOrderId(orderId);
 	}
 

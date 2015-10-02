@@ -9,17 +9,17 @@ public interface OrdersService {
 
 	public List<Orders> list(Seed<Orders> seed) throws Exception;
 	
-	public Orders findOrdersByOrderId(Integer orderId)throws Exception;
+	public Orders findOrdersByOrderId(String orderId)throws Exception;
 	
 	public void createOrUpdate(Orders orders) throws Exception;
 	
-	public void payOrder(Integer orderId) throws Exception;
+	public void payOrder(String orderId) throws Exception;
 	
-	public void invalidOrder(Integer orderId) throws Exception;
+	public void invalidOrder(String orderId) throws Exception;
 	
-	public void transferOrder(Integer orderId) throws Exception;
+	public void transferOrder(String orderId) throws Exception;
 	
-	public void completeOrder(Integer orderId) throws Exception;
+	public void completeOrder(String orderId) throws Exception;
 	
 	public void create(Orders orders) throws Exception;
 }
