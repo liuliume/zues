@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>服务协议</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script>
+    $(function(){
+		
+		$(".month").bind("click", function() {
+			$(".month").removeClass("hover");
+			$(this).addClass("hover");
+		})
+		
+		$(".day").bind("click", function() {
+			$(".day").removeClass("hover");
+			$(this).addClass("hover");
+		})
+		
+		$(".hour").bind("click", function() {
+			$(".hour").removeClass("hover");
+			$(this).addClass("hover");
+		})
+        
+    })
+
+</script>
+</head>
+
+<body>
+
+<!--时间选取-->
+<div class="ui-dialog">
+  <div class="t_title"><span>取消</span>服务时间<span style="float:right">确定</span></div>
+  <div class="t_content">
+  	<li><span class="month">9月</span><span class="day">15日</span><span class="hour">9:00</span></li>
+    <li><span class="month">10月</span><span class="day">16日</span><span class="hour">10:00</span></li>
+    <li><span class="month">9月</span><span class="day">15日</span><span class="hour">9:00</span></li>
+    <li><span class="month">10月</span><span class="day">16日</span><span class="hour">10:00</span></li>
+    <li><span class="month">9月</span><span class="day">15日</span><span class="hour">9:00</span></li>
+    <li><span class="month">10月</span><span class="day">16日</span><span class="hour">10:00</span></li>
+    <li><span class="month">9月</span><span class="day">15日</span><span class="hour">9:00</span></li>
+    <li><span class="month">10月</span><span class="day">16日</span><span class="hour">10:00</span></li>
+  </div>
+</div>
+
+</body>
+</html>

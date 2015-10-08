@@ -16,7 +16,7 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .wrapper input:focus{border-color: #ffd800;box-shadow: 0 0 5px rgba(52, 54, 66, 0.1)}
 .wrapper input[type=submit]{padding:16px 0;background:#ffd800;color:#493939;border-radius:6px;display:block;width:87%;position:absolute;bottom:10%;left:7%;font-weight:bold;font-size:1.25em; border:0}
 
-.next{padding:16px 0;background:#ffd800;color:#493939;border-radius:6px;display:block;width:87%; text-align:center; margin:0 auto;font-weight:bold;font-size:1.25em; border:0}
+.next{padding:16px 0;background:#ffd800;color:#493939;border-radius:6px;display:block;width:87%; text-align:center; margin:0 auto 15px;font-weight:bold;font-size:1.25em; border:0}
 
 /* 首页焦点图 */
 .slideBox{ position:relative; overflow:hidden; margin:0 auto;  max-width:640px;/* 设置焦点图最大宽度 */ }
@@ -74,9 +74,9 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .ico-ask{background:url(../img/ico-ask.png) no-repeat 13px center;background-size:auto 37%}
 .order-submit.ico-price{background-size:auto 37%; background-position:13px center}
 .ico-pay{background:url(../img/ico-pay.png) no-repeat 13px center;background-size:auto 42%}
-.pay-metod input{ height:15px; width:15px; border-radius:15px; border:2px solid #666; margin-right:10px;vertical-align:middle}
+.pay-metod input{ height:15px; width:15px; border-radius:15px; border:2px solid #c6c6c6; margin-right:10px;vertical-align:middle}
 .pay-metod .list{ border:none}
-.list input[type=checkbox]{ height:15px; width:15px;border:2px solid #666;margin-right:10px;vertical-align:middle}
+.list input[type=checkbox]{ height:15px; width:15px;border:2px solid #c6c6c6;margin-right:10px;vertical-align:middle}
 
 /* 订单确认 */
 .order-confirm{border-top:none; height:58px; line-height:58px}
@@ -98,9 +98,17 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 /* 宠物寄养 */
 .foster-ad{overflow:hidden; margin:0 auto;  max-width:640px;/* 设置焦点图最大宽度 */ }
 .foster-ad img{ background:url(../img/loading.gif) center center no-repeat;  vertical-align:top; width:100%;/* 图片宽度100%，达到自适应效果 */}
-.foster-time{background:url(../img/info-icon-order.png) no-repeat 13px center;background-size:auto 37%;}
-.foster-total{ border:none; text-align:right; height:50px; line-height:50px; text-indent:1%;}
-.foster-room{border:none;background:url(../img/info-icon-order.png) no-repeat 13px center;background-size:auto 37%;}
+.foster-time{background:url(../img/ico-time.png) no-repeat 13px center;background-size:auto 37%;}
+.foster-breed{background:url(../img/ico-breed.png) no-repeat 13px center;background-size:auto 37%;}
+.foster-total{border:none; text-align:right; height:50px; line-height:50px; text-indent:1%;}
+.foster-room{border:none;background:url(../img/ico-room.png) no-repeat 13px center;background-size:auto 37%}
+.foster-room span{display:inline-block; float:right}
+.room-list{border:none; height:30px; line-height:30px}
+
+/* 宠物美容 */
+.beauty-serve{ border-top:none;height:50px; padding-bottom:20px}
+.beauty-serve span{ display:inline-block; width:40%; float:left}
+.beauty-serve input[type=radio]{height:15px; width:15px; border-radius:15px; border:2px solid #c6c6c6; margin-right:10px;vertical-align:middle; padding:0}
 
 /* 弹窗组件 */
 .ui-dialog{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;background:rgba(0,0,0,.4)}
@@ -108,6 +116,24 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .ui-dialog-hd{height:48px;line-height:48px;text-align:center;position:relative}
 .ui-dialog-ft{border-bottom-left-radius:6px;border-bottom-right-radius:6px;display:-webkit-box;width:100%;box-sizing:border-box;-webkit-box-align:center;border-top:1px solid #e0e0e0;height:42px;line-height:42px}
 .ui-dialog-ft button{color:#00a5e0;text-align:center;width:100%;line-height:42px;background:0 0;display:block;margin:0!important;-webkit-box-flex:1}
+
+/* 查看详情弹窗 */
+.t_title{ background:#ffd800; height:50px; line-height:50px; text-align:center; width:100%;position:absolute; bottom:50%;left:0}
+.t_title span{ display:inline-block; float:left; padding:0 20px}
+.t_content{background:#fff; height:50%; width:100%; position:absolute; bottom:0;left:0;overflow:auto;}
+.content_p{ padding:10px}
+
+/* 服务时间弹窗 */
+.t_content li{ border-bottom:1px solid #929292; height:55px; line-height:55px; color:#929292}
+.month,.day,.hour{ display:inline-block; width:30%; text-align:center}
+.day{ border-left:1px solid #929292;border-right:1px solid #929292}
+.hover{ background:#fff3b2; color:#49271b}
+
+/* 服务协议弹窗 */
+.deal-cnt{width:90%;-webkit-background-clip:padding-box;background-clip:padding-box;pointer-events:auto;background-color:rgba(253,253,253,.95);position:relative;font-size:16px; height:90%; overflow:auto}
+.deal-cnt-close{text-align:right; color:#49271b;position:absolute; top:10px; right:10px}
+.deal-cnt-title{text-align:center; font-size:20px; padding-top:20px}
+.deal-cnt-p{ padding:10px 10px 10px 20px}
 
 /* 宠物列表 */
 .mui-content{background-color:#efeff4;-webkit-overflow-scrolling:touch}

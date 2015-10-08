@@ -143,13 +143,12 @@ html,body {height: 100%;overflow: hidden}
         $.ajax({
             url:'/animal/listAllAnimals',
             type:'GET',
+            async:false,
             success:function(result){
                 $("li.mui-table-view-cell.mui-group-list-item").remove();
                 if(result.success){
-                    console.info(result);
                     $.each(result.data,function(index,item){
                         var type = item.orderType;
-                        console.info($("li[data-group='"+type+"']"));
                         $("li[data-group='"+type+"']").after("<li value='"+item.id+"' class='mui-table-view-cell mui-group-list-item'>"+item.animalsName+"</li>");
                     })
                 } else{
@@ -186,7 +185,9 @@ html,body {height: 100%;overflow: hidden}
             window.groupList = new mui.GroupList(list);
             //点击列表选择
             var ul_pet = document.getElementById('ul_pet');
-            ul_pet.addEventListener("tap", function(e) {
+            console.info("testr");
+//            ul_pet.addEventListener("tap", function(e) {
+            ul_pet.addEventListener("click", function(e) {
                 var tagClass = e.target.getAttribute("class");
                 console.log("tagClass==" + tagClass);
                 if (tagClass && tagClass.indexOf("mui-table-view-cell") != -1) {

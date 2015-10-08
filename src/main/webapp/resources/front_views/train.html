@@ -9,6 +9,11 @@
 <title>宠物训练</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script src="js/slide_show.js"></script>
+<style>
+.wrapper input{ margin:0}
+.beauty-serve{ border-bottom:none; height:30px; line-height:30px; padding-bottom:15px}
+.beauty-serve span{ width:100%}
+</style>
 </head>
 
 <body>
@@ -17,13 +22,17 @@
 		<img src="img/train-ad.jpg">
     </div>
 
-    <a class="list foster-time">入住时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-time" style="border-top:none">离开时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-total">共计30天</a>
-    <a class="list foster-time">宠物品种<span class="arrow">&#8250;</span></a>
-    <div class="list foster-room">房间类型<span>查看房间详情</span></div>
+    <a class="list foster-time">服务时间<span class="arrow">&#8250;</span></a>
+    <a class="list foster-breed" style="border-top:none" href="pets-list.html">宠物品种<span class="arrow">&#8250;</span></a>
+
+	<!--宠物训练-->
+    <a class="list foster-room" style="background-image:url(img/cd-icon-yzm.png)">训练课程<span>查看课程详情&nbsp;&nbsp;</span></a>
+    <a class="list beauty-serve"><span><input name="serve-method" type="radio">幼犬训练 3-8个月</span></a>
+    <a class="list beauty-serve"><span><input name="serve-method" type="radio">成犬训练 8个月以上</span></a>
+    <a class="list beauty-serve"><span><input name="serve-method" type="radio">单项训练 如转圈捡球等</span></a>
+    <a class="list beauty-serve" style="border-bottom:1px solid #927d76"><span><input name="serve-method" type="radio">特需训练 定制课程</span></a>
     
-    <a class="next" href="order-submit.html">下一步</a>
+    <a class="next" href="order-submit.html" style="margin-top:20px">下一步</a>
 
 </div>
 
