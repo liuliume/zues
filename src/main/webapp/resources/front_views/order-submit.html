@@ -48,7 +48,7 @@
         var service_type = requestParam.service_type;
         var animalsId = requestParam.animalsId;
         var order_type_inner_name = null;
-        var dataDiff = DateDiff(startDate,endDate);
+        var dataDiff = null;
         var money = null;
         if(order_type==1){
             var order_type_name = "寄养";
@@ -56,6 +56,8 @@
             service_type = 0;
             var service_type_name = "到店服务";
             order_type_inner_name = null;
+            dataDiff = DateDiff(startDate,endDate);
+            var dataDisplay = startDate+" 至 "+endDate;
             $.ajax({
                 url:'/room/indexForJson',
                 type:'GET',
@@ -75,6 +77,7 @@
             service_type = 0;
             var service_type_name = "到店服务";
             order_type_inner_name = null;
+            var dataDisplay = "从 " + startDate + " 起";
             $.ajax({
                 url:'/course/indexForJson',
                 type:'GET',
@@ -83,7 +86,7 @@
                 success:function(result){
                     console.info(result);
                     order_type_inner_name = result.courseName;
-                    money = result.expense * dataDiff;
+                    money = result.expense;
                 },failure:function(){
                     alert("系统错误");
                 }
@@ -115,7 +118,7 @@
         }
 
         $("#div").append("<a class='list order-submit ico-check'>您已选择<span>"+order_type_name+"-"+order_type_inner_name+"-"+dataDiff+"天</span></a>")
-                .append("<a class='list order-submit ico-time'>服务时间<span>"+startDate+" 至 "+endDate+"</span></a>")
+                .append("<a class='list order-submit ico-time'>服务时间<span>"+dataDisplay+"</span></a>")
                 .append("<a class='list order-submit ico-ask'>特殊要求<span>"+service_type_name+"</span></a>")
                 .append("<a class='list order-submit ico-phone'>联系电话<span>"+mobile+"</span></a>")
                 .append("<a class='list order-submit ico-price'>服务价格<span>"+money+"元</span></a>")
