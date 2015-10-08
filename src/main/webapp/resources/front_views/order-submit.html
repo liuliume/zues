@@ -70,7 +70,7 @@
                     alert("系统错误");
                 }
             });
-
+            var type_display = order_type_name + "-"+order_type_inner_name+"-"+dataDiff+"天";
         } else if(order_type==2){
             var order_type_name = "训练";
             var course_id = requestParam.course_id;
@@ -91,11 +91,12 @@
                     alert("系统错误");
                 }
             });
-
+            var type_display = order_type_name + "-"+order_type_inner_name;
         } else if(order_type==3){
             var order_type_name = "美容";
             var hairdress_id = requestParam.hairdress_id;
             service_type = requestParam.service_type;
+            var dataDisplay = "从 " + startDate + " 起";
             if(service_type==0){
                 var service_type_name = "到店服务";
             } else {
@@ -110,14 +111,15 @@
                 success:function(result){
                     console.info(result);
                     order_type_inner_name = result.hairdressingName;
-                    money = result.expense * dataDiff;
+                    money = result.expense;
                 },failure:function(){
                     alert("系统错误");
                 }
             });
+            var type_display = order_type_name + "-"+order_type_inner_name;
         }
 
-        $("#div").append("<a class='list order-submit ico-check'>您已选择<span>"+order_type_name+"-"+order_type_inner_name+"-"+dataDiff+"天</span></a>")
+        $("#div").append("<a class='list order-submit ico-check'>您已选择<span>"+type_display+"</span></a>")
                 .append("<a class='list order-submit ico-time'>服务时间<span>"+dataDisplay+"</span></a>")
                 .append("<a class='list order-submit ico-ask'>特殊要求<span>"+service_type_name+"</span></a>")
                 .append("<a class='list order-submit ico-phone'>联系电话<span>"+mobile+"</span></a>")
@@ -161,9 +163,9 @@
                 async:false,
                 data:order_param,
                 success:function(result){
-                    console.info(result);
                     if(result.success){
-
+//                        console.info(result.data);
+                        window.location.href="order-confirm.html?ordersId=" + result.data;
                     }else{
                         $("#div_text").text(result.detail);
                         $(".ui-dialog").show();

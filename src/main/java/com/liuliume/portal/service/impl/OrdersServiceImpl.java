@@ -199,7 +199,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public void create(Orders orders) throws Exception {
+	public Orders create(Orders orders) throws Exception {
 		if (orders == null)
 			throw new IllegalArgumentException("订单不能为空");
 		if (orders.getOrderType() == null)
@@ -207,7 +207,8 @@ public class OrdersServiceImpl implements OrdersService {
 		OrdersUtil.genOrderNo(orders);
 		OrderTypeEnum orderTypeEnum = OrderTypeEnum
 				.parse(orders.getOrderType());
-		switch (orderTypeEnum) {
+        orders.setStatus(OrderStatusEnum.ORDERED.getId());
+        switch (orderTypeEnum) {
 		case FOSTER:// 寄养订单
 			_createFosterOrder(orders);
 			break;
@@ -220,6 +221,7 @@ public class OrdersServiceImpl implements OrdersService {
 		default:
 			throw new IllegalArgumentException("订单类型错误");
 		}
+        return orders;
 	}
 
 	private void _createFosterOrder(Orders orders) throws Exception {
@@ -357,12 +359,13 @@ public class OrdersServiceImpl implements OrdersService {
 				throw new IllegalArgumentException("详细地址不能为空");
 			}
 		}
-		if (orders.getServiceBegin() == null || orders.getServiceBegin() <= 0) {
-			throw new IllegalArgumentException("服务时间段不能为空");
-		}
+//		if (orders.getServiceBegin() == null || orders.getServiceBegin() <= 0) {
+//			throw new IllegalArgumentException("服务时间段不能为空");
+//		}
 		double cost = countService.hairDressingCountMoney(
 				orders.getAnimalsId(), orders.getHairdressId());
 		orders.setCost(cost);
+        orders.setCreateTime(new Date());
 		ordersDao.createOrder(orders);
 	}
 }

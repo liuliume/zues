@@ -288,7 +288,7 @@ public class OrdersController {
 				Account account = accountService.findAccountByMobile(mobile);
 				orders.setAccount(account);
 				orders.setAccountId(account.getAccount_id());
-				ordersService.create(orders);
+				jData.setData(ordersService.create(orders).getOrderId());
 				jData.setCode(200);
 				jData.setSuccess(true);
 				jData.setDetail("操作成功");

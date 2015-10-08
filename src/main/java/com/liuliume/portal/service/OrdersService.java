@@ -21,5 +21,5 @@ public interface OrdersService {
 	
 	public void completeOrder(String orderId) throws Exception;
 	
-	public void create(Orders orders) throws Exception;
+	public Orders create(Orders orders) throws Exception;
 }
