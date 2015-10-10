@@ -174,12 +174,12 @@ public class RoomController {
     public JData verifyRoomNum(@RequestParam(value="startDate",required=true)String startDate,
                               @RequestParam(value="endDate",required=true)String endDate,
                               @RequestParam(value="room_id",required=true)Integer room_id) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
         JData jData = new JData();
         try {
-            Date start_Date = sdf.parse(startDate);
-            Date end_Date = sdf.parse(endDate);
-            boolean flag = roomService.isRoomNotEmpty(start_Date,end_Date,room_id);
+//            Date start_Date = sdf.parse(startDate);
+//            Date end_Date = sdf.parse(endDate);
+            boolean flag = roomService.isRoomNotEmpty(startDate,endDate,room_id);
             jData.setData(flag);
             jData.setCode(200);
             jData.setSuccess(true);

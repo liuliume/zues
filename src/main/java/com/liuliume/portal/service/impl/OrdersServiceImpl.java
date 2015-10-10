@@ -221,10 +221,40 @@ public class OrdersServiceImpl implements OrdersService {
 		default:
 			throw new IllegalArgumentException("订单类型错误");
 		}
+        ordersDao.createOrder(orders);
         return orders;
 	}
 
-	private void _createFosterOrder(Orders orders) throws Exception {
+
+    @Override
+    @Transactional
+    public Orders getMoney(Orders orders) throws Exception {
+        if (orders == null)
+            throw new IllegalArgumentException("订单不能为空");
+        if (orders.getOrderType() == null)
+            throw new IllegalArgumentException("订单类型不能为空");
+        OrdersUtil.genOrderNo(orders);
+        OrderTypeEnum orderTypeEnum = OrderTypeEnum
+                .parse(orders.getOrderType());
+        orders.setStatus(OrderStatusEnum.ORDERED.getId());
+        switch (orderTypeEnum) {
+            case FOSTER:// 寄养订单
+                _createFosterOrder(orders);
+                break;
+            case TRAINING:// 训练订单
+                _createTrainingOrders(orders);
+                break;
+            case BEAUTY:// 美容订单
+                _createBeautyOrders(orders);
+                break;
+            default:
+                throw new IllegalArgumentException("订单类型错误");
+        }
+        return orders;
+    }
+
+
+    private void _createFosterOrder(Orders orders) throws Exception {
 		if (StringUtils.isBlank(orders.getStartDate())) {
 			throw new Exception("开始时间不能为空");
 		}
@@ -238,13 +268,13 @@ public class OrdersServiceImpl implements OrdersService {
 		if (room == null) {
 			throw new Exception("寄养房间类型错误");
 		}
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date startDate = sdf.parse(orders.getStartDate());
 		Date endDate = sdf.parse(orders.getEndDate());
-		boolean empty = roomService.isRoomNotEmpty(startDate, endDate,
+		boolean empty = roomService.isRoomNotEmpty(orders.getStartDate(), orders.getEndDate(),
 				orders.getRoomId());
 		if (!empty) {
-			throw new Exception("该房间已满,请选择其他房间类型");
+			throw new Exception("该时段房间已满,请选择其他房间类型");
 		}
 		if (orders.getAnimalsId() == null || orders.getAnimalsId() <= 0) {
 			throw new Exception("宠物类型不能为空");
@@ -257,7 +287,6 @@ public class OrdersServiceImpl implements OrdersService {
 				orders.getRoomId(), orders.getAnimalsId());
 		orders.setCost(cost);
 		orders.setCreateTime(new Date());
-		ordersDao.createOrder(orders);
 	}
 
 	private void _createTrainingOrders(Orders orders) throws Exception {
@@ -279,7 +308,6 @@ public class OrdersServiceImpl implements OrdersService {
 				orders.getAnimalsId());
 		orders.setCost(cost);
 		orders.setCreateTime(new Date());
-		ordersDao.createOrder(orders);
 	}
 
 	private void _createBeautyOrders(Orders orders) throws Exception {
@@ -371,6 +399,5 @@ public class OrdersServiceImpl implements OrdersService {
 				orders.getAnimalsId(), orders.getHairdressId());
 		orders.setCost(cost);
         orders.setCreateTime(new Date());
-		ordersDao.createOrder(orders);
 	}
 }

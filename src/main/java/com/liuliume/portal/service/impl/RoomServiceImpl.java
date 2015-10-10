@@ -97,7 +97,7 @@ public class RoomServiceImpl implements RoomService {
 		return roomDao.listAllRooms();
 	}
 
-    public boolean isRoomNotEmpty(Date startDate,Date endDate,Integer room_id) {
+    public boolean isRoomNotEmpty(String startDate,String endDate,Integer room_id) {
         Room room = roomDao.findRoomById(room_id);
         int room_num = room.getRoomNum();
         int order_num = ordersDao.countRoomOrders(startDate,endDate);

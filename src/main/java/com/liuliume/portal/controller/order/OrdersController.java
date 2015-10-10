@@ -288,6 +288,9 @@ public class OrdersController {
 				Account account = accountService.findAccountByMobile(mobile);
 				orders.setAccount(account);
 				orders.setAccountId(account.getAccount_id());
+                if(orders.getPaymentType()==null){
+                    orders.setPaymentType(2);
+                }
 				jData.setData(ordersService.create(orders).getOrderId());
 				jData.setCode(200);
 				jData.setSuccess(true);
@@ -306,6 +309,42 @@ public class OrdersController {
 		}
 		return jData;
 	}
+
+
+    @RequestMapping(value = "getMoney", method = RequestMethod.POST)
+    @ResponseBody
+    public JData getMoney(Orders orders, HttpServletRequest request) {
+        logger.info("call the create Orders");
+        JData jData = new JData();
+        try {
+            String mobile = ServletUtil.getCookie(request, "mobile");
+            String sgid = ServletUtil.getCookie(request, "sgid");
+            if (StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid)
+                    && MD5Util.MD5WithSalt(mobile).equals(sgid)) {
+                Account account = accountService.findAccountByMobile(mobile);
+                orders.setAccount(account);
+                orders.setAccountId(account.getAccount_id());
+                if(orders.getPaymentType()==null){
+                    orders.setPaymentType(2);
+                }
+                jData.setData(ordersService.create(orders).getCost());
+                jData.setCode(200);
+                jData.setSuccess(true);
+                jData.setDetail("操作成功");
+            } else {
+                jData.setCode(302);
+                jData.setSuccess(false);
+                jData.setDetail("请登陆！");
+            }
+        } catch (Exception e) {
+            logger.error("create Or Update  Error." + e.getMessage()
+                    + " orders[" + orders + "]", e);
+            jData.setCode(500);
+            jData.setSuccess(false);
+            jData.setDetail(e.getMessage());
+        }
+        return jData;
+    }
 
 	@RequestMapping(value = "getAllOrders", method = RequestMethod.GET)
 	@ResponseBody

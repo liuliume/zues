@@ -25,5 +25,5 @@ public interface RoomService {
     
     public List<Room> listAllRooms() throws Exception;
 
-    public boolean isRoomNotEmpty(Date startDate,Date endDate,Integer room_id);
+    public boolean isRoomNotEmpty(String startDate,String endDate,Integer room_id);
 }
