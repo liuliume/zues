@@ -27,9 +27,9 @@
 
         var requestParam = GetRequest();
         var ru = requestParam.ru;
-        if(ru==null || ru==''){
-            ru="index.html";
-        }
+//        if(ru==null || ru==''){
+//            ru="index.html";
+//        }
 
         $("#button_confirm").click(function(){
             $(".ui-dialog").hide();
@@ -74,7 +74,11 @@
 //                            window.location.href=ru;
                             $("#button_confirm").unbind("click");
                             $("#button_confirm").one("click",function(){
-                                window.location.href=ru;
+                                if(ru!=null) {
+                                    window.location.href = ru;
+                                } else {
+                                    window.history.go(-1);
+                                }
                             });
 
 

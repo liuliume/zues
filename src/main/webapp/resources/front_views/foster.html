@@ -37,22 +37,25 @@
             $(this).addClass("hover");
         })
 
-        $("#room_detail").click(function(){
-            $("#detail").show();
-        })
-
         $("#cancle_time").click(function(){
             $("#time").hide();
-        })
-
-        $("#cancle_detail").click(function(){
-            $("#detail").hide();
         })
 
         $("#confirm_time").click(function(){
             console.info($(".month.hover").text());
 //             alert($(".month.hover").value());
         })
+
+
+        $("#room_detail").click(function(){
+            $("#detail").show();
+        })
+
+        $("#cancle_detail").click(function(){
+            $("#detail").hide();
+        })
+
+
 
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
@@ -70,6 +73,7 @@
         var requestParam = GetRequest();
         var animalsId = requestParam.animalsId;
         var order_type = 1;
+        alert(animalsId)
 
     })
 </script>

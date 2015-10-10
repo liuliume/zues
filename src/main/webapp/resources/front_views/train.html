@@ -14,6 +14,39 @@
 .beauty-serve{ border-bottom:none; height:30px; line-height:30px; padding-bottom:15px}
 .beauty-serve span{ width:100%}
 </style>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript">
+
+    $(function(){
+
+        $("#detail_btn").click(function(){
+            $("#detail").show();
+        })
+
+        $("#cancle_detail").click(function(){
+            $("#detail").hide();
+        })
+
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var requestParam = GetRequest();
+        var animalsId = requestParam.animalsId;
+        var order_type = 2;
+        alert(animalsId)
+
+    })
+</script>
 </head>
 
 <body>
@@ -23,10 +56,10 @@
     </div>
 
     <a class="list foster-time">服务时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-breed" style="border-top:none" href="pets-list.html">宠物品种<span class="arrow">&#8250;</span></a>
+    <a class="list foster-breed" style="border-top:none" href="pets-list.html?ru=train.html">宠物品种<span class="arrow">&#8250;</span></a>
 
 	<!--宠物训练-->
-    <a class="list foster-room" style="background-image:url(img/cd-icon-yzm.png)">训练课程<span>课程详情&nbsp;&nbsp;</span></a>
+    <a class="list foster-room" style="background-image:url(img/cd-icon-yzm.png)">训练课程<span id="detail_btn">课程详情&nbsp;&nbsp;</span></a>
     <a class="list beauty-serve"><span><input name="serve-method" type="radio">幼犬训练 3-8个月</span></a>
     <a class="list beauty-serve"><span><input name="serve-method" type="radio">成犬训练 8个月以上</span></a>
     <a class="list beauty-serve"><span><input name="serve-method" type="radio">单项训练 如转圈捡球等</span></a>
@@ -34,6 +67,17 @@
     
     <a class="next" href="order-submit.html" style="margin-top:20px">下一步</a>
 
+</div>
+
+<div id="detail" class="ui-dialog" style="display:none">
+    <div class="t_title"><span id="cancle_detail">返回</span>课程详情</div>
+    <div class="t_content">
+        <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
+        <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
+        <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
+        <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
+        <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
+    </div>
 </div>
 
 </body>
