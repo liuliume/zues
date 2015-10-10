@@ -49,8 +49,10 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
     @Override
-    public int countRoomOrders(Date startTime) {
-        return ordersMapper.countRoomOrders(startTime);
+    public int countRoomOrders(Date startTime,Date endTime) {
+        int startCount = ordersMapper.countRoomOrders(startTime);
+        int endCount = ordersMapper.countRoomOrdersForEndDate(endTime);
+        return startCount >= endCount ? startCount:endCount;
     }
 
 }

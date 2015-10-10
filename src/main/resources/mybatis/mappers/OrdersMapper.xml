@@ -162,6 +162,12 @@
       and start_date <![CDATA[<=]]> #{startDate} and end_date <![CDATA[>=]]> #{startDate}
     </select>
 
+    <select id="countRoomOrdersForEndDate" resultType="int">
+      select count(*) from orders
+      where order_type=1 and status!=-3 and status!=99
+      and start_date <![CDATA[<=]]> #{endDate} and end_date <![CDATA[>=]]> #{endDate}
+    </select>
+
 	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
 		> insert into orders (order_id, account_id, order_type, order_type_id, animals_id, 
 		province, city, area, status, order_time, update_at, start_date, end_date, 
