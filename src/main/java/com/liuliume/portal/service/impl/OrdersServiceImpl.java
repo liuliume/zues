@@ -210,7 +210,7 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setStatus(OrderStatusEnum.ORDERED.getId());
         switch (orderTypeEnum) {
 		case FOSTER:// 寄养订单
-			_createFosterOrder(orders);
+			_createFosterOrder(orders,false);
 			break;
 		case TRAINING:// 训练订单
 			_createTrainingOrders(orders);
@@ -239,7 +239,7 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setStatus(OrderStatusEnum.ORDERED.getId());
         switch (orderTypeEnum) {
             case FOSTER:// 寄养订单
-                _createFosterOrder(orders);
+                _createFosterOrder(orders,true);
                 break;
             case TRAINING:// 训练订单
                 _createTrainingOrders(orders);
@@ -254,7 +254,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
 
-    private void _createFosterOrder(Orders orders) throws Exception {
+    private void _createFosterOrder(Orders orders,boolean getmoney) throws Exception {
 		if (StringUtils.isBlank(orders.getStartDate())) {
 			throw new Exception("开始时间不能为空");
 		}
@@ -271,11 +271,13 @@ public class OrdersServiceImpl implements OrdersService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date startDate = sdf.parse(orders.getStartDate());
 		Date endDate = sdf.parse(orders.getEndDate());
-		boolean empty = roomService.isRoomNotEmpty(orders.getStartDate(), orders.getEndDate(),
-				orders.getRoomId());
-		if (!empty) {
-			throw new Exception("该时段房间已满,请选择其他房间类型");
-		}
+        if(!getmoney){
+            boolean empty = roomService.isRoomNotEmpty(orders.getStartDate(), orders.getEndDate(),
+                    orders.getRoomId());
+            if (!empty) {
+                throw new Exception("该时段房间已满,请选择其他房间类型");
+            }
+        }
 		if (orders.getAnimalsId() == null || orders.getAnimalsId() <= 0) {
 			throw new Exception("宠物类型不能为空");
 		}

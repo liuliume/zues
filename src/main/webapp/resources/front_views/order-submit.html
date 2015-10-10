@@ -146,7 +146,7 @@
                     money = result.data;
                 }else{
                     $("#div_text").text(result.detail);
-                    $(".ui-dialog").show();
+                    $("#alert").show();
                     return;
                 }
             },failure:function(){
@@ -195,7 +195,7 @@
                         window.location.href="order-confirm.html?ordersId=" + result.data;
                     }else{
                         $("#div_text").text(result.detail);
-                        $(".ui-dialog").show();
+                        $("#alert").show();
                         return;
                     }
                 },failure:function(){

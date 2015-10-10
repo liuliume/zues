@@ -327,7 +327,7 @@ public class OrdersController {
                 if(orders.getPaymentType()==null){
                     orders.setPaymentType(2);
                 }
-                jData.setData(ordersService.create(orders).getCost());
+                jData.setData(ordersService.getMoney(orders).getCost());
                 jData.setCode(200);
                 jData.setSuccess(true);
                 jData.setDetail("操作成功");
