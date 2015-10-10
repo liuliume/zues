@@ -20,9 +20,10 @@
             url:'/code/address/listUserAddress',
             type:"GET",
             success:function(result){
+                console.info(result)
                 if(result.success){
                     var detail = $("<a class='addr-list'>");
-                    var href = "addr-detail.html?province_id="+result.data.province_id+"&city_id="+result.data.city_id+"&area_id="+result.data.area_id+"&address="+result.data.address;
+                    var href = "addr-detail.html?province_id="+result.data.province_id+"&city_id="+result.data.city_id+"&area_id="+result.data.area_id;
                     detail.attr("href",href);
                     var obj = $("<div />");
                     obj.addClass("addr-detail");
@@ -62,12 +63,12 @@
 <body>
 <div class="wrapper">
 	
-     <a class="addr-list" href="addr-detail.html">
-    	<div class="addr-detail">团结湖15号楼 -118室<br />联系电话：15010248416
-        	<span class="arrow">&#8250;</span>
-        </div>
-    </a>  
-    <!--<div id="address_list"></div>-->
+     <!--<a class="addr-list" href="addr-detail.html">-->
+    	<!--<div class="addr-detail">团结湖15号楼 -118室<br />联系电话：15010248416-->
+        	<!--<span class="arrow">&#8250;</span>-->
+        <!--</div>-->
+    <!--</a>  -->
+    <div id="address_list"></div>
 
 </div>
 <div class="ui-dialog" style="display:none">
