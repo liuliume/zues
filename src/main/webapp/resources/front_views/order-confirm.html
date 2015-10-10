@@ -27,35 +27,52 @@
         var requestParam = GetRequest();
         var ordersId = requestParam.ordersId;
 
-        if(id!=null){
+        if(ordersId!=null){
             $.ajax({
                 url:'/orders/orderDetailForJson',
                 type:'GET',
-                data:"ordersId=" + id,
+                data:"ordersId=" + ordersId,
                 success:function(result){
-                    console.info(result)
+                    console.info(result.data)
                     if(result.success){
                         var order_id = result.data.orderId;
                         var order_type = null;
+                        var dataDisplay = null;
+                        var type_display =null;
+                        var address = null;
                         if(result.data.orderType==1){
                             order_type = "宠物寄养";
+                            dataDisplay = result.data.startDate+" 至 "+result.data.endDate;
+                            address_display = "寄养地址"
+                            address = "测试寄养地址"
                         }
                         if(result.data.orderType==2){
                             order_type = "训练";
+                            dataDisplay = "从 " + result.data.startDate + " 起";
+                            address_display = "训练地址"
+                            address = "测试训练地址"
                         }
                         if(result.data.orderType==3){
                             order_type = "美容";
+                            dataDisplay = "从 " + result.data.startDate + " 起";
+                            if(result.data.serviceType==1){
+                                address_display = "上门地址"
+                                address = result.data.province + result.data.city + result.data.area + result.data.address;
+                            } else{
+                                address_display = "美容地址"
+                                address = "测试美容地址"
+                            }
                         }
                         var startDate = result.data.startDate;
                         var endData = result.data.endDate;
                         var cost = result.data.cost;
-                        console.info(order_id);
-                        console.info(order_type);
-                        console.info(startDate);
-                        console.info(endData);
-                        console.info(cost);
-
-
+                        $("#first").append("<a class='list order-confirm order-numb'>订单号</a>" +
+                                        "<a class='list order-confirm order-numb'>"+result.data.orderId+"</a>" +
+                                        "<a class='list order-confirm ico-item'>服务项目<span>"+order_type+"</span></a>" +
+                                        "<a class='list order-confirm confirm-detail'>订单金额 "+cost+"</a>" +
+                                        "<a class='list order-confirm ico-time'>服务时间<span>"+dataDisplay+"</span></a>" +
+                                        "<a class='list order-confirm ico-addr'>"+address_display+"<span>"+address+"</span></a>" +
+                                        "<a class='list order-confirm ico-phone'>联系电话<span>"+result.data.account.mobile+"</span></a>")
                     }
                 },failure:function(){
                     alert("系统错误");
@@ -71,16 +88,18 @@
 <div class="wrapper">
 	
     <a class="list order-confirm ico-confirm">订单已提交！</a>
-    <a class="list order-confirm order-numb">订单号 0102015249324</a>
+    <div id="first"></div>
+    <!--<a class="list order-confirm order-numb">订单号</a>-->
+    <!--<a class="list order-confirm order-numb">0102015249324</a>-->
     
-    <a class="list order-confirm ico-item">服务项目<span>宠物寄养</span></a>
-    <a class="list order-confirm confirm-detail">订单金额 1500元</a>
-    <a class="list order-confirm confirm-detail">优惠金额 50元</a>
-    <a class="list order-confirm confirm-detail">实收金额 1450元</a>
+    <!--<a class="list order-confirm ico-item">服务项目<span>宠物寄养</span></a>-->
+    <!--<a class="list order-confirm confirm-detail">订单金额 1500元</a>-->
+    <!--<a class="list order-confirm confirm-detail">优惠金额 50元</a>-->
+    <!--<a class="list order-confirm confirm-detail">实收金额 1450元</a>-->
     
-    <a class="list order-confirm ico-time">服务时间<span>2015-9-17至2015-10-01</span></a>
-    <a class="list order-confirm ico-addr">寄样地址<span>寄养地址详情</span></a>
-    <a class="list order-confirm ico-phone">联系电话<span>15010248416</span></a>
+    <!--<a class="list order-confirm ico-time">服务时间<span>2015-9-17至2015-10-01</span></a>-->
+    <!--<a class="list order-confirm ico-addr">寄样地址<span>寄养地址详情</span></a>-->
+    <!--<a class="list order-confirm ico-phone">联系电话<span>15010248416</span></a>-->
     
     <div class="next" style="margin-top:20px">关闭</div>
 </div>

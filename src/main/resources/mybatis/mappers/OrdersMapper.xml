@@ -26,6 +26,9 @@
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="last_modified" property="lastModified"
 			jdbcType="TIMESTAMP" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="area" property="area" jdbcType="VARCHAR" />
 		<result column="hairdress_id" property="hairdressId" />
 		<association property="account" resultMap="account"></association>
 		<association property="room" resultMap="room"></association>
@@ -129,7 +132,7 @@
 		room_id,r.`room_name`,r.cost AS room_cost,c.`id` AS
 		course_id,c.`course_name`,c.`course_describe`,c.`expense` AS expense_course,
 		h.`id` AS hairdressing_id,h.`hairdressing_describe`,h.`hairdressing_name`,h.`expense` AS expense_hairdressing,
-		an.animals_name
+		an.animals_name,o.province_id,o.city_id,o.area_id,ad.name as province,ad1.name as city,ad2.name as area
 		FROM orders o
 		LEFT JOIN account a ON o.`account_id` = a.`account_id` AND
 		a.`flag` <![CDATA[<>]]>
@@ -139,6 +142,9 @@
 		o.`course_id` = c.`id`
 		LEFT JOIN hairdressing h on o.`hairdress_id` = h.`id`
 		LEFT JOIN animals an ON o.`animals_id` = an.`id`
+		LEFT JOIN address ad on  ad.id=o.province_id
+		LEFT JOIN address ad1 on ad1.id = o.city_id
+		LEFT JOIN address ad2 on ad2.id = o.area_id
 		WHERE o.order_id=#{orderId}
 	</select>
 	

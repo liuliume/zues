@@ -306,6 +306,11 @@ public class OrdersServiceImpl implements OrdersService {
 			throw new IllegalArgumentException("服务方式错误,只能为上门服务和到店服务");
 		}
 		if (orders.getServiceType() != Constants.SERVICE_DOOR) {// 上门服务的地址不能为空
+            Account account = orders.getAccount();
+            orders.setProvinceId(account.getProvince_id());
+            orders.setCityId(account.getCity_id());
+            orders.setAreaId(account.getArea_id());
+            orders.setAddress(account.getAddress());
 			Integer provinceId = orders.getProvinceId();
 			Integer cityId = orders.getCityId();
 			Integer areaId = orders.getAreaId();

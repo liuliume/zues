@@ -152,6 +152,18 @@
 
         //下单按钮
         $("#createOrder").click(function(){
+            var val=$("input:radio[name='pay-metod']:checked").val();
+            if(val==null){
+                $("#div_text").text("请选择支付方式!");
+                $(".ui-dialog").show();
+                return;
+            }
+
+            if($(".deal").attr("checked")==false){
+                $("#div_text").text("请阅读并同意服务协议!");
+                $(".ui-dialog").show();
+                return;
+            }
             if($(".deal").attr("checked")==false){
                 $("#div_text").text("请阅读并同意服务协议!");
                 $(".ui-dialog").show();

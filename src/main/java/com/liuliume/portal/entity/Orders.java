@@ -136,6 +136,12 @@ public class Orders implements Serializable {
 	private Integer hairdressId;
 	
 	private Hairdressing hairdressing;
+
+    private String province;
+
+    private String city;
+
+    private String area;
 	
 	/**
 	 * 支付方式
@@ -386,22 +392,23 @@ public class Orders implements Serializable {
 
     @Transient
 	public String getServiceTime() {
-		String date = "";
-		String start = startDate.trim();
-		String end = endDate.trim();
-		if (start.equals(end)) {
-			date = start;
-		} else {
-			date = start + "~" + end;
-		}
-		String time = "";
-		if(serviceBegin!=null){
-			time+=serviceBegin+":00 ";
-		}
-		if(serviceEnd!=null){
-			time+="-" +serviceEnd+":00 ";
-		}
-		return date + " " +time;
+//		String date = "";
+//		String start = startDate.trim();
+//		String end = endDate.trim();
+//		if (start.equals(end)) {
+//			date = start;
+//		} else {
+//			date = start + "~" + end;
+//		}
+//		String time = "";
+//		if(serviceBegin!=null){
+//			time+=serviceBegin+":00 ";
+//		}
+//		if(serviceEnd!=null){
+//			time+="-" +serviceEnd+":00 ";
+//		}
+//		return date + " " +time;
+        return null;
 	}
 
 	@Transient
@@ -440,4 +447,30 @@ public class Orders implements Serializable {
 		this.hairdressing = hairdressing;
 	}
 
+    @Transient
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Transient
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    @Transient
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 }
