@@ -177,6 +177,8 @@ html,body {height: 100%;overflow: hidden}
 
         var requestParam = GetRequest();
         var ru = requestParam.ru;
+        var startDate = requestParam.startDate;
+        var endDate = requestParam.endDate;
 
         mui.init();
         mui.ready(function() {
@@ -193,7 +195,7 @@ html,body {height: 100%;overflow: hidden}
                 if (tagClass && tagClass.indexOf("mui-table-view-cell") != -1) {
                     var selectPet = e.target.innerText;
                     var selectPetId = e.target.value;
-                    window.location.href=ru+"?animalsName="+selectPet+"&animalsId="+selectPetId;
+                    window.location.href=ru+"?animalsId="+selectPetId+"&startDate="+startDate+"&endDate="+endDate;
 //                    alert("选择的宠物=" + selectPet);
 //                    alert("选择的宠物=" + selectPetId);
 //                    alert(ru);

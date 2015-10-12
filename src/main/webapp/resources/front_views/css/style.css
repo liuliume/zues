@@ -118,15 +118,16 @@ input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none
 .ui-dialog-ft button{color:#00a5e0;text-align:center;width:100%;line-height:42px;background:0 0;display:block;margin:0!important;-webkit-box-flex:1}
 
 /* 查看详情弹窗 */
-.t_title{ background:#ffd800; height:50px; line-height:50px; text-align:center; width:100%;position:absolute; bottom:50%;left:0}
-.t_title span{ display:inline-block; float:left; padding:0 20px}
-.t_content{background:#fff; height:50%; width:100%; position:absolute; bottom:0;left:0;overflow:auto;}
+.t_title{ background:#ffd800; height:50px; line-height:50px; text-align:center; width:100%;position:absolute; bottom:62%;left:0}
+.t_title span{ display:inline-block;padding:0 20px; position:absolute; left:0}
+.t_content{background:#fff; height:62%; width:100%; position:absolute; bottom:0;left:0;overflow:auto;}
 .content_p{ padding:10px}
 
 /* 服务时间弹窗 */
-.t_content li{ border-bottom:1px solid #929292; height:55px; line-height:55px; color:#929292}
-.month,.day,.hour{ display:inline-block; width:30%; text-align:center}
-.day{ border-left:1px solid #929292;border-right:1px solid #929292}
+.ts_content{background:#fff; height:62%; width:100%; position:absolute; bottom:0;left:0}
+.t_1,.t_2,.t_3{width:30%; height:100%; line-height:55px; color:#929292; float:left;overflow:auto;border-right:1px solid #929292;}
+.t_3{width:39%;border-right:none}
+.ts_content span{display:inline-block; width:100%; text-align:center;border-bottom:1px solid #929292}
 .hover{ background:#fff3b2; color:#49271b}
 
 /* 服务协议弹窗 */
