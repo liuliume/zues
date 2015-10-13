@@ -20,6 +20,7 @@
 		$.ajax({
 			url:'/account/listAccount',
 			type:'GET',
+            async:false,
 			success:function(result){
                 console.info(result);
 				if(result.success){
