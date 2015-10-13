@@ -18,6 +18,21 @@
 <script type="text/javascript">
     $(function(){
 
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var requestParam = GetRequest();
+
         var startDate,endDate;
         var d = new Date();
         var d1 = new Date();
@@ -34,17 +49,57 @@
 
         $("#time_button").click(function(){
             $("#time").show();
+            if(startDate==null){
+                startDate = requestParam.startDate;
+            }
             if(startDate!=null){
                 var month = startDate.substr(0,4)+"年"+startDate.substring(5,7)+"月";
                 var day = startDate.substring(8,10)+"日";
                 var time = startDate.substring(11,startDate.length);
-                alert(time)
+                for(var i=0;i<$("#time .month").length;i++){
+                    if($("#time .month").eq(i).text()==month){
+                        $("#time .month").eq(i).addClass("hover");
+                    }
+                }
+                for(var i=0;i<$("#time .day").length;i++){
+                    if($("#time .day").eq(i).text()==day){
+                        $("#time .day").eq(i).addClass("hover");
+                    }
+                }
+                for(var i=0;i<$("#time .hour").length;i++){
+                    if($("#time .hour").eq(i).text()==time){
+                        $("#time .hour").eq(i).addClass("hover");
+                    }
+                }
             }
 
         })
 
         $("#time_button1").click(function(){
             $("#time1").show();
+            if(endDate==null){
+                endDate = requestParam.endDate;
+            }
+            if(endDate!=null){
+                var month = endDate.substr(0,4)+"年"+endDate.substring(5,7)+"月";
+                var day = endDate.substring(8,10)+"日";
+                var time = endDate.substring(11,endDate.length);
+                for(var i=0;i<$("#time1 .month").length;i++){
+                    if($("#time1 .month").eq(i).text()==month){
+                        $("#time1 .month").eq(i).addClass("hover");
+                    }
+                }
+                for(var i=0;i<$("#time1 .day").length;i++){
+                    if($("#time1 .day").eq(i).text()==day){
+                        $("#time1 .day").eq(i).addClass("hover");
+                    }
+                }
+                for(var i=0;i<$("#time1 .hour").length;i++){
+                    if($("#time1 .hour").eq(i).text()==time){
+                        $("#time1 .hour").eq(i).addClass("hover");
+                    }
+                }
+            }
         })
 
         $(".month").bind("click", function() {
@@ -126,26 +181,6 @@
         $("#pet_btn").click(function(){
             window.location.href = "pets-list.html?ru=foster.html&startDate="+startDate+"&endDate=" + endDate;
         })
-
-
-
-
-
-        function GetRequest() {
-            var url = location.search; //获取url中"?"符后的字串
-            var theRequest = new Object();
-            if (url.indexOf("?") != -1) {
-                var str = url.substr(1);
-                var strs = str.split("&");
-                for(var i = 0; i < strs.length; i ++) {
-                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
-                }
-            }
-            return theRequest;
-        }
-
-        var requestParam = GetRequest();
-
 
         $("#next").click(function(){
 
@@ -286,15 +321,15 @@
             <span class="month">11月</span>
         </div>
         <div class="t_2">
-            <span class="day">1日</span>
-            <span class="day">2日</span>
-            <span class="day">3日</span>
-            <span class="day">4日</span>
-            <span class="day">5日</span>
-            <span class="day">6日</span>
-            <span class="day">7日</span>
-            <span class="day">8日</span>
-            <span class="day">9日</span>
+            <span class="day">01日</span>
+            <span class="day">02日</span>
+            <span class="day">03日</span>
+            <span class="day">04日</span>
+            <span class="day">05日</span>
+            <span class="day">06日</span>
+            <span class="day">07日</span>
+            <span class="day">08日</span>
+            <span class="day">09日</span>
             <span class="day">10日</span>
             <span class="day">11日</span>
             <span class="day">12日</span>

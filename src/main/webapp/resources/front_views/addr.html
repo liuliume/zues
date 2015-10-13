@@ -20,7 +20,6 @@
             url:'/code/address/listUserAddress',
             type:"GET",
             success:function(result){
-                console.info(result)
                 if(result.success){
                     var detail = $("<a class='addr-list'>");
                     var href = "addr-detail.html?province_id="+result.data.province_id+"&city_id="+result.data.city_id+"&area_id="+result.data.area_id;

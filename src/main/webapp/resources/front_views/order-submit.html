@@ -63,7 +63,7 @@
         if(order_type==1){
             var order_type_name = "寄养";
             var room_id = requestParam.room_id;
-            service_type = 0;
+            service_type = 1;
             var service_type_name = "到店服务";
             order_type_inner_name = null;
             dataDiff = DateDiff(startDate,endDate);
@@ -84,7 +84,7 @@
         } else if(order_type==2){
             var order_type_name = "训练";
             var course_id = requestParam.course_id;
-            service_type = 0;
+            service_type = 1;
             var service_type_name = "到店服务";
             order_type_inner_name = null;
             var dataDisplay = "从 " + startDate + " 起";
@@ -108,9 +108,9 @@
             service_type = requestParam.service_type;
             var dataDisplay = "从 " + startDate + " 起";
             if(service_type==0){
-                var service_type_name = "到店服务";
-            } else {
                 var service_type_name = "上门服务";
+            } else {
+                var service_type_name = "到店服务";
             }
             order_type_inner_name = null;
             $.ajax({

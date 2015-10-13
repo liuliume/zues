@@ -17,14 +17,6 @@
 
     $(function(){
 
-        $("#detail_btn").click(function(){
-            $("#detail").show();
-        })
-
-        $("#cancle_detail").click(function(){
-            $("#detail").hide();
-        })
-
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
             var theRequest = new Object();
@@ -40,8 +32,164 @@
 
         var requestParam = GetRequest();
         var animalsId = requestParam.animalsId;
-        var order_type = 3;
-        alert(animalsId)
+
+
+        $("#detail_btn").click(function(){
+            $("#detail").show();
+        })
+
+        $("#cancle_detail").click(function(){
+            $("#detail").hide();
+        })
+
+        $("#detail_btn").click(function(){
+            $("#detail").show();
+        })
+
+        $("#cancle_detail").click(function(){
+            $("#detail").hide();
+        })
+
+        var startDate;
+        var d = new Date();
+        var d1 = new Date();
+        var d2 = new Date();
+        d1.setMonth(d1.getMonth()+1);
+        d2.setMonth(d2.getMonth()+2)
+        dmonth = (d.getMonth()+1)<10?"0"+ (d.getMonth()+1): (d.getMonth()+1);
+        dmonth1 =  (d1.getMonth()+1)<10?"0"+ (d1.getMonth()+1): (d1.getMonth()+1);
+        dmonth2 =  (d2.getMonth()+1)<10?"0"+ (d2.getMonth()+1): (d2.getMonth()+1)
+        $(".t_1").empty();
+        $(".t_1").append("<span class='month'>"+ d.getFullYear() + "年" +dmonth+"月</span>")
+                .append("<span class='month'>"+ d1.getFullYear() + "年" +dmonth1+"月</span>")
+                .append("<span class='month'>"+ d2.getFullYear() + "年" +dmonth2+"月</span>")
+
+        $("#time_button").click(function(){
+            $("#time").show();
+            if(startDate==null){
+                startDate = requestParam.startDate;
+            }
+            if(startDate!=null){
+                var month = startDate.substr(0,4)+"年"+startDate.substring(5,7)+"月";
+                var day = startDate.substring(8,10)+"日";
+                var time = startDate.substring(11,startDate.length);
+                for(var i=0;i<$("#time .month").length;i++){
+                    if($("#time .month").eq(i).text()==month){
+                        $("#time .month").eq(i).addClass("hover");
+                    }
+                }
+                for(var i=0;i<$("#time .day").length;i++){
+                    if($("#time .day").eq(i).text()==day){
+                        $("#time .day").eq(i).addClass("hover");
+                    }
+                }
+                for(var i=0;i<$("#time .hour").length;i++){
+                    if($("#time .hour").eq(i).text()==time){
+                        $("#time .hour").eq(i).addClass("hover");
+                    }
+                }
+            }
+        })
+
+        $(".month").bind("click", function() {
+            $(".month").removeClass("hover");
+            $(".day").removeClass("hover");
+            $(this).addClass("hover");
+            var curMonthDays = new Date(($(".month.hover").text().substr(0,3)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
+            $(".t_2").empty();
+            for(var i=1;i<=curMonthDays;i++){
+                tmp = i<10?"0"+i:i;
+                $(".t_2").append("<span class='day'>"+tmp+"日</span>");
+            }
+            $(".day").bind("click", function() {
+                $(".day").removeClass("hover");
+                $(this).addClass("hover");
+            })
+        })
+
+        $(".day").bind("click", function() {
+            $(".day").removeClass("hover");
+            $(this).addClass("hover");
+        })
+
+        $(".hour").bind("click", function() {
+            $(".hour").removeClass("hover");
+            $(this).addClass("hover");
+        })
+
+        $("#cancle_time").click(function(){
+            $("#time").hide();
+        })
+
+        $("#button_confirm").click(function(){
+            $("#alert").hide();
+        })
+
+        $("#pet_btn").click(function(){
+            window.location.href = "pets-list.html?ru=beauty.html&startDate="+startDate;
+        })
+
+        $("#address_btn").click(function(){
+            if(startDate==null){
+                startDate = requestParam.startDate;
+            }
+            window.location.href = "addr-detail.html?ru=beauty.html&startDate="+startDate+"&animalsId="+animalsId+"&ru=beauty.html";
+        })
+
+
+        $("#confirm_time").click(function(){
+            var start_month = $("#time .month.hover").text()
+            var start_day = $("#time .day.hover").text()
+            var start_hour = $("#time .hour.hover").text()
+            if(start_month==null || start_month=="" || start_day==null || start_day =="" || start_hour==null || start_hour==""){
+                $("#div_text").text("请选择正确的服务时间!");
+                $("#alert").show();
+                return;
+            }
+            startDate = start_month + start_day + start_hour;
+            startDate = startDate.replace("年","-").replace("月","-").replace("日"," ");
+            $("#time").hide();
+        })
+
+
+        $("#next").click(function(){
+
+            var val=$("input:radio[name='serve-method']:checked").val();
+            if(val==null){
+                $("#div_text").text("请选择服务方式!");
+                $("#alert").show();
+                return;
+            }
+
+            var hairdress_id=$("input:radio[name='serve-item']:checked").val();
+            if(val==null){
+                $("#div_text").text("请选择服务项目!");
+                $("#alert").show();
+                return;
+            }
+            var service_type = $("input:radio[name='serve-method']:checked").val();
+            var animalsId = requestParam.animalsId;
+            if(animalsId==null){
+                $("#div_text").text("请选择宠物品种!");
+                $("#alert").show();
+                return;
+            }
+
+            if(startDate==null || startDate=="" || startDate =='undefined'){
+                if(requestParam.startDate==null || requestParam.startDate=="" || requestParam.startDate== 'undefined'){
+                    $("#div_text").text("请选择服务时间!");
+                    $("#alert").show();
+                    return;
+                } else {
+                    startDate = requestParam.startDate;
+                }
+
+            }
+            window.location.href = "order-submit.html?order_type=3&animalsId="+animalsId+"&hairdress_id="+hairdress_id+"&startDate="+startDate+"&service_type="+service_type
+
+        })
+
+
 
     })
 
@@ -54,21 +202,21 @@
 		<img src="img/beauty-ad.jpg">
     </div>
 
-    <a class="list foster-time">服务时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-breed" style="border-top:none" href="pets-list.html?ru=beauty.html">宠物品种<span class="arrow">&#8250;</span></a>
+    <a class="list foster-time" id="time_button">服务时间<span class="arrow">&#8250;</span></a>
+    <a class="list foster-breed" style="border-top:none" href="#" id="pet_btn">宠物品种<span class="arrow">&#8250;</span></a>
     
     <!--服务项目-->
     <a class="list ico-item" style="border:none;height:50px;background-size:auto 44%;background-position:14px 25px">服务项目</a>
-    <a class="list beauty-serve"><span><input name="serve-item" type="radio">宠物洗澡</span><span><input name="serve-item" type="radio">宠物美容</span></a>
+    <a class="list beauty-serve"><span><input name="serve-item" type="radio" value="0">宠物洗澡</span><span><input name="serve-item" type="radio" value="1">宠物美容</span></a>
     
-    <a class="list info-addr" style="border-top:none;background-size:auto 40%">选择地址</a>
+    <a class="list info-addr" style="border-top:none;background-size:auto 40%" id="address_btn">选择地址</a>
     
     <!--服务方式-->
     <a class="list foster-room">服务方式<span id="detail_btn">服务方式&nbsp;&nbsp;</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio">上门服务</span><span><input name="serve-method" type="radio">到店服务</span></a>
+    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="0">上门服务</span><span><input name="serve-method" type="radio" value="1">到店服务</span></a>
     
     
-    <a class="next" href="order-submit.html" style="margin-top:20px">下一步</a>
+    <a class="next" href="order-submit.html" id="next" style="margin-top:20px">下一步</a>
 
 </div>
 
@@ -80,6 +228,71 @@
         <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
         <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
         <div class="content_p">幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容幼犬训练课程内容</div>
+    </div>
+</div>
+
+<div class="ui-dialog" style="display:none" id="time">
+    <div class="t_title"><!--<span id="cancle_time">取消</span>-->服务时间<span style="float:right" id="confirm_time">确定</span></div>
+    <div class="ts_content">
+        <div class="t_1">
+            <span class="month">9月</span>
+            <span class="month">10月</span>
+            <span class="month">11月</span>
+        </div>
+        <div class="t_2">
+            <span class="day">01日</span>
+            <span class="day">02日</span>
+            <span class="day">03日</span>
+            <span class="day">04日</span>
+            <span class="day">05日</span>
+            <span class="day">06日</span>
+            <span class="day">07日</span>
+            <span class="day">08日</span>
+            <span class="day">09日</span>
+            <span class="day">10日</span>
+            <span class="day">11日</span>
+            <span class="day">12日</span>
+            <span class="day">13日</span>
+            <span class="day">14日</span>
+            <span class="day">15日</span>
+            <span class="day">16日</span>
+            <span class="day">17日</span>
+            <span class="day">18日</span>
+            <span class="day">19日</span>
+            <span class="day">20日</span>
+            <span class="day">21日</span>
+            <span class="day">22日</span>
+            <span class="day">23日</span>
+            <span class="day">24日</span>
+            <span class="day">25日</span>
+            <span class="day">26日</span>
+            <span class="day">27日</span>
+            <span class="day">28日</span>
+            <span class="day">29日</span>
+            <span class="day">30日</span>
+            <span class="day">31日</span>
+        </div>
+        <div class="t_3">
+            <span class="hour">9:00</span>
+            <span class="hour">10:00</span>
+            <span class="hour">11:00</span>
+            <span class="hour">12:00</span>
+            <span class="hour">13:00</span>
+            <span class="hour">14:00</span>
+            <span class="hour">15:00</span>
+            <span class="hour">16:00</span>
+            <span class="hour">17:00</span>
+            <span class="hour">18:00</span>
+        </div>
+    </div>
+</div>
+
+<div id="alert" class="ui-dialog" style="display:none">
+    <div class="ui-dialog-cnt">
+        <div class="ui-dialog-hd" id="div_text">请选择服务项目</div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button" id="button_confirm">确定</button>
+        </div>
     </div>
 </div>
 

@@ -59,6 +59,30 @@
         });
 
         var province_id =  requestParam.province_id;
+        var city_id,area_id;
+        if(province_id==null || province_id=='null'){
+            $.ajax({
+                url:'/code/address/listUserAddress',
+                type:"GET",
+                async:false,
+                success:function(result){
+                    if(result.success){
+                        province_id = result.data.province_id;
+                        city_id = result.data.city_id;
+                        area_id = result.data.area_id;
+                    } else {
+                        if(result.code==302){
+                            $("#div_text").text(result.detail)
+                            $(".ui-dialog").show();
+                            $("#button_confirm").unbind("click");
+                            $("#button_confirm").one("click",function(){
+                                window.location.href="login.html?ru=addr-detail.html";
+                            });
+                        }
+                    }
+                }
+            })
+        }
         if(province_id!=null && province_id!='null'){
             $("#province").val(province_id);
             //获取市
@@ -84,8 +108,9 @@
                 }
             });
 
-
-            var city_id =  requestParam.city_id;
+            if(city_id == null) {
+                var city_id =  requestParam.city_id;
+            }
             if(city_id!=null && city_id!='null'){
                 $("#city").val(city_id);
                 //获取区域
@@ -108,7 +133,9 @@
                         }
                     }
                 });
-                var area_id =  requestParam.area_id;
+                if(area_id==null){
+                    var area_id =  requestParam.area_id;
+                }
                 $("#area").val(area_id);
 
                 $.ajax({
@@ -186,6 +213,10 @@
 //                        alert("更新地址成功");
                         $("#div_text").text("更新地址成功");
                         $(".ui-dialog").show();
+                        $("#button_confirm").unbind("click");
+                        $("#button_confirm").one("click",function(){
+                            window.history.go(-1);
+                        });
                     }
                     else{
 //                        alert(result.detail);

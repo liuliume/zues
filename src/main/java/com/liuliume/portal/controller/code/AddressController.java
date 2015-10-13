@@ -231,6 +231,7 @@ public class AddressController {
             }
         } else {
             jData.setSuccess(false);
+            jData.setCode(302);
             jData.setDetail("用户身份验证失败");
             jData.setData(null);
         }
