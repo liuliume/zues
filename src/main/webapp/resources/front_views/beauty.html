@@ -162,7 +162,7 @@
             }
 
             var hairdress_id=$("input:radio[name='serve-item']:checked").val();
-            if(val==null){
+            if(hairdress_id==null){
                 $("#div_text").text("请选择服务项目!");
                 $("#alert").show();
                 return;
@@ -207,7 +207,7 @@
     
     <!--服务项目-->
     <a class="list ico-item" style="border:none;height:50px;background-size:auto 44%;background-position:14px 25px">服务项目</a>
-    <a class="list beauty-serve"><span><input name="serve-item" type="radio" value="0">宠物洗澡</span><span><input name="serve-item" type="radio" value="1">宠物美容</span></a>
+    <a class="list beauty-serve"><span><input name="serve-item" type="radio" value="1">宠物洗澡</span><span><input name="serve-item" type="radio" value="2">宠物美容</span></a>
     
     <a class="list info-addr" style="border-top:none;background-size:auto 40%" id="address_btn">选择地址</a>
     
@@ -216,7 +216,7 @@
     <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="0">上门服务</span><span><input name="serve-method" type="radio" value="1">到店服务</span></a>
     
     
-    <a class="next" href="order-submit.html" id="next" style="margin-top:20px">下一步</a>
+    <a class="next" href="#" id="next" style="margin-top:20px">下一步</a>
 
 </div>
 

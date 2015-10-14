@@ -61,6 +61,7 @@
             $.ajax({
                 url : "/sms/verifyMsgCode",
                 type : "GET",
+                async:false,
                 data : 'mobile=' + $("#phone").val()+'&code=' + $("#yzm").val(),
                 success : function(result) {
                     var obj = eval(result);
@@ -121,6 +122,7 @@
             $.ajax({
                 url : "/sms/getMsgCode",
                 type : "GET",
+                async:false,
                 data : 'mobile=' + $("#phone").val(),
                 success : function(result) {
                     var obj = eval(result);

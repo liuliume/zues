@@ -4,7 +4,7 @@
 /*reset*/
 *{margin:0;padding:0;border:0;list-style:none;text-decoration:none}
 body{background-color: #fff; color: #555; font-family: Microsoft Yahei,微软雅黑,宋体,Arial,Lucida,Verdana,Helvetica,sans-serif; min-width: 320px;}
-input,select{-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appearance: none;border-radius:0}
+input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appearance: none;border-radius:0}
 .wrapper{background-color: #fff; margin: 0 auto; max-width: 640px; min-width: 320px; overflow: hidden; width: 100%;}
 
 /*login*/
