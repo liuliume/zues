@@ -19,6 +19,7 @@
         $.ajax({
             url:'/code/address/listUserAddress',
             type:"GET",
+            async:false,
             success:function(result){
                 if(result.success){
                     var detail = $("<a class='addr-list'>");
