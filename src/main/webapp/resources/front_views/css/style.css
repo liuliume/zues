@@ -71,6 +71,7 @@ input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appe
 .order-submit span{ display:inline-block;text-indent:20px; font-size:14px}
 .ico-check{background:url(../img/ico-check.png) no-repeat 13px center;background-size:auto 37%}
 .order-submit.ico-time{background-size:auto 37%}
+.order-submit.ico-time span{word-spacing:-3px; letter-spacing: 0px; font-size:12px}
 .ico-ask{background:url(../img/ico-ask.png) no-repeat 13px center;background-size:auto 37%}
 .order-submit.ico-price{background-size:auto 37%; background-position:13px center}
 .ico-pay{background:url(../img/ico-pay.png) no-repeat 13px center;background-size:auto 42%}
