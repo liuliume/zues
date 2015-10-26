@@ -28,7 +28,7 @@ CREATE TABLE `account` (
   `email` varchar(255) DEFAULT NULL,
   `mobile` varchar(15) NOT NULL,
   `reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `reg_ip` varchar(15) NOT NULL,
+  `reg_ip` varchar(15) DEFAULT NULL,
   `avatar` varchar(128) DEFAULT NULL,
   `uniq_name` varchar(127) DEFAULT NULL,
   `gender` tinyint(1) DEFAULT NULL,
@@ -296,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-26 22:47:14
+-- Dump completed on 2015-10-26 22:54:36
