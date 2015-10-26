@@ -50,7 +50,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,NULL,'lalss@sogou.com','13811633448','2015-09-21 14:29:54','0:0:0:0:0:0:0:1',NULL,'test',0,4,6,10,'12321',0,'test_real1','aniamals1'),(2,NULL,'sb@litb.com','18888888888','2015-09-21 14:30:32','0:0:0:0:0:0:0:1',NULL,'test sb',0,4,5,6,'望京丽泽中二路',0,'test1','test2'),(3,NULL,'lao@sogou.com','13811633447','2015-09-23 13:55:24','0:0:0:0:0:0:0:1',NULL,'test',0,4,9,-1,'test',0,'','');
+INSERT INTO `account` VALUES (1,NULL,'lalss@sogou.com','13811633448','2015-09-21 14:29:54','0:0:0:0:0:0:0:1',NULL,'test12',0,4,6,10,'12321321',0,'test_real1','aniamals1'),(2,NULL,'sb@litb.com','18888888888','2015-09-21 14:30:32','0:0:0:0:0:0:0:1',NULL,'test sb',0,4,5,6,'望京丽泽中二路',0,'test1','test2'),(3,NULL,'lao@sogou.com','13811633447','2015-09-23 13:55:24','0:0:0:0:0:0:0:1',NULL,'test',0,4,9,-1,'test',0,'','');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `hairdressing_time` (
   `end_time` varchar(32) DEFAULT NULL,
   `service_persion_num` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,6 +207,7 @@ CREATE TABLE `hairdressing_time` (
 
 LOCK TABLES `hairdressing_time` WRITE;
 /*!40000 ALTER TABLE `hairdressing_time` DISABLE KEYS */;
+INSERT INTO `hairdressing_time` VALUES (1,'09:00','11:00',2);
 /*!40000 ALTER TABLE `hairdressing_time` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,8 +230,8 @@ CREATE TABLE `orders` (
   `service_type` tinyint(2) DEFAULT NULL COMMENT '服务方式:0-上门服务,1-到店服务',
   `service_begin` tinyint(2) DEFAULT NULL COMMENT '服务开始时间',
   `service_end` tinyint(4) DEFAULT NULL COMMENT '服务结束时间',
-  `start_date` varchar(31) NOT NULL COMMENT '开始时间 yyyy-MM-dd hh:mm:ss',
-  `end_date` varchar(31) NOT NULL COMMENT '结束时间 yyyy-MM-dd hh:mm:ss',
+  `start_date` varchar(32) DEFAULT NULL,
+  `end_date` varchar(32) DEFAULT NULL,
   `room_id` int(11) DEFAULT NULL COMMENT '房间类型',
   `course_id` int(11) DEFAULT NULL COMMENT '课程类型',
   `cost` decimal(11,4) DEFAULT NULL COMMENT '订单价格',
@@ -252,7 +253,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('1',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/01/2015','09/17/2015',4,NULL,NULL,NULL,0,-3,'2015-09-04 23:32:20','2015-09-04 15:32:20',NULL),('2',1,2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/07/2015','09/18/2015',NULL,1,NULL,NULL,1,0,'2015-09-04 23:55:44','2015-09-04 15:55:45',NULL),('3',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:15','2015-09-04 15:57:15',NULL),('4',1,1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'09/10/2015','09/18/2015',4,NULL,NULL,NULL,0,0,'2015-09-04 23:57:16','2015-09-04 15:57:16',NULL);
+INSERT INTO `orders` VALUES ('3bMuUpi11444745750102lHzt',1,3,1,NULL,NULL,NULL,NULL,0,NULL,NULL,'2015-10-02 10:00',NULL,NULL,NULL,144.0000,1,0,0,'2015-10-13 22:15:50','2015-10-13 14:15:50',2),('3HZNKwD11444835680085ITvP',1,3,5,4,6,10,'12321321',0,NULL,NULL,'2015-10-01 9:00',NULL,NULL,NULL,144.0000,1,0,0,'2015-10-14 23:14:40','2015-10-14 15:14:39',2);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +283,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (4,'低调奢华房',1,1,1,1,11,1),(5,'高端大气房',2,22,22,2,2,2);
+INSERT INTO `room` VALUES (1,'低调奢华房',1,1,1,1,11,1),(2,'高端大气房',2,22,22,2,2,2);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -295,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-25  0:19:20
+-- Dump completed on 2015-10-26 22:47:14
