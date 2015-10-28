@@ -148,6 +148,7 @@
             startDate = start_month + start_day + start_hour;
             startDate = startDate.replace("年","-").replace("月","-").replace("日"," ");
             $("#time").hide();
+            $("#start_time").text(startDate);
         })
 
         $("#confirm_time1").click(function(){
@@ -162,6 +163,7 @@
             endDate = end_month + end_day + end_hour;
             endDate = endDate.replace("年","-").replace("月","-").replace("日"," ");
             $("#time1").hide();
+            $("#end_time").text(endDate);
 //             alert($(".month.hover").value());
         })
 
@@ -239,8 +241,8 @@
 		<img src="img/foster-ad.jpg">
     </div>
 
-    <a class="list foster-time" id="time_button">入住时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-time" style="border-top:none" id="time_button1">离开时间<span class="arrow">&#8250;</span></a>
+    <a class="list foster-time" id="time_button">入住时间 &nbsp;&nbsp;&nbsp;<span id="start_time"></span><span class="arrow">&#8250;</span></a>
+    <a class="list foster-time" style="border-top:none" id="time_button1">离开时间 &nbsp;&nbsp;&nbsp;<span id="end_time"></span><span class="arrow">&#8250;</span></a>
     <a class="list foster-total">共计<span>30</span>天&nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a class="list foster-breed" id="pet_btn"  href="#">宠物品种<span class="arrow">&#8250;</span></a>
     
