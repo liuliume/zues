@@ -14,8 +14,11 @@
     <bean id="cacheConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
           p:usePool="true">
          <!--<property name="hostName" value="10.146.24.45"/>-->
-        <property name="hostName" value="10.211.55.4"/>
+        <!--<property name="hostName" value="10.211.55.4"/>-->
          <!--<property name="port" value="6359"/>-->
+        <!--  <property name="hostName" value="10.146.24.45"/>
+         <property name="port" value="6359"/> -->
+        <property name="hostName" value="localhost"/>
         <property name="port" value="6379"/>
         <constructor-arg index="0" ref="cachePoolConfig"/>
     </bean>
@@ -28,7 +31,7 @@
         <!--30分钟跑一次idle object eviction线程-->
         <property name="timeBetweenEvictionRunsMillis" value="180000" />
         <!-- 解决java.net.SocketTimeoutException: connect timed out-->
-        <property name="lifo" value="false" />
+        <property name="lifo" value="false"  />
     </bean>
 
 
