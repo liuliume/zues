@@ -29,21 +29,22 @@ input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appe
 .slideBox .bd li a{ -webkit-tap-highlight-color:rgba(0,0,0,0);  }  /* 去掉链接触摸高亮 */
 
 /* 首页内容 */
-.index a{width:30%; height:60px;color:#000; font-size:20px; text-align:center;position:absolute;background-size:60% auto;padding-top:65px;}
-.a1{left:10%; top:51%; background:url(../img/t1.png) no-repeat center 0;}
-.a2{right:10%;top:51%; background:url(../img/t2.png) no-repeat center 0;}
-.a3{left:10%; top:68%; background:url(../img/t3.png) no-repeat center 0;}
-.a4{right:10%;top:68%; background:url(../img/t4.png) no-repeat center 0;}
+.index{ width:100%;}
+.index a{width:50%; float:left; height:50px;color:#000; font-size:20px; text-align:center;background-size:35% auto;padding-top:68px;}
+.a1{ background:url(../img/t1.png) no-repeat center 10px;}
+.a2{ background:url(../img/t2.png) no-repeat center 10px;}
+.a3{ background:url(../img/t3.png) no-repeat center 10px;margin-bottom:50px}
+.a4{ background:url(../img/t4.png) no-repeat center 10px;margin-bottom:50px}
 
 /* 导航 */
-.nav a{background:url(../img/nav-icon.png) no-repeat #fff;background-size:auto 50%;width:50%;line-height:50px; font-size:18px; text-align:center;position:absolute;background-position:19px center;bottom:0;border-top:1px solid #c6c6c6; color:#000;text-indent:25px}
+.nav a{background:url(../img/nav-icon.png) no-repeat #fff;background-size:auto 50%;width:50%;line-height:50px; font-size:18px; text-align:center;position:fixed;background-position:19px center;bottom:0;border-top:1px solid #c6c6c6; color:#000;text-indent:25px}
 .nav a:first-child{left:0; border-right:1px solid #c6c6c6}
 .nav a:last-child{right:0}
 
 /* 主人的信息 */
 .username{width:100%; height:140px}
 .username span{display:inline-block; float:left;width:80px; height:80px; margin:30px 40px 30px 50px;border-radius:80px;background:url(../img/user-photo.png) no-repeat center #b6b6b6;background-size:60% auto;}
-.username input{display:inline-block; float:left;height:20px;width:100px; line-height:20px; margin:45px 0;font-style:normal;font-size:19px; border:none; padding:16px 20px 16px 5px}
+.username input{display:inline-block; height:20px;width:100px; line-height:20px; margin:45px 0;font-style:normal;font-size:19px; border:none; padding:16px 20px 16px 5px}
 .list{color:#493939;display:block;width:100%; height:70px;text-indent:60px;line-height:70px;border-top:1px solid #927d76; border-bottom:1px solid #927d76; position:relative}
 .info-order{background:url(../img/info-icon-order.png) no-repeat 13px center;background-size:auto 37%;}
 .info-addr{border-top:none; background:url(../img/info-icon-addr.png) no-repeat 10px center;background-size:auto 45%}
@@ -81,7 +82,7 @@ input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appe
 
 /* 订单确认 */
 .order-confirm{border-top:none; height:58px; line-height:58px}
-.order-confirm span{ display:inline-block;text-indent:20px; font-size:14px}
+.order-confirm span{ display:inline-block;font-size:14px;line-height:25px; padding-left:20px;text-indent:0}
 .ico-confirm{ text-align:center; border-bottom:none; font-size:20px;background:url(../img/ico-confirm.png) no-repeat 35% center;background-size:auto 42%}
 .order-numb{text-align:center; width:90%; border-bottom:none; height:30px; line-height:30px; padding-bottom:20px}
 .order-confirm.ico-addr{background-size:auto 46%;background-position:10px center}
@@ -108,7 +109,7 @@ input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appe
 
 /* 宠物美容 */
 .beauty-serve{ border-top:none;height:50px; padding-bottom:20px}
-.beauty-serve span{ display:inline-block; width:45%; float:left}
+.beauty-serve span{ display:inline-block; width:50%; float:left}
 .beauty-serve input[type=radio]{height:15px; width:15px; border-radius:15px; border:2px solid #c6c6c6; margin-right:10px;vertical-align:middle; padding:0}
 
 /* 弹窗组件 */
