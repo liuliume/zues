@@ -45,7 +45,32 @@
         $(".t_1").empty();
         $(".t_1").append("<span class='month'>"+ d.getFullYear() + "年" +dmonth+"月</span>")
                 .append("<span class='month'>"+ d1.getFullYear() + "年" +dmonth1+"月</span>")
-                .append("<span class='month'>"+ d2.getFullYear() + "年" +dmonth2+"月</span>")
+                .append("<span class='month'>"+ d2.getFullYear() + "年" +dmonth2+"月</span>");
+        
+        //获取房间信息
+        $.ajax({
+        	url:'/room/listForJson',
+        	type:'GET',
+            async:false,
+            success:function(result){
+                if(result.success){
+                	$(result.data).each(function(index,item){
+                		$("#div_room").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' value='"+item.id+"'>"+item.roomName+"</span></a>");
+                	})
+                    
+                }else if(result.code==500){
+                    $("#div_text").text("系统错误,请重试");
+                    $("#alert").show();
+                    $("#button_confirm").unbind("click");
+                    $("#button_confirm").one("click",function(){
+                        window.location.reload();
+                    });
+                    return;
+                }
+            },failure:function(){
+                alert("系统错误");
+            }
+        })
 
         $("#time_button").click(function(){
             $("#time").show();
@@ -247,11 +272,13 @@
     <a class="list foster-breed" id="pet_btn"  href="#">宠物品种<span class="arrow">&#8250;</span></a>
     
     <!--宠物寄养-->
+   
     <a class="list foster-room">房间类型<span id="room_detail">房间详情&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="1">酒店式 50元/天 1200元/月</span></a>
+    <div id="div_room">
+    <!--  <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="1">酒店式 50元/天 1200元/月</span></a>
     <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="2">标准间 60元/天 1500元/月</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="3">别墅间 90元/天 2000元/月</span></a>
-    
+    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="3">别墅间 90元/天 2000元/月</span></a> -->
+    </div>
     <a class="next" href="#" id="next">下一步</a>
 
 </div>

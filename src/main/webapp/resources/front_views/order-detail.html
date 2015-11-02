@@ -65,13 +65,18 @@
                         var startDate = result.data.startDate;
                         var endData = result.data.endDate;
                         var cost = result.data.cost;
+                        var time = startDate;
                         console.info(order_id);
                         console.info(order_type);
                         console.info(startDate);
                         console.info(endData);
                         console.info(cost);
+                        if(endData!=null && typeof(endData)!='undefined'){
+                        	time += " 至 "+endData;
+                        }
                         $(".wrapper").append("<a class='list order-detail ico-item' style='margin-top:20px'>服务项目<span>"+order_type_detail+"</span></a>")
-                                .append("<a class='list order-detail ico-time'>服务时间<span>"+startDate+" 至 "+endData+"</span></a>")
+                                //.append("<a class='list order-detail ico-time'>服务时间<span>"+startDate+" 至 "+endData+"</span></a>")
+                                .append("<a class='list order-detail ico-time'>服务时间<span>"+time+"</span></a>")
                                 .append("<a class='list order-detail ico-phone'>联系电话<span>"+result.data.account.mobile+"</span></a>")
                                 .append("<a class='list order-detail ico-addr'>"+address_title+"<span>"+address+"</span></a>")
                                 .append("<a class='list order-detail ico-price' style='margin-bottom:30px'>服务价格<span>"+cost+"元</span></a>")
