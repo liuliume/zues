@@ -167,4 +167,12 @@ public class HairdressingTimeController {
 		}
 		return jData;
 	}
+	
+	@RequestMapping(value="isServiceTimeValid",method=RequestMethod.GET)
+    @ResponseBody
+    public JData isServiceTimeValid(String serviceTime,int service_type){
+    	JData jData = new JData();
+    	jData.setSuccess(true);
+    	return jData;
+    }
 }

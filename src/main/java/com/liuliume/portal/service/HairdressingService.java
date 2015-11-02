@@ -1,6 +1,7 @@
 package com.liuliume.portal.service;
 
 import com.liuliume.common.pagination.Seed;
+import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Course;
 import com.liuliume.portal.entity.Hairdressing;
 

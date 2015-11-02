@@ -193,9 +193,9 @@ html,body {height: 100%;overflow: hidden}
                 var tagClass = e.target.getAttribute("class");
                 console.log("tagClass==" + tagClass);
                 if (tagClass && tagClass.indexOf("mui-table-view-cell") != -1) {
-                    var selectPet = e.target.innerText;
+                    var selectPet = escape(e.target.innerHTML);
                     var selectPetId = e.target.value;
-                    window.location.href=ru+"?animalsId="+selectPetId+"&startDate="+startDate+"&endDate="+endDate;
+                    window.location.href=ru+"?animalsId="+selectPetId+"&animalName="+selectPet+"&startDate="+startDate+"&endDate="+endDate;
 //                    alert("选择的宠物=" + selectPet);
 //                    alert("选择的宠物=" + selectPetId);
 //                    alert(ru);
