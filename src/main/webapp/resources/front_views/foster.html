@@ -18,6 +18,8 @@
 <script type="text/javascript">
     $(function(){
 
+
+
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
             var theRequest = new Object();
@@ -174,7 +176,9 @@
             startDate = startDate.replace("年","-").replace("月","-").replace("日"," ");
             $("#time").hide();
             $("#start_time").text(startDate);
+            calDays();
         })
+
 
         $("#confirm_time1").click(function(){
             var end_month = $("#time1 .month.hover").text()
@@ -189,12 +193,35 @@
             endDate = endDate.replace("年","-").replace("月","-").replace("日"," ");
             $("#time1").hide();
             $("#end_time").text(endDate);
+            calDays();
 //             alert($(".month.hover").value());
         })
+
+        if(startDate==null){
+            startDate = requestParam.startDate;
+            $("#start_time").text(startDate);
+        }
+
+        if(endDate==null){
+            endDate = requestParam.endDate;
+            $("#end_time").text(endDate);
+        }
+
+        calDays();
+
+        function calDays(){
+            if(startDate!=null && endDate!=null){
+                $("#days").text("1");
+            }else{
+                $("#days").text("0");
+            }
+        }
+
 
 
         $("#room_detail").click(function(){
             $("#detail").show();
+
         })
 
         $("#cancle_detail").click(function(){
@@ -268,7 +295,7 @@
 
     <a class="list foster-time" id="time_button">入住时间 &nbsp;&nbsp;&nbsp;<span id="start_time"></span><span class="arrow">&#8250;</span></a>
     <a class="list foster-time" style="border-top:none" id="time_button1">离开时间 &nbsp;&nbsp;&nbsp;<span id="end_time"></span><span class="arrow">&#8250;</span></a>
-    <a class="list foster-total">共计<span>30</span>天&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    <a class="list foster-total">共计<span id="days">0</span>天&nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a class="list foster-breed" id="pet_btn"  href="#">宠物品种<span class="arrow">&#8250;</span></a>
     
     <!--宠物寄养-->
