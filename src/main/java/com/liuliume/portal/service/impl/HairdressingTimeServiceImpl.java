@@ -120,4 +120,11 @@ public class HairdressingTimeServiceImpl implements HairdressingTimeService {
 		return null;
 	}
 
+	@Override
+	public boolean isServiceTimeValid(String serviceTime, int service_type)
+			throws Exception {
+//		HairdressingTime hairdressingTime = this.findHairdressingTimeById(hairdressingTime_id)
+		return false;
+	}
+
 }

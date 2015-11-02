@@ -1,6 +1,7 @@
 package com.liuliume.portal.service;
 
 import com.liuliume.common.pagination.Seed;
+import com.liuliume.portal.common.JData;
 import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.entity.HairdressingTime;
 
@@ -23,4 +24,6 @@ public interface HairdressingTimeService {
     public void batchDelete(String hairdressingIds) throws Exception;
     
     public List<HairdressingTime> listValidHairingDressingTime(Date serviceDate) throws Exception;
+    
+    public boolean isServiceTimeValid(String serviceTime,int service_type) throws Exception;
 }

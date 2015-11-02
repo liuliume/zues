@@ -32,25 +32,61 @@
 
         var requestParam = GetRequest();
         var animalsId = requestParam.animalsId;
-
-
-        $("#detail_btn").click(function(){
-            $("#detail").show();
-        })
-
-        $("#cancle_detail").click(function(){
-            $("#detail").hide();
-        })
-
-        $("#detail_btn").click(function(){
-            $("#detail").show();
-        })
-
-        $("#cancle_detail").click(function(){
-            $("#detail").hide();
-        })
-
+        var animalName=requestParam.animalName;
         var startDate;
+        
+        var serviceDate = requestParam.startDate;
+        if(serviceDate!=null && typeof(serviceDate)!='undefined'){
+        	$("#start_time").text(serviceDate);
+        	startDate = serviceDate;
+        }
+        
+        if(animalName!=null && typeof(animalName)!='undefined'){
+        	animalName=animalName;
+        	$("#animalName").text(animalName);
+        }
+        
+        $.ajax({
+        	url:"/hairdressing/listAllHairDressing",
+        	type:'GET',
+        	success:function(result){
+        		if(result.success){
+        			$(result.data).each(function(index,item){
+        				console.info(item);
+                		//$("#div_room").append("<input name='serve-item' type='radio' value='1'>宠物洗澡");
+        				$("#service_type").append("<span><input name='serve-item' type='radio' value='"+item.id+"'>"+item.hairdressingName+"</span>");
+                	});
+        		}else{
+        			$("#div_text").text("系统错误,请重试");
+                    $("#alert").show();
+                    $("#button_confirm").unbind("click");
+                    $("#button_confirm").one("click",function(){
+                        window.location.reload();
+                    });
+                    return;
+        		}
+        	},failure:function(){
+        		
+        	}
+        })
+
+
+        $("#detail_btn").click(function(){
+            $("#detail").show();
+        })
+
+        $("#cancle_detail").click(function(){
+            $("#detail").hide();
+        })
+
+        $("#detail_btn").click(function(){
+            $("#detail").show();
+        })
+
+        $("#cancle_detail").click(function(){
+            $("#detail").hide();
+        })
+
         var d = new Date();
         var d1 = new Date();
         var d2 = new Date();
@@ -149,6 +185,7 @@
             startDate = start_month + start_day + start_hour;
             startDate = startDate.replace("年","-").replace("月","-").replace("日"," ");
             $("#time").hide();
+            $("#start_time").text(startDate);
         })
 
 
@@ -202,12 +239,13 @@
 		<img src="img/beauty-ad.jpg">
     </div>
 
-    <a class="list foster-time" id="time_button">服务时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-breed" style="border-top:none" href="#" id="pet_btn">宠物品种<span class="arrow">&#8250;</span></a>
+    <a class="list foster-time" id="time_button">服务时间 &nbsp;&nbsp;&nbsp;<span id="start_time"></span><span class="arrow">&#8250;</span></a>
+    <a class="list foster-breed" style="border-top:none" href="#" id="pet_btn">宠物品种&nbsp;&nbsp;&nbsp;<span id="animalName"></span><span class="arrow">&#8250;</span></a>
     
     <!--服务项目-->
     <a class="list ico-item" style="border:none;height:50px;background-size:auto 44%;background-position:14px 25px">服务项目</a>
-    <a class="list beauty-serve"><span><input name="serve-item" type="radio" value="1">宠物洗澡</span><span><input name="serve-item" type="radio" value="2">宠物美容</span></a>
+    <!-- <a class="list beauty-serve"><span><input name="serve-item" type="radio" value="1">宠物洗澡</span><span><input name="serve-item" type="radio" value="2">宠物美容</span></a> -->
+    <a class="list beauty-serve" id="service_type"></a> 
     
     <a class="list info-addr" style="border-top:none;background-size:auto 40%" id="address_btn">选择地址</a>
     
