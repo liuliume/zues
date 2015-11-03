@@ -135,7 +135,16 @@
             $(this).addClass("hover");
             var curMonthDays = new Date(($(".month.hover").text().substr(0,3)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
             $(".t_2").empty();
+            var curDate = new Date();
+            var tmp_month = (curDate.getMonth()+1);
+            var tmp_date = curDate.getDate();
             for(var i=1;i<=curMonthDays;i++){
+                if(tmp_month == $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1)){
+                    console.info("test")
+                    if(i<tmp_date){
+                        continue;
+                    }
+                }
                 tmp = i<10?"0"+i:i;
                 $(".t_2").append("<span class='day'>"+tmp+"日</span>");
             }
@@ -211,10 +220,26 @@
 
         function calDays(){
             if(startDate!=null && endDate!=null){
-                $("#days").text("1");
+                var tmp_start = startDate.split(" ")[0];
+                var tmp_end = endDate.split(" ")[0];
+                var tmp_time = endDate.split(" ")[1].split(":")[0];
+                var day = null;
+                if(tmp_time >=12) {
+                    day = DateDiff(tmp_start,tmp_end) + 1;
+                } else {
+                    day = DateDiff(tmp_start,tmp_end);
+                }
+                $("#days").text(day);
             }else{
                 $("#days").text("0");
             }
+        }
+
+        function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式
+            var begintime_ms = Date.parse(new Date(sDate1.replace(/-/g, "/"))); //begintime 为开始时间
+            var endtime_ms = Date.parse(new Date(sDate2.replace(/-/g, "/")));
+            var days=Math.floor((endtime_ms-begintime_ms)/(24*3600*1000));
+            return days;
         }
 
 
