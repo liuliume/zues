@@ -33,6 +33,18 @@
         }
 
         var requestParam = GetRequest();
+        
+        var animalName=requestParam.animalName;
+        if(animalName!=null && typeof(animalName)!='undefined'){
+        	animalName=animalName;
+        	$("#animalName").text(animalName);
+        }
+        
+        var serviceDate = requestParam.startDate;
+        if(serviceDate!=null && typeof(serviceDate)!='undefined'){
+        	$("#start_time").text(serviceDate);
+        	startDate = serviceDate;
+        }
 
         $("#detail_btn").click(function(){
             $("#detail").show();
@@ -132,6 +144,7 @@
             }
             startDate = start_month + start_day + start_hour;
             startDate = startDate.replace("年","-").replace("月","-").replace("日"," ");
+            $("#start_time").text(startDate);
             $("#time").hide();
         })
 
@@ -194,8 +207,8 @@
 		<img src="img/train-ad.jpg">
     </div>
 
-    <a class="list foster-time" id="time_button">服务时间<span class="arrow">&#8250;</span></a>
-    <a class="list foster-breed" style="border-top:none" id="pet_btn" href="#">宠物品种<span class="arrow">&#8250;</span></a>
+    <a class="list foster-time" id="time_button">服务时间&nbsp;&nbsp;&nbsp;<span id="start_time"></span><span class="arrow">&#8250;</span></a>
+    <a class="list foster-breed" style="border-top:none" id="pet_btn" href="#">宠物品种&nbsp;&nbsp;&nbsp;<span id="animalName"></span><span class="arrow">&#8250;</span></a>
 
 	<!--宠物训练-->
     <a class="list foster-room" style="background-image:url(img/cd-icon-yzm.png)">训练课程<span id="detail_btn">课程详情&nbsp;&nbsp;</span></a>

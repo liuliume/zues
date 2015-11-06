@@ -34,6 +34,11 @@
         }
 
         var requestParam = GetRequest();
+        var animalName=requestParam.animalName;
+        if(animalName!=null && typeof(animalName)!='undefined'){
+        	animalName=animalName;
+        	$("#animalName").text(animalName);
+        }
 
         var startDate,endDate;
         var d = new Date();
@@ -321,7 +326,7 @@
     <a class="list foster-time" id="time_button">入住时间 &nbsp;&nbsp;&nbsp;<span id="start_time"></span><span class="arrow">&#8250;</span></a>
     <a class="list foster-time" style="border-top:none" id="time_button1">离开时间 &nbsp;&nbsp;&nbsp;<span id="end_time"></span><span class="arrow">&#8250;</span></a>
     <a class="list foster-total">共计<span id="days">0</span>天&nbsp;&nbsp;&nbsp;&nbsp;</a>
-    <a class="list foster-breed" id="pet_btn"  href="#">宠物品种<span class="arrow">&#8250;</span></a>
+    <a class="list foster-breed" id="pet_btn"  href="#">宠物品种&nbsp;&nbsp;&nbsp;<span id="animalName"></span><span class="arrow">&#8250;</span></a>
     
     <!--宠物寄养-->
    
