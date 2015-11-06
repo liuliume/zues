@@ -169,6 +169,21 @@
 
         })
 
+
+        $.ajax({
+            url:'/course/listForJson',
+            type:'GET',
+            success:function(result){
+                $.each(result,function(index,item){
+                    console.info(item)
+                    $("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' value='"+item.id+"'>"+item.courseName+"</span></a>");
+                })
+            },failure:function(){
+
+            }
+
+        });
+
     })
 </script>
 </head>
@@ -184,10 +199,13 @@
 
 	<!--宠物训练-->
     <a class="list foster-room" style="background-image:url(img/cd-icon-yzm.png)">训练课程<span id="detail_btn">课程详情&nbsp;&nbsp;</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="1">幼犬训练 3-8个月</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="2">成犬训练 8个月以上</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="3">单项训练 如转圈捡球等</span></a>
-    <a class="list beauty-serve" style="border-bottom:1px solid #927d76"><span><input name="serve-method" type="radio" value="4">特需训练 定制课程</span></a>
+    <div id="course_a">
+        <!--<a class="list beauty-serve"><span><input name="serve-method" type="radio" value="1">幼犬训练 3-8个月</span></a>-->
+        <!--<a class="list beauty-serve"><span><input name="serve-method" type="radio" value="2">成犬训练 8个月以上</span></a>-->
+        <!--<a class="list beauty-serve"><span><input name="serve-method" type="radio" value="3">单项训练 如转圈捡球等</span></a>-->
+        <!--<a class="list beauty-serve" style="border-bottom:1px solid #927d76"><span><input name="serve-method" type="radio" value="4">特需训练 定制课程</span></a>-->
+    </div>
+
     
     <a class="next" id="next" href="#" style="margin-top:20px">下一步</a>
 
