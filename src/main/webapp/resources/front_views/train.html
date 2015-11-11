@@ -100,8 +100,16 @@
             $(".day").removeClass("hover");
             $(this).addClass("hover");
             var curMonthDays = new Date(($(".month.hover").text().substr(0,3)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
+            var curDate = new Date();
+            var tmp_month = (curDate.getMonth()+1);
+            var tmp_date = curDate.getDate();
             $(".t_2").empty();
             for(var i=1;i<=curMonthDays;i++){
+                if(tmp_month == $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1)){
+                    if(i<tmp_date){
+                        continue;
+                    }
+                }
                 tmp = i<10?"0"+i:i;
                 $(".t_2").append("<span class='day'>"+tmp+"日</span>");
             }
