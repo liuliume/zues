@@ -4,6 +4,7 @@ import com.liuliume.portal.entity.Hairdressing;
 import com.liuliume.portal.entity.HairdressingTime;
 import com.liuliume.portal.mybatis.MyBatisBaseMapper;
 import com.liuliume.portal.mybatis.Parameter;
+
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,5 +27,7 @@ public interface HairdressingTimeMapper extends MyBatisBaseMapper<HairdressingTi
     public List<HairdressingTime> list(@Param("param")Parameter parameter);
     
     public List<HairdressingTime> listAllHairdressingTime();
+    
+    public HairdressingTime getHairdressingTimeByStartTime(@Param("startTime")String startTime);
 
 }

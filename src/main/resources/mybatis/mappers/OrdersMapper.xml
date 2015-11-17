@@ -151,9 +151,11 @@
 	<select id="countHairDressingOrders" resultType="int">
 		select count(*) from orders
 		where order_type= 3 and status not in(-3,99)
-		and start_date <![CDATA[<=]]>#{serviceDate} and end_date <![CDATA[>=]]>#{serviceDate}
+		and DATEDIFF(#{serviceDate},start_date)=0 and end_date <![CDATA[>=]]>#{serviceDate}
 		and (service_begin=#{startTime} or service_begin=#{startTime}+1 )
-		and service_end <![CDATA[>=]]>#{endTime}
+		<if test="service_end != null and service_end !=''">
+			and service_end <![CDATA[>=]]>#{endTime}
+		</if>
 	</select>
 
     <select id="countRoomOrders" resultType="int">

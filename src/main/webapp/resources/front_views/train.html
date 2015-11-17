@@ -41,7 +41,7 @@
         }
         
         var serviceDate = requestParam.startDate;
-        if(serviceDate!=null && typeof(serviceDate)!='undefined'){
+        if(serviceDate!=null &&serviceDate!='undefined' && typeof(serviceDate)!='undefined'){
         	$("#start_time").text(serviceDate);
         	startDate = serviceDate;
         }

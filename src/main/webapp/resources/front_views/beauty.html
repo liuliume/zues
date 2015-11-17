@@ -36,7 +36,7 @@
         var startDate;
         
         var serviceDate = requestParam.startDate;
-        if(serviceDate!=null && typeof(serviceDate)!='undefined'){
+        if(serviceDate!=null && serviceDate!='undefined' && typeof(serviceDate)!='undefined'){
         	$("#start_time").text(serviceDate);
         	startDate = serviceDate;
         }
@@ -230,8 +230,35 @@
                 }
 
             }
-            window.location.href = "order-submit.html?order_type=3&animalsId="+animalsId+"&hairdress_id="+hairdress_id+"&startDate="+startDate+"&service_type="+service_type
-
+            
+            $.ajax({
+            	url:'/hairdressing_time/isServiceTimeValid',
+            	type:'GET',
+            	data:{"serviceTime":startDate,"service_type":service_type},
+                async:false,
+                success:function(result){
+                    if(result.success){
+                        if(result.data==false){
+                        	alert("该服务时间已满员,请重新选择一个服务时间");
+                        	return;
+                        }else{
+                        	window.location.href = "order-submit.html?order_type=3&animalsId="+animalsId+"&hairdress_id="+hairdress_id+"&startDate="+startDate+"&service_type="+service_type
+                        }
+                    }else if(result.code==500){
+                        $("#div_text").text("系统错误,请重试");
+                        $("#alert").show();
+                        $("#button_confirm").unbind("click");
+                        $("#button_confirm").one("click",function(){
+                            window.location.reload();
+                        });
+                        return;
+                    }
+                },failure:function(){
+                    alert("系统错误");
+                    return ;
+                }
+            })
+            
         })
 
 

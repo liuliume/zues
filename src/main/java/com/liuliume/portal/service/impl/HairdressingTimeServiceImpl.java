@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,8 +125,24 @@ public class HairdressingTimeServiceImpl implements HairdressingTimeService {
 	@Override
 	public boolean isServiceTimeValid(String serviceTime, int service_type)
 			throws Exception {
-//		HairdressingTime hairdressingTime = this.findHairdressingTimeById(hairdressingTime_id)
+		HairdressingTime ht = hairdressingTimeDao.getHairdressingTimeByStartTime(serviceTime);
+		if(ht!=null){
+			int sum = ht.getServicePersionNum();
+			
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+			Date date= format.parse(serviceTime);
+			int startTime = date.getHours();
+			int count = countHairDressingOrders(date, startTime);
+			if(sum>count)
+				return true;
+			return false;
+		}
 		return false;
+	}
+	
+	private int countHairDressingOrders(Date serviceDate,int startTime){
+		String serviceTime = Integer.toString(startTime);
+		return ordersDao.countHairDressingOrders(serviceDate, serviceTime, null);
 	}
 
 }

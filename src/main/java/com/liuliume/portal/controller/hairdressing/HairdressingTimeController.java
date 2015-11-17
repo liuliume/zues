@@ -172,7 +172,22 @@ public class HairdressingTimeController {
     @ResponseBody
     public JData isServiceTimeValid(String serviceTime,int service_type){
     	JData jData = new JData();
-    	jData.setSuccess(true);
+    	boolean isValid;
+		try {
+			isValid = hairdressingTimeService.isServiceTimeValid(serviceTime, service_type);
+			jData.setData(isValid);
+			jData.setSuccess(true);
+			jData.setCode(200);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(
+					"Error in isServiceTimeValid! reason:{}, Paramter:account_id:{}.",
+					e.getMessage(), serviceTime, e);
+			jData.setCode(500);
+			jData.setData(null);
+			jData.setSuccess(false);
+			jData.setDetail("操作失败");
+		}
     	return jData;
     }
 }

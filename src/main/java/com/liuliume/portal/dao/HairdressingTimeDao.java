@@ -22,5 +22,7 @@ public interface HairdressingTimeDao {
     public void delete(HairdressingTime hairdressingTime);
     
     public List<HairdressingTime> listAllHairdressingTime();
+    
+    public HairdressingTime getHairdressingTimeByStartTime(String startTime);
 
 }

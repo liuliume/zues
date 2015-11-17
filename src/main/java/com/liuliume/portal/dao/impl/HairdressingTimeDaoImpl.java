@@ -7,6 +7,7 @@ import com.liuliume.portal.entity.HairdressingTime;
 import com.liuliume.portal.mybatis.Parameter;
 import com.liuliume.portal.mybatis.mapper.HairdressingMapper;
 import com.liuliume.portal.mybatis.mapper.HairdressingTimeMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -52,6 +53,11 @@ public class HairdressingTimeDaoImpl implements HairdressingTimeDao{
 	@Override
 	public List<HairdressingTime> listAllHairdressingTime() {
 		return hairdressingTimeMapper.listAllHairdressingTime();
+	}
+
+	@Override
+	public HairdressingTime getHairdressingTimeByStartTime(String startTime) {
+		return hairdressingTimeMapper.getHairdressingTimeByStartTime(startTime);
 	}
 
 

@@ -119,4 +119,8 @@
       service_persion_num = #{servicePersionNum,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getHairdressingTimeByStartTime" resultMap="BaseResultMap">
+		SELECT * FROM hairdressing_time WHERE start_time <![CDATA[<=]]>#{startTime} AND end_time<![CDATA[>=]]>#{startTime}
+  </select>
 </mapper>

@@ -211,14 +211,16 @@
 //             alert($(".month.hover").value());
         })
 
-        if(startDate==null){
+        if(startDate==null || typeof(startDate) == 'undefined'){
             startDate = requestParam.startDate;
-            $("#start_time").text(startDate);
+            if(startDate!=null && startDate !='undefined' && typeof(startDate) != 'undefined')
+            	$("#start_time").text(startDate);
         }
 
         if(endDate==null){
             endDate = requestParam.endDate;
-            $("#end_time").text(endDate);
+            if(endDate!=null && endDate !='undefined' && typeof(endDate) != 'undefined')
+            	$("#end_time").text(endDate);
         }
 
         calDays();
