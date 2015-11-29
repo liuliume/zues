@@ -37,6 +37,7 @@
         }
 
         var requestParam = GetRequest();
+        ru = requestParam.ru;
 
         //获取省份
         $.ajax({
@@ -76,7 +77,7 @@
                             $(".ui-dialog").show();
                             $("#button_confirm").unbind("click");
                             $("#button_confirm").one("click",function(){
-                                window.location.href="login.html?ru=addr-detail.html";
+                                window.location.href="login.html?ru=addr-detail.html?ru_index="+ru;
                             });
                         }
                     }
@@ -215,7 +216,11 @@
                         $(".ui-dialog").show();
                         $("#button_confirm").unbind("click");
                         $("#button_confirm").one("click",function(){
-                            window.history.go(-1);
+                            if(ru!=null || ru!=""){
+                                window.location.href = ru;
+                            }else{
+                                window.history.go(-1);
+                            }
                         });
                     }
                     else{

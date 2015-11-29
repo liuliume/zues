@@ -308,12 +308,36 @@
                 $("#alert").show();
                 return;
             }
-            var order_type = 1;
-            window.location.href = "order-submit.html?order_type=1&animalsId="+animalsId+"&room_id="+room_id+"&startDate="+startDate+"&endDate="+endDate
 
+            $.ajax({
+            	url:'/room/verifyRoomNum',
+            	type:'POST',
+            	data:{"endDate":endDate,"startDate":startDate,"room_id":room_id},
+                async:false,
+                success:function(result){
+                    if(result.success){
+                        if(result.data==false){
+                        	alert("该服务时间已满员,请重新选择一个服务时间");
+                        	return;
+                        }else{
+                           var order_type = 1;
+                           window.location.href = "order-submit.html?order_type=1&animalsId="+animalsId+"&room_id="+room_id+"&startDate="+startDate+"&endDate="+endDate
+                        }
+                    }else if(result.code==500){
+                        $("#div_text").text("系统错误,请重试");
+                        $("#alert").show();
+                        $("#button_confirm").unbind("click");
+                        $("#button_confirm").one("click",function(){
+                            window.location.reload();
+                        });
+                        return;
+                    }
+                },failure:function(){
+                    alert("系统错误");
+                    return ;
+                }
+            })
         })
-
-
     })
 </script>
 
