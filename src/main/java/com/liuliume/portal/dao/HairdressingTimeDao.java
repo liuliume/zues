@@ -24,5 +24,7 @@ public interface HairdressingTimeDao {
     public List<HairdressingTime> listAllHairdressingTime();
     
     public HairdressingTime getHairdressingTimeByStartTime(String startTime);
+    
+    public HairdressingTime getHairdressingTimeByStartTime(int startTime);
 
 }

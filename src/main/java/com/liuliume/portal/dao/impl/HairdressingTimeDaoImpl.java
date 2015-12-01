@@ -60,5 +60,9 @@ public class HairdressingTimeDaoImpl implements HairdressingTimeDao{
 		return hairdressingTimeMapper.getHairdressingTimeByStartTime(startTime);
 	}
 
-
+	@Override
+	public HairdressingTime getHairdressingTimeByStartTime(int startTime) {
+		String str = Integer.toString(startTime);
+		return hairdressingTimeMapper.getHairdressingTimeByStartTime(str);
+	}
 }

@@ -125,13 +125,14 @@ public class HairdressingTimeServiceImpl implements HairdressingTimeService {
 	@Override
 	public boolean isServiceTimeValid(String serviceTime, int service_type)
 			throws Exception {
-		HairdressingTime ht = hairdressingTimeDao.getHairdressingTimeByStartTime(serviceTime);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		Date date= format.parse(serviceTime);
+		int startTime = date.getHours();
+		
+		HairdressingTime ht = hairdressingTimeDao.getHairdressingTimeByStartTime(startTime);
 		if(ht!=null){
 			int sum = ht.getServicePersionNum();
 			
-			DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			Date date= format.parse(serviceTime);
-			int startTime = date.getHours();
 			int count = countHairDressingOrders(date, startTime);
 			if(sum>count)
 				return true;

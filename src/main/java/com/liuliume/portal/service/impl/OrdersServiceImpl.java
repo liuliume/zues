@@ -32,6 +32,7 @@ import com.liuliume.portal.service.AnimalService;
 import com.liuliume.portal.service.CountService;
 import com.liuliume.portal.service.CourseService;
 import com.liuliume.portal.service.HairdressingService;
+import com.liuliume.portal.service.HairdressingTimeService;
 import com.liuliume.portal.service.OrdersService;
 import com.liuliume.portal.service.RoomService;
 
@@ -52,6 +53,8 @@ public class OrdersServiceImpl implements OrdersService {
 	private HairdressingService hairdressingService;
 	@Autowired
 	private AddressService addressService;
+	@Autowired
+	private HairdressingTimeService hairdressingTimeService;
 
 	@Override
 	public List<Orders> list(Seed<Orders> seed) throws Exception {
@@ -394,9 +397,13 @@ public class OrdersServiceImpl implements OrdersService {
 				throw new IllegalArgumentException("详细地址不能为空");
 			}
 		}
-//		if (orders.getServiceBegin() == null || orders.getServiceBegin() <= 0) {
-//			throw new IllegalArgumentException("服务时间段不能为空");
-//		}
+		if (orders.getServiceBegin() == null || orders.getServiceBegin() <= 0) {
+			throw new IllegalArgumentException("服务时间段不能为空");
+		}
+		//下单判断服务人员是否可用
+		if(!hairdressingTimeService.isServiceTimeValid(orders.getStartDate(), orders.getServiceType())){
+			throw new IllegalArgumentException("该服务时间服务人员已满,请您重新选择");
+		}
 		double cost = countService.hairDressingCountMoney(
 				orders.getAnimalsId(), orders.getHairdressId());
 		orders.setCost(cost);

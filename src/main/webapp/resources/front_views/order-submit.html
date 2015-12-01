@@ -157,7 +157,7 @@
             data:order_param,
             success:function(result){
                 if(result.success){
-                    money = result.data;
+                    money = result.data.toFixed(2);
                 }else{
                     $("#div_text").text(result.detail);
                     $("#alert").show();
