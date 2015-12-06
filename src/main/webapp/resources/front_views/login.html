@@ -27,6 +27,7 @@
 
         var requestParam = GetRequest();
         var ru = requestParam.ru;
+        var ru_index = requestParam.ru_index;
 //        if(ru==null || ru==''){
 //            ru="index.html";
 //        }
@@ -69,14 +70,23 @@
                         if(obj.data){
                             //验证短信成功；
 //                            alert(obj.detail);
+                            console.info(ru);
+                            console.info(ru_index);
                             $("#div_text").text(obj.detail)
                             $(".ui-dialog").show();
-//                            console.info(ru);
+//
 //                            window.location.href=ru;
                             $("#button_confirm").unbind("click");
                             $("#button_confirm").one("click",function(){
                                 if(ru!=null) {
-                                    window.location.href = ru;
+                                    if(ru_index!=null){
+                                        var tmp = ru + "?ru_index=" + ru_index;
+                                        console.info(tmp)
+                                        window.location.href = tmp;
+                                    } else{
+                                        console.info("bbb")
+                                        window.location.href = ru;
+                                    }
                                 } else {
                                     window.history.go(-1);
                                 }

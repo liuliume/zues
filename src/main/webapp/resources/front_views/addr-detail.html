@@ -38,6 +38,7 @@
 
         var requestParam = GetRequest();
         ru = requestParam.ru;
+        ru_index = requestParam.ru_index;
 
         //获取省份
         $.ajax({
@@ -77,7 +78,7 @@
                             $(".ui-dialog").show();
                             $("#button_confirm").unbind("click");
                             $("#button_confirm").one("click",function(){
-                                window.location.href="login.html?ru=addr-detail.html?ru_index="+ru;
+                                window.location.href="login.html?ru=addr-detail.html&ru_index="+ru;
                             });
                         }
                     }
@@ -216,7 +217,10 @@
                         $(".ui-dialog").show();
                         $("#button_confirm").unbind("click");
                         $("#button_confirm").one("click",function(){
-                            if(ru!=null || ru!=""){
+                            if(ru_index!=null && ru_index!=""){
+                                window.location.href = ru_index;
+                            }else if(ru!=null && ru!=""){
+                                console.info(ru);
                                 window.location.href = ru;
                             }else{
                                 window.history.go(-1);
