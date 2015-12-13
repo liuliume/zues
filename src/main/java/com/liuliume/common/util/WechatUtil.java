@@ -36,7 +36,7 @@ import net.sf.json.JSONObject;
 public class WechatUtil {
 	
 	@Autowired
-	private static RedisUtils utils;
+	public static RedisUtils utils;
 
 	private static JSONObject _getAccessToken() throws Exception {
 
