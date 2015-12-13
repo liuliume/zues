@@ -37,8 +37,8 @@ public class SmsServiceImpl implements SmsService {
         for (int i = 0; i < 4 ; i++){
             sb.append(new Random().nextInt(9));
         }
-//        Map<String,Object> result = sendMsg(mobile,sb.toString());
-        Map<String,Object> result = new HashMap<String,Object>();
+        Map<String,Object> result = sendMsg(mobile,sb.toString());
+//        Map<String,Object> result = new HashMap<String,Object>();
         result.put("statusCode","000000");
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("code",sb.toString());
