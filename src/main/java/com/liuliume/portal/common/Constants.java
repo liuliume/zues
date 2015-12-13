@@ -33,8 +33,12 @@ public class Constants {
     //内存缓存时间
     public static final int CACHE_REFRESH_INTERVAL = 5;
     
-    public static final String APP_ID = "wx2d60b47537b993fa";
-    public static final String APP_SECRET="1e7dc4d6eaa531dc1e38c0543a66aa44";
+//    public static final String APP_ID = "wx2d60b47537b993fa";
+//    public static final String APP_SECRET="1e7dc4d6eaa531dc1e38c0543a66aa44";
+    
+  public static final String APP_ID = "wx3382d54a842ce919";
+  public static final String APP_SECRET="2885c1ad046baf1c8e4ae7451fe1acae";
+
     
     public static final String Token = "qwerasdfzxcv";
 }
