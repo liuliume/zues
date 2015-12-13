@@ -39,10 +39,10 @@ public class SmsServiceImpl implements SmsService {
         }
         Map<String,Object> result = sendMsg(mobile,sb.toString());
 //        Map<String,Object> result = new HashMap<String,Object>();
-        result.put("statusCode","000000");
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("code",sb.toString());
-        result.put("data", map);
+//        result.put("statusCode","000000");
+//        Map<String,Object> map = new HashMap<String,Object>();
+//        map.put("code",sb.toString());
+//        result.put("data", map);
         if("000000".equals(result.get("statusCode"))){
             //正常返回输出data包体信息（map）
             HashMap<String,Object> data = (HashMap<String, Object>) result.get("data");
@@ -114,7 +114,7 @@ public class SmsServiceImpl implements SmsService {
         //*result = restAPI.sendTemplateSMS("13800000000","1" ,new String[]{"6532","5"});																		  *
         //*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入     *
         //*********************************************************************************************************************
-        result = restAPI.sendTemplateSMS("13811633448","1" ,new String[]{"6532","5"});
+        result = restAPI.sendTemplateSMS(mobile,"1" ,new String[]{"6532","5"});
 
         return result;
 
