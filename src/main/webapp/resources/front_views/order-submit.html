@@ -222,7 +222,21 @@
                     				       //支付成功或失败前台判断
                     		    	       if(res.err_msg=='get_brand_wcpay_request:ok'){
                     		    	    	   alert('恭喜您，支付成功!');
-                    		    	    	   window.location.href="order-confirm.html?ordersId=" + order_id;
+                    		    	    	   //更新订单支付状态
+                    		    	    	   $.ajax({
+                    		    	    		   url:'/orders/completeOrderPaymentState',
+                    		    	    		   type:'POST',
+                    		    	    		   data:order_id,
+                    		    	    		   success:function(result){
+                    		    	    			   if(result.success){
+                    		    	    				   window.location.href="order-confirm.html?ordersId=" + order_id;
+                    		    	    			   }else{
+                    		    	    				   alert('更新支付状态失败');
+                    		    	    			   }
+                    		    	    		   },failure:function(){
+                    		    	    			   alert('更新支付状态失败');
+                    		    	    		   }
+                    		    	    	   })
                     		    	       }else{
                     		    	    	   alert('支付失败');
                     		    	       }

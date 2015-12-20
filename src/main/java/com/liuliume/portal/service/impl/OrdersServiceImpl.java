@@ -409,4 +409,14 @@ public class OrdersServiceImpl implements OrdersService {
 		orders.setCost(cost);
         orders.setCreateTime(new Date());
 	}
+	
+	@Override
+	@Transactional
+	public void updateOrderPaymentState(String orders_id,int state) throws Exception{
+		Orders orders = ordersDao.findOrdersByOrderId(orders_id);
+		if(orders == null){
+			throw new IllegalArgumentException("获取订单出错");
+		}
+		ordersDao.updateOrderPaymentState(orders_id, state);
+	}
 }

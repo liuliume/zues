@@ -169,6 +169,10 @@
       where order_type=1 and status!=-3 and status!=99
       and start_date <![CDATA[<=]]> #{endDate} and end_date <![CDATA[>=]]> #{endDate}
     </select>
+    
+    <update id="updateOrderPaymentState">
+    	update orders set payment_status = #{state},last_modified=now() where order_id=#{orders_id}
+    </update>
 
 	<!-- <insert id="insert" parameterType="com.liuliume.portal.entity.Orders" 
 		> insert into orders (order_id, account_id, order_type, order_type_id, animals_id, 

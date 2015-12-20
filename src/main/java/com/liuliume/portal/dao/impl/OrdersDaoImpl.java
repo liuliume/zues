@@ -55,4 +55,9 @@ public class OrdersDaoImpl implements OrdersDao{
         return startCount >= endCount ? startCount:endCount;
     }
 
+	@Override
+	public void updateOrderPaymentState(String orders_id, int state) {
+		ordersMapper.updateOrderPaymentState(orders_id, state);
+	}
+
 }

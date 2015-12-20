@@ -28,4 +28,6 @@ public interface OrdersDao {
 	public int countHairDressingOrders(Date serviceDate,String startTime,String endTime);
 
     public int countRoomOrders(String startTime,String endTime);
+    
+    public void updateOrderPaymentState(String orders_id,int state);
 }

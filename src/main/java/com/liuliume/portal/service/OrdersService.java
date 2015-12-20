@@ -24,4 +24,6 @@ public interface OrdersService {
 	public Orders create(Orders orders) throws Exception;
 
     public Orders getMoney(Orders orders) throws Exception;
+    
+    public void updateOrderPaymentState(String orders_id,int state) throws Exception;
 }
