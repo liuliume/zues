@@ -9,6 +9,7 @@ import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Random;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLException;
@@ -82,40 +83,6 @@ public class WechatUtil {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-//		URL url = new URL(accessTokenUrl);
-//		HttpURLConnection httpURLConnection = (HttpURLConnection) url
-//				.openConnection();
-//		httpURLConnection.setRequestMethod("GET");
-//		httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//		httpURLConnection.setDoOutput(true);
-//		httpURLConnection.setDoInput(true);
-//		
-//		httpURLConnection.connect();
-//		InputStream is = httpURLConnection.getInputStream();
-//		InputStreamReader isr = new InputStreamReader(is, "utf-8");
-//		BufferedReader bufferedReader = new BufferedReader(isr);
-//		
-//		String str="";
-//		StringBuffer buffer=new StringBuffer();
-//		while ((str = bufferedReader.readLine()) != null) {
-//			buffer.append(str);
-//		}
-//		bufferedReader.close();
-//		isr.close();
-//		// 释放资源
-//		is.close();
-//		is = null;
-//		httpURLConnection.disconnect();
-//		
-//		JSONObject jsonObject = JSONObject.fromObject(buffer.toString());
-//		
-//		if(jsonObject!=null){
-//			accessToken = jsonObject.getString("access_token");
-//			Integer expires_in = jsonObject.getInt("expires_in");
-//			utils.setWithinSeconds("access_token", accessToken, expires_in);
-//			System.out.println(accessToken);
-//			System.out.println(expires_in);
-//		}
 		return null;
 	}
 	
@@ -128,7 +95,12 @@ public class WechatUtil {
 		return access_token;
 	}
 	
-	private static CloseableHttpClient createSSLInsecureClient()  
+	public static String getNonceStr() {
+		String nonceString=MD5Util.MD5(String.valueOf(new Random().nextInt(10000)));
+		return nonceString;
+	}
+	
+	public static CloseableHttpClient createSSLInsecureClient()  
             throws GeneralSecurityException {  
         try {  
             SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(  
