@@ -67,11 +67,13 @@
                 success : function(result) {
                     var obj = eval(result);
                     if(obj.success){
-                        if(obj.data){
+                        if(obj.data.flag){
                             //验证短信成功；
 //                            alert(obj.detail);
                             console.info(ru);
                             console.info(ru_index);
+                            document.cookie = "mobile="+obj.data.mobile+";path=/"
+                            document.cookie = "sgid="+obj.data.sgid+";path=/"
                             $("#div_text").text(obj.detail)
                             $(".ui-dialog").show();
 //

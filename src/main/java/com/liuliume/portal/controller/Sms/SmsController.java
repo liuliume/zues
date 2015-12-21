@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -143,13 +144,18 @@ public class SmsController {
             boolean flag = smsService.verifyMsgCode(mobile,code);
 //            boolean flag = true;
             if(flag){
-                jData.setData(flag);
+//                jData.setData(flag);
                 jData.setCode(200);
                 jData.setSuccess(true);
                 jData.setDetail("验证成功");
                 String sgid = MD5Util.MD5WithSalt(mobile);
                 ServletUtil.setCookie(request,response,"sgid",sgid,6 * 30 * 24 * 60 * 60);
                 ServletUtil.setCookie(request,response,"mobile",mobile,6 * 30 * 24 * 60 * 60);
+                Map<String,Object> map = new HashMap<String, Object>();
+                map.put("flag",flag);
+                map.put("sgid",sgid);
+                map.put("mobile",mobile);
+                jData.setData(map);
             } else {
                 jData.setData(flag);
                 jData.setCode(200);
