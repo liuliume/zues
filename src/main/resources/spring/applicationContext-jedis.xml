@@ -18,7 +18,7 @@
          <!--<property name="port" value="6359"/>-->
         <!--  <property name="hostName" value="10.146.24.45"/>
          <property name="port" value="6359"/> -->
-        <property name="hostName" value="localhost"/>
+        <property name="hostName" value="182.254.132.53"/>
         <property name="port" value="6379"/>
         <constructor-arg index="0" ref="cachePoolConfig"/>
     </bean>
