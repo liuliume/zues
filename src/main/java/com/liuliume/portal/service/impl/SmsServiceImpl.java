@@ -115,7 +115,7 @@ public class SmsServiceImpl implements SmsService {
         //*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入     *
         //*********************************************************************************************************************
 //        result = restAPI.sendTemplateSMS(mobile,"1" ,new String[]{"6532","5"});
-        result = restAPI.sendTemplateSMS(mobile,"55747" ,new String[]{"6532"});
+        result = restAPI.sendTemplateSMS(mobile,"55747" ,new String[]{verifyNo});
 
         return result;
 
