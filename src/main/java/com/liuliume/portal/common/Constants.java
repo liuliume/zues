@@ -46,11 +46,11 @@ public class Constants {
 	/**
 	 * 微信商户ID,身份标识
 	 */
-	public static final String MCH_ID="";
+	public static final String MCH_ID="1289131601";
 	/**
 	 * 商户支付密钥Key。审核通过后，在微信发送的邮件中查看
 	 */
-	public static final String PARTNER_KEY ="";
+	public static final String PARTNER_KEY ="1q2w3e4r5t6y7u8i9o0pazsxdcfvgbhn";
 	/**
 	 * 异步回调地址
 	 */

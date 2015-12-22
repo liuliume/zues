@@ -13,6 +13,7 @@
 .ico-time span{display:inline-block; position:absolute; left:125px; top:0px}
 </style>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
     $(function(){
 
@@ -217,31 +218,7 @@
                     			success:function(result){
                     				console.log(result);
                     				$(".choose").click(function(){
-                    				    WeixinJSBridge.invoke('getBrandWCPayRequest',{result.data},
-                    				    function(res){
-                    				       //支付成功或失败前台判断
-                    		    	       if(res.err_msg=='get_brand_wcpay_request:ok'){
-                    		    	    	   alert('恭喜您，支付成功!');
-                    		    	    	   //更新订单支付状态
-                    		    	    	   $.ajax({
-                    		    	    		   url:'/orders/completeOrderPaymentState',
-                    		    	    		   type:'POST',
-                    		    	    		   data:order_id,
-                    		    	    		   success:function(result){
-                    		    	    			   if(result.success){
-                    		    	    				   window.location.href="order-confirm.html?ordersId=" + order_id;
-                    		    	    			   }else{
-                    		    	    				   alert('更新支付状态失败');
-                    		    	    			   }
-                    		    	    		   },failure:function(){
-                    		    	    			   alert('更新支付状态失败');
-                    		    	    		   }
-                    		    	    	   })
-                    		    	       }else{
-                    		    	    	   alert('支付失败');
-                    		    	       }
-                    				     });
-                    			    
+                    				    weixinPay(result.data);
                     			    });
                     				
                     			},failure:function(){
@@ -280,7 +257,57 @@
             var days=Math.floor((endtime_ms-begintime_ms)/(24*3600*1000));
             return days;
         }
+        
+        function weixinPay(data){
+        	if(typeof WeixinJSBridge == "undefined"){
+        		if(document.addEventListener){
+        			document.addEventListener('WeixinJSBridgeReady', function(){
+        				jsApiCall(data);
+        			}, false);
+        		}else if (document.attachEvent){
+			        document.attachEvent('WeixinJSBridgeReady', function(){
+			        	jsApiCall(data);
+			        }); 
+			        document.attachEvent('onWeixinJSBridgeReady', function(){
+			        	jsApiCall(data);
+			        });
+			    }
+        	}else{
+        		jsApiCall(data);
+        	}
+        }
 
+      //调用微信JS api 支付
+        function jsApiCall(data){
+        	WeixinJSBridge.invoke(
+    				'getBrandWCPayRequest',data,
+    				function(res){
+    					WeixinJSBridge.log(res.err_msg);
+    					//alert(res.err_code+res.err_desc+res.err_msg);
+    					//支付成功或失败前台判断
+ 		    	       if(res.err_msg=='get_brand_wcpay_request:ok'){
+ 		    	    	   alert('恭喜您，支付成功!');
+ 		    	    	   //更新订单支付状态
+ 		    	    	   $.ajax({
+ 		    	    		   url:'/orders/completeOrderPaymentState',
+ 		    	    		   type:'POST',
+ 		    	    		   data:order_id,
+ 		    	    		   success:function(result){
+ 		    	    			   if(result.success){
+ 		    	    				   window.location.href="order-confirm.html?ordersId=" + order_id;
+ 		    	    			   }else{
+ 		    	    				   alert('更新支付状态失败');
+ 		    	    			   }
+ 		    	    		   },failure:function(){
+ 		    	    			   alert('更新支付状态失败');
+ 		    	    		   }
+ 		    	    	   })
+ 		    	       }else{
+ 		    	    	   alert('支付失败');
+ 		    	       }
+    				}
+    			);
+        }
     })
 </script>
 </head>
