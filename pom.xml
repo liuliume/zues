@@ -521,6 +521,42 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+				<plugin>
+				<groupId>com.pyx4me</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<obfuscate>true</obfuscate>
+					<proguardInclude>${basedir}/proguard.conf</proguardInclude>
+					<!-- 添加依赖，这里你可以按你的需要修改 -->
+					<libs>						 
+						<lib>${java.home}/lib/rt.jar</lib>
+					</libs>
+					<addMavenDescriptor>false</addMavenDescriptor>
+					<injar>${project.build.finalName}.war</injar>
+					<outjar>${project.build.finalName}-pg.war</outjar>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+				</configuration>
+				<dependencies> 
+					<!-- 使用4.8版本来混淆 -->
+					<dependency>
+						<groupId>net.sf.proguard</groupId>
+						<artifactId>proguard</artifactId>
+						<version>5.2</version>
+						<systemPath>${basedir}/src/main/webapp/resources/proguard.jar</systemPath>
+						<scope>system</scope>
+					</dependency>
+				</dependencies>
+				
+			</plugin> 
 		</plugins>
 	</build>
 

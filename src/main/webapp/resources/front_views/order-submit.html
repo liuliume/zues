@@ -214,7 +214,7 @@
                     			url:'/wechat/wxOauth',
                     			type:'GET',
                     			async:false,
-                    			data:order_id,
+                    			data:{"order_id":order_id},
                     			success:function(result){
                     				console.log(result);
                     				$(".choose").click(function(){

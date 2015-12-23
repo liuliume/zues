@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.liuliume.common.util.HttpUtil;
 import com.liuliume.common.util.MD5Util;
@@ -63,11 +64,11 @@ public class WechatController {
 	}
 	
 	@RequestMapping(value="wxOauth",method = {RequestMethod.GET,RequestMethod.POST})
-	public String wxOauth(String order_id){
+	public ModelAndView wxOauth(String order_id){
 		logger.info("Get Code begin.");
 		String oauth2Url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI"
 				+ "&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
-		String redirect_uri = "http://182.254.132.53:8080/wechat/wxPrepay";
+		String redirect_uri = "http://192.168.1.107:8888/wechat/wxPrepay";
 		//将Order_Id放在state中
 		oauth2Url = oauth2Url.replace("APPID", Constants.APP_ID)
 				.replace("REDIRECT_URI", redirect_uri)
@@ -76,7 +77,9 @@ public class WechatController {
 
 		System.out.println("GETCODE URL:" + oauth2Url);
 
-		return "redirect:" + oauth2Url;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:" + oauth2Url);
+		return mav;
 	}
 	
 	@RequestMapping(value="wxPrepay",method = {RequestMethod.GET,RequestMethod.POST})
