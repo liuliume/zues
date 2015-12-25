@@ -116,55 +116,75 @@
             })
         })
 
-        $("#code_button").click(function(){
-            var mobile = $("#phone").val();
-            var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-            if (mobile == null || mobile == "") {
+    $("#code_button").bind("click",cl);
+    })
+
+    var countdown=10;
+    var flag = true;
+    $("#code_button").bind("click",cl);
+    var cl = function(){
+	    if (countdown == 0) {
+		    $("#code_button").css("background","#ffd800").text("获取验证码");
+		    $("#code_button").bind("click",cl);
+		    countdown = 10;
+		    flag = true;
+	    }else{
+	        console.info(flag);
+		    if(flag){
+                var mobile = $("#phone").val();
+                var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+                if (mobile == null || mobile == "") {
 //                alert("请输入手机号！");
-                $("#div_text").text("请输入手机号!")
-                $(".ui-dialog").show();
-                return;
-            }
-            if (!reg.test(mobile)) {
+                    $("#div_text").text("请输入手机号!")
+                    $(".ui-dialog").show();
+                    return;
+                }
+                if (!reg.test(mobile)) {
 //                alert("请输入正确手机号！")
-                $("#div_text").text("请输入正确手机号！")
-                $(".ui-dialog").show();
-                return;
-            }
-            $.ajax({
-                url : "/sms/getMsgCode",
-                type : "GET",
-                async:false,
-                data : 'mobile=' + $("#phone").val(),
-                success : function(result) {
-                    var obj = eval(result);
-                    if(obj.success){
-                        if(obj.data){
-                            //发送短信成功；
+                    $("#div_text").text("请输入正确手机号！")
+                    $(".ui-dialog").show();
+                    return;
+                }
+                $.ajax({
+                    url : "/sms/getMsgCode",
+                    type : "GET",
+                    async:false,
+                    data : 'mobile=' + $("#phone").val(),
+                    success : function(result) {
+                        var obj = eval(result);
+                        if(obj.success){
+                            if(obj.data){
+                                //发送短信成功；
 //                            alert(obj.detail);
-                            $("#div_text").text(obj.detail)
-                            $(".ui-dialog").show();
+                                $("#div_text").text(obj.detail)
+                                $(".ui-dialog").show();
+                            } else {
+                                //发送短信失败
+//                              alert(obj.detail);
+                                $("#div_text").text(obj.detail)
+                                $(".ui-dialog").show();
+                            }
                         } else {
                             //发送短信失败
-//                            alert(obj.detail);
+//                          alert(obj.detail);
                             $("#div_text").text(obj.detail)
                             $(".ui-dialog").show();
                         }
-                    } else {
-                        //发送短信失败
-//                        alert(obj.detail);
-                        $("#div_text").text(obj.detail)
+                    },
+                    failure : function(result) {
+//                    alert("操作失败", result.detail);
+                        $("#div_text").text(result.detail)
                         $(".ui-dialog").show();
                     }
-                },
-                failure : function(result) {
-//                    alert("操作失败", result.detail);
-                    $("#div_text").text(result.detail)
-                    $(".ui-dialog").show();
-                }
-            });
-        })
-    })
+                });
+                flag = false;
+		    }
+		    $("#code_button").css("background","#ccc").text("倒计时" + countdown + "s");
+		    countdown--;
+		    $("#code_button").unbind("click",cl);
+		    setTimeout(cl,1000);
+	    }
+    }
 
 </script>
 
@@ -176,7 +196,7 @@
     <input class="phoneNum" id="phone" type="tel" placeholder="手机号">
     <div style="position:relative">
     	<input class="yzm" id="yzm" type="tel" placeholder="验证码">
-        <span id="code_button" class="get-code">获取验证码</span>
+        <span id="code_button" style="background:#ffd800" class="get-code">获取验证码</span>
     </div>
     <input type="submit" id="login" value="登 录">
 </div>
