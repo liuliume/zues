@@ -54,7 +54,7 @@ public class Constants {
 	/**
 	 * 异步回调地址
 	 */
-	public static final String NOTIFY_URL="http://127.0.0.1:8080/resources/front_views/payNotifyUrl.jsp";
+	public static final String NOTIFY_URL="http://www.liuliume.com/wechat/notify";
 	/**
 	 * 不弹出授权页面，仅仅能够获取用户的openId
 	 * 如果使用snsapi_info，会弹出一个授权页面,可以获取用户的所有信息

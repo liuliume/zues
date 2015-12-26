@@ -217,9 +217,10 @@
                     			data:{"order_id":order_id},
                     			success:function(result){
                     				console.log(result);
-                    				$(".choose").click(function(){
+                    				location.href=result;
+                    				/* $(".choose").click(function(){
                     				    weixinPay(result.data);
-                    			    });
+                    			    }); */
                     				
                     			},failure:function(){
                     				alert("微信支付失败")

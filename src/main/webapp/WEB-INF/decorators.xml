@@ -5,6 +5,7 @@
 		<pattern>/resources/*.*</pattern>
 		<pattern>/api/*.*</pattern>
 		<pattern>/login*</pattern>
+		<pattern>/wechat/*</pattern>
 	</excludes>
 	<decorator name="activity" page="activity-layout.jsp">
 		<!--<pattern>/account/*</pattern>-->

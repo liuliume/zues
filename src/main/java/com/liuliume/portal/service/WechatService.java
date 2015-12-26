@@ -17,5 +17,5 @@ public interface WechatService {
 
 	String getUserOpenId(String code) throws Exception;
 	
-	String prepay(HttpServletRequest request) throws Exception;
+	String prepay(HttpServletRequest request,String openId) throws Exception;
 }

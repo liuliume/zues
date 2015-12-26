@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -27,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.liuliume.common.util.HttpUtil;
+import com.liuliume.common.util.JSONUtil;
 import com.liuliume.common.util.MD5Util;
 import com.liuliume.common.util.StringUtil;
 import com.liuliume.common.util.WechatUtil;
@@ -84,29 +87,20 @@ public class WechatServiceImpl implements WechatService {
 		logger.info("Get Access token uri:{}", uri);
 
 		String data = HttpUtil.doGet(uri);
-		JSONObject jsonObject = JSONObject.fromObject(data);
-		return jsonObject.getString("openid");
+		logger.debug("debug_msg:getUserOpenId:{}",data);
+//		JSONObject jsonObject = JSONObject.fromObject(data);
+		Map<String, Object>	map = JSONUtil.fromJson(data, HashMap.class);
+		if(MapUtils.isNotEmpty(map) && map.get("openid")!=null){
+			return map.get("openid").toString();
+		}
+		return null;
 	}
 
 	@Override
-	public String prepay(HttpServletRequest request) throws Exception {
+	public String prepay(HttpServletRequest request,String openId) throws Exception {
 		// 使用TreeMap,插入时自动按照Key升序排序
-		Map<String, String> paraMap = new TreeMap<String, String>(
-				new Comparator<String>() {
-					@Override
-					public int compare(String o1, String o2) {
-						return o1.compareTo(o2);
-					}
-				});
-		String code = request.getParameter("code");
-		String openId = "";
-		if (StringUtils.isBlank(code)) {
-			openId = request.getParameter("openId");
-		} else {
-			//获取用户ID
-			openId = this.getUserOpenId(code);
-		}
-
+		Map<String, String> paraMap = new TreeMap<String, String>();
+		
 		String nonce_str = WechatUtil.getNonceStr();
 
 		String order_id = request.getParameter("state");
@@ -137,13 +131,13 @@ public class WechatServiceImpl implements WechatService {
 
 		// 统一下单 https://api.mch.weixin.qq.com/pay/unifiedorder
 		String url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-		String result = HttpUtil.doPost(url, StringUtil.createParam(paraMap));
+		String result = HttpUtil.doPost(url,XMLUtil.map2Xml(paraMap));
 		logger.info("result:{}", result);
 		// 预付商品id
 		String prepay_id = "";
 		if (result.indexOf("SUCCESS") != -1) {
-			Map<String, String> map = XMLUtil.getMapFromXML(result);
-			prepay_id = map.get("prepay_id");
+			Map<String, Object> map = XMLUtil.xml2Map(result);
+			prepay_id = map.get("prepay_id").toString();
 		}
 		return prepay_id;
 	}
