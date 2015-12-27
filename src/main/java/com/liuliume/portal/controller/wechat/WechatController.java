@@ -103,6 +103,8 @@ public class WechatController {
 
 		System.out.println("debug_msg:open_id:"+openId);
 		logger.debug("debug_msg:open_id:{}",openId);
+		//订单ID通过STATE传入
+		String order_id = request.getParameter("state");
 		
 		String prepay_id = wechatService.prepay(request,openId);
 		
@@ -123,6 +125,7 @@ public class WechatController {
 		logger.info(map.toString());
 		String result=JSONUtil.toJson(map);
 		ModelAndView mav = new ModelAndView("/wechat/pay");
+		mav.addObject("orderId",order_id);
 		mav.addObject("result", result);
 		return mav;
 	}
