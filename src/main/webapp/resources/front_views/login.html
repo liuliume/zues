@@ -72,8 +72,11 @@
 //                            alert(obj.detail);
                             console.info(ru);
                             console.info(ru_index);
-                            document.cookie = "mobile="+obj.data.mobile+";path=/"
-                            document.cookie = "sgid="+obj.data.sgid+";path=/"
+                            var Days = 30;
+                            var exp = new Date();
+                            exp.setTime(exp.getTime() + Days*24*60*60*1000);
+                            document.cookie = "mobile="+obj.data.mobile+";path=/;expires="+exp.toGMTString();
+                            document.cookie = "sgid="+obj.data.sgid+";path=/;expires="+exp.toGMTString();
                             $("#div_text").text(obj.detail)
                             $(".ui-dialog").show();
 //
@@ -119,14 +122,14 @@
     $("#code_button").bind("click",cl);
     })
 
-    var countdown=10;
+    var countdown=120;
     var flag = true;
     $("#code_button").bind("click",cl);
     var cl = function(){
 	    if (countdown == 0) {
 		    $("#code_button").css("background","#ffd800").text("获取验证码");
 		    $("#code_button").bind("click",cl);
-		    countdown = 10;
+		    countdown = 120;
 		    flag = true;
 	    }else{
 	        console.info(flag);
