@@ -1,6 +1,9 @@
 package com.liuliume.common.util;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -72,8 +75,11 @@ public class MD5Util {
     public final static String MD5WithSalt(String s) {
         return MD5WithSalt(s,"564213879");
     }
-    public static void main(String[] args) {
-        System.out.println(MD5Util.MD5("password"));
+    public static void main(String[] args) throws UnsupportedEncodingException {
+    	String s=     "appid=wx3382d54a842ce919&body=宠物训练&mch_id=1289131601&nonce_str=CAA89215E67B35D504B99A0B22F1C56D&notify_url=http://www.liuliume.com/wechat/notify&openid=okj2mwAT2QpIChRdt4KEoRsoEVb4&out_trade_no=2jGdhIK41451479840156eADc&spbill_create_ip=127.0.0.1&total_fee=1&trade_type=JSAPI&key=1q2w3e4r5t6y7u8i9o0pazsxdcfvgbhn";
+    	System.out.println(DigestUtils.md5Hex(s));
+    	System.out.println(s.equals(new String(s.getBytes("utf-8"),"utf-8")));
+        System.out.println(MD5Util.MD5(s));
         System.out.print(MD5Util.MD5WithSalt("passport","123"));
     }
 }

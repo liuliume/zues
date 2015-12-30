@@ -1,31 +1,18 @@
 package com.liuliume.portal.service.impl;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.MessageDigest;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.config.RequestConfig.Builder;
-import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.liuliume.common.util.HttpUtil;
@@ -35,13 +22,21 @@ import com.liuliume.common.util.StringUtil;
 import com.liuliume.common.util.WechatUtil;
 import com.liuliume.common.util.XMLUtil;
 import com.liuliume.portal.common.Constants;
+import com.liuliume.portal.entity.Orders;
 import com.liuliume.portal.model.wechat.WechatCheckModel;
+import com.liuliume.portal.service.OrdersService;
 import com.liuliume.portal.service.WechatService;
 
 @Service
 public class WechatServiceImpl implements WechatService {
 
 	private Logger logger = LoggerFactory.getLogger(WechatServiceImpl.class);
+	
+	@Autowired
+	private OrdersService ordersService;
+	
+	@Value("${isTest}")
+	private boolean isTest;
 
 	@Override
 	public String validate(WechatCheckModel model) throws Exception {
@@ -61,14 +56,10 @@ public class WechatServiceImpl implements WechatService {
 		logger.info("nonce:{}", nonce);
 
 		String[] arr = { token, timestamp.toString(), nonce.toString() };
-		logger.info("arr:{}", arr);
 		Arrays.sort(arr);
 		String str = arr[0] + arr[1] + arr[2];
 		logger.info("after sort:{}", str);
 
-		// MessageDigest digest = MessageDigest.getInstance("SHA1");
-		// digest.update(str.getBytes());
-		// String sha = getFormattedText(digest.digest());
 		String sha = DigestUtils.sha1Hex(str);
 
 		logger.info(sha);
@@ -79,6 +70,7 @@ public class WechatServiceImpl implements WechatService {
 		return "error";
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String getUserOpenId(String code) throws Exception {
 		String uri = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
@@ -104,20 +96,20 @@ public class WechatServiceImpl implements WechatService {
 		String nonce_str = WechatUtil.getNonceStr();
 
 		String order_id = request.getParameter("state");
-		String format = "yyyyMMssmm";
-		String time = new SimpleDateFormat(format).format(new Date());
-		String suffix = StringUtil.genRandomString(4);
-		String out_trade_no = time + suffix;// 测试,订单号暂时这样设置
-		if(StringUtils.isNotBlank(order_id)){
-			out_trade_no = order_id;
+		Orders orders = ordersService.findOrdersByOrderId(order_id);
+		String order_type = orders.getOrderTypeEnum().getDesc();
+//		order_type = new String(order_type.getBytes(),"GBK");
+		String total_fee = "1";
+		if(!isTest){
+			total_fee = String.valueOf((int)(orders.getCost()*100));
 		}
 
 		paraMap.put("appid", Constants.APP_ID);
 		paraMap.put("mch_id", Constants.MCH_ID);
 		paraMap.put("nonce_str", nonce_str);
-		paraMap.put("body", "测试");
-		paraMap.put("out_trade_no", out_trade_no);
-		paraMap.put("total_fee", "1");
+		paraMap.put("body", order_type);
+		paraMap.put("out_trade_no", order_id);
+		paraMap.put("total_fee", total_fee);
 		paraMap.put("spbill_create_ip", request.getRemoteAddr());
 		paraMap.put("notify_url", Constants.NOTIFY_URL);
 		paraMap.put("trade_type", "JSAPI");
@@ -125,8 +117,10 @@ public class WechatServiceImpl implements WechatService {
 
 		String para = StringUtil.createParam(paraMap);
 		para += "&key=" + Constants.PARTNER_KEY;
+		para = new String(para.getBytes("utf-8"),"utf-8");
 		logger.info("param:{}", para);
-		String sign = MD5Util.MD5(para).toUpperCase();
+//		String sign = MD5Util.MD5(para).toUpperCase();
+		String sign = DigestUtils.md5Hex(para).toUpperCase();
 		paraMap.put("sign", sign);
 
 		// 统一下单 https://api.mch.weixin.qq.com/pay/unifiedorder

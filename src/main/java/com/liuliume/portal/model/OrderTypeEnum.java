@@ -8,9 +8,9 @@ package com.liuliume.portal.model;
 public enum OrderTypeEnum {
 	
 	ALL(-1,"ALL"),
-	FOSTER(1,"寄养"),
-	TRAINING(2,"训练"),
-	BEAUTY(3,"美容");
+	FOSTER(1,"宠物寄养"),
+	TRAINING(2,"宠物训练"),
+	BEAUTY(3,"宠物美容");
 	
 	private int id;
 	private String desc;

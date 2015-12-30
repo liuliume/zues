@@ -1,11 +1,6 @@
 package com.liuliume.portal.controller.wechat;
 
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,24 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.liuliume.common.util.HttpUtil;
 import com.liuliume.common.util.JSONUtil;
 import com.liuliume.common.util.MD5Util;
 import com.liuliume.common.util.StringUtil;
 import com.liuliume.common.util.WechatUtil;
 import com.liuliume.portal.common.Constants;
-import com.liuliume.portal.common.JData;
 import com.liuliume.portal.model.wechat.WechatCheckModel;
 import com.liuliume.portal.service.WechatService;
 

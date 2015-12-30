@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.collections.MapUtils;
 import org.dom4j.DocumentHelper;
@@ -74,17 +75,24 @@ public class XMLUtil {
 		}
 		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
+		Pattern pattern =Pattern.compile("[0-9]*");
 		for (Entry<String, String> entry : map.entrySet()) {
 			String key = entry.getKey();
 			String value = entry.getValue();
 			sb.append("<" + key + ">");
-			sb.append(value);
+			if(pattern.matcher(value).matches()){
+				sb.append(value);
+			}
+			else {
+				sb.append("<![CDATA["+value+"]]>");
+			}
 			sb.append("</" + key + ">");
 		}
 		sb.append("</xml>");
 		try {
-			return new String(sb.toString().getBytes(), "ISO8859-1");
-		} catch (UnsupportedEncodingException e) {
+//			return new String(sb.toString().getBytes(), "ISO-8859-1");
+			return sb.toString();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -96,5 +104,10 @@ public class XMLUtil {
 		// Map<String, String> map = getMapFromXML(string);
 		Map<String, Object> map = xml2Map(string);
 		System.out.println(map);
+		
+		System.out.println("-----------");
+		String s = "宠物训练";
+		String s1 = new String(s.getBytes("ISO_8859-1"),"utf-8");
+		System.out.println(s1);
 	}
 }
