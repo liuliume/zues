@@ -22,6 +22,15 @@
 			type:"GET",
 			success:function(result){
 				if(result.success){
+					if(result.data == null || result.data.length==0){
+						var detail = $("<a class='order-list'>");
+						var obj = $("<div />");
+						obj.addClass("list-detail");
+						obj.html("您暂时没有订单无数据");
+						obj.appendTo(detail);
+						detail.appendTo($("#order_list"));
+						return;
+					}
 					$.each(result.data,function(index,item){
 						// alert(item);
 						var detail = $("<a class='order-list'>");
