@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	${result }
+	<%-- ${result } --%>
 	
 	<script type="text/javascript">
 		var orderId = "${orderId}";

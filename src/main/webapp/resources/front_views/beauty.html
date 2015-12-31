@@ -46,15 +46,26 @@
         	$("#animalName").text(animalName);
         }
         
+        var serv_type=requestParam.service_type;
+        if(serv_type!=null && typeof(serv_type)!='undefined'){
+        	$("#serv_type_"+serv_type).attr("checked",true);
+        }
+        
+        var addr = requestParam.addr;
+        if(addr!=null && typeof(addr)!='undefined'){
+        	$("#addr").text(addr);
+        }
+        
         $.ajax({
         	url:"/hairdressing/listAllHairDressing",
         	type:'GET',
+        	async: false,
         	success:function(result){
         		if(result.success){
         			$(result.data).each(function(index,item){
         				console.info(item);
                 		//$("#div_room").append("<input name='serve-item' type='radio' value='1'>宠物洗澡");
-        				$("#service_type").append("<span><input name='serve-item' type='radio' value='"+item.id+"'>"+item.hairdressingName+"</span>");
+        				$("#service_type").append("<span><input name='serve-item' type='radio' id='serv_item_"+item.id+"' value='"+item.id+"'>"+item.hairdressingName+"</span>");
                 	});
         		}else{
         			$("#div_text").text("系统错误,请重试");
@@ -69,6 +80,11 @@
         		
         	}
         })
+        
+        var hairdress_id = requestParam.hairdress_id;
+        if(hairdress_id!=null && typeof(hairdress_id)!='undefined'){
+        	$("#serv_item_"+hairdress_id).attr('checked',true);
+        }
 
 
         $("#detail_btn").click(function(){
@@ -170,14 +186,26 @@
         })
 
         $("#pet_btn").click(function(){
-            window.location.href = "pets-list.html?ru=beauty.html&startDate="+startDate;
+        	var hairdress_id=$("input:radio[name='serve-item']:checked").val();
+        	var service_type=$("input:radio[name='serve-method']:checked").val();
+            window.location.href = "pets-list.html?ru=beauty.html&startDate="+startDate+"&hairdress_id="+hairdress_id+"&service_type="+service_type;
         })
 
         $("#address_btn").click(function(){
             if(startDate==null){
                 startDate = requestParam.startDate;
             }
-            window.location.href = "addr-detail.html?ru=beauty.html&startDate="+startDate+"&animalsId="+animalsId+"&ru=beauty.html";
+            var service_type = $("input:radio[name='serve-method']:checked").val();
+            var hairdress_id = $("input:radio[name='serve-item']:checked").val();
+            animalName=escape(animalName);
+            url = "addr-detail.html?ru=beauty.html&startDate="+startDate+"&animalsId="+animalsId+"&animalName="+animalName+"&ru=beauty.html";
+            if(service_type!= null &&typeof(service_type)!='undefined'){
+            	url+="&service_type="+service_type;
+            }
+            if(hairdress_id!=null && typeof(hairdress_id)!='undefined'){
+            	url+="&hairdress_id="+hairdress_id;
+            }
+            window.location.href=url;
         })
 
 
@@ -282,11 +310,11 @@
     <!-- <a class="list beauty-serve"><span><input name="serve-item" type="radio" value="1">宠物洗澡</span><span><input name="serve-item" type="radio" value="2">宠物美容</span></a> -->
     <a class="list beauty-serve" id="service_type"></a> 
     
-    <a class="list info-addr" style="border-top:none;background-size:auto 40%" id="address_btn">选择地址</a>
+    <a class="list info-addr" style="border-top:none;background-size:auto 40%" id="address_btn">服务地址&nbsp;&nbsp;&nbsp;<span id="addr"></span></a>
     
     <!--服务方式-->
     <a class="list foster-room">服务方式<span id="detail_btn">服务方式&nbsp;&nbsp;</span></a>
-    <a class="list beauty-serve"><span><input name="serve-method" type="radio" value="0">上门服务</span><span><input name="serve-method" type="radio" value="1">到店服务</span></a>
+    <a class="list beauty-serve"><span><input name="serve-method" type="radio" id="serv_type_0" value="0">上门服务</span><span><input name="serve-method" id="serv_type_1" type="radio" value="1">到店服务</span></a>
     
     
     <a class="next" href="#" id="next" style="margin-top:20px">下一步</a>
@@ -305,7 +333,7 @@
 </div>
 
 <div class="ui-dialog" style="display:none" id="time">
-    <div class="t_title"><!--<span id="cancle_time">取消</span>-->服务时间<span style="float:right" id="confirm_time">确定</span></div>
+    <div class="t_title"><div id="cancle_time" style="width:5%;float:left">返回</div>服务时间<div style="width:5%;float:right;" id="confirm_time">确定</div></div>
     <div class="ts_content">
         <div class="t_1">
             <span class="month">9月</span>

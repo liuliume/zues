@@ -179,6 +179,7 @@ html,body {height: 100%;overflow: hidden}
         var ru = requestParam.ru;
         var startDate = requestParam.startDate;
         var endDate = requestParam.endDate;
+        var course_id = requestParam.course_id;
 
         mui.init();
         mui.ready(function() {
@@ -195,7 +196,16 @@ html,body {height: 100%;overflow: hidden}
                 if (tagClass && tagClass.indexOf("mui-table-view-cell") != -1) {
                     var selectPet = escape(e.target.innerHTML);
                     var selectPetId = e.target.value;
-                    window.location.href=ru+"?animalsId="+selectPetId+"&animalName="+selectPet+"&startDate="+startDate+"&endDate="+endDate;
+                    //window.location.href=ru+"?animalsId="+selectPetId+"&animalName="+selectPet+"&startDate="+startDate+"&endDate="+endDate+"&course_id="+course_id;
+                    var url =ru+"?animalsId="+selectPetId+"&animalName="+selectPet;
+                    if(requestParam!=null && typeof(requestParam)!='undefined'){
+                    	for(var prop in requestParam){
+                    		if(requestParam.hasOwnProperty(prop)){
+                    			url +="&"+prop+"="+requestParam[prop];
+                    		}
+                    	}
+                    }
+                    window.location.href=url;
 //                    alert("选择的宠物=" + selectPet);
 //                    alert("选择的宠物=" + selectPetId);
 //                    alert(ru);

@@ -18,8 +18,6 @@
 <script type="text/javascript">
     $(function(){
 
-
-
         function GetRequest() {
             var url = location.search; //获取url中"?"符后的字串
             var theRequest = new Object();
@@ -227,6 +225,11 @@
 
         function calDays(){
             if(startDate!=null && endDate!=null){
+            	if(startDate>endDate){
+            		$("#div_text").text("离开时间必须大于入住时间!");
+                    $("#alert").show();
+                    return;
+            	}
                 var tmp_start = startDate.split(" ")[0];
                 var tmp_end = endDate.split(" ")[0];
                 var tmp_time = endDate.split(" ")[1].split(":")[0];
@@ -369,7 +372,7 @@
 
 <!--时间选取-->
 <div class="ui-dialog" style="display:none" id="time">
-    <div class="t_title"><!--<span id="cancle_time">取消</span>-->服务时间<span style="float:right" id="confirm_time">确定</span></div>
+    <div class="t_title"><div id="cancle_time" style="width:5%;float:left">返回</div>服务时间<div style="width:5%;float:right;" id="confirm_time">确定</div></div>
     <div class="ts_content">
         <div class="t_1">
             <span class="month">9月</span>
@@ -425,7 +428,7 @@
 </div>
 
 <div class="ui-dialog" style="display:none" id="time1">
-    <div class="t_title"><!--<span id="cancle_time1">取消</span>-->服务时间<span style="float:right" id="confirm_time1">确定</span></div>
+    <div class="t_title"><div id="cancle_time1" style="width:5%;float:left">返回</div>离开时间<div style="width:5%;float:right" id="confirm_time1">确定</div></div>
     <div class="ts_content">
         <div class="t_1">
             <span class="month">9月</span>

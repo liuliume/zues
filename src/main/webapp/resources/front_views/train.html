@@ -45,7 +45,7 @@
         	$("#start_time").text(serviceDate);
         	startDate = serviceDate;
         }
-
+        
         $("#detail_btn").click(function(){
             $("#detail").show();
         })
@@ -138,7 +138,11 @@
         })
 
         $("#pet_btn").click(function(){
-            window.location.href = "pets-list.html?ru=train.html&startDate="+startDate;
+        	var val=$("input:radio[name='serve-method']:checked").val();
+        	if(val == null)
+            	window.location.href = "pets-list.html?ru=train.html&startDate="+startDate;
+        	else
+        		window.location.href = "pets-list.html?ru=train.html&startDate="+startDate+"&course_id="+val;
         })
 
         $("#confirm_time").click(function(){
@@ -163,28 +167,28 @@
         $("#next").click(function(){
 
             var val=$("input:radio[name='serve-method']:checked").val();
+            var complete = true;//标记信息是否都填写完成
             if(val==null){
-                $("#div_text").text("请选择训练课程!");
-                $("#alert").show();
-                return;
+            	complete = false;
             }
             var course_id = $("input:radio[name='serve-method']:checked").val();
             var animalsId = requestParam.animalsId;
             if(animalsId==null){
-                $("#div_text").text("请选择宠物品种!");
-                $("#alert").show();
-                return;
+            	complete = false;
             }
 
             if(startDate==null || startDate=="" || startDate =='undefined'){
                 if(requestParam.startDate==null || requestParam.startDate=="" || requestParam.startDate== 'undefined'){
-                    $("#div_text").text("请选择服务时间!");
-                    $("#alert").show();
-                    return;
+                	complete = false;
                 } else {
                     startDate = requestParam.startDate;
                 }
 
+            }
+            if(!complete){
+            	 $("#div_text").text("请填写相关信息!");
+                 $("#alert").show();
+                 return;
             }
             window.location.href = "order-submit.html?order_type=2&animalsId="+animalsId+"&course_id="+course_id+"&startDate="+startDate
 
@@ -194,16 +198,22 @@
         $.ajax({
             url:'/course/listForJson',
             type:'GET',
+            async: false,
             success:function(result){
                 $.each(result,function(index,item){
                     console.info(item)
-                    $("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' value='"+item.id+"'>"+item.courseName+"</span></a>");
+                    $("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' id='course_"+item.id+"' value='"+item.id+"'>"+item.courseName+"</span></a>");
                 })
             },failure:function(){
 
             }
 
         });
+        
+        var course_id = requestParam.course_id;
+        if(course_id != null &&course_id!='undefined' && typeof(course_id)!='undefined'){
+        	$("#course_"+course_id).attr('checked','checked');
+        }
 
     })
 </script>
@@ -244,7 +254,7 @@
 </div>
 
 <div class="ui-dialog" style="display:none" id="time">
-    <div class="t_title"><!--<span id="cancle_time">取消</span>-->服务时间<span style="float:right" id="confirm_time">确定</span></div>
+    <div class="t_title"><div id="cancle_time" style="width:5%;float:left">返回</div>服务时间<div style="width:5%;float:right" id="confirm_time">确定</div></div>
     <div class="ts_content">
         <div class="t_1">
             <span class="month">9月</span>

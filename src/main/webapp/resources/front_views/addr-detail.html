@@ -221,7 +221,29 @@
                                 window.location.href = ru_index;
                             }else if(ru!=null && ru!=""){
                                 console.info(ru);
-                                window.location.href = ru;
+                                //window.location.href = ru;
+                                var addr ='';
+                                if($("#province").val()!=''){
+                                	addr += $("#province").find("option:selected").text();
+                                }
+                                if($("#city").val()!=''){
+                                	addr += $("#city").find("option:selected").text();
+                                }
+                                if($("#area").val()!=''){
+                                	addr +=$("#area").find("option:selected").text();
+                                }
+                                addr +=$("#address").val();
+                                addr = escape(addr);
+                                var url = ru+"?";
+                                if(requestParam!=null && typeof(requestParam)!='undefined'){
+                                	for(var prop in requestParam){
+                                		if(requestParam.hasOwnProperty(prop)){
+                                			url +="&"+prop+"="+escape(requestParam[prop]);
+                                		}
+                                	}
+                                }
+                                url += "&addr="+addr;
+                                window.location.href = url;
                             }else{
                                 window.history.go(-1);
                             }
