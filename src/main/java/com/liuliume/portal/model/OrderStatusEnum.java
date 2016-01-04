@@ -14,6 +14,7 @@ public enum OrderStatusEnum {
 	ORDERED(0,"下单成功"),
 	SERVICING(1,"服务中"),
 	TRANSFER(2,"转发"),
+	REFUND(5,"退款"),
 	COMPLETE(10,"已完成"),
 	ASSESSED(20,"已评价");
 	

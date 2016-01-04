@@ -95,6 +95,30 @@ var orderDetail = function(){
 		});
 	}
 	
+	var refundOrder = function(){
+		var orderId = $("#orderId").val();
+		$.ajax({
+			url:"/orders/refundOrder",
+			type:"POST",
+			data:{"orderId":orderId},
+			dataType:"json",
+			success:function(result){
+				$.cookie.json = true;
+				if(result.success){
+					$.cookie('action-message',{action:"success",message:result.detail});
+					window.location.reload();
+				}else{
+					alert("订单退款错误",result.detail,function(){
+						window.location.reload();
+					});
+				}
+			},
+			failure:function(result){
+				alert("系统错误","系统错误,请重试");
+			}
+		});
+	}
+	
 	return {
 		init:function(){
 			$("#btnPay").click(function(){
@@ -119,6 +143,10 @@ var orderDetail = function(){
 					alert("系统错误","订单ID不存在");
 					return false;
 				}
+				if(orderStatus==5){
+					alert("订单置无效","订单已退款,不能置无效");
+					return false;
+				}
 				if(orderStatus>0){
 					alert("订单置无效","订单已服务,不能置无效");
 					return false;
@@ -132,6 +160,10 @@ var orderDetail = function(){
 				var orderStatus = $("#orderStatus").val();
 				if(orderId == null){
 					alert("系统错误","订单ID不存在");
+					return false;
+				}
+				if(orderStatus==5){
+					alert("订单置无效","订单已退款,不能置无效");
 					return false;
 				}
 				if(orderStatus!=0){
@@ -148,9 +180,26 @@ var orderDetail = function(){
 					alert("系统错误","订单ID不存在");
 					return false;
 				}
+				if(orderStatus==5){
+					alert("订单置无效","订单已退款,不能置无效");
+					return false;
+				}
 				confirm("转发确认","确认订单完成  "+orderId+"?",doneOrder);
 				return false;
 			});
+			
+			$("#btnRefund").click(function(){
+				var orderId = $("#orderId").val();
+				var orderStatus = $("#orderStatus").val();
+				if(orderId == null){
+					alert("系统错误","订单ID不存在");
+					return false;
+				}
+				if(orderStatus>0){
+					alert("订单退款","订单已经开始服务,不能退款");
+				}
+				confirm("退款确认","确认订单 "+orderId+"退款?",refundOrder);
+			})
 		}
 	}
 }();

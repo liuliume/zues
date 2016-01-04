@@ -40,7 +40,7 @@ public class CountController {
 			Date start_Date = sdf.parse(startDate);
 			Date end_Date = sdf.parse(endDate);
 			double money = countService.roomCountMoney(start_Date, end_Date,
-					room_id, animals_id);
+					room_id, animals_id,false);
 			jData.setData(money);
 			jData.setCode(200);
 			jData.setSuccess(true);

@@ -24,15 +24,15 @@ public class OrdersUtil {
 		// RandomStringUtils.random(count)
 		Integer account_id = orders.getAccountId();
 		int acc_num = account_id.toString().length();
-		String accountPart = RandomStringUtils.randomAlphabetic(ACCOUNT_NUM-acc_num);
+		String accountPart = RandomStringUtils.randomNumeric(ACCOUNT_NUM-acc_num);
 		accountPart+=account_id;
 		
 		Long timestamp = System.currentTimeMillis();
 		int time_num = timestamp.toString().length();
-		String timePart = RandomStringUtils.randomAlphabetic(TIMESTAMP_NUM-time_num);
+		String timePart = RandomStringUtils.randomNumeric(TIMESTAMP_NUM-time_num);
 		timePart+=timestamp;
 		
-		String randomPart = RandomStringUtils.randomAlphabetic(RANDOM_NUM);
+		String randomPart = RandomStringUtils.randomNumeric(RANDOM_NUM);
 		
 		String order_no = type+accountPart+timePart+randomPart;
 		

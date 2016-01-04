@@ -180,34 +180,32 @@ public class OrdersController {
 		return "orders/orderDetail";
 	}
 
+	@RequestMapping(value = "orderDetailForJson", method = RequestMethod.GET)
+	@ResponseBody
+	public JData orderDetailForJson(String ordersId, ModelMap map) {
 
-    @RequestMapping(value = "orderDetailForJson", method = RequestMethod.GET)
-    @ResponseBody
-    public JData orderDetailForJson(String ordersId, ModelMap map) {
+		logger.info("call OrdersController.orderDetail");
+		JData jData = new JData();
 
-        logger.info("call OrdersController.orderDetail");
-        JData jData = new JData();
+		Orders orders = null;
 
-        Orders orders = null;
+		try {
+			orders = ordersService.findOrdersByOrderId(ordersId);
+			jData.setData(orders);
+			jData.setSuccess(true);
+			jData.setCode(200);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.index! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), ordersId, e);
+			jData.setData(null);
+			jData.setSuccess(false);
+			jData.setCode(500);
+		}
+		return jData;
+	}
 
-        try {
-            orders = ordersService.findOrdersByOrderId(ordersId);
-            jData.setData(orders);
-            jData.setSuccess(true);
-            jData.setCode(200);
-        } catch (Exception e) {
-            logger.error(
-                    "Error in OrdersController.index! reason:{}, Paramter:ordersId:{}.",
-                    e.getMessage(), ordersId, e);
-            jData.setData(null);
-            jData.setSuccess(false);
-            jData.setCode(500);
-        }
-        return jData;
-    }
-
-
-    @RequestMapping(value = "payOrder", method = RequestMethod.POST)
+	@RequestMapping(value = "payOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public JData payOrder(
 			@RequestParam(value = "orderId", required = true) String orderId) {
@@ -275,6 +273,23 @@ public class OrdersController {
 		return jData;
 	}
 
+	@RequestMapping(value = "refundOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public JData refundOrder(
+			@RequestParam(value = "orderId", required = true) String orderId) {
+		JData jData = new JData("操作成功",true);
+		try {
+			ordersService.refundOrder(orderId);
+		} catch (Exception e) {
+			logger.error(
+					"Error in OrdersController.refundOrder! reason:{}, Paramter:ordersId:{}.",
+					e.getMessage(), orderId, e);
+			jData.setDetail(e.getMessage());
+			jData.setSuccess(false);
+		}
+		return jData;
+	}
+
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
 	public JData create(Orders orders, HttpServletRequest request) {
@@ -288,9 +303,9 @@ public class OrdersController {
 				Account account = accountService.findAccountByMobile(mobile);
 				orders.setAccount(account);
 				orders.setAccountId(account.getAccount_id());
-                if(orders.getPaymentType()==null){
-                    orders.setPaymentType(2);
-                }
+				if (orders.getPaymentType() == null) {
+					orders.setPaymentType(2);
+				}
 				jData.setData(ordersService.create(orders).getOrderId());
 				jData.setCode(200);
 				jData.setSuccess(true);
@@ -310,41 +325,40 @@ public class OrdersController {
 		return jData;
 	}
 
-
-    @RequestMapping(value = "getMoney", method = RequestMethod.POST)
-    @ResponseBody
-    public JData getMoney(Orders orders, HttpServletRequest request) {
-        logger.info("call the create Orders");
-        JData jData = new JData();
-        try {
-            String mobile = ServletUtil.getCookie(request, "mobile");
-            String sgid = ServletUtil.getCookie(request, "sgid");
-            if (StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid)
-                    && MD5Util.MD5WithSalt(mobile).equals(sgid)) {
-                Account account = accountService.findAccountByMobile(mobile);
-                orders.setAccount(account);
-                orders.setAccountId(account.getAccount_id());
-                if(orders.getPaymentType()==null){
-                    orders.setPaymentType(2);
-                }
-                jData.setData(ordersService.getMoney(orders).getCost());
-                jData.setCode(200);
-                jData.setSuccess(true);
-                jData.setDetail("操作成功");
-            } else {
-                jData.setCode(302);
-                jData.setSuccess(false);
-                jData.setDetail("请登陆！");
-            }
-        } catch (Exception e) {
-            logger.error("create Or Update  Error." + e.getMessage()
-                    + " orders[" + orders + "]", e);
-            jData.setCode(500);
-            jData.setSuccess(false);
-            jData.setDetail(e.getMessage());
-        }
-        return jData;
-    }
+	@RequestMapping(value = "getMoney", method = RequestMethod.POST)
+	@ResponseBody
+	public JData getMoney(Orders orders, HttpServletRequest request) {
+		logger.info("call the create Orders");
+		JData jData = new JData();
+		try {
+			String mobile = ServletUtil.getCookie(request, "mobile");
+			String sgid = ServletUtil.getCookie(request, "sgid");
+			if (StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(sgid)
+					&& MD5Util.MD5WithSalt(mobile).equals(sgid)) {
+				Account account = accountService.findAccountByMobile(mobile);
+				orders.setAccount(account);
+				orders.setAccountId(account.getAccount_id());
+				if (orders.getPaymentType() == null) {
+					orders.setPaymentType(2);
+				}
+				jData.setData(ordersService.getMoney(orders).getCost());
+				jData.setCode(200);
+				jData.setSuccess(true);
+				jData.setDetail("操作成功");
+			} else {
+				jData.setCode(302);
+				jData.setSuccess(false);
+				jData.setDetail("请登陆！");
+			}
+		} catch (Exception e) {
+			logger.error("create Or Update  Error." + e.getMessage()
+					+ " orders[" + orders + "]", e);
+			jData.setCode(500);
+			jData.setSuccess(false);
+			jData.setDetail(e.getMessage());
+		}
+		return jData;
+	}
 
 	@RequestMapping(value = "getAllOrders", method = RequestMethod.GET)
 	@ResponseBody
@@ -385,18 +399,21 @@ public class OrdersController {
 		return list;
 	}
 
-	@RequestMapping(value="completeOrderPaymentState",method=RequestMethod.POST)
+	@RequestMapping(value = "completeOrderPaymentState", method = RequestMethod.POST)
 	@ResponseBody
-	public JData completeOrderPaymentState(@RequestParam(value="order_id",required=true)String order_id){
-		logger.info("completeOrderPaymentState更新订单支付状态,order id:{}",order_id);
+	public JData completeOrderPaymentState(
+			@RequestParam(value = "order_id", required = true) String order_id) {
+		logger.info("completeOrderPaymentState更新订单支付状态,order id:{}", order_id);
 		JData jData = new JData();
 		try {
-			ordersService.updateOrderPaymentState(order_id, Constants.PAYMENT_YES);
+			ordersService.updateOrderPaymentState(order_id,
+					Constants.PAYMENT_YES);
 			jData.setDetail("更新订单状态成功");
 			jData.setSuccess(true);
 		} catch (Exception e) {
 			// TODO: handle exception
-			logger.error("更新订单支付状态失败,Order id:{},error_msg:{}",order_id,e.getMessage());
+			logger.error("更新订单支付状态失败,Order id:{},error_msg:{}", order_id,
+					e.getMessage());
 			jData.setSuccess(false);
 			jData.setDetail("更新订单状态失败");
 		}

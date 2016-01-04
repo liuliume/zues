@@ -38,7 +38,7 @@
 									<c:choose>
 										<c:when test="${orders.orderType eq 3}">
 											<button class="btn green" type="button" id="BtnTransfer">
-											<i class="fa fa-share"></i> 转发
+												<i class="fa fa-share"></i> 转发
 											</button>
 										</c:when>
 										<%-- <c:otherwise>
@@ -47,6 +47,13 @@
 											</button>
 										</c:otherwise> --%>
 									</c:choose>
+
+									<c:if test="${orders.paymentStatus eq 1 }">
+										<button class="btn green" type="button" id="btnRefund">
+											<i class="fa fa-check-circle"></i> 退款
+										</button>
+									</c:if>
+
 								</c:if>
 								<c:if test="${orders.paymentStatus eq 0 }">
 									<button class="btn green" type="button" id="btnPay">

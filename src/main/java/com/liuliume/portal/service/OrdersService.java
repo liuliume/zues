@@ -21,6 +21,8 @@ public interface OrdersService {
 	
 	public void completeOrder(String orderId) throws Exception;
 	
+	public void refundOrder(String orderId) throws Exception;
+	
 	public Orders create(Orders orders) throws Exception;
 
     public Orders getMoney(Orders orders) throws Exception;
