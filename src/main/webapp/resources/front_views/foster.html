@@ -58,6 +58,7 @@
         	type:'GET',
             async:false,
             success:function(result){
+                console.info(result);
                 if(result.success){
                 	$(result.data).each(function(index,item){
                 		$("#div_room").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' value='"+item.id+"'>"+item.roomName+"</span></a>");
@@ -224,7 +225,9 @@
         calDays();
 
         function calDays(){
-            if(startDate!=null && endDate!=null){
+            console.info(startDate)
+            console.info(endDate)
+            if(startDate!=null && endDate!=null && startDate!="undefined" && endDate!="undefined"){
             	if(startDate>endDate){
             		$("#div_text").text("离开时间必须大于入住时间!");
                     $("#alert").show();
@@ -268,11 +271,10 @@
         })
 
         $("#pet_btn").click(function(){
-            window.location.href = "pets-list.html?ru=foster.html&startDate="+startDate+"&endDate=" + endDate;
+            window.location.href = "pets-list.html?ru=foster.html&startDate="+startDate+"&endDate=" + endDate+"&roomId="+$("input:radio[name='serve-method']:checked").val();
         })
 
         $("#next").click(function(){
-
             var val=$("input:radio[name='serve-method']:checked").val();
             if(val==null){
                 $("#div_text").text("请选择房间类型!");
@@ -287,6 +289,7 @@
                 return;
             }
 
+            console.info("aaa")
             if(startDate==null || startDate=="" || startDate =='undefined'){
                 if(requestParam.startDate==null || requestParam.startDate=="" || requestParam.startDate== 'undefined'){
                     $("#div_text").text("请选择入住时间!");
@@ -341,6 +344,16 @@
                 }
             })
         })
+
+
+        var roomId = requestParam.roomId;
+        if(roomId!=null && typeof(roomId)!='undefined'){
+            <!--$("#course_"+course_id).attr('checked','checked');-->
+            <!--console.info( $("input[name='serve-method']"));-->
+            $("input[name='serve-method'][value="+roomId+"]").attr("checked",true);
+            <!--console.info($("#radio_"+roomId))-->
+            <!--$("#radio_"+roomId).attr('checked','checked');-->
+        }
     })
 </script>
 
