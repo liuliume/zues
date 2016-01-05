@@ -6,9 +6,18 @@
 		<pattern>/api/*.*</pattern>
 		<pattern>/login*</pattern>
 		<pattern>/wechat/*</pattern>
+		<pattern>/login/*</pattern>
 	</excludes>
 	<decorator name="activity" page="activity-layout.jsp">
-		<!--<pattern>/account/*</pattern>-->
-        <pattern>/*</pattern>
+		<pattern>/code/*</pattern>
+		<pattern>/account/*</pattern>
+		<pattern>/address/*</pattern>
+		<pattern>/animal/*</pattern>
+		<pattern>/room/*</pattern>
+		<pattern>/course/*</pattern>
+		<pattern>/hairdressing/*</pattern>
+		<pattern>/hairdressing_time/*</pattern>
+		<pattern>/orders/*</pattern>
+        <!-- <pattern>/*</pattern> -->
 	</decorator>
 </decorators>

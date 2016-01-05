@@ -9,7 +9,7 @@
     <div class="navbar-collapse collapse">
     	<ul class="nav navbar-nav">
 	   	    <li>
-		    	<a class="navbar-brand" href="/">
+		    	<a class="navbar-brand" href="/index">
 					<span style="color:#fff;">LiuLiume Platform</span>
 				</a>
 			</li>

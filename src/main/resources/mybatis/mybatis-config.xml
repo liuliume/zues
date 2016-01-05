@@ -35,5 +35,6 @@
         <mapper resource="mybatis/mappers/HairdressingMapper.xml"/>
         <mapper resource="mybatis/mappers/HairdressingTimeMapper.xml"/>
         <mapper resource="mybatis/mappers/OrdersMapper.xml"/>
+        <mapper resource="mybatis/mappers/LoginMapper.xml"/>
     </mappers>
 </configuration>

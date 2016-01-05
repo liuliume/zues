@@ -8,7 +8,7 @@
 <html>
 <head>
 <title>Index</title>
-
+<script src="${ctx}/resources/login/js/jquery-1.11.1.min.js"></script>
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 <%@ include file="/WEB-INF/views/includes/conflict-includes.jsp"%>
 <%@ include file="/WEB-INF/views/includes/util.jsp"%>
@@ -95,7 +95,8 @@ $(document).ready(function(){
 		<div class="work-table">
 			<h2>工作台</h2>
 			<div class="around no-border">
-				<div class="around-left">预处理清单：</div>
+				<!-- <div class="around-left">预处理清单：</div> -->
+				<div class="around-left">ToDo list:：</div>
 				<div class="around-right"><a href="${ctx}/procurement-order/unreviewed" id="unreviewedOrdersLink">...</a></div>
 			</div>
 		</div>
@@ -104,9 +105,11 @@ $(document).ready(function(){
 		<div class="help-center">
 			<h2>帮助中心</h2>
 			<p class="other-tips">
-                <a href="${ctx}/resources/supplierManual.pdf">供应商手册</a>
+                <%-- <a href="${ctx}/resources/supplierManual.pdf">供应商手册</a> --%>
+                <a href="${ctx}/resources/supplierManual.pdf">使用手册</a>
 				<a href="${ctx}/resources/supplierHelper.doc">帮助文档</a>
-				<a href="${ctx}/resources/faq.doc">供应商平台常见问题</a>
+				<%-- <a href="${ctx}/resources/faq.doc">供应商平台常见问题</a> --%>
+				<a href="${ctx}/resources/faq.doc">Liuliume平台常见问题</a>
 			</p>
 			<h2>举报投诉</h2>
 			<p>
