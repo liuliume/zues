@@ -214,36 +214,36 @@
             success:function(result){
                 $.each(result,function(index,item){
                     console.info(item)
-                    $("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' id='course_"+item.id+"' value='"+item.id+"'>"+item.courseName+"</span></a>");
+                    $("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' id='course_"+item.id+"' value='"+item.id+"'>"+item.courseName+"  "+item.courseDescribe+"</span></a>");
                 })
             },failure:function(){
 
             }
 
-            if(!complete){
-            	 $("#div_text").text("请填写相关信息!");
-                 $("#alert").show();
-                 return;
-            }
-            window.location.href = "order-submit.html?order_type=2&animalsId="+animalsId+"&course_id="+course_id+"&startDate="+startDate
+            <!--if(!complete){-->
+            	 <!--$("#div_text").text("请填写相关信息!");-->
+                 <!--$("#alert").show();-->
+                 <!--return;-->
+            <!--}-->
+            <!--window.location.href = "order-submit.html?order_type=2&animalsId="+animalsId+"&course_id="+course_id+"&startDate="+startDate-->
 
         })
 
 
-        $.ajax({
-            url:'/course/listForJson',
-            type:'GET',
-            async: false,
-            success:function(result){
-                $.each(result,function(index,item){
-                    console.info(item)
-                    $("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' id='course_"+item.id+"' value='"+item.id+"'>"+item.courseName+"</span></a>");
-                })
-            },failure:function(){
+        <!--$.ajax({-->
+            <!--url:'/course/listForJson',-->
+            <!--type:'GET',-->
+            <!--async: false,-->
+            <!--success:function(result){-->
+                <!--$.each(result,function(index,item){-->
+                    <!--console.info(item)-->
+                    <!--$("#course_a").append("<a class='list beauty-serve'><span><input name='serve-method' type='radio' id='course_"+item.id+"' value='"+item.id+"'>"+item.courseName+"</span></a>");-->
+                <!--})-->
+            <!--},failure:function(){-->
 
-            }
+            <!--}-->
 
-        });
+        <!--});-->
         
         var course_id = requestParam.course_id;
         if(course_id != null &&course_id!='undefined' && typeof(course_id)!='undefined'){
