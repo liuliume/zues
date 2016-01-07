@@ -56,7 +56,7 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
-	<mvc:view-controller path="/" view-name="login" />
+	<mvc:view-controller path="/" view-name="index" />
 
 	<!-- configure the inceptors -->
 	<mvc:interceptors>
