@@ -30,6 +30,7 @@
         <result column="city" property="city" jdbcType="VARCHAR" />
         <result column="area" property="area" jdbcType="VARCHAR" />
 		<result column="hairdress_id" property="hairdressId" />
+		<result column="full_amount" property="full_amount"/>
 		<association property="account" resultMap="account"></association>
 		<association property="room" resultMap="room"></association>
 		<association property="course" resultMap="course"></association>

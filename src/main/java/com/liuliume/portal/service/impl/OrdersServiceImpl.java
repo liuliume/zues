@@ -307,7 +307,9 @@ public class OrdersServiceImpl implements OrdersService {
 		boolean isWechatPayment = orders.getPaymentType() == Constants.PAYMENTTYPE_ONLINE;
 		double cost = countService.roomCountMoney(startDate, endDate,
 				orders.getRoomId(), orders.getAnimalsId(), isWechatPayment);
+		double full_amount = countService.roomCountFullAmountMoney(startDate, endDate, orders.getRoomId(), orders.getAnimalsId());
 		orders.setCost(cost);
+		orders.setFull_amount(full_amount);
 		orders.setCreateTime(new Date());
 	}
 
@@ -329,6 +331,7 @@ public class OrdersServiceImpl implements OrdersService {
 		double cost = countService.courseCountMoney(orders.getCourseId(),
 				orders.getAnimalsId());
 		orders.setCost(cost);
+		orders.setFull_amount(cost);
 		orders.setCreateTime(new Date());
 	}
 
@@ -425,6 +428,7 @@ public class OrdersServiceImpl implements OrdersService {
 		double cost = countService.hairDressingCountMoney(
 				orders.getAnimalsId(), orders.getHairdressId());
 		orders.setCost(cost);
+		orders.setFull_amount(cost);
 		orders.setCreateTime(new Date());
 	}
 

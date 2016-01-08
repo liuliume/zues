@@ -11,4 +11,7 @@ public interface CountService {
 
 	public double hairDressingCountMoney(Integer animals_id,
 			Integer hairDressing_id) throws Exception;
+	
+	public double roomCountFullAmountMoney(Date startDate, Date endDate, Integer room_id,
+			Integer animals_id);
 }

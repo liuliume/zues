@@ -147,6 +147,10 @@ public class Orders implements Serializable {
 	 * 支付方式
 	 */
 	private Integer paymentType;
+	
+	private Double full_amount;
+	
+	private Double discount_amount;
 
 	@Column(name="payment_type")
 	public Integer getPaymentType() {
@@ -473,4 +477,24 @@ public class Orders implements Serializable {
     public void setArea(String area) {
         this.area = area;
     }
+
+    @Column(name="full_amount")
+	public Double getFull_amount() {
+		return full_amount;
+	}
+
+	public void setFull_amount(Double full_amount) {
+		this.full_amount = full_amount;
+	}
+
+	@Transient
+	public Double getDiscount_amount() {
+		if(full_amount== null || cost == null)
+			return null;
+		return full_amount - cost;
+	}
+
+	public void setDiscount_amount(Double discount_amount) {
+		this.discount_amount = discount_amount;
+	}
 }

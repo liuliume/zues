@@ -33,7 +33,8 @@ public class SpringMVCInterceptor implements HandlerInterceptor {
 			logger.info("------用户访问:" + actionName);
 		}
 		if (actionName.equalsIgnoreCase("/loginPage")
-				|| actionName.startsWith("/resources"))
+				|| actionName.startsWith("/resources")
+				|| actionName.startsWith("/wechat"))
 			return true;
 		// ajax请求不判断用户是否登录
 		String requestType = request.getHeader("X-Requested-With");

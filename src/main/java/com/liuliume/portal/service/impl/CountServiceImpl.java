@@ -45,6 +45,7 @@ public class CountServiceImpl implements CountService {
 	@Autowired
 	private HairdressingDao hairdressingDao;
 
+	@Override
 	public double roomCountMoney(Date startDate, Date endDate, Integer room_id,
 			Integer animals_id, boolean isWechatPayment) {
 		Room room = null;
@@ -80,7 +81,30 @@ public class CountServiceImpl implements CountService {
 		}
 		return money;
 	}
+	
+	@Override
+	public double roomCountFullAmountMoney(Date startDate, Date endDate, Integer room_id,
+			Integer animals_id){
+		Room room = null;
+		Animals animals = null;
+		AnimalsType animalsType = null;
+		if (StringUtils.isNotBlank(String.valueOf(room_id))) {
+			room = roomDao.findRoomById(room_id);
+		}
+		if (StringUtils.isNotBlank(String.valueOf(animals_id))) {
+			animals = animalDao.findAnimalsById(animals_id);
+		}
+		int type_id = animals.getTypeId();
+		animalsType = animalDao.findAnimalsTypeById(type_id);
+		int days = daysBetween(startDate, endDate);
+		double money = 0.0;
+		if (room != null && animalsType != null) {
+			money = room.getCost() * days;
+		}
+		return money;
+	}
 
+	@Override
 	public double courseCountMoney(Integer course_id, Integer animals_id) {
 		Course course = null;
 		Animals animals = null;

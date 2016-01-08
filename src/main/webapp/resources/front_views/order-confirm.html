@@ -69,15 +69,17 @@
                         }
                         var startDate = result.data.startDate;
                         var endData = result.data.endDate;
-                        var cost = result.data.cost;
+                        var cost = result.data.cost.toFixed(2);
+                        var full_amount = result.data.full_amount.toFixed(2);
+                        var dis_amount=(full_amount-cost).toFixed(2);
                         $("#first").append(
                                         "<a class='list order-confirm order-numb'>订单号</a>" +
                                         "<a class='list order-confirm order-numb'>"+result.data.orderId+"</a>" +
                                         <!--"<a class='list order-confirm order-numb'>订单号："+result.data.orderId+"</a>" +-->
                                         "<a class='list order-confirm ico-item'>服务项目<span>"+order_type+"</span></a>" +
-                                        "<a class='list order-confirm confirm-detail'>订单金额 "+cost+"</a>" +
-                                        "<a class='list order-confirm confirm-detail'>优惠金额：50元</a>" +
-                                        "<a class='list order-confirm confirm-detail'>实收金额：1450元</a>" +
+                                        "<a class='list order-confirm confirm-detail'>订单金额 ："+full_amount+"元</a>" +
+                                        "<a class='list order-confirm confirm-detail'>优惠金额："+dis_amount+"元</a>" +
+                                        "<a class='list order-confirm confirm-detail'>实收金额："+cost+"元</a>" +
                                         "<a class='list order-confirm ico-time'>服务时间<span>"+dataDisplay+"</span></a>" +
                                         "<a class='list order-confirm ico-addr'>"+address_display+"<span>"+address+"</span></a>" +
                                         "<a class='list order-confirm ico-phone'>联系电话<span>"+result.data.account.mobile+"</span></a>")
