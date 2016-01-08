@@ -10,7 +10,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <style>
 .order-confirm.ico-time{border-top:none; position:relative}
-.ico-time span{display:inline-block; position:absolute; left:125px; top:0px}
+.ico-time span{display:inline-block; position:absolute; left:144px; top:6px;line-height:23px;text-indent:0}
 </style>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -72,7 +72,7 @@
             var service_type_name = "到店服务";
             order_type_inner_name = null;
             dataDiff = DateDiff(startDate,endDate);
-            var dataDisplay = startDate+" 至 <br/>"+endDate;
+            var dataDisplay = startDate+" 至"+endDate;
             $.ajax({
                 url:'/room/indexForJson',
                 type:'GET',
