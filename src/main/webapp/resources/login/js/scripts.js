@@ -35,6 +35,8 @@ jQuery(document).ready(function() {
     var login = function(){
     	var user = $("#form-username").val();
     	var passwd = $("#form-password").val();
+    	if(isBlank(user)||isBlank(passwd))
+    		return false;
     	$.ajax({
     		url:'/login',
     		data:{"name":user,"passwd":passwd},
@@ -51,5 +53,15 @@ jQuery(document).ready(function() {
     		}
     	});
     	return false;
+    }
+    
+    var isBlank = function(item){
+    	if(item == null || typeof(item)=='undefined' || item=='')
+    		return true;
+    	for(var i=0;i<item.length;i++){
+    		if(item[i]!=' ')
+    			return false;
+    	}
+    	return true;
     }
 });

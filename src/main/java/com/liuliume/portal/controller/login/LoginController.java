@@ -21,6 +21,11 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+	@RequestMapping(value="loginPage",method={RequestMethod.GET,RequestMethod.POST})
+	public String loginPage(){
+		return "login";
+	}
+	
 	@RequestMapping(value="login",method={RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public JData login(String name,String passwd,HttpServletRequest request){
@@ -41,5 +46,12 @@ public class LoginController {
 	@RequestMapping(value="index",method={RequestMethod.GET,RequestMethod.POST})
 	public String index(){
 		return "index";
+	}
+	
+	@RequestMapping(value="logout",method={RequestMethod.GET,RequestMethod.POST})
+	public String logout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.removeAttribute(Constants.SESSION_ADMIN);
+		return "login";
 	}
 }
