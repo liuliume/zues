@@ -48,13 +48,13 @@
                             order_type = "宠物寄养";
                             dataDisplay = result.data.startDate+" 至 <br/>"+result.data.endDate;
                             address_display = "寄养地址"
-                            address = "测试寄养地址"
+                            address = "顺义区下西市西赵各庄 (导航顺义区下西市即可)"
                         }
                         if(result.data.orderType==2){
                             order_type = "训练";
                             dataDisplay = "从 " + result.data.startDate + " 起";
                             address_display = "训练地址"
-                            address = "测试训练地址"
+                            address = "顺义区下西市西赵各庄 (导航顺义区下西市即可)"
                         }
                         if(result.data.orderType==3){
                             order_type = "美容";
@@ -64,7 +64,7 @@
                                 address = result.data.province + result.data.city + result.data.area + result.data.address;
                             } else{
                                 address_display = "美容地址"
-                                address = "测试美容地址"
+                                address = "顺义区下西市西赵各庄 (导航顺义区下西市即可)"
                             }
                         }
                         var startDate = result.data.startDate;

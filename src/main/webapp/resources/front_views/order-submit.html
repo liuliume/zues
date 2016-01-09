@@ -71,7 +71,8 @@
             service_type = 1;
             var service_type_name = "到店服务";
             order_type_inner_name = null;
-            dataDiff = DateDiff(startDate,endDate);
+            //dataDiff = DateDiff(startDate,endDate);
+            dataDiff = calDays(startDate,endDate);
             var dataDisplay = startDate+" 至"+endDate;
             $.ajax({
                 url:'/room/indexForJson',
@@ -251,6 +252,30 @@
             $("#service").hide();
         })
 
+        function calDays(startDate,endDate){
+            console.info(startDate)
+            console.info(endDate)
+            if(startDate!=null && endDate!=null && startDate!="undefined" && endDate!="undefined"){
+            	if(startDate>endDate){
+            		$("#div_text").text("离开时间必须大于入住时间!");
+                    $("#alert").show();
+                    return;
+            	}
+                var tmp_start = startDate.split(" ")[0];
+                var tmp_end = endDate.split(" ")[0];
+                var tmp_time = endDate.split(" ")[1].split(":")[0];
+                var day = null;
+                if(tmp_time >=12) {
+                    day = DateDiff(tmp_start,tmp_end) + 1;
+                } else {
+                    day = DateDiff(tmp_start,tmp_end);
+                }
+                return day;
+            }else{
+                return 0;
+            }
+        }
+        
         //日期
         function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式
             var begintime_ms = Date.parse(new Date(sDate1.replace(/-/g, "/"))); //begintime 为开始时间

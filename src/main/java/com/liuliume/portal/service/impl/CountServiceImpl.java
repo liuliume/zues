@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -81,10 +82,10 @@ public class CountServiceImpl implements CountService {
 		}
 		return money;
 	}
-	
+
 	@Override
-	public double roomCountFullAmountMoney(Date startDate, Date endDate, Integer room_id,
-			Integer animals_id){
+	public double roomCountFullAmountMoney(Date startDate, Date endDate,
+			Integer room_id, Integer animals_id) {
 		Room room = null;
 		Animals animals = null;
 		AnimalsType animalsType = null;
@@ -127,11 +128,14 @@ public class CountServiceImpl implements CountService {
 	public static int daysBetween(Date startDate, Date endDate) {
 		Calendar s = Calendar.getInstance();
 		Calendar e = Calendar.getInstance();
-		s.setTime(startDate);
-		e.setTime(endDate);
+		 s.setTime(startDate);
+		 e.setTime(endDate);
+		int time = endDate.getHours();
 		long days = (e.getTimeInMillis() - s.getTimeInMillis())
 				/ (1000 * 3600 * 24);
-		return Integer.parseInt(String.valueOf(days));
+//		int dateDiff = Integer.parseInt(String.valueOf(Math.floor(days)));
+		int dateDiff = (int) Math.floor(days);
+		return time >= 12 ? dateDiff + 1 : dateDiff;
 	}
 
 	@Override
