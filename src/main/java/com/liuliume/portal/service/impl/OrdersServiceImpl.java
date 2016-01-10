@@ -1,7 +1,9 @@
 package com.liuliume.portal.service.impl;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -336,6 +338,11 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	private void _createBeautyOrders(Orders orders) throws Exception {
+		String startDate = orders.getStartDate();
+		Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(startDate);
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		orders.setServiceBegin(c.get(Calendar.HOUR));
 		if (orders.getHairdressId() == null || orders.getHairdressId() <= 0) {
 			throw new IllegalArgumentException("美容服务项目不能为空");
 		}

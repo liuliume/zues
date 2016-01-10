@@ -51,10 +51,10 @@
         	$("#serv_type_"+serv_type).attr("checked",true);
         }
         
-        var addr = requestParam.addr;
+        /* var addr = requestParam.addr;
         if(addr!=null && typeof(addr)!='undefined'){
         	$("#addr").text(addr);
-        }
+        } */
         
         $.ajax({
         	url:"/hairdressing/listAllHairDressing",
@@ -333,7 +333,7 @@
 </div>
 
 <div class="ui-dialog" style="display:none" id="time">
-    <div class="t_title"><div id="cancle_time" style="width:5%;float:left">返回</div>服务时间<div style="width:5%;float:right;" id="confirm_time">确定</div></div>
+    <div class="t_title"><div id="cancle_time" style="width:5%;float:left;left: 0">返回</div>服务时间<div style="width:5%;float:right;right: 0" id="confirm_time">确定</div></div>
     <div class="ts_content">
         <div class="t_1">
             <span class="month">9月</span>

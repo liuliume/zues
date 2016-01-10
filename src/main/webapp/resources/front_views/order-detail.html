@@ -8,6 +8,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>订单详情</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<style>
+.order-detail.ico-time{position:relative}
+.ico-time span{display:inline-block; position:absolute; left:144px; top:5px; line-height:20px;text-indent:0}
+</style>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript">
     $(function(){
@@ -81,8 +85,8 @@
                                 .append("<a class='list order-detail ico-addr'>"+address_title+"<span>"+address+"</span></a>")
                                 .append("<a class='list order-detail ico-price' style='margin-bottom:30px'>服务价格<span>"+cost+"元</span></a>")
                                 /* .append("<a class='list order-detail serve-title'>服务提供</a>") */
-                                .append("<a class='list order-detail serve-supply'>溜溜五星级服务中心</a>")
-                                .append("<a class='list order-detail serve-supply'>服务热线：400-123-123</a>")
+                                /* .append("<a class='list order-detail serve-supply'>溜溜五星级服务中心</a>")
+                                .append("<a class='list order-detail serve-supply'>服务热线：400-123-123</a>") */
                                 .append("<a class='list order-detail going-on-title'>订单状态</a>")
                                 .append("<a class='list order-detail going-on'>"+result.data.orderStatusEnumDesc+"</a>")
 
