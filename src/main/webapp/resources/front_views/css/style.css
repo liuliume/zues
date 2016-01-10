@@ -5,11 +5,14 @@
 *{margin:0;padding:0;border:0;list-style:none;text-decoration:none}
 body{background-color: #fff; color: #555; font-family: Microsoft Yahei,微软雅黑,宋体,Arial,Lucida,Verdana,Helvetica,sans-serif; min-width: 320px;}
 input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appearance: none;border-radius:0}
+input[type="button"], input[type="submit"], input[type="reset"] {-webkit-appearance: none}
+textarea {-webkit-appearance:none}
 .wrapper{background-color: #fff; margin: 0 auto; max-width: 640px; min-width: 320px; overflow: hidden; width: 100%;}
 
 /*login*/
 .cd-logo{width:100%;text-align:center;margin:80px 0 30px}
-.wrapper input{ border-top:1px solid #d2d8d8;border-bottom:1px solid #d2d8d8; padding:16px 20px 16px 50px; margin:20px 0;width:100%; font-size:16px; font-weight:300; letter-spacing:2px;border-radius:0}
+.wrapper input{border-top:1px solid #d2d8d8;border-bottom:1px solid #d2d8d8; padding:16px 20px 16px 50px; margin:20px 0;width:100%; font-size:16px; font-weight:300; letter-spacing:2px;border-radius:0}
+.wrapper textarea{ border:1px solid #d2d8d8;margin:5%;width:81%; font-size:16px; font-weight:300; letter-spacing:2px;border-radius:0; line-height:20px; padding:20px; text-indent:0}
 .phoneNum{background:url(../img/cd-icon-username.png) no-repeat 17px 9px}
 .yzm{background:url(../img/cd-icon-yzm.png) no-repeat 11px 12px}
 .get-code{ position:absolute; top:25px; right:5px; background:#d2d1d1; height:40px; width:130px; text-align:center; line-height:40px}
@@ -121,7 +124,7 @@ input,select{-moz-appearance: none;-ms-appearance: none;-o-appearance: none;appe
 
 /* 查看详情弹窗 */
 .t_title{ background:#ffd800; height:50px; line-height:50px; text-align:center; width:100%;position:absolute; bottom:62%;left:0}
-.t_title span{ display:inline-block;padding:0 20px; position:absolute; left:0}
+.t_title span{ display:inline-block;padding:0 20px; position:absolute}
 .t_content{background:#fff; height:62%; width:100%; position:absolute; bottom:0;left:0;overflow:auto;}
 .content_p{ padding:10px}
 
