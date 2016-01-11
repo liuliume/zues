@@ -135,7 +135,7 @@ public class CountServiceImpl implements CountService {
 				/ (1000 * 3600 * 24);
 //		int dateDiff = Integer.parseInt(String.valueOf(Math.floor(days)));
 		int dateDiff = (int) Math.floor(days);
-		return time >= 12 ? dateDiff + 1 : dateDiff;
+		return time >= 13 ? dateDiff + 1 : dateDiff;
 	}
 
 	@Override
