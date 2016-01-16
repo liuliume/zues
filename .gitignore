@@ -1,4 +1,6 @@
 /target/
 .idea/
 zues.iml
-
+DOC/DOC.iml
+src/main/main.iml
+src/test/test.iml
