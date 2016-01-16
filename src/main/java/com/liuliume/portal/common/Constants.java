@@ -38,15 +38,18 @@ public class Constants {
 	/**
 	 * 微信APPID
 	 */
-	public static final String APP_ID = "wx3382d54a842ce919";
+//	public static final String APP_ID = "wx3382d54a842ce919";
+	public static final String APP_ID = "wxe1887e6019fc8283";
 	/**
 	 * 微信APPSecret
 	 */
-	public static final String APP_SECRET = "2885c1ad046baf1c8e4ae7451fe1acae";
+//	public static final String APP_SECRET = "2885c1ad046baf1c8e4ae7451fe1acae";
+	public static final String APP_SECRET = "b33ef098cb39f4cdfe249458eb49b1f3";
 	/**
 	 * 微信商户ID,身份标识
 	 */
-	public static final String MCH_ID="1289131601";
+//	public static final String MCH_ID="1289131601";
+	public static final String MCH_ID = "1307349501";
 	/**
 	 * 商户支付密钥Key。审核通过后，在微信发送的邮件中查看
 	 */
@@ -54,7 +57,7 @@ public class Constants {
 	/**
 	 * 异步回调地址
 	 */
-	public static final String NOTIFY_URL="http://www.liuliume.com/wechat/notify";
+	public static final String NOTIFY_URL="http://wangzupet.com/wechat/notify";
 	/**
 	 * 不弹出授权页面，仅仅能够获取用户的openId
 	 * 如果使用snsapi_info，会弹出一个授权页面,可以获取用户的所有信息
