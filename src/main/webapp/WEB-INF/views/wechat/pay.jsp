@@ -31,6 +31,24 @@
 	    	   })
 		};
 		
+		var cancelOrder = function(){
+			$.ajax({
+				//未支付时置无效
+	    		   url:'/orders/cancelOrderPaymentState',
+	    		   type:'POST',
+	    		   data:{"order_id":orderId},
+	    		   success:function(result){
+	    			   if(result.success){
+	    				   window.location.href="http://www.liuliume.com/resources/front_views/index.html";
+	    			   }else{
+	    				   alert('更新支付状态失败');
+	    			   }
+	    		   },failure:function(){
+	    			   alert('更新支付状态失败');
+	    		   }
+	    	   })
+		};
+		
 		var jsApiCall = function(){
 			var json = ${result};
 			WeixinJSBridge.invoke(

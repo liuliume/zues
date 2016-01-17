@@ -419,4 +419,23 @@ public class OrdersController {
 		}
 		return jData;
 	}
+	
+	@RequestMapping(value = "cancelOrderPaymentState", method = RequestMethod.POST)
+	@ResponseBody
+	public JData cancelOrderPaymentState(@RequestParam(value = "order_id", required = true) String order_id) {
+		logger.info("cancelOrderPaymentState更新订单支付状态,order id:{}", order_id);
+		JData jData = new JData();
+		try {
+			ordersService.invalidOrder(order_id);
+			jData.setDetail("更新订单状态成功");
+			jData.setSuccess(true);
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("更新订单支付状态失败,Order id:{},error_msg:{}", order_id,
+					e.getMessage());
+			jData.setSuccess(false);
+			jData.setDetail("更新订单状态失败");
+		}
+		return jData;
+	}
 }
