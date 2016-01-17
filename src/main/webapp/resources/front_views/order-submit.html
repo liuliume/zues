@@ -134,20 +134,26 @@
             });
             var type_display = order_type_name + "-"+order_type_inner_name;
         }
+        
+        var paymentType = $("input[name='pay-metod']:checked").val();
+        
+        if(paymentType==null || typeof(paymentType)=='undefined'){
+        	paymentType=2;
+        }
 
         //下单参数
         if(order_type==1){
             var order_param = {"accountId":account_id,"orderType":order_type,"animalsId":animalsId,
-                "serviceType":service_type,"startDate":startDate,"endDate":endDate,"paymentStatus":0,"roomId":room_id
+                "serviceType":service_type,"startDate":startDate,"endDate":endDate,"paymentStatus":0,"roomId":room_id,"paymentType":paymentType
             };
         }else if(order_type==2){
             var order_param = {"accountId":account_id,"orderType":order_type,"animalsId":animalsId,
-                "serviceType":service_type,"startDate":startDate,"paymentStatus":0,"courseId":course_id
+                "serviceType":service_type,"startDate":startDate,"paymentStatus":0,"courseId":course_id,"paymentType":paymentType
 //                "cost":money
             };
         }else if(order_type==3){
             var order_param = {"accountId":account_id,"orderType":order_type,"animalsId":animalsId,
-                "serviceType":service_type,"startDate":startDate,"paymentStatus":0,"hairdressId":hairdress_id
+                "serviceType":service_type,"startDate":startDate,"paymentStatus":0,"hairdressId":hairdress_id,"paymentType":paymentType
 //                "cost":money
             };
         }
@@ -190,6 +196,8 @@
                 $("#div_text").text("请选择支付方式!");
                 $("#alert").show();
                 return;
+            }else{
+            	order_param.paymentType = val;
             }
 
             if($(".deal").attr("checked")==false){
