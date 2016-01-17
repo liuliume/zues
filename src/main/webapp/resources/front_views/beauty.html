@@ -147,7 +147,7 @@
             $(".month").removeClass("hover");
             $(".day").removeClass("hover");
             $(this).addClass("hover");
-            var curMonthDays = new Date(($(".month.hover").text().substr(0,3)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
+            var curMonthDays = new Date(($(".month.hover").text().substr(0,4)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
             $(".t_2").empty();
             var curDate = new Date();
             var tmp_month = (curDate.getMonth()+1);

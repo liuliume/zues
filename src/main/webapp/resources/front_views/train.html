@@ -61,16 +61,16 @@
         var d3 = new Date();
         d1.setMonth(d1.getMonth()+1);
         d2.setMonth(d2.getMonth()+2);
-        <!--d3.setMonth(d3.getMonth()+3);-->
+        d3.setMonth(d3.getMonth()+3);
         dmonth = (d.getMonth()+1)<10?"0"+ (d.getMonth()+1): (d.getMonth()+1);
         dmonth1 =  (d1.getMonth()+1)<10?"0"+ (d1.getMonth()+1): (d1.getMonth()+1);
         dmonth2 =  (d2.getMonth()+1)<10?"0"+ (d2.getMonth()+1): (d2.getMonth()+1);
-        <!--dmonth3 =  (d3.getMonth()+1)<10?"0"+ (d3.getMonth()+1): (d3.getMonth()+1);-->
+        dmonth3 =  (d3.getMonth()+1)<10?"0"+ (d3.getMonth()+1): (d3.getMonth()+1);
         $(".t_1").empty();
         $(".t_1").append("<span class='month'>"+ d.getFullYear() + "年" +dmonth+"月</span>")
                 .append("<span class='month'>"+ d1.getFullYear() + "年" +dmonth1+"月</span>")
                 .append("<span class='month'>"+ d2.getFullYear() + "年" +dmonth2+"月</span>")
-                <!--.append("<span class='month'>"+ d3.getFullYear() + "年" +dmonth3+"月</span>")-->
+                .append("<span class='month'>"+ d3.getFullYear() + "年" +dmonth3+"月</span>")
 
         $("#time_button").click(function(){
             $("#time").show();
@@ -103,7 +103,7 @@
             $(".month").removeClass("hover");
             $(".day").removeClass("hover");
             $(this).addClass("hover");
-            var curMonthDays = new Date(($(".month.hover").text().substr(0,3)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
+            var curMonthDays = new Date(($(".month.hover").text().substr(0,4)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
             var curDate = new Date();
             var tmp_month = (curDate.getMonth()+1);
             var tmp_date = curDate.getDate();
