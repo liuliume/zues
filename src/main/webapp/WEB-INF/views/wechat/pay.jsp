@@ -58,7 +58,7 @@
 						WeixinJSBridge.log(res.err_msg);
 						//alert(res.err_code+res.err_desc+res.err_msg);
 						if(res.err_msg=='get_brand_wcpay_request:ok'){
-	 		    	    	   alert('恭喜您，支付成功!');
+	 		    	    	  // alert('恭喜您，支付成功!');
 	 		    	    	  compeleOrder();
 	 		    	    	   //更新订单支付状态
 	 		    	    	   /* $.ajax({
