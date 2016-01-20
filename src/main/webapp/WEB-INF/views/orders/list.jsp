@@ -105,9 +105,10 @@
 								</th>
 								<th style="width: 10%;">订单号</th>
 								<th style="width: 5%;">订单类型</th>
-								<th style="width: 10%;">下单人</th>
+								<th style="width: 5%;">下单人</th>
 								<th style="width: 10%;">手机号</th>
 								<th style="width: 10%;">宠物</th>
+								<th style="width: 5%;">支付方式</th>
 								<th style="width: 5%;">服务类型</th>
 								<th style="width: 10%;">服务时间</th>
 								<th style="width: 15%;">地址</th>
@@ -133,6 +134,7 @@
 									<td>${item.account.uniqname }</td>
 									<td>${item.account.mobile }</td>
 									<td>${item.animalName }</td>
+									<td><c:if test="${item.paymentType eq 1 }">微信支付</c:if><c:if test="${item.paymentType eq 2 }">到店支付</c:if></td>
 									<td>${item.serviceTypeDesc }</td>
 									<td>${item.serviceTime }</td>
 									<td>${item.address }</td>

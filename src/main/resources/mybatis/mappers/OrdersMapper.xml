@@ -20,6 +20,7 @@
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="payment_status" property="paymentStatus"
 			jdbcType="INTEGER" />
+		<result column="payment_type" property="paymentType"/>
 		<result column="room_id" property="roomId" jdbcType="INTEGER" />
 		<result column="course_id" property="courseId" jdbcType="INTEGER" />
 		<result column="cost" property="cost" jdbcType="DOUBLE" />
