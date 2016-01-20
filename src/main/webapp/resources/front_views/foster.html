@@ -41,20 +41,20 @@
         var startDate,endDate;
         var d = new Date();
         var d1 = new Date();
-        var d2 = new Date();
-        var d3 = new Date();
+        //var d2 = new Date();
+        //var d3 = new Date();
         d1.setMonth(d1.getMonth()+1);
-        d2.setMonth(d2.getMonth()+2);
-        d3.setMonth(d3.getMonth()+3);
+        //d2.setMonth(d2.getMonth()+2);
+        //d3.setMonth(d3.getMonth()+3);
         dmonth = (d.getMonth()+1)<10?"0"+ (d.getMonth()+1): (d.getMonth()+1);
         dmonth1 =  (d1.getMonth()+1)<10?"0"+ (d1.getMonth()+1): (d1.getMonth()+1);
-        dmonth2 =  (d2.getMonth()+1)<10?"0"+ (d2.getMonth()+1): (d2.getMonth()+1);
-        dmonth3 =  (d3.getMonth()+1)<10?"0"+ (d3.getMonth()+1): (d3.getMonth()+1);
+        //dmonth2 =  (d2.getMonth()+1)<10?"0"+ (d2.getMonth()+1): (d2.getMonth()+1);
+        //dmonth3 =  (d3.getMonth()+1)<10?"0"+ (d3.getMonth()+1): (d3.getMonth()+1);
         $(".t_1").empty();
         $(".t_1").append("<span class='month'>"+ d.getFullYear() + "年" +dmonth+"月</span>")
                 .append("<span class='month'>"+ d1.getFullYear() + "年" +dmonth1+"月</span>")
-                .append("<span class='month'>"+ d2.getFullYear() + "年" +dmonth2+"月</span>")
-                .append("<span class='month'>"+ d3.getFullYear() + "年" +dmonth3+"月</span>");
+                //.append("<span class='month'>"+ d2.getFullYear() + "年" +dmonth2+"月</span>")
+                //.append("<span class='month'>"+ d3.getFullYear() + "年" +dmonth3+"月</span>");
         //获取房间信息
         $.ajax({
         	url:'/room/listForJson',
