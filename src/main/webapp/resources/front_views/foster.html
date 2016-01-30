@@ -43,7 +43,9 @@
         var d1 = new Date();
         //var d2 = new Date();
         //var d3 = new Date();
+        d1.setDate(1);
         d1.setMonth(d1.getMonth()+1);
+        console.info(d1)
         //d2.setMonth(d2.getMonth()+2);
         //d3.setMonth(d3.getMonth()+3);
         dmonth = (d.getMonth()+1)<10?"0"+ (d.getMonth()+1): (d.getMonth()+1);
