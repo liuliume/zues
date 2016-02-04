@@ -43,7 +43,9 @@
         var d1 = new Date();
         //var d2 = new Date();
         //var d3 = new Date();
+        d1.setDate(1);
         d1.setMonth(d1.getMonth()+1);
+        console.info(d1)
         //d2.setMonth(d2.getMonth()+2);
         //d3.setMonth(d3.getMonth()+3);
         dmonth = (d.getMonth()+1)<10?"0"+ (d.getMonth()+1): (d.getMonth()+1);
@@ -136,27 +138,52 @@
             }
         })
 
-        $(".month").bind("click", function() {
-            $(".month").removeClass("hover");
-            $(".day").removeClass("hover");
+        $("#time .month").bind("click", function() {
+            $("#time .month").removeClass("hover");
+            $("#time .day").removeClass("hover");
             $(this).addClass("hover");
-            var curMonthDays = new Date(($(".month.hover").text().substr(0,4)), $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1), 0).getDate();
-            $(".t_2").empty();
+            var curMonthDays = new Date(($("#time .month.hover").text().substr(0,4)), $("#time .month.hover").text().substring($("#time .month.hover").text().indexOf("年")+1,$("#time .month.hover").text().length-1), 0).getDate();
+            $("#time .t_2").empty();
             var curDate = new Date();
             var tmp_month = (curDate.getMonth()+1);
             var tmp_date = curDate.getDate();
             for(var i=1;i<=curMonthDays;i++){
-                if(tmp_month == $(".month.hover").text().substring($(".month.hover").text().indexOf("年")+1,$(".month.hover").text().length-1)){
+                if(tmp_month == $("#time .month.hover").text().substring($("#time .month.hover").text().indexOf("年")+1,$("#time .month.hover").text().length-1)){
                     console.info("test")
                     if(i<tmp_date){
                         continue;
                     }
                 }
                 tmp = i<10?"0"+i:i;
-                $(".t_2").append("<span class='day'>"+tmp+"日</span>");
+                $("#time .t_2").append("<span class='day'>"+tmp+"日</span>");
             }
-            $(".day").bind("click", function() {
-                $(".day").removeClass("hover");
+            $("#time .day").bind("click", function() {
+                $("#time .day").removeClass("hover");
+                $(this).addClass("hover");
+            })
+        })
+
+        $("#time1 .month").bind("click", function() {
+            $("#time1 .month").removeClass("hover");
+            $("#time1 .day").removeClass("hover");
+            $(this).addClass("hover");
+            var curMonthDays = new Date(($("#time1 .month.hover").text().substr(0,4)), $("#time1 .month.hover").text().substring($("#time1 .month.hover").text().indexOf("年")+1,$("#time1 .month.hover").text().length-1), 0).getDate();
+            $("#time1 .t_2").empty();
+            var curDate = new Date();
+            var tmp_month = (curDate.getMonth()+1);
+            var tmp_date = curDate.getDate();
+            for(var i=1;i<=curMonthDays;i++){
+                if(tmp_month == $("#time1 .month.hover").text().substring($("#time1 .month.hover").text().indexOf("年")+1,$("#time1 .month.hover").text().length-1)){
+                    console.info("test")
+                    if(i<tmp_date){
+                        continue;
+                    }
+                }
+                tmp = i<10?"0"+i:i;
+                $("#time1 .t_2").append("<span class='day'>"+tmp+"日</span>");
+            }
+            $("#time1 .day").bind("click", function() {
+                $("#time1 .day").removeClass("hover");
                 $(this).addClass("hover");
             })
         })
