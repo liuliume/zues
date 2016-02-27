@@ -71,7 +71,7 @@ public class SmsController {
         //*测试开发可使用“测试Demo”的APP ID，正式上线需要使用自己创建的应用的App ID     *
         //*应用ID的获取：登陆官网，在“应用-应用列表”，点击应用名称，看应用详情获取APP ID*
         //*******************************************************************************
-        restAPI.setAppId("8a48b551516c09cd01518470cac02d4d");
+        restAPI.setAppId("aaf98f8951af2ba80151cda1ed980570");
 
 
         //******************************注释****************************************************************
@@ -88,7 +88,7 @@ public class SmsController {
         //*result = restAPI.sendTemplateSMS("13800000000","1" ,new String[]{"6532","5"});																		  *
         //*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入     *
         //*********************************************************************************************************************
-        result = restAPI.sendTemplateSMS("13811633448","1" ,new String[]{"6532","5"});
+        result = restAPI.sendTemplateSMS("13811633448","57617" ,new String[]{"6532"});
 
         System.out.println("SDKTestGetSubAccounts result=" + result);
         if("000000".equals(result.get("statusCode"))){
