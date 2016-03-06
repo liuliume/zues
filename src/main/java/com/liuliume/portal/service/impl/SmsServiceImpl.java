@@ -4,19 +4,33 @@ import com.cloopen.rest.sdk.CCPRestSmsSDK;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Maps;
 import com.liuliume.common.util.RedisUtils;
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.dao.AccountDao;
 import com.liuliume.portal.entity.Account;
 import com.liuliume.portal.service.SmsService;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,27 +51,28 @@ public class SmsServiceImpl implements SmsService {
         for (int i = 0; i < 4 ; i++){
             sb.append(new Random().nextInt(9));
         }
-        Map<String,Object> result = sendMsg(mobile,sb.toString());
-//        Map<String,Object> result = new HashMap<String,Object>();
-//        result.put("statusCode","000000");
-//        Map<String,Object> map = new HashMap<String,Object>();
-//        map.put("code",sb.toString());
-//        result.put("data", map);
-        if("000000".equals(result.get("statusCode"))){
-            //正常返回输出data包体信息（map）
-            HashMap<String,Object> data = (HashMap<String, Object>) result.get("data");
-            Set<String> keySet = data.keySet();
-            for(String key:keySet){
-                Object object = data.get(key);
-                System.out.println(key +" = "+object);
-            }
+//        Map<String,Object> result = sendMsg(mobile,sb.toString());
+//        if("000000".equals(result.get("statusCode"))){
+//            //正常返回输出data包体信息（map）
+//            HashMap<String,Object> data = (HashMap<String, Object>) result.get("data");
+//            Set<String> keySet = data.keySet();
+//            for(String key:keySet){
+//                Object object = data.get(key);
+//                System.out.println(key +" = "+object);
+//            }
+//            redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
+//            return true;
+//        }else{
+//            //异常返回输出错误码和错误信息
+//            System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+//            return false;
+//        }
+        JSONObject json = sendMsgByNew(mobile,sb.toString());
+        if(null != json && "0".equalsIgnoreCase(json.get("code").toString())){
             redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
             return true;
-        }else{
-            //异常返回输出错误码和错误信息
-            System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
-            return false;
         }
+        return false;
     }
 
     public boolean verifyMsgCode(String mobile,String code) {
@@ -77,6 +92,25 @@ public class SmsServiceImpl implements SmsService {
             return false;
         }
     }
+
+    private JSONObject sendMsgByNew(String mobile,String verifyNo){
+        String url = "https://sms.yunpian.com/v1/sms/send.json";
+        Map<String,String> params = Maps.newHashMap();
+        params.put("apikey","587eb48f44f05d613a88f9e4d4dc7d29");
+        params.put("mobile",mobile);
+        params.put("text","【汪族墅屋】您的验证码是 " + verifyNo + "，欢迎您的加入。");
+
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        HttpPost post = postForm(url, params);
+        String body = invoke(httpclient, post);
+        httpclient.getConnectionManager().shutdown();
+        if(null != body && StringUtils.isNotEmpty(body)){
+            JSONObject json = JSONObject.fromObject(body);
+            return json;
+        }
+        return null;
+    }
+
 
     private Map<String,Object> sendMsg(String mobile,String verifyNo) {
         HashMap<String, Object> result = null;
@@ -132,5 +166,71 @@ public class SmsServiceImpl implements SmsService {
 //            //异常返回输出错误码和错误信息
 //            System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
 //        }
+    }
+
+
+    private static String paseResponse(HttpResponse response) {
+//        log.info("get response from http server..");
+        HttpEntity entity = response.getEntity();
+
+//        log.info("response status: " + response.getStatusLine());
+        String charset = EntityUtils.getContentCharSet(entity);
+//        log.info(charset);
+
+        String body = null;
+        try {
+            body = EntityUtils.toString(entity);
+//            log.info(body);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return body;
+    }
+
+    private static String invoke(DefaultHttpClient httpclient,
+                                 HttpUriRequest httpost) {
+
+        HttpResponse response = sendRequest(httpclient, httpost);
+        String body = paseResponse(response);
+
+        return body;
+    }
+
+    private static HttpResponse sendRequest(DefaultHttpClient httpclient,
+                                            HttpUriRequest httpost) {
+//        log.info("execute post...");
+        HttpResponse response = null;
+
+        try {
+            response = httpclient.execute(httpost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    private static HttpPost postForm(String url, Map<String, String> params){
+
+        HttpPost httpost = new HttpPost(url);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+        Set<String> keySet = params.keySet();
+        for(String key : keySet) {
+            nvps.add(new BasicNameValuePair(key, params.get(key)));
+        }
+
+        try {
+//            log.info("set utf-8 form entity to httppost");
+            httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return httpost;
     }
 }
