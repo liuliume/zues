@@ -5,6 +5,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Maps;
+import com.liuliume.common.util.JSONUtil;
 import com.liuliume.common.util.RedisUtils;
 import com.liuliume.portal.common.Constants;
 import com.liuliume.portal.dao.AccountDao;
@@ -67,11 +68,18 @@ public class SmsServiceImpl implements SmsService {
 //            System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
 //            return false;
 //        }
-        JSONObject json = sendMsgByNew(mobile,sb.toString());
-        if(null != json && "0".equalsIgnoreCase(json.get("code").toString())){
+//        JSONObject json = sendMsgByNew(mobile,sb.toString());
+        String json = sendMsgByNew(mobile,sb.toString());
+        Result result = JSONUtil.fromJson(json,Result.class);
+//        System.out.println(result);
+        if(null != result && "0".equalsIgnoreCase(result.getCode())){
             redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
             return true;
         }
+//        if(null != json && "0".equalsIgnoreCase(json.get("code").toString())){
+//            redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
+//            return true;
+//        }
         return false;
     }
 
@@ -93,7 +101,7 @@ public class SmsServiceImpl implements SmsService {
         }
     }
 
-    private JSONObject sendMsgByNew(String mobile,String verifyNo){
+    private String sendMsgByNew(String mobile,String verifyNo){
         String url = "https://sms.yunpian.com/v1/sms/send.json";
         Map<String,String> params = Maps.newHashMap();
         params.put("apikey","587eb48f44f05d613a88f9e4d4dc7d29");
@@ -105,8 +113,9 @@ public class SmsServiceImpl implements SmsService {
         String body = invoke(httpclient, post);
         httpclient.getConnectionManager().shutdown();
         if(null != body && StringUtils.isNotEmpty(body)){
-            JSONObject json = JSONObject.fromObject(body);
-            return json;
+            return body;
+//            JSONObject json = JSONObject.fromObject(body);
+//            return json;
         }
         return null;
     }
@@ -232,5 +241,29 @@ public class SmsServiceImpl implements SmsService {
         }
 
         return httpost;
+    }
+}
+
+class Result {
+
+    private String code;
+
+    private String msg;
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
