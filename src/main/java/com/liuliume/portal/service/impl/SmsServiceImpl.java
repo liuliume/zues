@@ -26,6 +26,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class SmsServiceImpl implements SmsService {
+
+    private Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
 
     @Autowired
     private RedisUtils redisUtils;
@@ -76,6 +80,8 @@ public class SmsServiceImpl implements SmsService {
             redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
             return true;
         }
+//        redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
+        logger.error(json);
 //        if(null != json && "0".equalsIgnoreCase(json.get("code").toString())){
 //            redisUtils.setWithinSeconds(mobile + "_verifyNo", sb.toString(), 60*5);
 //            return true;
